@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        
+        <meta charset="utf-8">
+        <title> indice test</title>
+    </head>
+    <body>
+        <h4>
+			Bienvenido <span sec:authentication="principal.username"></span>
+            
+		</h4>
+        <p><span th:text="${usuario.nombre}"></span></p>
+        <h1>Aqui ira el indice del test</h1>
+        <br/>
+        <a class="navbar-brand" href="#" th:href="@{/}">Indice</a>
+    </body>
+</html>
