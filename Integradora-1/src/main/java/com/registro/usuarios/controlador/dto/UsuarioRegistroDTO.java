@@ -4,7 +4,8 @@ public class UsuarioRegistroDTO {
 
 	private Long id;
 	private String nombre;
-	private String apellido;
+	private String apellidoP;
+	private String apellidoM;
 	private String email;
 	private String password;
 
@@ -24,12 +25,20 @@ public class UsuarioRegistroDTO {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
-		return apellido;
+	public String getApellidoP() {
+		return apellidoP;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidoP(String apellidoP) {
+		this.apellidoP = apellidoP;
+	}
+
+	public String getApellidoM() {
+		return apellidoM;
+	}
+
+	public void setApellidoM(String apellidoM) {
+		this.apellidoM = apellidoM;
 	}
 
 	public String getEmail() {
@@ -49,10 +58,11 @@ public class UsuarioRegistroDTO {
 	}
 
 
-	public UsuarioRegistroDTO(String nombre, String apellido, String email, String password) {
+	public UsuarioRegistroDTO(String nombre, String apellidoP, String apellidoM, String email, String password) {
 		super();
 		this.nombre = nombre;
-		this.apellido = apellido;
+		this.apellidoP = apellidoP;
+		this.apellidoM = apellidoM;
 		this.email = email;
 		this.password = password;
 	}
