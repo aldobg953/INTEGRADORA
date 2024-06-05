@@ -15,6 +15,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
+	
 </head>
 <body>
 
@@ -58,7 +59,8 @@
 				<tr>
 					<th>ID</th>
 					<th>Nombre</th>
-					<th>Apellido</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
 					<th>Email</th>
 				</tr>
 			</thead>
@@ -66,7 +68,8 @@
 				<tr th:each="usuario : ${usuarios}">
 					<td th:text="${usuario.id}">ID</td>
 					<td th:text="${usuario.nombre}">ID</td>
-					<td th:text="${usuario.apellido}">ID</td>
+					<td th:text="${usuario.apellidoP}">ID</td>
+					<td th:text="${usuario.apellidoM}">ID</td>
 					<td th:text="${usuario.email}">ID</td>
 				</tr>
 			</tbody>
@@ -74,6 +77,14 @@
 	</div>
 	<a class="navbar-brand" href="#" th:href="@{/test}">Test vocacional</a>
 
+	<!--mapa-->
+	<input type="hidden" id="direccion" th:value="${direccion}" />
+	<iframe id="googleMap" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	<script>
+        var direccionGoogle =  document.getElementById('direccion').value;
+        document.getElementById('googleMap').src = direccionGoogle;
+    </script>
+	<!--fin mapa-->
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
