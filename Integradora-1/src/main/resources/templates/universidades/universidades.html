@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <meta charset="utf-8">
+        <title>Universidades</title>
+    </head>
+    <body>
+        <h1>Universidades</h1>
+        <ul>
+            <li th:each="universidad : ${universidades}">
+                <a th:text="${universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${universidad.id})}"></a>
+            </li>
+        </ul>
+    </body>
+</html>

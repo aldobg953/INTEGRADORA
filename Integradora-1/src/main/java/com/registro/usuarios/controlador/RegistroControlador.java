@@ -32,4 +32,9 @@ public class RegistroControlador {
 		modelo.addAttribute("direccion", direccion);
 		return "index";
 	}
+
+	@GetMapping("/inicio")
+	public String inicio() {
+		return "inicio";
+	}
 }

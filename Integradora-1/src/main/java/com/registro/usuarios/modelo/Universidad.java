@@ -15,14 +15,13 @@ public class Universidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
+    private String nombre_completo;
+    private String nombre_abreviado;
+    private String pagina_web;
+    private String correo;
+    private String telefono;
     private String informacion;
-    private String calle;
-    private String colonia;
-    private String numeroExterior;
-    private String codigoPostal;
-    private String ciudad;
-    private String estado;
-    private String pais;
-    private String direccionGoogle;    
+    private String direccion;
+    private String direccionGoogle; 
+    private String folder;   
 }

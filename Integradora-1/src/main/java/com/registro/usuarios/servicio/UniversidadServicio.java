@@ -1,5 +1,6 @@
 package com.registro.usuarios.servicio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,9 @@ public class UniversidadServicio {
 
     public Optional<Universidad> getUniversidadesById(Long id){
         return universidadRepositorio.findById(id);
+    }
+
+    public List<Universidad> getAllUniversidades(){
+        return universidadRepositorio.findAll();
     }
 }
