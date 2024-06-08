@@ -2,19 +2,19 @@ package com.registro.usuarios.controlador.dto;
 
 public class UsuarioRegistroDTO {
 
-	private Long id;
+	private Long id_usuario;
 	private String nombre;
 	private String apellidoP;
 	private String apellidoM;
 	private String email;
 	private String password;
 
-	public Long getId() {
-		return id;
+	public Long getId_usuario() {
+		return id_usuario;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public String getNombre() {

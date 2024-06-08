@@ -14,7 +14,7 @@ public class Universidad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_universidad;
     private String nombre_completo;
     private String nombre_abreviado;
     private String pagina_web;

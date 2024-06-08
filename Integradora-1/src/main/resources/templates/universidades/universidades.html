@@ -9,7 +9,7 @@
         <h1>Universidades</h1>
         <ul>
             <li th:each="universidad : ${universidades}">
-                <a th:text="${universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${universidad.id})}"></a>
+                <a th:text="${universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad})}"></a>
             </li>
         </ul>
     </body>
