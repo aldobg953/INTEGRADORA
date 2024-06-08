@@ -26,8 +26,11 @@ public class Usuario {
 	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "apellido")
-	private String apellido;
+	@Column(name = "apellidoP")
+	private String apellidoP;
+
+	@Column(name = "apellidoM")
+	private String apellidoM;
 
 	private String email;
 	private String password;
@@ -56,12 +59,20 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
-		return apellido;
+	public String getApellidoP() {
+		return apellidoP;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidoP(String apellidoP) {
+		this.apellidoP = apellidoP;
+	}
+
+	public String getApellidoM() {
+		return apellidoM;
+	}
+
+	public void setApellidoM(String apellidoM) {
+		this.apellidoM = apellidoM;
 	}
 
 	public String getEmail() {
@@ -88,20 +99,22 @@ public class Usuario {
 		this.roles = roles;
 	}
 
-	public Usuario(Long id, String nombre, String apellido, String email, String password, Collection<Rol> roles) {
+	public Usuario(Long id, String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.apellido = apellido;
+		this.apellidoP = apellidoP;
+		this.apellidoM = apellidoM;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
 	}
 
-	public Usuario(String nombre, String apellido, String email, String password, Collection<Rol> roles) {
+	public Usuario(String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles) {
 		super();
 		this.nombre = nombre;
-		this.apellido = apellido;
+		this.apellidoP = apellidoP;
+		this.apellidoM = apellidoM;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;

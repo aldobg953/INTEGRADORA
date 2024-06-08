@@ -39,7 +39,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	public Usuario guardar(UsuarioRegistroDTO registroDTO) {
 		
 		Usuario usuario = new Usuario(registroDTO.getNombre(), 
-				registroDTO.getApellido(),registroDTO.getEmail(),
+				registroDTO.getApellidoP(),registroDTO.getApellidoM(),registroDTO.getEmail(),
 				passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(Long.parseLong("1"))));
 		return usuarioRepositorio.save(usuario);
 	}

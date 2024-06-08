@@ -45,11 +45,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/js/**",
 				"/css/**",
 				"/img/**",
-				"/test/testResultado").permitAll()
+				"/test/testResultado",
+				"universidades/universidad**",
+				"/inicio").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
 		.loginPage("/login")
+		.defaultSuccessUrl("/", true)
 		.permitAll()
 		.and()
 		.logout()

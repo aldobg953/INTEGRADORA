@@ -15,6 +15,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
+	
 </head>
 <body>
 
@@ -31,6 +32,7 @@
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Registro y
 					inicio de sesión</a>
+				<a class="navbar-brand" href="#" th:href="@{/universidades}">Universidades</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
@@ -38,6 +40,7 @@
 							sesión</a></li>
 				</ul>
 			</div>
+			
 		</div>
 	</nav>
 
@@ -58,7 +61,8 @@
 				<tr>
 					<th>ID</th>
 					<th>Nombre</th>
-					<th>Apellido</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
 					<th>Email</th>
 				</tr>
 			</thead>
@@ -66,14 +70,14 @@
 				<tr th:each="usuario : ${usuarios}">
 					<td th:text="${usuario.id}">ID</td>
 					<td th:text="${usuario.nombre}">ID</td>
-					<td th:text="${usuario.apellido}">ID</td>
+					<td th:text="${usuario.apellidoP}">ID</td>
+					<td th:text="${usuario.apellidoM}">ID</td>
 					<td th:text="${usuario.email}">ID</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<a class="navbar-brand" href="#" th:href="@{/test}">Test vocacional</a>
-
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
