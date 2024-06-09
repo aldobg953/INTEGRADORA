@@ -40,7 +40,7 @@ public class UniversidadControlador {
     @GetMapping("/universidad/{id}")
     public String mostrarUniversidad( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         Optional<Universidad> universidad = universidadServicio.getUniversidadesById(id);    
-        model.addAttribute("universidad",universidad.get());    
+        model.addAttribute("universidad",universidad.get()); 
         return "universidades/universidad";
     }
 	

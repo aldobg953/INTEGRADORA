@@ -1,5 +1,6 @@
 package com.registro.usuarios.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +21,16 @@ public class Universidad {
     private String pagina_web;
     private String correo;
     private String telefono;
+
+    @Column(length = 600)
     private String informacion;
     private String direccion;
+
+    @Column(length = 600)
     private String direccionGoogle; 
-    private String folder;   
+    private String folder;
+    private String tipo_institucion; //publica o privada
+    private String caracteristicas;  
+
+    
 }
