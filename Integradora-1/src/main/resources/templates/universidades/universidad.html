@@ -13,6 +13,7 @@
     </style>
 </head>
 <body>
+    <a href="#" th:href="@{/universidades}">Universidades</a>
     <h1><span th:text="${universidad.nombre_completo}">nombre_completo</span></h1>
     
     <h3>Caracteristicas</h3>
@@ -31,6 +32,12 @@
     <a th:href="${universidad.pagina_web}" target="_blank">pagina oficial</a>
     <br/>
     <img th:src="@{'/img/' + ${universidad.folder} + '/logo.jpg'}" alt="logo" style="width: 500px; height: 500px;margin-top: 50px;">
+    <h1>Carreras</h1>
+    <ul>
+        <li th:each="carreras : ${carreras}">
+            <a th:text="${carreras.nombre}" th:href="@{/carreras/carrera/{id}(id=${carreras.id_carrera})}"></a>
+        </li>
+    </ul>
 
     <iframe src="https://roadmap.sh/r/embed?id=66625d3ce724e39e4df0bcc4" width="100%" height="1000px" frameBorder="0"></iframe>
 </body>

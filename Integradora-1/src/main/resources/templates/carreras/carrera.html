@@ -18,5 +18,10 @@
     <h3><span th:text="${carrera.informacion}">nombre_completo</span></h3>
     <h1>Horario</h1>
     <h3><span th:utext="${carrera.horario_especifico}">nombre_completo</span></h3>
+    <h1>universidad</h1>
+    <a th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad})}"></a>
+    <h1>Area</h1>
+    <a th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area})}"></a>
+
 </body>
 </html>

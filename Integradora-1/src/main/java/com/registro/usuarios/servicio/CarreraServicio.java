@@ -26,4 +26,8 @@ public class CarreraServicio {
     public List<Carrera> getCarrerasByArea(Long id){
         return carreraRepositorio.findByArea(id);
     }
+
+    public List<Carrera> getCarrerasByUniversidad(Long id){
+        return carreraRepositorio.findByUniversidad(id);
+    }
 }
