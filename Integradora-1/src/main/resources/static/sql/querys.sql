@@ -38,7 +38,8 @@ values
 ('Matutino'),
 ('Vespertino'),
 ('Nocturno'),
-('Hibrido');
+('Hibrido'),
+('Matutino y Vespertino');
 
 -- inserta universidades
 insert into universidades (correo, direccion, direccion_google, informacion, nombre_abreviado, nombre_completo, pagina_web, telefono, folder,caracteristicas,tipo_institucion) 
@@ -54,3 +55,13 @@ values
 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14003.792430824195!2d-106.0357084!3d28.6612724!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86ea44ea3eb085a3%3A0xc6c94b37ec294343!2sUniversidad%20Tecnol%C3%B3gica%20de%20Chihuahua%20Sur!5e0!3m2!1ses-419!2smx!4v1717613362126!5m2!1ses-419!2smx',
 'informacion de utch sur en base de datos', 'UTCH SUR', 'Universidad Tecnologica de Chihuahua Sur','https://utchsur.edu.mx/','614-4-20-34-10','utchsur','caracteristicas en base de datos','publica')
 ;
+
+insert into areas(nombre_area, descripcion)
+value
+('Administracion', 'Las carreras del área de administración se enfocan en la gestión y organización de recursos humanos, financieros y materiales dentro de una empresa u organización. '),
+('Ingenieria', 'Ingeniería se centra en la aplicación de principios científicos y matemáticos para diseñar, desarrollar y mejorar estructuras, sistemas y procesos.');
+
+insert into areas(nombre_area, descripcion)
+value
+('Administracion', 'Las carreras del área de administración se enfocan en la gestión y organización de recursos humanos, financieros y materiales dentro de una empresa u organización. '),
+('Ingenieria', 'Ingeniería se centra en la aplicación de principios científicos y matemáticos para diseñar, desarrollar y mejorar estructuras, sistemas y procesos.');

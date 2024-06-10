@@ -15,6 +15,6 @@ public class Horario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_horario;
     private String nombre_horario;
 }

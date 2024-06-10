@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <meta charset="utf-8">
+        <title>Areas</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("li").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Areas</h1>
+        <input type="text" id="search" placeholder="Buscar universidad...">
+        <ul>
+            <li th:each="areas : ${areas}">
+                <a th:text="${areas.nombre_area}" th:href="@{/carreras/area/{id}(id=${areas.id_area})}"></a>
+            </li>
+        </ul>
+    </body>
+</html>

@@ -2,9 +2,9 @@ package com.registro.usuarios.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.registro.usuarios.modelo.Universidad;
+import com.registro.usuarios.modelo.Area;
 
 @Repository
-public interface UniversidadRepositorio extends JpaRepository<Universidad,Long>{
-
+public interface AreaRepositorio extends JpaRepository<Area,Long> {
+    
 }
