@@ -21,7 +21,7 @@
         <input type="text" id="search" placeholder="Buscar universidad...">
         <ul>
             <li th:each="carreras : ${carreras}">
-                <a th:text="${carreras.nombre}"></a>
+                <a th:text="${carreras.nombre}" th:href="@{/carreras/carrera/{id}(id=${carreras.id_carrera})}"></a>
             </li>
         </ul>
     </body>

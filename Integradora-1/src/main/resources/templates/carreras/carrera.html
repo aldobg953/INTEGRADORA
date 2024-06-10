@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+    <title >carrera</title>
+    <style>
+        ul {
+          border-left: 5px solid red;
+          background-color: #f1f1f1;
+          list-style-type: none;
+          padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1><span th:text="${carrera.nombre}">nombre_completo</span></h1>
+    <h1>Informacion</h1>
+    <h3><span th:text="${carrera.informacion}">nombre_completo</span></h3>
+    <h1>Horario</h1>
+    <h3><span th:utext="${carrera.horario_especifico}">nombre_completo</span></h3>
+</body>
+</html>

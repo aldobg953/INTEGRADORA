@@ -1,6 +1,8 @@
 package com.registro.usuarios.controlador;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,8 +26,15 @@ public class CarreraControlador {
     @Autowired
     private CarreraServicio carreraServicio;
 
+    @GetMapping("/carrera/{id}")
+    public String mostrarCarrera( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
+        Optional<Carrera> carrera = carreraServicio.getCarreraById(id);
+        model.addAttribute("carrera", carrera.get());
+        return "carreras/carrera";
+    }
+
     @GetMapping("/area/{id}")
-    public String mostrarUniversidad( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
+    public String mostrarCarreraByArea( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         List<Carrera> carreras = carreraServicio.getCarrerasByArea(id);
         String area = carreras.get(0).getArea().getNombre_area();
         model.addAttribute("carreras", carreras);
