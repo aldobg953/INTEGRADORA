@@ -1,85 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="utf-8">
-<title>Inicio de sesión</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
+
 </head>
-<body>
+
+<body class="malla">
+    <center>
+        <header>
+            <nav>
+                <div class="return-home">
+                    <img src="css/flecha-pequena-izquierda.svg" alt="">
+                    <a th:href="@{/inicio}" id="return-home-text">Regresar al inicio</a>
+                </div>
+            </nav>
+        </header>
 
 
-	<nav>
-		<div>
-			<div>
-				<a href="#" th:href="@{/}">Registro y
-					inicio de sesión</a>
-			</div>
-		</div > <!-- No borrar los href ni ningun th, los form son los que hacen el formulario, se manda a Java tampoco borrar -->>
-	</nav>
+        <div class="tarjeta" id="sign-in"> <!--TARJETA DE INICIO DE SESION-->
 
-	<br>
-	<br>
+            <div id="logo-image"> <!--PARTE IZQUIERDA DE LA TARJETA DE INICIO DE SESION-->
 
-	<div>
-		<div>
-			<div>
-				<h1>Inicio de sesión</h1>
-				<form th:action="@{/login}" method="post">
+                <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt="" style="max-width:100%;height:auto;">
 
-					<div th:if=${param.error}>
-						<div>Usuario o contraseña
-							inválidos</div>
-					</div>
+                <hr>
 
-					<div th:if=${param.logout}>
-						<div>Ha cerrado sesión exitosamente
-						</div>
-					</div>
+                <img id="image-login" src="css/undraw_searching_re_3ra9.svg" alt="" style="max-width:60%;height:auto;">
 
+            </div>
 
-					<div>
-						<label  for="username">Correo Electronico : </label> <input id="username"  name="username" type="email" class="form-control"
-							required autofocus="autofocus" placeholder="Digite su email ID">
-					</div>
+            <div id="sign-in-form"> <!--PARTE DERECHA DE LA TARJETA DE INICIO DE SESION-->
 
-					<div>
-						<label  for="password">Password : </label> <input
-							id="password" type="password"  name="password" class="form-control" required
-							autofocus="autofocus" placeholder="Digite su password">
-					</div>
+                <div>
+                    <p id="welcome-title">¡Bienvenido!</p>
+                </div>
 
-					<div>
-						<div>
-							<div>
-								<input type="submit" class="form-control btn btn-primary" name="login-submit" id="login-submit"
-									value="Iniciar sesión" />
-							</div>
-						</div>
-					</div>
-				</form>
-				<div>
-					<span>Si eres nuevo usuario <a th:href="@{/registro}">regístrate
-							aqui</a></span>
-				</div>
-				<div>
-					<span>Para volver al <a th:href="@{/inicio}">inicio</a></span>
-				</div>
+                <div>
+                    <p id="sign-in-title">Iniciar sesión</p>
+                </div>
 
-			</div>
-		</div>
-	</div>
+                <div th:if="${param.error}">
+                    <p id="error">ERROR: Ingresa tus datos nuevamente</p>
+                </div>
+
+                <hr>
+
+                <form th:action="@{/login}" method="post"> <!--FORMULARIO-->
+
+                    <div class="input-group"> <!--INPUTS-->
+
+                        <input id="username" name="username" required="" type="email" autocomplete="on" class="input"
+                            placeholder="Nombre de usuario o correo">
+
+                            <i id="login-input-icon"  class="fi-rr-envelope"></i>
+                            
+
+                    </div>
+
+                    <hr>
+
+                    <div class="input-group">
+                        <input id="password" name="password" required="" type="password" autocomplete="on" class="input"
+                            placeholder="Ingresa tu contraseña">
+
+                        <div for="name">
+                            <i id="login-input-icon"  class="fi-rr-lock"></i>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <button class="btn btn-primary"> <!--BOTON DE INICIO DE SESION-->
+                        <span class="btn-txt">Iniciar sesión</span>
+                    </button>
+
+                </form>
+
+                <hr>
+
+                <div class="create-account-message-login"> <!--MENSAJE DEBAJO DEL BOTON DE INICIO DE SESION-->
+                    <p id="create-account-message-login">¿No tienes una cuenta?
+                        <a th:href="@{/registro}"
+                            id="create-account-message-login">¡Crea una!<a />
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </center>
+
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

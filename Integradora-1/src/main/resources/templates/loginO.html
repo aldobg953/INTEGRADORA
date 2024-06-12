@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Inicio de sesión</title>
+</head>
+<body>
+
+
+	<nav>
+		<div>
+			<div>
+				<a href="#" th:href="@{/}">Registro y
+					inicio de sesión</a>
+			</div>
+		</div > <!-- No borrar los href ni ningun th, los form son los que hacen el formulario, se manda a Java tampoco borrar -->>
+	</nav>
+
+	<br>
+	<br>
+
+	<div>
+		<div>
+			<div>
+				<h1>Inicio de sesión</h1>
+				<form th:action="@{/login}" method="post">
+
+					<div th:if=${param.error}>
+						<div>Usuario o contraseña
+							inválidos</div>
+					</div>
+
+					<div th:if=${param.logout}>
+						<div>Ha cerrado sesión exitosamente
+						</div>
+					</div>
+
+
+					<div>
+						<label  for="username">Correo Electronico : </label> <input id="username"  name="username" type="email" class="form-control"
+							required autofocus="autofocus" placeholder="Digite su email ID">
+					</div>
+
+					<div>
+						<label  for="password">Password : </label> <input
+							id="password" type="password"  name="password" class="form-control" required
+							autofocus="autofocus" placeholder="Digite su password">
+					</div>
+
+					<div>
+						<div>
+							<div>
+								<input type="submit" class="form-control btn btn-primary" name="login-submit" id="login-submit"
+									value="Iniciar sesión" />
+							</div>
+						</div>
+					</div>
+				</form>
+				<div>
+					<span>Si eres nuevo usuario <a th:href="@{/registro}">regístrate
+							aqui</a></span>
+				</div>
+				<div>
+					<span>Para volver al <a th:href="@{/inicio}">inicio</a></span>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
