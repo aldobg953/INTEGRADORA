@@ -27,6 +27,7 @@ public class Carrera {
     private float costo;
     private String horario_especifico;
     private boolean bilingue;
+    private int cantidad_periodos;
 
     @ManyToOne
     @JoinColumn(name = "fk_universidad")
