@@ -22,8 +22,10 @@
 		<div>
 			<div>
 				<div th:if=${param.exito}>
-					<div class="alert alert-info">Se ha registrado exitosamente a
-						la aplicación</div>
+					<div class="alert alert-info">Se ha registrado exitosamente. De click en inicio de sesion</div>
+				</div>
+				<div th:if=${param.error}>
+					<div class="alert alert-info">El correo que intenta registrar ya esta en uso</div>
 				</div>
 
 				<h1>Regístrate</h1>

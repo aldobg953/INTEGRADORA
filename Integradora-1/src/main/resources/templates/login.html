@@ -47,6 +47,9 @@
                 <div th:if="${param.error}">
                     <p id="error">ERROR: Ingresa tus datos nuevamente</p>
                 </div>
+                <div th:if="${mensajeExito}">
+                    <p th:text="${mensajeExito}"></p>
+                </div>
 
                 <hr>
 
