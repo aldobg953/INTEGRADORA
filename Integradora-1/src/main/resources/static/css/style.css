@@ -103,18 +103,12 @@ nav {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    display: flex;
     height: 100%;
     width: 50%;
+    padding-top: 5%;
 }
 
-#logo-horizontal-image {
-    height: 15%;
-}
 
-#image-login{
-    height: 60%;
-}
 
 #sign-in-form {
     display: flex;
@@ -186,7 +180,7 @@ form {
     height: 2vw;
     border: 3px solid transparent;
     border-radius: var(--border-radius);
-    background: #fff;
+    background: #ffffff;
     padding: 2vh 1vw 2vh 3vw;
     font-size: 1.2em;
     transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -198,12 +192,12 @@ form {
 }
 
 #login-input-icon {
-    display: flex;
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 1VW;
+    top: 0;
     width: 60px;
     height: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
     color: #7E7E7E;
