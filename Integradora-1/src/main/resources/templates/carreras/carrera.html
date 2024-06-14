@@ -10,6 +10,68 @@
           list-style-type: none;
           padding: 10px 20px;
         }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .comments-section {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .comments-section h2 {
+            margin-top: 0;
+        }
+        .comment {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .comment-author {
+            font-weight: bold;
+        }
+        .comment-date {
+            font-size: 0.9em;
+            color: #999;
+        }
+        .comment-content {
+            margin-top: 10px;
+        }
+        .comment-form {
+            margin-top: 30px;
+        }
+        .comment-form h3 {
+            margin-bottom: 10px;
+        }
+        .comment-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .comment-form input[type="text"],
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .comment-form button {
+            display: inline-block;
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .comment-form button:hover {
+            background-color: #4cae4c;
+        }
     </style>
 </head>
 <body>
@@ -22,6 +84,38 @@
     <a th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad})}"></a>
     <h1>Area</h1>
     <a th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area})}"></a>
+
+
+
+    <div class="comments-section">
+        <h2>Comentarios</h2>
+        <div th:each="comentario : ${foros}">
+            <div class="comment">
+                <p class="comment-author" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}">Autor</p>
+                <p class="comment-date" th:text="${#dates.format(comentario.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</p>
+                <p class="comment-content" th:text="${comentario.comentario}">Contenido del comentario</p>
+            </div>
+        </div>
+
+        <div th:if="${foros == null or #lists.isEmpty(foros)}">
+            <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+        </div>
+
+        <div class="comment-form">
+            <h3>Deja un comentario</h3>
+            <form th:action="@{/carreras/agregarComentario}" method="post">
+                <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
+                <div>
+                    <label for="comentarioNuevo">Comentario:</label>
+                    <textarea id="comentarioNuevo" name="comentarioNuevo" required></textarea>
+                </div>
+                <div>
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 </body>
 </html>

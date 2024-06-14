@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.registro.usuarios.controlador.dto.UsuarioRegistroDTO;
-import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.servicio.UsuarioServicio;
 
 @Controller
@@ -39,7 +38,7 @@ public class RegistroUsuarioControlador {
 			return "redirect:/registro?error";
 		}else{
 			redirectAttributes.addFlashAttribute("mensajeExito", "Registro exitoso. ¡Ahora puedes iniciar sesión!");
-			return "redirect:/login?exito";
+			return "redirect:/login";
 		}	
 	}
 }

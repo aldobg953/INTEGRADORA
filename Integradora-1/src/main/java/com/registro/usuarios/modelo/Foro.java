@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -26,10 +28,16 @@ public class Foro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_foro;
     private String comentario;
-    
-    @ManyToOne
+    private Long fk_carrera;
+    private Long fk_especialidad;
+
+    /*@ManyToOne
     @JoinColumn(name = "fk_carrera")
     private Carrera carrera;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_especialidad")
+    private Especialidad especialidad;*/
 
     @ManyToOne
     @JoinColumn(name = "fk_usuario")
