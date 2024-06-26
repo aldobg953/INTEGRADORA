@@ -145,7 +145,15 @@ hr {
 }
 
 #error{
-    color: red;
+    color: rgb(0, 17, 255);
+    position: absolute;
+    transform: translate(-50%, -70%);
+    font-weight: 700;
+}
+
+#error > .input {
+    border: 3px solid #ff0000;
+    box-shadow: 0 0 15px #ff3333;
 }
 
 #create-account-message-login {
@@ -193,9 +201,8 @@ form {
 
 #login-input-icon {
     position: absolute;
-    left: 1VW;
+    left: 5%;
     top: 0;
-    width: 60px;
     height: 100%;
     display: flex;
     justify-content: center;
