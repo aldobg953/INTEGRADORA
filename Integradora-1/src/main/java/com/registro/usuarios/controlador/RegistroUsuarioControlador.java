@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.registro.usuarios.controlador.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.servicio.UsuarioServicio;
@@ -31,8 +32,13 @@ public class RegistroUsuarioControlador {
 	}
 	
 	@PostMapping
-	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") UsuarioRegistroDTO registroDTO) {
-		usuarioServicio.guardar(registroDTO);
-		return "redirect:/registro?exito";
+	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") UsuarioRegistroDTO registroDTO, RedirectAttributes redirectAttributes) {
+		
+		if(usuarioServicio.guardar(registroDTO)==null){
+			return "redirect:/registro?error";
+		}else{
+			redirectAttributes.addFlashAttribute("mensajeExito", "Registro exitoso. ¡Ahora puedes iniciar sesión!");
+			return "redirect:/login";
+		}	
 	}
 }

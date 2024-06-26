@@ -25,11 +25,19 @@ public class Foro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_foro;
+    @Column(length = 600)
     private String comentario;
-    
-    @ManyToOne
+    private int calificacion;
+    private Long fk_carrera;
+    private Long fk_especialidad;
+
+    /*@ManyToOne
     @JoinColumn(name = "fk_carrera")
     private Carrera carrera;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_especialidad")
+    private Especialidad especialidad;*/
 
     @ManyToOne
     @JoinColumn(name = "fk_usuario")

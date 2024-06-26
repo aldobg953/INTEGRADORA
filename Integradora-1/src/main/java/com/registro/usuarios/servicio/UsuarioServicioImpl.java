@@ -38,10 +38,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	@Override
 	public Usuario guardar(UsuarioRegistroDTO registroDTO) {
 		
-		Usuario usuario = new Usuario(registroDTO.getNombre(), 
-				registroDTO.getApellidoP(),registroDTO.getApellidoM(),registroDTO.getEmail(),
-				passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(Long.parseLong("1"))));
-		return usuarioRepositorio.save(usuario);
+		//comprobacion
+		Usuario usuario = usuarioRepositorio.findByEmail(registroDTO.getEmail());
+		if(usuario==null){
+			usuario = new Usuario(registroDTO.getNombre(), 
+			registroDTO.getApellidoP(),registroDTO.getApellidoM(),registroDTO.getEmail(),
+			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)));
+			return usuarioRepositorio.save(usuario);
+		}else{
+			return null;
+		}
 	}
 
 	@Override
