@@ -15,8 +15,6 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Data
@@ -27,7 +25,9 @@ public class Foro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_foro;
+    @Column(length = 600)
     private String comentario;
+    private int calificacion;
     private Long fk_carrera;
     private Long fk_especialidad;
 

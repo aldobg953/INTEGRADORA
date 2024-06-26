@@ -34,6 +34,7 @@ public class Usuario {
 
 	private String email;
 	private String password;
+	private boolean activo;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
@@ -99,6 +100,14 @@ public class Usuario {
 		this.roles = roles;
 	}
 
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
 	public Usuario(Long id_usuario, String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles) {
 		super();
 		this.id_usuario = id_usuario;
@@ -123,5 +132,7 @@ public class Usuario {
 	public Usuario() {
 		
 	}
+
+	
 
 }

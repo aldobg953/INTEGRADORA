@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.registro.usuarios.controlador.dto.CalificacionesDto;
 import com.registro.usuarios.modelo.Area;
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
@@ -38,9 +39,10 @@ public class CarreraControlador {
     public String mostrarCarrera( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         Optional<Carrera> carrera = carreraServicio.getCarreraById(id);
         List<Foro> foros = carreraServicio.getForoByCarrera(id);
-        System.out.println(foros);
+        CalificacionesDto califGnral = foroServicio.obtenerCalifCarrera(id);
         model.addAttribute("carrera", carrera.get());
         model.addAttribute("foros", foros);
+        model.addAttribute("califGnral", califGnral);
         return "carreras/carrera";
     }
 
@@ -63,11 +65,10 @@ public class CarreraControlador {
     @PostMapping("/agregarComentario")
     public String agregarComentario(Model model, @AuthenticationPrincipal UserDetails userDetails,
                                          @RequestParam("id_carrera") Long id_carrera,
-                                         @RequestParam("comentarioNuevo") String comentarioNuevo
+                                         @RequestParam("comentarioNuevo") String comentarioNuevo,
+                                         @RequestParam("calificacion") int calificacion
                                             ) {
-        System.out.println(id_carrera);
-        System.out.println(comentarioNuevo);
-        foroServicio.crearForoCarrera(id_carrera, null, userDetails.getUsername(), comentarioNuevo);
+        foroServicio.crearForoCarrera(id_carrera, userDetails.getUsername(), comentarioNuevo, calificacion);
         return "redirect:/carreras/carrera/" + id_carrera;
     }
 }

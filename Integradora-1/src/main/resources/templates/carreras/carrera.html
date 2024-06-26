@@ -4,118 +4,266 @@
     
     <title >carrera</title>
     <style>
-        ul {
-          border-left: 5px solid red;
-          background-color: #f1f1f1;
-          list-style-type: none;
-          padding: 10px 20px;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .comments-section {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .comments-section h2 {
-            margin-top: 0;
-        }
-        .comment {
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eaeaea;
-        }
-        .comment-author {
-            font-weight: bold;
-        }
-        .comment-date {
-            font-size: 0.9em;
-            color: #999;
-        }
-        .comment-content {
-            margin-top: 10px;
-        }
-        .comment-form {
-            margin-top: 30px;
-        }
-        .comment-form h3 {
-            margin-bottom: 10px;
-        }
-        .comment-form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .comment-form input[type="text"],
-        .comment-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .comment-form button {
-            display: inline-block;
-            background-color: #5cb85c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
+        .star {
             cursor: pointer;
+            color: gray;
         }
-        .comment-form button:hover {
-            background-color: #4cae4c;
+        .star.selected {
+            color: gold;
+            fill:gold;
         }
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1><span th:text="${carrera.nombre}">nombre_completo</span></h1>
-    <h1>Informacion</h1>
-    <h3><span th:text="${carrera.informacion}">nombre_completo</span></h3>
-    <h1>Horario</h1>
-    <h3><span th:utext="${carrera.horario_especifico}">nombre_completo</span></h3>
-    <h1>universidad</h1>
-    <a th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad})}"></a>
-    <h1>Area</h1>
-    <a th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area})}"></a>
-
-
-
-    <div class="comments-section">
-        <h2>Comentarios</h2>
-        <div th:each="comentario : ${foros}">
-            <div class="comment">
-                <p class="comment-author" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}">Autor</p>
-                <p class="comment-date" th:text="${#dates.format(comentario.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</p>
-                <p class="comment-content" th:text="${comentario.comentario}">Contenido del comentario</p>
+    
+    <nav class="bg-white border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a th:href="@{/}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <div id="logo-image"> 
+                <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+                style="max-width:40%;height:auto;">
             </div>
+            <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">PathFinder</span>
+        </a>
+        <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s" alt="user photo">
+            </button>
         </div>
-
-        <div th:if="${foros == null or #lists.isEmpty(foros)}">
-            <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+        <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1" >
+        <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
+            <li>
+            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+            </li>
+            <li>
+            <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+            </li>
+            <li>
+            <a href="#" class="text-2xl py-2 px-3 text-blue-700 md:p-0">Carreras</a>
+            </li>
+            <li>
+                <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+            </li>
+            <li>
+                <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+            </li>
+        </ul>
         </div>
+        </div>
+    </nav>
+    
 
-        <div class="comment-form">
-            <h3>Deja un comentario</h3>
-            <form th:action="@{/carreras/agregarComentario}" method="post">
-                <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
-                <div>
-                    <label for="comentarioNuevo">Comentario:</label>
-                    <textarea id="comentarioNuevo" name="comentarioNuevo" required></textarea>
+
+
+
+    <div class="bg-fixed w-full min-h-80 bg-cover" style="background-image: url(/img/utch/portada.jpg); background-position: center 70%;">
+        <div class="bg-sky-900 w-full h-80 flex items-center justify-center bg-opacity-50">
+            <span class="font-serif text-5xl text-white font-bold z-10 ml-12 text-center" th:text="${carrera.nombre}">nombre_completo</span>
+        </div>
+    </div>
+    <div class=" my-8 mx-2 md:mx-28 border-l-4 pl-10" >
+        <span class="text-justify font-mono text-sm md:text-xl" th:text="${carrera.informacion}">informacion</span>
+    </div>
+    <div class="flex flex-col md:flex-row my-7 w-full">
+        <div class="md:basis-1/2 flex justify-center items-center mt-5">
+            <img src="/img/utch/logo.jpg" class="h-auto max-w-full md:max-w-[80%]">
+        </div>
+        <div class="ml-0 md:ml-32 md:basis-1/2 w-full flex flex-col space-y-4">
+            <div class="ml-5 mt-5 h-10 text-xl md:text-3xl font-bold font-serif">Informacion de la carrera</div>
+            <div class="text-xl md:text-lg font-serif font-bold">Horarios y costos</div>
+            <div th:utext="${carrera.horario_especifico}" class="text-base md:text-lg">horario</div>
+            <div th:text="'Costo de la carrera: ' + ${carrera.costo} + '0$'" class="text-base md:text-lg">costos</div>
+            <div class="text-xl md:text-lg font-serif font-bold">Modalidad</div>
+            <div th:text="${carrera.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
+            <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
+            <div class="text-xl md:text-lg font-serif font-bold">Area</div>
+            <a class="font-serif text-base md:text-lg" th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area})}"></a>
+            <div class="text-xl md:text-lg font-serif font-bold">Universidad</div>
+            <a class="font-serif text-base md:text-lg" th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad})}"></a>
+        </div>
+    </div>
+    
+    <div class="w-full">
+        <iframe src="https://roadmap.sh/r/embed?id=66625d3ce724e39e4df0bcc4" width="800px" height="800px" frameBorder="0"></iframe>
+    </div>
+    
+
+    
+
+
+    <hr class="w-full"/>
+    
+    <div class="flex flex-col lg:flex-row">
+        <!-- calificaciones de usuarios, estrellas-->
+        <div class="bg-white p-6 rounded-lg shadow-lg basis-full lg:basis-1/4 font-mono">
+            <h2 class="text-2xl font-bold w-full">Calificaciones de usuarios</h2>
+            <div class="flex">
+                <span class="ml-1" th:each="i : ${#numbers.sequence(1, 5)}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
+                        <path th:attr="fill=${i} <= ${califGnral.promedioGral} ? 'gold' : 'none', stroke=${i} <= ${califGnral.promedioGral} ? 'gold' : 'black'"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                </span>
+                <span class="ml-2" th:text = "${califGnral.promedioGral} + ' de 5'"></span>
+            </div>
+            <div>
+                <span class="ml-2" th:text = "${califGnral.cantidadCalif} + ' calificaciones globales'"></span>
+            </div>
+            <div class="flex">
+                <div class="flex-none w-10 flex items-center space-x-1">
+                    <span class="text-lg"> 5</span>
+                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
                 </div>
+                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
+                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promCincoE} + '%'"></div>
+                </div>
+                <div class="flex-auto w-16 flex justify-center">
+                    <span th:text="${califGnral.promCincoE} + '%'"></span>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex-none w-10 flex items-center space-x-1">
+                    <span class="text-lg"> 4</span>
+                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                </div>
+                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
+                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promCuatroE} + '%'"></div>
+                </div>
+                <div class="flex-auto w-16 flex justify-center">
+                    <span th:text="${califGnral.promCuatroE} + '%'"></span>
+                </div>
+            </div>    
+            <div class="flex">
+                <div class="flex-none w-10 flex items-center space-x-1">
+                    <span class="text-lg"> 3</span>
+                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                </div>
+                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
+                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promTresE} + '%'"></div>
+                </div>
+                <div class="flex-auto w-16 flex justify-center">
+                    <span th:text="${califGnral.promTresE} + '%'"></span>
+                </div>
+            </div>    
+            <div class="flex">
+                <div class="flex-none w-10 flex items-center space-x-1">
+                    <span class="text-lg"> 2</span>
+                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                </div>
+                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
+                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promDosE} + '%'"></div>
+                </div>
+                <div class="flex-auto w-16 flex justify-center">
+                    <span th:text="${califGnral.promDosE} + '%'"></span>
+                </div>
+            </div>    
+            <div class="flex">
+                <div class="flex-none w-10 flex items-center space-x-1">
+                    <span class="text-lg"> 1</span>
+                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                </div>
+                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
+                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promUnaE} + '%'"></div>
+                </div>
+                <div class="flex-auto w-16 flex justify-center">
+                    <span th:text="${califGnral.promUnaE} + '%'"></span>
+                </div>
+            </div>        
+            
+
+            <form th:action="@{/carreras/agregarComentario}" method="post" class="my-7">
+                <h2 class="text-2xl font-bold">Califica esta carrera</h2>
+                <div id="star-rating" class="flex space-x-1">
+                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                    </svg>
+                </div>
+                <input type="hidden" id="calificacion" name="calificacion" th:value="0">
+                <h3>Deja un comentario:</h3>
+                <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
+                <textarea class="w-full h-32 rounded-lg  border-4 border-current resize-none" id="comentarioNuevo" name="comentarioNuevo" required placeholder="Escribe tus comentarios aquí..."></textarea>
+                
                 <div>
-                    <button type="submit">Enviar</button>
+                    <button class="bg-green-500 w-full max-w-96 rounded-lg font-bold" type="submit" >Enviar</button>
                 </div>
             </form>
+        
+        </div>
+
+
+
+        <div class="basis-full lg:basis-3/4 ml-5 my-7">
+        <h2 class="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold ">Comentarios</h2>
+            <div th:each="comentario : ${foros}">
+                <div>
+                    <p class="font-mono font-bold" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}">Autor</p>
+                    <p class="font-mono text-xs" th:text="${#dates.format(comentario.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</p>
+                    <div class="flex space-x-1 my-3">
+                        <span th:each="i : ${#numbers.sequence(1, 5)}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                            th:attr="fill=${i} <= ${comentario.calificacion} ? 'gold' : 'none', stroke=${i} <= ${comentario.calificacion} ? 'gold' : 'black'"
+                                 viewBox="0 0 24 24"
+                                 class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                            </svg>
+                        </span>
+                    </div>
+                    
+                    <p class="font-mono " th:text="${comentario.comentario}">Contenido del comentario</p>
+                </div>
+                <hr class="w-full my-7"/>
+            </div>
+            <div class="ml-5 my-7" th:if="${foros == null or #lists.isEmpty(foros)}">
+                <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+            </div>
         </div>
     </div>
 
 
+    
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingValue = document.getElementById('rating-value');
+        const calificacionInput = document.getElementById('calificacion');
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                stars.forEach((s, i) => {
+                    if (i <= index) {
+                        s.classList.add('selected');
+                    } else {
+                        s.classList.remove('selected');
+                    }
+                });
+                const rating = index + 1;
+                calificacionInput.value = rating;
+            });
+        });
+    </script>
 </body>
 </html>
