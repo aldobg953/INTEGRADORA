@@ -28,6 +28,12 @@ public class Carrera {
     private String horario_especifico;
     private boolean bilingue;
     private int cantidad_periodos;
+    @Column(length = 1000)
+    private String porque_estudiar;
+    @Column(length = 1000)
+    private String donde_trabajar;
+    @Column(length = 1000)
+    private String como_desemp; //como desempeñar la carrera
 
     @ManyToOne
     @JoinColumn(name = "fk_universidad")

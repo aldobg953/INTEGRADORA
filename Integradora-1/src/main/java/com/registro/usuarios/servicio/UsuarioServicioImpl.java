@@ -37,7 +37,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 	@Override
 	public Usuario guardar(UsuarioRegistroDTO registroDTO) {
-		
 		//comprobacion
 		Usuario usuario = usuarioRepositorio.findByEmail(registroDTO.getEmail());
 		if(usuario==null){
@@ -72,4 +71,37 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public Usuario findByEmail(String username) {
         return usuarioRepositorio.findByEmail(username);
     }
+
+	@Override
+	public boolean actualizarUsuario(Usuario usuario){
+		usuarioRepositorio.save(usuario);
+		return true;
+	}
+
+	@Override
+	public boolean actualizarPass (String email, String password){
+		String userPassword = usuarioRepositorio.findByEmail(email).getPassword();
+		
+		System.out.println(passwordEncoder.matches(password, userPassword));
+		return false;
+	}
+
+	@Override
+	public String actualizarEmail(String oldEmail, String newEmail , String password){
+		Usuario usuario = usuarioRepositorio.findByEmail(newEmail);
+		if (usuario == null) {
+			Usuario userPassword = usuarioRepositorio.findByEmail(oldEmail);
+			if (passwordEncoder.matches(password, userPassword.getPassword())) {
+				userPassword.setEmail(newEmail);
+				System.out.println("se actualizo");
+				usuarioRepositorio.save(userPassword);
+			}else{
+				System.out.println("NO SE ACTUALIZO");
+			}
+		}else{
+			System.out.println("NO SE ACTUALIZO PORQUE EXISTE USUARIO");
+		}
+		return null;
+	}
+
 }

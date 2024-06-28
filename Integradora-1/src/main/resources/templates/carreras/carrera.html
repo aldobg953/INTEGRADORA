@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="css/global_font.css">
     
     <title >carrera</title>
     <style>
@@ -13,6 +14,27 @@
             fill:gold;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userMenuButton = document.getElementById('user-menu-button');
+            var userDropdown = document.getElementById('user-dropdown');
+
+            userMenuButton.addEventListener('click', function(event) {
+                event.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+
+            userDropdown.addEventListener('click', function(event) {
+                event.stopPropagation(); // Evita que el clic en el menú desplegable cierre el menú
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
+                    userDropdown.classList.add('hidden');
+                }
+            });
+        });
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -26,12 +48,35 @@
                 </div>
                 <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">PathFinder</span>
             </a>
-            <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s" alt="user photo">
+
+            <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600" id="user-menu-button" aria-expanded="false">
+                    <span class="sr-only">Menu usuario</span>
+                    <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s" alt="user photo">
                 </button>
+                
             </div>
+            <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20" id="user-dropdown">
+                <div class="px-4 py-3">
+                    <span class="block text-sm text-black-900 dark:text-white" th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
+                    <span class="block text-sm text-gray-500 truncate dark:text-gray-400" th:text="${usuario.email} ">correo</span>
+                </div>
+                <ul class="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                        <a th:href="@{/configuracion/perfil}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Perfil</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Configuraciones</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Favoritos</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300" >Cerrar sesion</a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1" >
             <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                 <li>
@@ -53,10 +98,6 @@
             </div>
         </div>
     </nav>
-    
-
-
-
 
     <div class="bg-fixed w-full min-h-80 bg-cover" style="background-image: url(/img/utch/portada.jpg); background-position: center 70%;">
         <div class="bg-sky-900 w-full h-80 flex items-center justify-center bg-opacity-50">
@@ -64,7 +105,7 @@
         </div>
     </div>
     <div class=" my-8 mx-2 md:mx-28 border-l-4 pl-10" >
-        <span class="text-justify font-mono text-sm md:text-xl" th:text="${carrera.informacion}">informacion</span>
+        <span class="text-justify font-serif text-sm md:text-xl" th:text="${carrera.informacion}">informacion</span>
     </div>
     <div class="flex flex-col md:flex-row my-7 w-full ">
         <div class="md:basis-1/2 flex justify-center items-center mt-5">
@@ -84,15 +125,30 @@
             <a class="font-serif text-base md:text-lg" th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad})}"></a>
         </div>
     </div>
-
-
-
-    <div class="md:ml-80 font-mono text-5xl font-bold my-7 " >Plan de estudio</div>
+    <div class="w-full my-10 bg-gray-600 flex flex-col md:flex-row">
+        <div class="basis-1/2 text-right pl-16 pr-10 content-center" >
+            <span class="font-serif text-2xl font-bold text-white" th:text="'¿Por qué estudiar ' + ${carrera.nombre} + '?'">carrera</span><br/>
+            <span class="font-serif text-lg pl-16 text-white" th:text="${carrera.porque_estudiar}">texto porque estudiar esta carrera</span>
+        </div>
+        <div class="basis-1/2 h-48 md:h-auto">
+            <img class="h-full w-full md:w-auto" src="/img/utch/1.jpg">
+        </div>
+    </div> 
+    
+    <div class="w-full my-10 flex flex-col md:flex-row">
+        <div class="basis-1/2 text-center">
+            <span class="font-serif text-2xl font-bold text-sky-600"> ¿Donde puedo trabajar?</span><br/>
+            <div class="px-3 my-5 border-l-4 ml-7 text-left"><span class="font-serif text-lg text-justify" th:text="${carrera.donde_trabajar}"></span></div>
+        </div>
+        <div class="basis-1/2 text-center">
+            <span class="font-serif text-2xl font-bold text-sky-600"> ¿Cómo Puedo Desempeñarme?</span><br/>
+            <div class="px-3 my-5  ml-7 text-left pl-10"><ul class="font-serif text-lg list-disc " th:utext="${carrera.como_desemp}"></ul></div>
+        </div>
+    </div>
+    <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold">Plan de estudio</p></div>
     <div class="md:mx-32 border-sky-600 border-2 mb-7 h-80 md:h-[1700px]" height="1700px">
         <iframe class="bg-sky-200 w-full h-full iframe-zoom" th:src="${carrera.roadmap}" width="100%" height="100%" frameBorder="0"></iframe>
     </div>
-    
-
 
     <hr class="w-full"/>
     

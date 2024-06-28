@@ -18,9 +18,11 @@ import com.registro.usuarios.controlador.dto.CalificacionesDto;
 import com.registro.usuarios.modelo.Area;
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
+import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
 import com.registro.usuarios.servicio.ForoServicio;
+import com.registro.usuarios.servicio.UsuarioServicio;
 
 @Controller
 @RequestMapping("/carreras")
@@ -35,11 +37,16 @@ public class CarreraControlador {
     @Autowired
     private ForoServicio foroServicio;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
     @GetMapping("/carrera/{id}")
     public String mostrarCarrera( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         Optional<Carrera> carrera = carreraServicio.getCarreraById(id);
         List<Foro> foros = carreraServicio.getForoByCarrera(id);
         CalificacionesDto califGnral = foroServicio.obtenerCalifCarrera(id);
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        model.addAttribute("usuario", usuario);
         model.addAttribute("carrera", carrera.get());
         model.addAttribute("foros", foros);
         model.addAttribute("califGnral", califGnral);

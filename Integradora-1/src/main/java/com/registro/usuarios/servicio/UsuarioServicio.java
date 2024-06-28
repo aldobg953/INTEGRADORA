@@ -16,4 +16,9 @@ public interface UsuarioServicio extends UserDetailsService{
 
 	Usuario findByEmail(String username);
 	
+	public boolean actualizarUsuario(Usuario usuario);
+
+	public boolean actualizarPass (String email, String password);
+
+	public String actualizarEmail(String oldEmail, String newEmail , String password);
 }
