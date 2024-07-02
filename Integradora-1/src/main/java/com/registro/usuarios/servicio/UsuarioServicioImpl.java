@@ -79,11 +79,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	}
 
 	@Override
-	public boolean actualizarPass (String email, String password){
-		String userPassword = usuarioRepositorio.findByEmail(email).getPassword();
+	public boolean actualizarPass (String email, String oldPass, String newPass){
+		Usuario usuario = usuarioRepositorio.findByEmail(email);
 		
-		System.out.println(passwordEncoder.matches(password, userPassword));
-		return false;
+		if(passwordEncoder.matches(oldPass, usuario.getPassword())){
+			usuario.setPassword(passwordEncoder.encode(newPass));
+			usuarioRepositorio.save(usuario);
+			return true;
+		}else{
+			return false;
+		}
+
 	}
 
 	@Override
@@ -95,13 +101,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 				userPassword.setEmail(newEmail);
 				System.out.println("se actualizo");
 				usuarioRepositorio.save(userPassword);
+				return "exito";
 			}else{
-				System.out.println("NO SE ACTUALIZO");
+				return "La contraseña ingresada es incorrecta";
 			}
 		}else{
-			System.out.println("NO SE ACTUALIZO PORQUE EXISTE USUARIO");
+			return "El correo electronico esta en uso.";
 		}
-		return null;
+		
 	}
 
 }
