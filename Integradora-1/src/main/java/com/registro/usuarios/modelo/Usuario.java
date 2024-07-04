@@ -35,6 +35,7 @@ public class Usuario {
 	private String email;
 	private String password;
 	private boolean activo;
+	private boolean darkmode;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
@@ -108,7 +109,15 @@ public class Usuario {
 		this.activo = activo;
 	}
 
-	public Usuario(Long id_usuario, String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles) {
+	public boolean isDarkmode() {
+		return darkmode;
+	}
+
+	public void setDarkmode(boolean darkmode) {
+		this.darkmode = darkmode;
+	}
+
+	public Usuario(Long id_usuario, String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
 		super();
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
@@ -117,9 +126,11 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		this.activo = activo;
+		this.darkmode = darkmode;
 	}
 
-	public Usuario(String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles) {
+	public Usuario(String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
 		super();
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
@@ -127,6 +138,8 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		this.activo = activo;
+		this.darkmode = darkmode;
 	}
 
 	public Usuario() {

@@ -21,4 +21,6 @@ public interface UsuarioServicio extends UserDetailsService{
 	public boolean actualizarPass (String email, String oldPass, String newPass);
 
 	public String actualizarEmail(String oldEmail, String newEmail , String password);
+
+	public void actualizarDarkmode(boolean darkmode, String email);
 }

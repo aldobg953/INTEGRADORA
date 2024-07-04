@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html th:classappend="${usuario.darkmode} ? 'dark' : ''">
+    <head>
+        <title>Configuracion</title>
+        <script src="/js/navbar.js"></script>
+        <link href="/css/tailwind.css" rel="stylesheet">
+    </head>
+    <body class="bg-gray-200 dark:bg-gray-800">
+        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
+                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
+                    <div id="logo-image">
+                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+                            style="max-width:40%;height:auto;">
+                    </div>
+                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
+                </a>
+    
+                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
+                        id="user-menu-button" aria-expanded="false">
+                        <span class="sr-only">Menu usuario</span>
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
+                            alt="user photo">
+                    </button>
+    
+                </div>
+                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-black-900 dark:text-white"
+                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
+                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
+                            th:text="${usuario.email} ">correo</span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a th:href="@{/configuracion/perfil}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/configuracion}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                                sesion</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
+                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
+                        <li>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <p class="md:mx-28 mt-8 font-bold text-3xl font-serif dark:text-white">Configuraciones</p>
+
+        <form th:action="@{/configuracion/cambiarDarkMode}" class="border border-blue-800 md:mx-28 rounded-lg my-10 shadow-lg shadow-blue-500/50" method="post">
+            <div class="grid grid-rows-2 grid-flow-col">
+                <div class="col-span-1 pt-6 pl-10 font-bold font-serif dark:text-white">
+                    Modo oscuro
+                </div>
+                <div class="pl-10 col-span-1 dark:text-white">
+                    Ajusta el aspecto de PathFinder para reducir el reflejo y dar un descanso a la vista.
+                </div>
+                <div class="col-span-2 row-span-2 justify-end">
+                    <label class="inline-flex items-center cursor-pointer m-10">
+                        <input type="checkbox" name="miCheckbox" value="true" th:checked="${usuario.darkmode}" class="sr-only peer">
+                        <div
+                            class="relative w-11 h-6 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                    </label>
+                </div>
+                
+            </div>
+            <div class="p-4 flex justify-end pr-20">
+                <button
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
+                    <span
+                        class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                        Actualizar
+                    </span>
+                </button>
+            </div>
+        </form>
+
+
+    </body>
+</html>

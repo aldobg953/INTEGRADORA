@@ -38,11 +38,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	@Override
 	public Usuario guardar(UsuarioRegistroDTO registroDTO) {
 		//comprobacion
+		
 		Usuario usuario = usuarioRepositorio.findByEmail(registroDTO.getEmail());
 		if(usuario==null){
 			usuario = new Usuario(registroDTO.getNombre(), 
 			registroDTO.getApellidoP(),registroDTO.getApellidoM(),registroDTO.getEmail(),
-			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)));
+			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false);
 			return usuarioRepositorio.save(usuario);
 		}else{
 			return null;
@@ -108,7 +109,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		}else{
 			return "El correo electronico esta en uso.";
 		}
-		
+	}
+
+	@Override
+	public void actualizarDarkmode(boolean darkmode, String email){
+		Usuario usuario = usuarioRepositorio.findByEmail(email);
+		usuario.setDarkmode(darkmode);
+		usuarioRepositorio.save(usuario);
 	}
 
 }

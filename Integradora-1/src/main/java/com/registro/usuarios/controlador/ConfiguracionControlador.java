@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.servicio.UsuarioServicio;
 
@@ -63,8 +62,25 @@ public class ConfiguracionControlador {
         }else{
             redirectAttributes.addFlashAttribute("msj","La contraseña del usaurio es incorrecta");
             return "redirect:/configuracion/perfil";
+        } 
+    }
+
+    @GetMapping
+    public String configuracion(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        model.addAttribute("usuario", usuario);
+        return "configuracion/configuracion";
+    }
+
+    @PostMapping("/cambiarDarkMode")
+    public String cambiarDarkMode(@RequestParam(name = "miCheckbox", required = false) Boolean checkboxValu, 
+                                    @AuthenticationPrincipal UserDetails userDetails){
+        if(checkboxValu!=null){
+            usuarioServicio.actualizarDarkmode(true, userDetails.getUsername());
+        }else{
+            usuarioServicio.actualizarDarkmode(false, userDetails.getUsername());
         }
-        
+        return "redirect:/configuracion";
     }
     
 }
