@@ -40,9 +40,15 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		//comprobacion
 		
 		Usuario usuario = usuarioRepositorio.findByEmail(registroDTO.getEmail());
-		if(usuario==null){
-			usuario = new Usuario(registroDTO.getNombre(), 
-			registroDTO.getApellidoP(),registroDTO.getApellidoM(),registroDTO.getEmail(),
+		
+
+
+		if(usuario==null){	
+			int firstSpaceIndex = registroDTO.getNombre().indexOf(' ');
+			String nombre = registroDTO.getNombre().substring(0, firstSpaceIndex);
+			String apellido = registroDTO.getNombre().substring(firstSpaceIndex + 1);
+			usuario = new Usuario(nombre, 
+			apellido, registroDTO.getEmail(),
 			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false);
 			return usuarioRepositorio.save(usuario);
 		}else{

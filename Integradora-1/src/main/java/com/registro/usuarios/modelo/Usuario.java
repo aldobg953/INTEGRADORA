@@ -29,9 +29,6 @@ public class Usuario {
 	@Column(name = "apellidoP")
 	private String apellidoP;
 
-	@Column(name = "apellidoM")
-	private String apellidoM;
-
 	private String email;
 	private String password;
 	private boolean activo;
@@ -67,14 +64,6 @@ public class Usuario {
 
 	public void setApellidoP(String apellidoP) {
 		this.apellidoP = apellidoP;
-	}
-
-	public String getApellidoM() {
-		return apellidoM;
-	}
-
-	public void setApellidoM(String apellidoM) {
-		this.apellidoM = apellidoM;
 	}
 
 	public String getEmail() {
@@ -117,12 +106,11 @@ public class Usuario {
 		this.darkmode = darkmode;
 	}
 
-	public Usuario(Long id_usuario, String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
+	public Usuario(Long id_usuario, String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
 		super();
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
-		this.apellidoM = apellidoM;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
@@ -130,11 +118,10 @@ public class Usuario {
 		this.darkmode = darkmode;
 	}
 
-	public Usuario(String nombre, String apellidoP, String apellidoM, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
+	public Usuario(String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
 		super();
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
-		this.apellidoM = apellidoM;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;

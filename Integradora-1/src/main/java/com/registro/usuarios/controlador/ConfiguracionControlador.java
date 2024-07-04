@@ -30,12 +30,10 @@ public class ConfiguracionControlador {
     @PostMapping("/actualizar")
     public String actualizarInfoUsuario(Model model, @AuthenticationPrincipal UserDetails userDetails,
                                                     @RequestParam("newNombre") String newNombre,
-                                                    @RequestParam("newApellidoP") String newApellidoP,
-                                                    @RequestParam("newApellidoM") String newApellidoM){
+                                                    @RequestParam("newApellidoP") String newApellidoP){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         usuario.setNombre(newNombre);
         usuario.setApellidoP(newApellidoP);
-        usuario.setApellidoM(newApellidoM);
         usuarioServicio.actualizarUsuario(usuario);
         return "redirect:/configuracion/perfil?exito";
     }

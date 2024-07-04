@@ -64,13 +64,13 @@
 			<form th:action="@{/registro}" method="post" th:object="${usuario}">
 
 				<div class="input-group">
-					<input id="nombre" type="text" class="input" 
+					<input id="nombre" for="nombre" type="text" class="input" 
 						   placeholder="Nombre y Apellido" 
-						   name="nombreCompleto"
+						   name="nombre"
 						   required
 						   pattern="\S+\s+\S+.*"
 						   title="Por favor, ingrese al menos un nombre y un apellido"
-						   autofocus>
+						   autofocus th:field="*{nombre}">
 					<div>
 						<i id="register-input-icon" class="fi-rr-user"></i>
 					</div>
@@ -93,7 +93,7 @@
 				</div>
 				<hr>
 				<div class="input-group">
-					<input type="password" id="password" class="input" placeholder="Confirma tu contraseña" th:field="*{password}"
+					<input type="password" id="password" class="input" placeholder="Confirma tu contraseña"
 						required autofocus="autofocus">
 					<div>
 						<i id="register-input-icon" class="fi-rr-lock"></i>
