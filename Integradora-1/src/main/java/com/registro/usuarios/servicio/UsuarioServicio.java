@@ -18,7 +18,7 @@ public interface UsuarioServicio extends UserDetailsService{
 	
 	public boolean actualizarUsuario(Usuario usuario);
 
-	public boolean actualizarPass (String email, String password);
+	public boolean actualizarPass (String email, String oldPass, String newPass);
 
 	public String actualizarEmail(String oldEmail, String newEmail , String password);
 }
