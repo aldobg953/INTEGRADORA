@@ -37,4 +37,14 @@ public class RegistroControlador {
 	public String inicio() {
 		return "inicio";
 	}
+
+
+	@GetMapping("/contactanos")
+	public String contactanos(){
+		return "contactanos";
+	}
+	@GetMapping("/acercade")
+	public String acercade(){
+		return "acercade";
+	}
 }
