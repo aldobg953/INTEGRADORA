@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.registro.usuarios.controlador.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.modelo.Usuario;
+import com.registro.usuarios.modelo.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.servicio.UsuarioServicio;
 import com.registro.usuarios.test.Question;
 import com.registro.usuarios.test.Respuestas;

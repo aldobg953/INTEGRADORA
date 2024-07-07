@@ -4,6 +4,7 @@
     <title>perfil</title>
     <link href="/css/tailwind.css" rel="stylesheet">
     <script src="/js/navbar.js"></script>
+    <script src="/js/utils.js"></script>
     <script>
         /*Funcionalidad acordion*/
         document.addEventListener('DOMContentLoaded', function () {
@@ -25,11 +26,6 @@
                 });
             });
         });
-
-        function ocultarAlerta(){
-            const alerta = event.target.parentElement.parentElement;
-            alerta.classList.add("hidden");
-        }
     </script>
 </head>
 
@@ -112,17 +108,17 @@
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
           </svg>
           <span class="sr-only">Info</span>
-          <h3 class="text-lg font-medium">Actualizado con exito!</h3>
+          <h3 class="text-lg font-medium">¡Actualizado con exito!</h3>
         </div>
         <div class="mt-2 mb-4 text-sm">
-            La informacion a sido actualizada con exito, para cualquier duda o comentario, contactanos!
+            La informacion a sido actualizada con exito, para cualquier duda o comentario, ¡contactanos!
         </div>
         <div class="flex">
           <button type="button" onclick="ocultarAlerta()" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close">
             Cerrar
           </button>
         </div>
-      </div>
+    </div>
 
     <div th:if="${msj} != null" id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 md:mx-28 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
         <div class="flex items-center">

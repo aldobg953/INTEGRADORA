@@ -1,4 +1,4 @@
-package com.registro.usuarios.controlador.dto;
+package com.registro.usuarios.modelo.dto;
 
 public class UsuarioRegistroDTO {
 

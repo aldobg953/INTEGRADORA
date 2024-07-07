@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.registro.usuarios.controlador.dto.CalificacionesDto;
 import com.registro.usuarios.modelo.Area;
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
 import com.registro.usuarios.modelo.Usuario;
+import com.registro.usuarios.modelo.dto.CalificacionesDto;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
 import com.registro.usuarios.servicio.ForoServicio;
@@ -41,7 +41,7 @@ public class CarreraControlador {
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/carrera/{id}")
-    public String mostrarCarrera( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
+    public String mostrarCarrera(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         Optional<Carrera> carrera = carreraServicio.getCarreraById(id);
         List<Foro> foros = carreraServicio.getForoByCarrera(id);
         CalificacionesDto califGnral = foroServicio.obtenerCalifCarrera(id);

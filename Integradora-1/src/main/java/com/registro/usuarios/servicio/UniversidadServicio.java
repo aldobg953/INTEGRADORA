@@ -22,4 +22,5 @@ public class UniversidadServicio {
     public List<Universidad> getAllUniversidades(){
         return universidadRepositorio.findAll();
     }
+
 }

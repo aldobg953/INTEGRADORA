@@ -55,5 +55,51 @@ public class Carrera {
     @JoinColumn(name = "fk_horario")
     private Horario horario;
 
+    public Carrera(){
 
+    }
+
+    public Carrera(Long id_carrera, String nombre, String informacion, String roadmap, float costo,
+            String horario_especifico, boolean bilingue, int cantidad_periodos, String porque_estudiar,
+            String donde_trabajar, String como_desemp, Universidad universidad, Area area, Modalidad modalidad,
+            PeriodoEscolar periodoEscolar, Horario horario) {
+        this.id_carrera = id_carrera;
+        this.nombre = nombre;
+        this.informacion = informacion;
+        this.roadmap = roadmap;
+        this.costo = costo;
+        this.horario_especifico = horario_especifico;
+        this.bilingue = bilingue;
+        this.cantidad_periodos = cantidad_periodos;
+        this.porque_estudiar = porque_estudiar;
+        this.donde_trabajar = donde_trabajar;
+        this.como_desemp = como_desemp;
+        this.universidad = universidad;
+        this.area = area;
+        this.modalidad = modalidad;
+        this.periodoEscolar = periodoEscolar;
+        this.horario = horario;
+    }
+
+    public Carrera(String nombre, String informacion, String roadmap, float costo, String horario_especifico,
+            boolean bilingue, int cantidad_periodos, String porque_estudiar, String donde_trabajar, String como_desemp,
+            Universidad universidad, Area area, Modalidad modalidad, PeriodoEscolar periodoEscolar, Horario horario) {
+        this.nombre = nombre;
+        this.informacion = informacion;
+        this.roadmap = roadmap;
+        this.costo = costo;
+        this.horario_especifico = horario_especifico;
+        this.bilingue = bilingue;
+        this.cantidad_periodos = cantidad_periodos;
+        this.porque_estudiar = porque_estudiar;
+        this.donde_trabajar = donde_trabajar;
+        this.como_desemp = como_desemp;
+        this.universidad = universidad;
+        this.area = area;
+        this.modalidad = modalidad;
+        this.periodoEscolar = periodoEscolar;
+        this.horario = horario;
+    }
+
+    
 }

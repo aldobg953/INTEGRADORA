@@ -48,6 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/test/testResultado",
 				"universidades/universidad**",
 				"/inicio", "/contactanos","/acercade").permitAll()
+				.antMatchers("/administrador").hasAnyRole("ADMIN", "SUPER")
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

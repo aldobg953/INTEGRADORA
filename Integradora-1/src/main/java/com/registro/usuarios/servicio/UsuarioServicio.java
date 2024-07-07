@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.registro.usuarios.controlador.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.modelo.Usuario;
+import com.registro.usuarios.modelo.dto.UsuarioRegistroDTO;
 
 
 public interface UsuarioServicio extends UserDetailsService{
