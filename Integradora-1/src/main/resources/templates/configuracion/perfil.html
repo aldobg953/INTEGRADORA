@@ -3,6 +3,7 @@
 <head>
     <title>perfil</title>
     <link href="/css/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/global_font.css">
     <script src="/js/navbar.js"></script>
     <script src="/js/utils.js"></script>
     <script>
@@ -100,7 +101,7 @@
 
     <!-- informacion del usuario-->
 
-    <p class="md:mx-28 mt-8 font-bold text-3xl font-serif dark:text-white">Informacion del perfil</p>
+    <p class="md:mx-28 mt-8 font-bold text-3xl font-sans-serif dark:text-white">Informacion del perfil</p>
 
     <div id="alert-additional-content-3" th:if="${param.exito}" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 md:mx-28 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
         <div class="flex items-center">
@@ -243,7 +244,7 @@
                         class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
                     <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingrese su contraseña actual: </div>
                     <input type="password" id="oldPass" name="oldPass"
-                        class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
+                        class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 outline-dashed">
                     <div class="p-4 flex justify-end pr-20">
                         <button
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
