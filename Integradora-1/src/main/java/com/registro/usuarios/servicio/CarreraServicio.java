@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
 import com.registro.usuarios.modelo.dto.CarreraDTO;
-import com.registro.usuarios.modelo.dto.UniversidadDTO;
-import com.registro.usuarios.modelo.resumen.UniversidadResumen;
 import com.registro.usuarios.repositorio.AreaRepositorio;
 import com.registro.usuarios.repositorio.CarreraRepositorio;
 import com.registro.usuarios.repositorio.ForoRepositorio;
