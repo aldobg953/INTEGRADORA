@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html th:classappend="${usuario.darkmode} ? 'dark' : ''">
+    <head>
+        <title>Crear Carrera</title>
+        <link href="/css/tailwind.css" rel="stylesheet">
+        <script src="/js/navbar.js"></script>
+        <script src="/js/utils.js"></script>
+    </head>
+    <body class="bg-gray-100 dark:bg-gray-800">
+        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
+                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
+                    <div id="logo-image">
+                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+                            style="max-width:40%;height:auto;">
+                    </div>
+                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
+                </a>
+    
+                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
+                        id="user-menu-button" aria-expanded="false">
+                        <span class="sr-only">Menu usuario</span>
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
+                            alt="user photo">
+                    </button>
+    
+                </div>
+                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-black-900 dark:text-white"
+                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
+                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
+                            th:text="${usuario.email} ">correo</span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a th:href="@{/configuracion/perfil}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/configuracion}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                                sesion</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
+                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
+                        <li>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="ml-28 mt-4">
+            <span class="text-black text-3xl font-bold dark:text-white">Crear Especialidad</span>
+        </div>
+        <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
+            <form th:action="@{/administrador/postguardarespecialidad}" method="post" th:object="${especialidad}">
+                <div class="mx-10 my-5">
+                    <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Añadir Especialidad</span></div>
+                    <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Especialidad:</label>
+                    <input id="nombre" th:field="*{nombre}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="mx-10 my-5">
+                    <label for="universidad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona una Carrera:</label>
+                    <select id="carrera" th:field="*{carrera}" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected value="0">Selecciona una Carrera</option>
+                        <option th:each="carrera : ${carreras}" 
+                            th:value="${carrera.id_carrera}" 
+                            th:text="${carrera.nombre}">
+                        </option>
+                    </select>
+                </div>
+                <div class="mx-10 my-5">
+                    <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Una descripcion breve de la epecialidad:</label>
+                    <textarea id="informacion" rows="4" th:field="*{descripcion_breve}"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Esta informacion aparecera en la tarjeta de la especialidad...."></textarea>
+                </div>
+                <div class="mx-10 my-5">
+                    <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Informacion de la especialidad:</label>
+                    <textarea id="informacion" rows="4" th:field="*{informacion}"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Escribe la informacion principal de la especialidad...."></textarea>
+                </div>
+                <div class="mx-10 my-5">
+                    <label for="RoadMap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RoadMap:</label>
+                    <input id="RoadMap" th:field="*{roadmap}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Ejemplo: https://roadmap.sh/r/embed?id=66625d3ce724e39e4df0bcc4">
+                </div>
+                <div class="mx-10 my-5">
+                    <label for="horario" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Horario Especifico:</label>
+                    <textarea id="horario" th:field="*{horario_especifico}" rows="4"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Ejemplo: <p>Lunes a viernes de 7 A.M. a *2 P.M.</br> Lunes a viernes de 5 P.M. a 10 P.M.</p>"></textarea>
+                </div>
+                <div class="mx-10 my-5 flex flex-col md:flex-row">
+                    <div class="basis-1/3">
+                        <label for="slctHorario" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona el Horario:</label>
+                        <select id="slctHorario" th:field="*{horario}" class="block p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="0">Selecciona el horario</option>
+                            <option th:each="ihorario : ${horarios}" 
+                                th:value="${ihorario.id_horario}" 
+                                th:text="${ihorario.nombre_horario}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="basis-1/3">
+                        <label for="txtCosto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Costo:</label>
+                        <input id="txtCosto" th:field="*{costo}" class="mr-28 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="basis-1/3">
+                        <label for="slctModalidad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona la modalidad:</label>
+                        <select id="slctModalidad" th:field="*{modalidad}" class="block p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="0">Selecciona la modalidad</option>
+                            <option th:each="imodalidad : ${modalidades}" 
+                                th:value="${imodalidad.id_modalidad}" 
+                                th:text="${imodalidad.nombre_modalidad}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mx-10 my-5 flex flex-col md:flex-row">
+                    <div class="basis-1/2 flex justify-center pt-5">
+                        <input id="default-checkbox" th:field="*{bilingue}" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Universidad Bilingue</label>
+                    </div>
+                    <div class="basis-1/2">
+                        <label for="slctPeriodoEscolar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona el periodo escolar:</label>
+                        <select id="slctPeriodoEscolar" th:field="*{periodoEscolar}" class="block p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="0">Selecciona el periodo escolar</option>
+                            <option th:each="perEscolar : ${allPeriodoEscolar}" 
+                                th:value="${perEscolar.id_periodo_escolar}" 
+                                th:text="${perEscolar.nombre_periodo}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="p-4 flex justify-end pr-20">
+                    <button
+                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
+                        <span
+                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                            Agregar Especialidad
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

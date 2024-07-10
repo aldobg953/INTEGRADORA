@@ -103,29 +103,11 @@
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar Carrera</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar/Eliminar Carrera</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Accede y ajusta la información de las carreras universitarias. Actualiza planes de estudio, requisitos y detalles importantes para mantener a los estudiantes informados con datos recientes.</p>
-                    <a th:href="@{/administrador/crearcarrera}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Esta funcionalidad te permite actualizar la información existente de una carrera o eliminarla del sistema. Puedes editar detalles como el nombre de la carrera, la duración, el plan de estudios, y otros aspectos importantes.</p>
+                    <a th:href="@{/administrador/modificarCarrera}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Modificar
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a href="#">
-                    <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/eliminarcarrera.jpg" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Eliminar Carrera</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Quita una carrera del catálogo universitario. Asegúrate de revisar y confirmar que esta eliminación es necesaria y final.</p>
-                    <a th:href="@{/administrador/crearcarrera}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Eliminar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
@@ -142,7 +124,7 @@
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Crear Especialidad</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Añade una nueva especialidad a una carrera universitaria. Define las diferentes ramas de estudio para ofrecer a los estudiantes más opciones de formación especializada.</p>
-                    <a th:href="@{/administrador/crearcarrera}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/crearespecialidad}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Crear
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -157,29 +139,11 @@
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar Especialidad</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar/Eliminar Especialidad</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Permite actualizar y gestionar la información de las especialidades ofrecidas por las universidades, asegurando que los datos sean precisos y estén siempre actualizados. Mejora la experiencia del usuario al proporcionar información confiable y relevante.</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Esta funcionalidad te permite actualizar la información existente de una especialidad o eliminarla del sistema. Puedes editar detalles como el nombre de la especialidad, la duración, los requisitos, y otros aspectos importantes.</p>
                     <a th:href="@{/administrador/crearcarrera}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Modificar
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a href="#">
-                    <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/eliminarespecialidad.jpg" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Eliminar Especialidad</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Permite a los administradores del sitio eliminar especialidades que ya no se ofrecen, asegurando que la información presentada a los usuarios esté siempre actualizada y relevante.</p>
-                    <a th:href="@{/administrador/crearcarrera}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Eliminar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
@@ -211,29 +175,11 @@
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar Universidad</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar/Eliminar Universidad</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Permite a los administradores del sitio actualizar la información de las universidades, asegurando que los usuarios obtengan datos precisos y relevantes sobre cada institución.</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Esta funcionalidad te permite actualizar la información existente de una universidad o eliminarla del sistema. Puedes editar detalles como el nombre de la universidad, su ubicación, la oferta académica, y otros aspectos relevantes.</p>
                     <a th:href="@{/administrador/crearcarrera}" class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Modificar
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a href="#">
-                    <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/eliminaruniversidad.jpg" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Eliminar Universidad</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Permite a los administradores del sitio eliminar universidades que ya no estén activas, manteniendo la información relevante para los usuarios.</p>
-                    <a th:href="@{/administrador/crearcarrera}" class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Eliminar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>

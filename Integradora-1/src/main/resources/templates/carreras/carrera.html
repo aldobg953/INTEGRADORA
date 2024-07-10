@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html th:classappend="${usuario.darkmode} ? 'dark' : ''">
 <head>
     <link rel="stylesheet" href="css/global_font.css">
     
@@ -15,9 +15,9 @@
         }
     </style>
     <script src="/js/navbar.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/css/tailwind.css" rel="stylesheet">
 </head>
-<body>
+<body class="dark:bg-gray-800 ">
     
     <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
@@ -26,7 +26,7 @@
                     <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
                     style="max-width:40%;height:auto;">
                 </div>
-                <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">PathFinder</span>
+                <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
             </a>
 
             <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -43,21 +43,21 @@
                 </div>
                 <ul class="py-2" aria-labelledby="user-menu-button">
                     <li>
-                        <a th:href="@{/configuracion/perfil}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Perfil</a>
+                        <a th:href="@{/configuracion/perfil}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
                     </li>
                     <li>
                         <a th:href="@{/configuracion}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Favoritos</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
                     </li>
                     <li>
-                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300" >Cerrar sesion</a>
+                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" >Cerrar sesion</a>
                     </li>
                 </ul>
             </div>
 
-            <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1" >
+            <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1 " >
             <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                 <li>
                 <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
@@ -84,11 +84,11 @@
             <span class="font-serif text-5xl text-white font-bold z-10 ml-12 text-center" th:text="${carrera.nombre}">nombre_completo</span>
         </div>
     </div>
-    <div class=" my-8 mx-2 md:mx-28 border-l-4 pl-10" >
+    <div class=" my-8 mx-2 md:mx-28 border-l-4 pl-10 dark:text-white" >
         <span class="text-justify font-serif text-sm md:text-xl" th:text="${carrera.informacion}">informacion</span>
     </div>
     <div class="flex flex-col md:flex-row my-7 w-full ">
-        <div class="md:basis-1/2 flex justify-center items-center mt-5">
+        <div class="md:basis-1/2 flex justify-center items-center mt-5 bg-white">
             <img src="/img/utch/logo.jpg" class="h-auto max-w-full md:max-w-[80%]">
         </div>
         <div class="my-0 md:mx-16 md:basis-1/2 w-full flex flex-col space-y-4 rounded-lg border-sky-600 border-2 p-4 bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -111,11 +111,11 @@
             <span class="font-serif text-lg pl-16 text-white" th:text="${carrera.porque_estudiar}">texto porque estudiar esta carrera</span>
         </div>
         <div class="basis-1/2 h-48 md:h-auto">
-            <img class="h-full w-full md:w-auto" src="/img/utch/1.jpg">
+            <img class="h-full w-full md:w-auto" th:src="@{'/img/carreras/' + ${carrera.id_carrera} + '.jpg'}">
         </div>
     </div> 
     
-    <div class="w-full my-10 flex flex-col md:flex-row">
+    <div class="w-full my-10 flex flex-col md:flex-row dark:text-white">
         <div class="basis-1/2 text-center">
             <span class="font-serif text-2xl font-bold text-sky-600"> ¿Donde puedo trabajar?</span><br/>
             <div class="px-3 my-5 border-l-4 ml-7 text-left"><span class="font-serif text-lg text-justify" th:text="${carrera.donde_trabajar}"></span></div>
@@ -125,16 +125,41 @@
             <div class="px-3 my-5  ml-7 text-left pl-10"><ul class="font-serif text-lg list-disc " th:utext="${carrera.como_desemp}"></ul></div>
         </div>
     </div>
-    <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold">Plan de estudio</p></div>
-    <div class="md:mx-32 border-sky-600 border-2 mb-7 h-80 md:h-[1700px]" height="1700px">
-        <iframe class="bg-sky-200 w-full h-full iframe-zoom" th:src="${carrera.roadmap}" width="100%" height="100%" frameBorder="0"></iframe>
+
+    <div th:if="${!#lists.isEmpty(especialidades)}" class="mx-28 flex flex-wrap">
+        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold dark:text-white">Especialidades</p></div>
+        <div class="mb-8 max-w-sm mx-4 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800" th:each="especialidad:${especialidades}">
+            <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad})}">
+                <img class="rounded-t-lg border-b border-blue-800 bg-white" src="/img/utch/logo.jpg" alt="" />
+            </a>
+            <div class="p-5">
+                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad})}">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${especialidad.nombre}">Noteworthy technology acquisitions 2021</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${especialidad.descripcion_breve}">descripcion breve</p>
+                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Ver mas
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:if="${#lists.isEmpty(especialidades)}">
+        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold">Plan de estudio</p></div>
+        <div class="md:mx-32 border-sky-600 border-2 mb-7 h-80 md:h-[1700px]" height="1700px">
+            <iframe class="bg-sky-200 w-full h-full iframe-zoom" th:src="${carrera.roadmap}" width="100%" height="100%" frameBorder="0"></iframe>
+        </div>
     </div>
 
     <hr class="w-full"/>
     
     <div class="flex flex-col lg:flex-row">
         <!-- calificaciones de usuarios, estrellas-->
-        <div class="bg-white p-6 rounded-lg shadow-lg basis-full lg:basis-1/4 font-mono">
+        <div class="p-6 rounded-lg shadow-lg basis-full lg:basis-1/4 font-mono dark:text-white">
             <h2 class="text-2xl font-bold w-full">Calificaciones de usuarios</h2>
             <div class="flex">
                 <span class="ml-1" th:each="i : ${#numbers.sequence(1, 5)}">
@@ -243,8 +268,7 @@
                 <input type="hidden" id="calificacion" name="calificacion" th:value="0">
                 <h3>Deja un comentario:</h3>
                 <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
-                <textarea class="w-full h-32 rounded-lg  border-4 border-current resize-none" id="comentarioNuevo" name="comentarioNuevo" required placeholder="Escribe tus comentarios aquí..."></textarea>
-                
+                <textarea id="comentarioNuevo" name="comentarioNuevo" rows="4" class="my-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escribe tu comentario aqui..."></textarea>
                 <div>
                     <button class="bg-green-500 w-full max-w-96 rounded-lg font-bold" type="submit" >Enviar</button>
                 </div>
@@ -254,7 +278,7 @@
 
 
 
-        <div class="basis-full lg:basis-3/4 ml-5 my-7">
+        <div class="basis-full lg:basis-3/4 ml-5 my-7 dark:text-white">
         <h2 class="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold ">Comentarios</h2>
             <div th:each="comentario : ${foros}">
                 <div>

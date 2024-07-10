@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.registro.usuarios.modelo.Area;
 import com.registro.usuarios.modelo.Carrera;
+import com.registro.usuarios.modelo.Especialidad;
 import com.registro.usuarios.modelo.Foro;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.modelo.dto.CalificacionesDto;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
+import com.registro.usuarios.servicio.EspecialidadServicio;
 import com.registro.usuarios.servicio.ForoServicio;
 import com.registro.usuarios.servicio.UsuarioServicio;
 
@@ -40,14 +42,20 @@ public class CarreraControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private EspecialidadServicio especialidadServicio;
+
     @GetMapping("/carrera/{id}")
     public String mostrarCarrera(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
-        Optional<Carrera> carrera = carreraServicio.getCarreraById(id);
+        Carrera carrera = carreraServicio.getCarreraById(id).get();
         List<Foro> foros = carreraServicio.getForoByCarrera(id);
         CalificacionesDto califGnral = foroServicio.obtenerCalifCarrera(id);
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Especialidad> especialidades = especialidadServicio.getEspecialidadByCarrera(id);
+
+        model.addAttribute("especialidades", especialidades);
         model.addAttribute("usuario", usuario);
-        model.addAttribute("carrera", carrera.get());
+        model.addAttribute("carrera", carrera);
         model.addAttribute("foros", foros);
         model.addAttribute("califGnral", califGnral);
         return "carreras/carrera";
@@ -77,5 +85,14 @@ public class CarreraControlador {
                                             ) {
         foroServicio.crearForoCarrera(id_carrera, userDetails.getUsername(), comentarioNuevo, calificacion);
         return "redirect:/carreras/carrera/" + id_carrera;
+    }
+
+    @GetMapping("/especialidad/{id}")
+    public String mostrarEspecialidad(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        Especialidad especialidad = especialidadServicio.getEspecialidadById(id).get();
+        model.addAttribute("especialidad", especialidad);
+        model.addAttribute("usuario", usuario);
+        return "carreras/especialidad";
     }
 }

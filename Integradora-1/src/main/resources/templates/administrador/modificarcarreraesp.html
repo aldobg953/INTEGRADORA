@@ -81,10 +81,10 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
               <span class="sr-only">Info</span>
-              <h3 class="text-lg font-medium">¡Carrera universitaria agregada con éxito!</h3>
+              <h3 class="text-lg font-medium">¡Carrera universitaria modificada con éxito!</h3>
             </div>
             <div class="mt-2 mb-4 text-sm">
-                Se ha publicado con éxito en Pathfinder, para cualquier duda o comentario, contactanos!
+                Se ha publicado la modificacion con éxito en Pathfinder, para cualquier duda o comentario, contactanos!
             </div>
             <div class="flex">
               <button type="button" onclick="ocultarAlerta()" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close">
@@ -99,7 +99,7 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
               <span class="sr-only">Info</span>
-              <h3 class="text-lg font-medium">!Error al agregar la carrera!</h3>
+              <h3 class="text-lg font-medium">!Error al modificar la carrera!</h3>
             </div>
             <div class="mt-2 mb-4 text-sm">Favor de contactarte con nosotros para cualquier aclaracion.</div>
             <div class="flex">
@@ -110,10 +110,11 @@
           </div>
 
         <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white">Crear Carrera</span>
+            <span class="text-black text-3xl font-bold dark:text-white">Modificar Carrera</span>
         </div>
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
-            <form th:action="@{/administrador/postguardarcarrera}" th:object="${carrera}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/administrador/postmodificarcarrera}" th:object="${carrera}" method="post" enctype="multipart/form-data">
+                <input class="hidden" id="id_carrera" th:field="*{id_carrera}">
                 <div class="mx-10 my-5">
                     <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Añadir Carrera</span></div>
                     <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre carrera:</label>
@@ -223,14 +224,14 @@
                 <div class="mx-10 my-5">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega una imagen</label>
                     <input th:field="*{file}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
                 </div>
                 <div class="p-4 flex justify-end pr-20">
                     <button
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span
                             class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
-                            Agregar Carrera
+                            Modificar Carrera
                         </span>
                     </button>
                 </div>

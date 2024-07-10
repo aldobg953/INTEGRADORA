@@ -21,21 +21,18 @@ public class Especialidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_especialidad;
     private String nombre;
-    
+    private String descripcion_breve;
+
     @Column(length = 600)
     private String informacion;
     private String roadmap;
     private float costo;
     private String horario_especifico;
-    private boolean bilingue;
+    private boolean bilingue; 
 
     @ManyToOne
     @JoinColumn(name = "fk_carrera")
     private Carrera carrera;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_Universidad")
-    private Universidad universidad;   
 
     @ManyToOne
     @JoinColumn(name = "fk_modalidad")
@@ -43,7 +40,7 @@ public class Especialidad {
 
     @ManyToOne
     @JoinColumn(name = "fk_periodo_escolar")
-    private PeriodoEscolar periodoEscolar;
+    private PeriodoEscolar periodoEscolar; 
 
     @ManyToOne
     @JoinColumn(name = "fk_horario")
