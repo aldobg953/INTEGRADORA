@@ -1,12 +1,26 @@
 /* Estilos de navegación */
+:root{
+    --margin-navbar: 2vw;
+    --margin-icon-navbar: .8vw;
+}
+
 nav {
     display: flex;
     flex-direction: row;
-    padding: 1vw;
+    padding: 1vw 2vw 1vw 2vw;
     align-items: center;
     border: var(--border-thick) solid #ffffff;
     border-radius: var(--border-radius);
     box-shadow: 0 0 35px #00000018;
+}
+
+nav > div > div > a {
+    text-decoration: none;
+}
+
+.hr-navbar {
+    border: transparent;
+    margin: 0 var(--margin-navbar);
 }
 
 .logo-navbar{
@@ -14,18 +28,19 @@ nav {
     align-items: center;
     justify-content: left;
     width: 50%;
-    margin: 0 1rem 0 1rem ;
+    margin: 0 var(--margin-navbar) 0 0 ;
 }
 
 #logo-navbar{
-    fill: #ffffff;
+    filter: brightness(0) invert(1);
+    cursor: pointer;
 }
 
 .vertical-line {
     border-left: var(--border-thick) solid #ffffff;
     border-radius: var(--border-radius);
     height: 2vw;
-    margin: 0 1vw;
+    margin: 0 var(--margin-navbar);
 }
 
 .action-buttons-navbar {
@@ -39,16 +54,15 @@ nav {
 .button-container-navbar{
     display: flex;
     align-items: center;
-    margin: 0 1rem 0 1rem ;
+    color: #fff;
 }
 
-#navbar-icon {
-    margin-right: 1vw;
-    display: flex;
-    align-items: center;
-    color: #ffffff;
+.navbar-icon {
+    color: #fff;
     scale: 1.5;
     padding: 0px;
+    margin: 0px var(--margin-icon-navbar) 0px 0px;
+    line-height: 0px;
 }
 
 .return-home {
@@ -64,4 +78,8 @@ nav {
 
 #button-text-navbar:hover {
     color: #2f00ff;
+}
+
+#color-blue {
+    color: #0047ff;
 }

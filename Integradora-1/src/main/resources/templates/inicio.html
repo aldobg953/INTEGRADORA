@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inicio | PathFinder</title>
-    <link rel="icon" href="css/IsotipoPathFinder.svg" type="image/x-icon">
-        <title> Inicio</title>
-    </head>
-    <body>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
+        <link rel="stylesheet" href="css/global_font.css">
+        <title>PathFInder | Inicio</title>
+</head>
+
+    <body class="malla" style="height: 200vh;">
+        <center>
+            <nav>
+                <div class="logo-navbar">
+                    
+                    <img id="logo-navbar" th:src="@{/css/LogoLogoPathFinderHorizontal.svg}" alt=""
+                    style="max-width:20%;height:auto;">
+    
+                    <div class="vertical-line"></div>
+                </div>
+    
+                    <div class="action-buttons-navbar">
+                        <div class="button-container-navbar">
+                                <i class="fi fi-rr-interrogation" id="navbar-icon"></i>
+                                <a th:href="@{/acercade}" id="button-text-navbar">Acerca de</a>
+                        </div>
+                        <hr class="hr-navbar">
+                        <div class="button-container-navbar">
+                            <i class="fi fi-rr-user-headset" id="navbar-icon"></i>
+                            <a th:href="@{/contactanos}" id="button-text-navbar">Contáctanos</a>
+                        </div>
+    
+                    <div class="vertical-line"></div>
+                    
+                    <div class="button-container-navbar">
+                        <i class="fi fi-rr-enter" id="navbar-icon"></i>
+                        <a th:href="@{/login}" id="button-text-navbar">Iniciar sesión</a>
+                    </div>
+                    <hr class="hr-navbar">
+                    <div class="button-container-navbar text-color-blue">
+                        <i class="fi fi-rr-user-add" id="navbar-icon"></i>
+                        <a th:href="@{/registro}" id="button-text-navbar">Regístrate</a>
+                    </div>
+                    
+                </div>
+                
+            </nav>
+
         <h1>este es el inicio</h1>
 
         <div class="form-group">
@@ -15,5 +57,8 @@
         <div class="form-group">
             <span>Si estas registrado <a th:href="@{/login}">inicia sesión aqui</a></span>
         </div>
+        </center>
+
+            
     </body>
 </html>

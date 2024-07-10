@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/navbar.css">
 	<link rel="stylesheet" href="css/registro.css">
+	<link rel="stylesheet" href="css/global_font.css">
 	<link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
 	<title>PathFInder | Registro</title>
 
@@ -15,108 +16,108 @@
 	<center>
 		<nav>
 			<div class="logo-navbar">
-				<img id="logo-navbar" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+                
+				<img id="logo-navbar" th:src="@{/css/LogoLogoPathFinderHorizontal.svg}" alt=""
 				style="max-width:20%;height:auto;">
+
 				<div class="vertical-line"></div>
 			</div>
 
-			<div class="action-buttons-navbar">
-				<div class="button-container-navbar">
-					<i class="fi fi-rr-interrogation" id="navbar-icon"></i>
-				<a th:href="@{/acercade}" id="button-text-navbar">Acerca de</a>
-				</div>
+                <div class="action-buttons-navbar">
+                    <div class="button-container-navbar">
+                            <i class="fi fi-rr-interrogation navbar-icon"></i>
+                            <a th:href="@{/acercade}" id="button-text-navbar">Acerca de</a>
+                    </div>
 
-				<div class="button-container-navbar">
-					<i class="fi fi-rr-user-headset" id="navbar-icon"></i>
-				<a th:href="@{/contactanos}" id="button-text-navbar">Contáctanos</a>
-				</div>
+                    <hr class="hr-navbar">
+					
+                    <div class="button-container-navbar">
+                        <i class="fi fi-rr-user-headset navbar-icon"></i>
+                        <a th:href="@{/contactanos}" id="button-text-navbar">Contáctanos</a>
+                    </div>
 
-				<div class="vertical-line"></div>
+				<div class="vertical-line" id="color-blue"></div>
 				
 				<div class="button-container-navbar">
-					<i class="fi fi-rr-exit" id="navbar-icon"></i>
-				<a th:href="@{/inicio}" id="button-text-navbar">Regresar al inicio</a>
+					<i class="fi fi-rr-house-chimney navbar-icon"></i>
+				    <a th:href="@{/inicio}" id="button-text-navbar">Regresar al inicio</a>
 				</div>
 				
 			</div>
 			
 		</nav>
 
-	<div class="tarjeta" id="register">
-		<div id="logo-image">
-			<img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-				style="max-width:40%;height:auto;">
-			<img id="image-login" src="css/register_image.svg" alt="" style="max-width:75%;height:auto;">
-		</div>
-
-		<div id="register-form">
-			<div th:if=${param.exito}>
-				<div class="alert alert-info">Se ha registrado exitosamente. De click en inicio de sesion</div>
-			</div>
-			<div th:if=${param.error}>
-				<div class="alert alert-info">El correo que intenta registrar ya esta en uso</div>
+		<div class="tarjeta" id="register">
+			<div id="logo-image">
+				<img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+					style="max-width:40%;height:auto;">
+				<img id="image-login" src="css/register_image.svg" alt="" style="max-width:75%;height:auto;">
 			</div>
 
-			<div>
-				<p id="register-title">Regístrate</p>
+			<div id="register-form">
+				<div th:if=${param.exito}>
+					<div class="alert alert-info">Se ha registrado exitosamente. De click en inicio de sesion</div>
+				</div>
+				<div th:if=${param.error}>
+					<div class="alert alert-info">El correo que intenta registrar ya esta en uso</div>
+				</div>
+
+				<div>
+					<p id="register-title">Regístrate</p>
+				</div>
+				<hr>
+				<form th:action="@{/registro}" method="post" th:object="${usuario}">
+
+					<div class="input-group">
+						<input id="nombre" for="nombre" type="text" class="input" placeholder="Nombre y Apellido"
+							name="nombre" required pattern="\S+\s+\S+.*"
+							title="Por favor, ingrese al menos un nombre y un apellido" autofocus th:field="*{nombre}">
+						<div>
+							<i id="register-input-icon" class="fi-rr-user"></i>
+						</div>
+					</div>
+					<hr class="transparent">
+					<div class="input-group">
+						<input id="email" type="email" class="input" placeholder="Correo electrónico"
+							th:field="*{email}" required autofocus="autofocus">
+						<div>
+							<i id="register-input-icon" class="fi-rr-envelope"></i>
+						</div>
+					</div>
+					<hr class="transparent">
+					<div class="input-group">
+						<input type="password" id="password" class="input" placeholder="Crea una contraseña"
+							th:field="*{password}" required autofocus="autofocus">
+						<div>
+							<i id="register-input-icon" class="fi-rr-key"></i>
+						</div>
+					</div>
+					<hr class="transparent">
+					<div class="input-group">
+						<input type="password" id="password" class="input" placeholder="Confirma tu contraseña" required
+							autofocus="autofocus">
+						<div>
+							<i id="register-input-icon" class="fi-rr-lock"></i>
+						</div>
+					</div>
+					<hr class="transparent">
+					<button type="submit" class="btn btn-success">
+						<span class="btn-txt">Registrarse</span>
+					</button>
+					<hr class="transparent">
+
+					<div class="account-message-login">
+						<p id="account-message-login">Si estas registrado
+							<a th:href="@{/login}" id="account-message-login">inicia sesión aqui</a>
+						</p>
+					</div>
+
+				</form>
+
 			</div>
-<hr>
-			<form th:action="@{/registro}" method="post" th:object="${usuario}">
-
-				<div class="input-group">
-					<input id="nombre" for="nombre" type="text" class="input" 
-						   placeholder="Nombre y Apellido" 
-						   name="nombre"
-						   required
-						   pattern="\S+\s+\S+.*"
-						   title="Por favor, ingrese al menos un nombre y un apellido"
-						   autofocus th:field="*{nombre}">
-					<div>
-						<i id="register-input-icon" class="fi-rr-user"></i>
-					</div>
-				</div>
-				<hr>
-				<div class="input-group">
-					<input id="email" type="email" class="input" placeholder="Correo electrónico" th:field="*{email}"
-						required autofocus="autofocus">
-					<div>
-						<i id="register-input-icon" class="fi-rr-envelope"></i>
-					</div>
-				</div>
-				<hr>
-				<div class="input-group">
-					<input type="password" id="password" class="input" placeholder="Crea una contraseña" th:field="*{password}"
-						required autofocus="autofocus">
-					<div>
-						<i id="register-input-icon" class="fi-rr-key"></i>
-					</div>
-				</div>
-				<hr>
-				<div class="input-group">
-					<input type="password" id="password" class="input" placeholder="Confirma tu contraseña"
-						required autofocus="autofocus">
-					<div>
-						<i id="register-input-icon" class="fi-rr-lock"></i>
-					</div>
-				</div>
-				<hr>
-				<button type="submit" class="btn btn-success">
-					<span class="btn-txt">Registrarse</span>
-				</button>
-				<hr>
-
-				<div class="account-message-login">
-					<p id="account-message-login">Si estas registrado
-						<a th:href="@{/login}" id="account-message-login">inicia sesión aqui</a>
-					</p>
-				</div>
-
-			</form>
 
 		</div>
-
-	</div>
-</center>
+	</center>
 
 </body>
 
