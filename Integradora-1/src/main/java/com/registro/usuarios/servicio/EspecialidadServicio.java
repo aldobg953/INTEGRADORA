@@ -23,12 +23,21 @@ public class EspecialidadServicio {
         return especialidadRepositorio.findById(id);
     }
 
-    public boolean guardarEspecialidad(Especialidad especialidad){
-        especialidadRepositorio.save(especialidad);
-        return true;
+    public Especialidad guardarEspecialidad(Especialidad especialidad){
+        return especialidadRepositorio.save(especialidad);
+        
     }
 
     public List<Especialidad> getEspecialidadByCarrera(Long carrera){
         return especialidadRepositorio.findbyCarrera(carrera);
+    }
+
+    public boolean deleteEspecialidad(Long id){
+        try {
+            especialidadRepositorio.deleteById(id);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

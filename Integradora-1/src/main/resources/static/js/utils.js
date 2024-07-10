@@ -12,4 +12,9 @@ function ocultarModal(){
     const alerta = document.getElementById("popup-modal");
     alerta.classList.add("hidden");
 }
-
+function confirmDeleteEspecialidad(id){
+    const input_id = document.getElementById("input_id_especialidad");
+    const alerta = document.getElementById("popup-modal");
+    input_id.value = id;
+    alerta.classList.remove("hidden");
+}

@@ -30,6 +30,7 @@ import com.registro.usuarios.modelo.PeriodoEscolar;
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.modelo.dto.CarreraDTO;
+import com.registro.usuarios.modelo.dto.UniversidadDTO;
 import com.registro.usuarios.modelo.resumen.UniversidadResumen;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
@@ -190,7 +191,54 @@ public class AdministradorControlador {
 
     @PostMapping("/postguardarespecialidad")
     private String postGuardarEspecialidad(@ModelAttribute Especialidad especialidad){
-        especialidadServicio.guardarEspecialidad(especialidad);
-        return "redirect:/administrador/crearespecialidad?exito";
+        Especialidad especialidadNueva = especialidadServicio.guardarEspecialidad(especialidad);
+        return "redirect:/administrador/modificarespecialidad/"+especialidadNueva.getId_especialidad()+"?exito";
     }
+
+    @GetMapping("/modificarespecialidad")
+    private String modificarEspecialidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Especialidad> especialidades = especialidadServicio.getAllEspecilidades();
+        model.addAttribute("especialidades", especialidades);
+        model.addAttribute("usuario", usuario);
+        return "administrador/modificarespecialidades";
+    }
+
+
+    @GetMapping("/modificarespecialidad/{id}")
+    private String modificarEspecialidadID(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<CarreraDTO> carreras = carreraServicio.getAllCarreraDTO();
+        List<PeriodoEscolar> allPeriodoEscolar = periodoEscolarServicio.getAllPeriodoEscolar();
+        List<Horario> horarios = horarioServicio.getAllHoriarios();
+        List<Modalidad> modalidades = modalidadServicio.getAllModalidades();
+        Especialidad especialidad = especialidadServicio.getEspecialidadById(id).get();
+        model.addAttribute("horarios", horarios);
+        model.addAttribute("modalidades", modalidades);
+        model.addAttribute("allPeriodoEscolar", allPeriodoEscolar);
+        model.addAttribute("carreras", carreras);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("especialidad", especialidad);
+        return "administrador/modificarespecialidad";
+    }
+
+     //FALTA AGREGAR VALIDACIONES
+     @GetMapping("/eliminarespecialidad/{id}")
+     private String eliminarEspecialidad(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        
+        if(especialidadServicio.deleteEspecialidad(id)){
+            return "redirect:/administrador/modificarespecialidad?exito";
+        }
+        return "redirect:/administrador/modificarespecialidad?error";
+     }
+
+     @GetMapping("/crearuniversidad")
+     private String crearUniversidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        model.addAttribute("universidad", new UniversidadDTO());
+        model.addAttribute("usuario", usuario);
+        return "administrador/crearuniversidad";
+     }
+
+
 }
