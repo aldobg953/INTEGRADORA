@@ -6,7 +6,6 @@
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 *,
 ::before,
@@ -136,7 +135,7 @@ code,
 kbd,
 samp,
 pre {
-  font-family: "Poppins", sans-serif;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* 1 */
   font-feature-settings: normal;
   /* 2 */
@@ -654,6 +653,11 @@ video {
   margin-right: 7rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -692,11 +696,6 @@ video {
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .mb-2 {
@@ -1471,11 +1470,11 @@ video {
 }
 
 .font-mono {
-  font-family: "Poppins", sans-serif;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .font-serif {
-  font-family: "Poppins", sans-serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 .text-2xl {
@@ -1628,6 +1627,10 @@ video {
 .shadow-blue-500\/50 {
   --tw-shadow-color: rgb(59 130 246 / 0.5);
   --tw-shadow: var(--tw-shadow-colored);
+}
+
+.outline-dashed {
+  outline-style: dashed;
 }
 
 .filter {
