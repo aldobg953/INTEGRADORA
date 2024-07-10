@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.registro.usuarios.controlador.dto.CalificacionesDto;
 import com.registro.usuarios.modelo.Foro;
 import com.registro.usuarios.modelo.Usuario;
+import com.registro.usuarios.modelo.dto.CalificacionesDto;
 import com.registro.usuarios.repositorio.ForoRepositorio;
 import com.registro.usuarios.repositorio.UsuarioRepositorio;
 

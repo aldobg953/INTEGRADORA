@@ -14,9 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.registro.usuarios.controlador.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Usuario;
+import com.registro.usuarios.modelo.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.repositorio.RolRespository;
 import com.registro.usuarios.repositorio.UsuarioRepositorio;
 
@@ -41,8 +41,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		
 		Usuario usuario = usuarioRepositorio.findByEmail(registroDTO.getEmail());
 		
-
-
 		if(usuario==null){	
 			int firstSpaceIndex = registroDTO.getNombre().indexOf(' ');
 			String nombre = registroDTO.getNombre().substring(0, firstSpaceIndex);

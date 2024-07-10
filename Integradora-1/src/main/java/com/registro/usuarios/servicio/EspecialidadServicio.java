@@ -23,4 +23,12 @@ public class EspecialidadServicio {
         return especialidadRepositorio.findById(id);
     }
 
+    public boolean guardarEspecialidad(Especialidad especialidad){
+        especialidadRepositorio.save(especialidad);
+        return true;
+    }
+
+    public List<Especialidad> getEspecialidadByCarrera(Long carrera){
+        return especialidadRepositorio.findbyCarrera(carrera);
+    }
 }

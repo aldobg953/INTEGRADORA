@@ -40,6 +40,8 @@
 
 	</div>
 	<a href="#" th:href="@{/test}">Test vocacional</a>
+	<a href="#" th:if="${roles.contains(2L)}" th:href="@{/administrador}">Administrador</a>
+
 </body>
 </html>
 
