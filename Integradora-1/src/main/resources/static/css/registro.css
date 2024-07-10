@@ -121,7 +121,6 @@ form {
 
 .input:focus {
     border-color: #0047FF;
-    box-shadow: 0 0 15px #336CFF;
     outline: none;
 }
 
@@ -170,6 +169,11 @@ form {
 }
 
 /* Estilos adicionales */
+.transparent {
+    background: transparent;
+    border: none;
+    color: transparent;
+}
 #error {
     color: #0011ff;
     position: absolute;

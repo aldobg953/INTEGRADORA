@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inicio | PathFinder</title>
-    <link rel="icon" href="css/IsotipoPathFinder.svg" type="image/x-icon">
-        <title> Inicio</title>
-    </head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
+        <title>PathFInder | Inicio</title>
+</head>
+
     <body>
+
+        <nav>
+            <div class="logo-navbar">
+                <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+                style="max-width:20%;height:auto;" fill="ffffff">
+                <div class="vertical-line"></div>
+            </div>
+
+            <div class="action-buttons-navbar">
+                <div class="button-container-navbar">
+                    <i class="fi fi-rr-interrogation" id="navbar-icon"></i>
+                <a th:href="@{/inicio}" id="button-text-navbar">Acerca de</a>
+                </div>
+
+                <div class="button-container-navbar">
+                    <i class="fi fi-rr-user-headset" id="navbar-icon"></i>
+                <a th:href="@{/inicio}" id="button-text-navbar">Contáctanos</a>
+                </div>
+
+                <div class="vertical-line"></div>
+                
+                <div class="button-container-navbar">
+                    <i class="fi fi-rr-exit" id="navbar-icon"></i>
+                <a th:href="@{/inicio}" id="button-text-navbar">Regresar al inicio</a>
+                </div>
+                
+            </div>
+            
+        </nav>
+
         <h1>este es el inicio</h1>
 
         <div class="form-group">

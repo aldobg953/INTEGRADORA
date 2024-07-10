@@ -18,7 +18,8 @@ nav {
 }
 
 #logo-navbar{
-    fill: #ffffff;
+    filter: brightness(0) invert(1);
+    cursor: pointer;
 }
 
 .vertical-line {
@@ -43,9 +44,6 @@ nav {
 }
 
 #navbar-icon {
-    margin-right: 1vw;
-    display: flex;
-    align-items: center;
     color: #ffffff;
     scale: 1.5;
     padding: 0px;

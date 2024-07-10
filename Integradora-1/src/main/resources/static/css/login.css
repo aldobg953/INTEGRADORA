@@ -34,7 +34,6 @@ body {
     justify-content: center;
     flex-direction: column;
 }
-
 /* Fondo con gradiente */
 .malla {
     background:
@@ -128,7 +127,6 @@ form {
 
 .input:focus {
     border-color: #0047FF;
-    box-shadow: 0 0 15px #336CFF;
     outline: none;
 }
 
@@ -177,6 +175,7 @@ form {
 }
 
 /* Estilos adicionales */
+
 #error {
     color: #0011ff;
     position: absolute;
