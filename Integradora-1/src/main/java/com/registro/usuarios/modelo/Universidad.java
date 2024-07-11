@@ -28,9 +28,42 @@ public class Universidad {
 
     @Column(length = 600)
     private String direccionGoogle; 
-    private String folder;
     private String tipo_institucion; //publica o privada
-    private String caracteristicas;  
+    @Column(length = 600)
+    private String caracteristicas;
 
+    public Universidad(Long id_universidad, String nombre_completo, String nombre_abreviado, String pagina_web,
+            String correo, String telefono, String informacion, String direccion, String direccionGoogle,
+            String tipo_institucion, String caracteristicas) {
+        this.id_universidad = id_universidad;
+        this.nombre_completo = nombre_completo;
+        this.nombre_abreviado = nombre_abreviado;
+        this.pagina_web = pagina_web;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.informacion = informacion;
+        this.direccion = direccion;
+        this.direccionGoogle = direccionGoogle;
+        this.tipo_institucion = tipo_institucion;
+        this.caracteristicas = caracteristicas;
+    }
+
+    public Universidad(String nombre_completo, String nombre_abreviado, String pagina_web, String correo,
+            String telefono, String informacion, String direccion, String direccionGoogle, String tipo_institucion,
+            String caracteristicas) {
+        this.nombre_completo = nombre_completo;
+        this.nombre_abreviado = nombre_abreviado;
+        this.pagina_web = pagina_web;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.informacion = informacion;
+        this.direccion = direccion;
+        this.direccionGoogle = direccionGoogle;
+        this.tipo_institucion = tipo_institucion;
+        this.caracteristicas = caracteristicas;
+    }
+
+    public Universidad() {
+    }  
     
 }

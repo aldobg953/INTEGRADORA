@@ -23,4 +23,10 @@ public interface UsuarioServicio extends UserDetailsService{
 	public String actualizarEmail(String oldEmail, String newEmail , String password);
 
 	public void actualizarDarkmode(boolean darkmode, String email);
+
+	public Usuario getById(Long id);
+
+	public UsuarioRegistroDTO getUsuarioRegistroDTO(Long id);
+
+	public boolean actualizarUsuarioDTO( UsuarioRegistroDTO usuarioRegistroDTO);
 }

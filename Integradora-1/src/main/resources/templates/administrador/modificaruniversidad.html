@@ -81,7 +81,7 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
               <span class="sr-only">Info</span>
-              <h3 class="text-lg font-medium">¡Universidad agregada con éxito!</h3>
+              <h3 class="text-lg font-medium">¡Universidad modificada con éxito!</h3>
             </div>
             <div class="mt-2 mb-4 text-sm">
                 Se ha publicado con éxito en Pathfinder, para cualquier duda o comentario, contactanos!
@@ -99,7 +99,7 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
               <span class="sr-only">Info</span>
-              <h3 class="text-lg font-medium">!Error al agregar la Universidad!</h3>
+              <h3 class="text-lg font-medium">!Error al modificar la Universidad!</h3>
             </div>
             <div class="mt-2 mb-4 text-sm">Favor de contactarte con nosotros para cualquier aclaracion.</div>
             <div class="flex">
@@ -111,13 +111,14 @@
 
 
           <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white">Crear Universidad</span>
+            <span class="text-black text-3xl font-bold dark:text-white">Modificar Universidad</span>
         </div>
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
             <form th:action="@{/administrador/postguardaruniversidad}" th:object="${universidad}" method="post" enctype="multipart/form-data">
+                <input class="hidden" id="id_universidad" th:field="*{id_universidad}">
                 <div class="mx-10 my-5">
-                    <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Añadir universidad</span></div>
-                    <label for="nombre_completo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Universidad (sin abreviar):</label>
+                    <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Modificar universidad</span></div>
+                    <label for="nombre_completo" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white">Nombre Universidad (sin abreviar):</label>
                     <input id="nombre_completo" th:field="*{nombre_completo}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
@@ -185,7 +186,7 @@
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span
                             class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
-                            Agregar Carrera
+                            Modificar Carrera
                         </span>
                     </button>
                 </div-->

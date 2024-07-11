@@ -48,7 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/test/testResultado",
 				"universidades/universidad**",
 				"/inicio", "/contactanos","/acercade").permitAll()
-				.antMatchers("/administrador").hasAnyRole("ADMIN", "SUPER")
+				.antMatchers("/administrador/usuarios","/administrador/eliminaruniversidad",
+				"/administrador/crearuniversidad", "/administrador/usuarios/**").hasAnyRole("SUPER")
+				.antMatchers("/administrador/**").hasAnyRole("ADMIN", "SUPER")
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

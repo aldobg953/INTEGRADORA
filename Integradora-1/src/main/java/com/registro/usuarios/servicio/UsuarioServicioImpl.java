@@ -122,4 +122,65 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		usuarioRepositorio.save(usuario);
 	}
 
+	@Override
+	public Usuario getById(Long id){
+		return usuarioRepositorio.getById(id);
+	}
+
+	@Override
+	public UsuarioRegistroDTO getUsuarioRegistroDTO(Long id){
+		Usuario usuario = usuarioRepositorio.getById(id);
+		boolean rolAdmin = false;
+		boolean rolSuper = false;
+		for (Rol rol : usuario.getRoles()) {
+			if(rol.getId_rol() == 2){
+				rolAdmin = true;
+			}
+			if(rol.getId_rol() == 3){
+				rolSuper = true;
+			}
+		}
+
+		return new UsuarioRegistroDTO(usuario.getId_usuario(), usuario.getNombre(), 
+		usuario.getApellidoP(),usuario.getEmail(), usuario.getPassword(),rolSuper,rolAdmin,usuario.getId_universidad());
+	}
+
+	@Override
+	public boolean actualizarUsuarioDTO( UsuarioRegistroDTO usuarioRegistroDTO){
+		Usuario usuario = usuarioRepositorio.getById(usuarioRegistroDTO.getId_usuario());
+		usuario.setNombre(usuarioRegistroDTO.getNombre());
+		usuario.setApellidoP(usuarioRegistroDTO.getApellidoP());
+		boolean esSuperUsuario = usuario.getRoles().stream().anyMatch(rol -> rol.getId_rol() == 3);
+		boolean esUsuarioAdmin = usuario.getRoles().stream().anyMatch(rol -> rol.getId_rol() == 2);
+		if(usuarioRegistroDTO.isSuperUsuario()){
+			if(!esSuperUsuario){
+				usuario.addRol(new Rol(3L, "ROLE_SUPER"));				
+			}
+		}else{
+			if(esSuperUsuario){
+				usuario.removeRol(3L);
+			}
+		}
+
+		if(usuarioRegistroDTO.isUsuarioAdmin()){
+			if(!esUsuarioAdmin){
+				usuario.addRol(new Rol(2L, "ROLE_ADMIN"));	
+			}
+		}else{
+			if (esUsuarioAdmin) {
+				usuario.removeRol(2L);
+			}
+		}
+		if(usuarioRegistroDTO.getIdUniversidad()!=0){
+			usuario.setId_universidad(usuarioRegistroDTO.getIdUniversidad());
+		}else{
+			usuario.setId_universidad(null);
+		}
+		try {
+			usuarioRepositorio.save(usuario);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 }

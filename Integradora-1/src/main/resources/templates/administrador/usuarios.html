@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html th:classappend="${usuario.darkmode} ? 'dark' : ''">
+    <head>
+        <title>Modificar Universidad</title>
+        <link href="/css/tailwind.css" rel="stylesheet">
+        <script src="/js/navbar.js"></script>
+        <script src="/js/utils.js"></script>
+        <script>
+            function eliminarUniversidad(){
+            var inputIdUniversidad = document.getElementById("input_id_universidad").value;
+            // Construir la URL dinámica
+            var url = '/administrador/eliminaruniversidad/' + inputIdUniversidad;
+            // Redirigir a la URL
+            window.location.href = url;
+            }
+        </script>
+    </head>
+    <body class="bg-gray-100 dark:bg-gray-800">
+        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
+                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
+                    <div id="logo-image">
+                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+                            style="max-width:40%;height:auto;">
+                    </div>
+                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
+                </a>
+    
+                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
+                        id="user-menu-button" aria-expanded="false">
+                        <span class="sr-only">Menu usuario</span>
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
+                            alt="user photo">
+                    </button>
+    
+                </div>
+                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-black-900 dark:text-white"
+                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
+                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
+                            th:text="${usuario.email} ">correo</span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a th:href="@{/configuracion/perfil}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/configuracion}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}"
+                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                                sesion</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
+                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
+                        <li>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="ml-28 mt-4">
+            <span class="text-black text-3xl font-bold dark:text-white">Administrar usuarios</span>
+        </div>
+
+        
+        <div class="mx-36 mt-8">
+            <ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <li class="pb-3 sm:pb-4 hover:bg-gray-700 px-5 pt-2" th:each="user:${usuarios}" th:if="${user.id_usuario} != ${usuario.id_usuario}">
+                    <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div class="flex-shrink-0">
+                            <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s" alt="Neil image">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white" th:text="${user.nombre} + ' ' + ${user.apellidoP}">nombre</p>
+                            <p class="text-sm text-gray-500 truncate dark:text-gray-400" th:text="${user.email}"></p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                            <a th:href="@{usuarios/{id}(id=${user.id_usuario})}">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                            <!--th:onclick="|confirmDeleteUniversidad('${universidad.id_universidad}')|"-->
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" >
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </body>    
+</html>

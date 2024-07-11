@@ -1,5 +1,6 @@
 package com.registro.usuarios.servicio;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
+import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.dto.CarreraDTO;
 import com.registro.usuarios.repositorio.AreaRepositorio;
 import com.registro.usuarios.repositorio.CarreraRepositorio;
@@ -82,6 +84,15 @@ public class CarreraServicio {
         return carreraRepositorio.findAll();
     }
 
+    public List<Carrera> getAllCarreras(Collection<Rol> roles,Long id_universidad){
+        boolean esSuperUsuario = roles.stream().anyMatch(rol -> rol.getId_rol() == 3);
+        if(esSuperUsuario){
+            return getAllCarreras();
+        }else{
+            return getCarrerasByUniversidad(id_universidad);
+        }
+    }
+
     public CarreraDTO getCarreraDTOById(Long id){
         Carrera carrera = carreraRepositorio.findById(id).get();
         CarreraDTO carreraDTO = new CarreraDTO(carrera.getId_carrera(), carrera.getNombre(),carrera.getInformacion(),carrera.getRoadmap(),
@@ -112,13 +123,30 @@ public class CarreraServicio {
     }
 
     //obtiene el id y nombre de todas las carreras
-    public List<CarreraDTO> getAllCarreraDTO(){
-
-        return carreraRepositorio.findAll().stream().map(original -> {CarreraDTO carreraDTO = new CarreraDTO();
+    public List<CarreraDTO> getAllCarreraDTO(Collection<Rol> roles, Long id_universidad) {
+        boolean esSuperUsuario = roles.stream().anyMatch(rol -> rol.getId_rol() == 3);
+    
+        return esSuperUsuario ? getAllCarrerasDTO() : getCarrerasDTOByUniversidad(id_universidad);
+    }
+    
+    private List<CarreraDTO> getAllCarrerasDTO() {
+        return carreraRepositorio.findAll().stream()
+                .map(this::convertirACarreraDTO)
+                .collect(Collectors.toList());
+    }
+    
+    private List<CarreraDTO> getCarrerasDTOByUniversidad(Long id_universidad) {
+        return carreraRepositorio.findAll().stream()
+                .filter(original -> original.getUniversidad().getId_universidad().equals(id_universidad))
+                .map(this::convertirACarreraDTO)
+                .collect(Collectors.toList());
+    }
+    
+    private CarreraDTO convertirACarreraDTO(Carrera original) {
+        CarreraDTO carreraDTO = new CarreraDTO();
         carreraDTO.setId_carrera(original.getId_carrera());
         carreraDTO.setNombre(original.getNombre());
         return carreraDTO;
-        })
-        .collect(Collectors.toList());
     }
+    
 }

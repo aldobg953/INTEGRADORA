@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
     <head>
-        <title>Crear Carrera</title>
+        <title>Modificar Universidad</title>
         <link href="/css/tailwind.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/utils.js"></script>
         <script>
-            function eliminarEspecialidad(){
-            var inputIdCarrera = document.getElementById("input_id_especialidad").value;
+            function eliminarUniversidad(){
+            var inputIdUniversidad = document.getElementById("input_id_universidad").value;
             // Construir la URL dinámica
-            var url = '/administrador/eliminarespecialidad/' + inputIdCarrera;
+            var url = '/administrador/eliminaruniversidad/' + inputIdUniversidad;
             // Redirigir a la URL
             window.location.href = url;
             }
@@ -87,7 +87,7 @@
             </div>
         </nav>
         <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white">Modificar Especialidad</span>
+            <span class="text-black text-3xl font-bold dark:text-white">Modificar Universidad</span>
         </div>
         
         
@@ -97,13 +97,13 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Especialidad
+                                Universidad
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                carrera
+                                Siglas
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                universidad
+                                Tipo de institucion
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 
@@ -114,19 +114,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="especialidad : ${especialidades}" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row" th:text="${especialidad.nombre}" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">especialidad</th>
-                            <td th:text="${especialidad.carrera.nombre}" class="px-6 py-4">carrera</td>
-                            <td th:text="${especialidad.carrera.universidad.nombre_abreviado}" class="px-6 py-4">universidad</td>
+                        <tr th:each="universidad : ${universidades}" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" th:text="${universidad.nombre_completo}" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">universidad</th>
+                            <td th:text="${universidad.nombre_abreviado}" class="px-6 py-4">siglas</td>
+                            <td th:text="${universidad.tipo_institucion}" class="px-6 py-4">tipo institucion</td>
                             <td class="px-6 py-4">
-                                <a th:href="@{modificarespecialidad/{id}(id=${especialidad.id_especialidad})}">
+                                <a th:href="@{modificaruniversidad/{id}(id=${universidad.id_universidad})}">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
                                     </svg>
                                 </a>
                             </td>
                             <td class="px-6 py-4">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" th:onclick="|confirmDeleteEspecialidad('${especialidad.id_especialidad}')|">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" th:onclick="|confirmDeleteUniversidad('${universidad.id_universidad}')|">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
                                 </svg>
                             </td>
@@ -136,7 +136,7 @@
             </div>
         </div>
 
-        <input id="input_id_especialidad" class="hidden">
+        <input id="input_id_universidad" class="hidden">
 
         <div id="popup-modal" tabindex="-1" class="hidden mt-32 md:ml-96 md:pl-24 md:mt-2 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
@@ -151,9 +151,9 @@
                         <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
-                        <h3 class=" text-lg font-normal text-gray-500 dark:text-gray-300">¿Estas seguro de eliminar esta especialidad?</h3>
+                        <h3 class=" text-lg font-normal text-gray-500 dark:text-gray-300">¿Estas seguro de eliminar esta Universidad?</h3>
                         <h3 class="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400">Toda la informacion se perdera y no se podra recuperar</h3>
-                        <button onclick="eliminarEspecialidad()" data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                        <button onclick="eliminarUniversidad()" data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                             Si, estoy seguro.
                         </button>
                         <button onclick="ocultarModal()" data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancelar</button>
