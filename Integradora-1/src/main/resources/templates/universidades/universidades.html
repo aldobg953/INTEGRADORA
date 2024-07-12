@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:classappend="${usuario.darkmode} ? 'dark' : ''"> 
     <head>
         <meta charset="utf-8">
         <title>Universidades</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="/css/tailwind.css" rel="stylesheet">
         <script>
             $(document).ready(function(){
                 $("#search").on("keyup", function() {
@@ -16,7 +17,16 @@
             });
         </script>
     </head>
-    <body>
+    <body class="bg-gray-100 dark:bg-gray-800"> 
+
+
+
+
+
+
+
+
+
         <h1>Universidades</h1>
         <input type="text" id="search" placeholder="Buscar universidad...">
         <ul>
@@ -24,6 +34,6 @@
                 <a th:text="${universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad})}"></a>
             </li>
         </ul>
-        <img src="https://ik.imagekit.io/3zxcbvthi/utch/Logotipo_UTCH.png?updatedAt=1718238678678" alt="Logotipo UTCH">
+        
     </body>
 </html>

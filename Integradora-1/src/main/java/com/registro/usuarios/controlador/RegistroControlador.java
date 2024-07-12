@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Universidad;
 import com.registro.usuarios.modelo.Usuario;
+import com.registro.usuarios.servicio.CarreraServicio;
 import com.registro.usuarios.servicio.UniversidadServicio;
 import com.registro.usuarios.servicio.UsuarioServicio;
 
@@ -24,6 +26,9 @@ public class RegistroControlador {
 	private UsuarioServicio usuarioServicio;
 	@Autowired
 	private UniversidadServicio universidadServicio;
+
+	@Autowired
+	private CarreraServicio carreraServicio;
 	
 	@GetMapping("/login")
 	public String iniciarSesion() {
@@ -35,11 +40,11 @@ public class RegistroControlador {
 		Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
 		Optional<Universidad> universidad =  universidadServicio.getUniversidadesById(3L);
 		String direccion = universidad.get().getDireccionGoogle();
-
+		List<Carrera> carreras = carreraServicio.getAllCarreras();
 		 List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
                                        .collect(Collectors.toList());
-									   
+		model.addAttribute("carreras", carreras);
 		model.addAttribute("roles",roleIds );
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("direccion", direccion);
