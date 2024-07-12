@@ -12,10 +12,33 @@ nav {
     border: var(--border-thick) solid #ffffff;
     border-radius: var(--border-radius);
     box-shadow: 0 0 35px #00000018;
+    font-size: 1.2em;
 }
 
 nav > div > div > a {
     text-decoration: none;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #ffffff00;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: var(--principal-subtitle-weight);
+    transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+select:hover{
+    color: #0047ff;
+    cursor: pointer;
+}
+
+select:active, select:focus {
+    outline: none;
+    color: #0047ff;
 }
 
 .hr-navbar {
@@ -77,7 +100,7 @@ nav > div > div > a {
 }
 
 #button-text-navbar:hover {
-    color: #2f00ff;
+    color: #0047ff;
 }
 
 #color-blue {
