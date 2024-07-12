@@ -98,6 +98,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	}
 
 	@Override
+	public boolean resetPassword (Usuario usuario){
+		try {
+			usuario.setPassword(passwordEncoder.encode("12345"));
+			usuarioRepositorio.save(usuario);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public String actualizarEmail(String oldEmail, String newEmail , String password){
 		Usuario usuario = usuarioRepositorio.findByEmail(newEmail);
 		if (usuario == null) {

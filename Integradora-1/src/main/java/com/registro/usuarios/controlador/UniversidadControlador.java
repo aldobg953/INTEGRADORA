@@ -36,7 +36,9 @@ public class UniversidadControlador {
             Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
             model.addAttribute("usuario", usuario);
         }
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         List<Universidad> universidades = universidadServicio.getAllUniversidades();
+        model.addAttribute("usuario", usuario);
         model.addAttribute("universidades", universidades);
 		return "universidades/universidades";
 	}

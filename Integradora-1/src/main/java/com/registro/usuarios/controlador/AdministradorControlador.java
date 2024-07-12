@@ -331,4 +331,13 @@ public class AdministradorControlador {
         return "redirect:/administrador/usuarios/"+usuarioRegistroDTO.getId_usuario()+"?error";
     }
 
+    @GetMapping("/resetearPassword/{id}")
+    private String resetearPassword( @AuthenticationPrincipal UserDetails userDetails,  @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.getById(id);
+        if(usuarioServicio.resetPassword(usuario)){
+            return "redirect:/administrador/usuarios/" + usuario.getId_usuario()+"?exito";
+        }
+        return "redirect:/administrador/usuarios/" + usuario.getId_usuario()+"?error";
+    }
+
 }
