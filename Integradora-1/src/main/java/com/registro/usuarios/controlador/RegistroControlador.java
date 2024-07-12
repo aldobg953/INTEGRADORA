@@ -41,7 +41,7 @@ public class RegistroControlador {
 		Optional<Universidad> universidad =  universidadServicio.getUniversidadesById(3L);
 		String direccion = universidad.get().getDireccionGoogle();
 		List<Carrera> carreras = carreraServicio.getAllCarreras();
-		 List<Long> roleIds = usuario.getRoles().stream()
+		List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
                                        .collect(Collectors.toList());
 		model.addAttribute("carreras", carreras);

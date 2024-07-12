@@ -2,6 +2,7 @@ package com.registro.usuarios.controlador;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.registro.usuarios.modelo.Carrera;
+import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Universidad;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.servicio.CarreraServicio;
@@ -32,12 +34,12 @@ public class UniversidadControlador {
 	
 	@GetMapping
 	public String mostrarIndiceUniversidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
-         if (userDetails != null) {
-            Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-            model.addAttribute("usuario", usuario);
-        }
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         List<Universidad> universidades = universidadServicio.getAllUniversidades();
+        List<Long> roleIds = usuario.getRoles().stream()
+                                       .map(Rol::getId_rol)
+                                       .collect(Collectors.toList());
+		model.addAttribute("roles",roleIds );
         model.addAttribute("usuario", usuario);
         model.addAttribute("universidades", universidades);
 		return "universidades/universidades";
