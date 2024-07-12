@@ -28,9 +28,11 @@ import com.registro.usuarios.modelo.Horario;
 import com.registro.usuarios.modelo.Modalidad;
 import com.registro.usuarios.modelo.PeriodoEscolar;
 import com.registro.usuarios.modelo.Rol;
+import com.registro.usuarios.modelo.Universidad;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.modelo.dto.CarreraDTO;
 import com.registro.usuarios.modelo.dto.UniversidadDTO;
+import com.registro.usuarios.modelo.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.modelo.resumen.UniversidadResumen;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
@@ -86,7 +88,7 @@ public class AdministradorControlador {
     @GetMapping("/crearcarrera")
     private String crearcarrera(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadResumen();
+        List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadResumen(usuario.getRoles(), usuario.getId_universidad());
         List<PeriodoEscolar> allPeriodoEscolar = periodoEscolarServicio.getAllPeriodoEscolar();
         List<Area> areas = areaServicio.getAllAreas();
         List<Horario> horarios = horarioServicio.getAllHoriarios();
@@ -106,7 +108,7 @@ public class AdministradorControlador {
         try {
             Carrera res = carreraServicio.guardarCarrera(carreraDTO);
             if(res!=null){  
-                Path path = Paths.get(uploadDir).resolve(res.getId_carrera() + ".jpg").normalize();
+                Path path = Paths.get(uploadDir+"/carreras").resolve(res.getId_carrera() + ".jpg").normalize();
                 Files.copy(carreraDTO.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             }else{
                 return "redirect:/administrador/crearcarrera?error";
@@ -120,7 +122,7 @@ public class AdministradorControlador {
     @GetMapping("/modificarCarrera")
     private String modificarCarrera(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<Carrera> carreras = carreraServicio.getAllCarreras();
+        List<Carrera> carreras = carreraServicio.getAllCarreras(usuario.getRoles(),usuario.getId_universidad());
         model.addAttribute("usuario", usuario);
         model.addAttribute("carreras", carreras);
         return "administrador/modificarcarrera";
@@ -131,7 +133,7 @@ public class AdministradorControlador {
         CarreraDTO carrera = carreraServicio.getCarreraDTOById(id);
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
        
-        List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadResumen();
+        List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadResumen(usuario.getRoles(), usuario.getId_universidad());
         List<PeriodoEscolar> allPeriodoEscolar = periodoEscolarServicio.getAllPeriodoEscolar();
         List<Area> areas = areaServicio.getAllAreas();
         List<Horario> horarios = horarioServicio.getAllHoriarios();
@@ -151,7 +153,7 @@ public class AdministradorControlador {
     private String postModificarCarrera(@ModelAttribute CarreraDTO carreraDTO){
         if(!carreraDTO.getFile().isEmpty()){
             try {
-                Path path = Paths.get(uploadDir).resolve(carreraDTO.getId_carrera() + ".jpg").normalize();
+                Path path = Paths.get(uploadDir + "/carreras").resolve(carreraDTO.getId_carrera() + ".jpg").normalize();
                 Files.copy(carreraDTO.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception e) {
                 return "redirect:/administrador/modificarcarrera/" + carreraDTO.getId_carrera() + "?error";
@@ -168,7 +170,7 @@ public class AdministradorControlador {
     @GetMapping("/eliminarcarrera/{id}")
     private String eliminarcarrera(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
         carreraServicio.eliminarcarrera(id);
-        File archivo = new File(uploadDir+"/"+id+".jpg");
+        File archivo = new File(uploadDir+"/carreras/"+id+".jpg");
         archivo.delete();
         return "redirect:/administrador/modificarCarrera";
     }
@@ -176,7 +178,7 @@ public class AdministradorControlador {
     @GetMapping("/crearespecialidad")
     private String crearespecialidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<CarreraDTO> carreras = carreraServicio.getAllCarreraDTO();
+        List<CarreraDTO> carreras = carreraServicio.getAllCarreraDTO(usuario.getRoles(),usuario.getId_universidad());
         List<PeriodoEscolar> allPeriodoEscolar = periodoEscolarServicio.getAllPeriodoEscolar();
         List<Horario> horarios = horarioServicio.getAllHoriarios();
         List<Modalidad> modalidades = modalidadServicio.getAllModalidades();
@@ -198,7 +200,7 @@ public class AdministradorControlador {
     @GetMapping("/modificarespecialidad")
     private String modificarEspecialidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<Especialidad> especialidades = especialidadServicio.getAllEspecilidades();
+        List<Especialidad> especialidades = especialidadServicio.getEspecialidadesbyUsuario(usuario.getRoles(),usuario.getId_universidad());
         model.addAttribute("especialidades", especialidades);
         model.addAttribute("usuario", usuario);
         return "administrador/modificarespecialidades";
@@ -208,7 +210,7 @@ public class AdministradorControlador {
     @GetMapping("/modificarespecialidad/{id}")
     private String modificarEspecialidadID(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<CarreraDTO> carreras = carreraServicio.getAllCarreraDTO();
+        List<CarreraDTO> carreras = carreraServicio.getAllCarreraDTO(usuario.getRoles(),usuario.getId_universidad());
         List<PeriodoEscolar> allPeriodoEscolar = periodoEscolarServicio.getAllPeriodoEscolar();
         List<Horario> horarios = horarioServicio.getAllHoriarios();
         List<Modalidad> modalidades = modalidadServicio.getAllModalidades();
@@ -240,5 +242,93 @@ public class AdministradorControlador {
         return "administrador/crearuniversidad";
      }
 
+    @PostMapping("/postguardaruniversidad")
+    private String postGuardarUniversidad(@ModelAttribute UniversidadDTO universidadDTO){
+        try {
+            Path dir = Paths.get(uploadDir,universidadDTO.getNombre_abreviado());
+            if (!Files.exists(dir)) {
+                Files.createDirectory(dir);
+            }
+            Path path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("logo.png").normalize();
+            if(!universidadDTO.getLogo().isEmpty()){
+                Files.copy(universidadDTO.getLogo().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            }
+            if(!universidadDTO.getPortada().isEmpty()){
+                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("portada.jpg").normalize();
+                Files.copy(universidadDTO.getPortada().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            }
+            if(!universidadDTO.getImagen1().isEmpty()){
+                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("imagen1.jpg").normalize();
+                Files.copy(universidadDTO.getImagen1().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            }
+            if(universidadServicio.guardarUniversidad(universidadDTO)){
+                return "redirect:/administrador/modificaruniversidad/"+universidadDTO.getId_universidad()+"?exito";
+            }else{
+                return "redirect:/administrador/crearuniversidad?error";
+            }
+        } catch (Exception e) {
+            return "redirect:/administrador/crearuniversidad?error";
+        } 
+    }
+
+    @GetMapping("/modificaruniversidad")
+    private String modificarUniversidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Universidad> universidades = universidadServicio.getAllUniversidades();
+        boolean esSuperUsuario = usuario.getRoles().stream().anyMatch(rol -> rol.getId_rol() == 3);
+        if(esSuperUsuario){
+            model.addAttribute("universidades", universidades);
+            model.addAttribute("usuario", usuario);
+            return "administrador/modificaruniversidades";
+        }else{
+            return "redirect:/administrador/modificaruniversidad/"+usuario.getId_universidad();
+        }
+        
+    }
+
+    @GetMapping("/modificaruniversidad/{id}")
+    private String modificarUniversidadID(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        UniversidadDTO universidad = universidadServicio.getUniversidadDTO(id);
+        model.addAttribute("universidad", universidad);
+        model.addAttribute("usuario", usuario);
+        return "administrador/modificaruniversidad";
+    }
+
+    @GetMapping("/eliminaruniversidad/{id}")
+     private String eliminarUniversidad(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        
+        if(universidadServicio.eliminarUniversidad(id)){
+            return "redirect:/administrador/modificaruniversidad?exito";
+        }
+        return "redirect:/administrador/modificaruniversidad?error";
+     }
+    @GetMapping("/usuarios")
+    private String administrarUsuario(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuario", usuario);
+        return "administrador/usuarios";
+    }
+
+    @GetMapping("/usuarios/{id}")
+    private String administrarUsuarioID(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        UsuarioRegistroDTO usuarioEdit = usuarioServicio.getUsuarioRegistroDTO(id);
+        List<UniversidadResumen> universidadDTO = universidadServicio.getAllUniversidadResumen(usuario.getRoles(),usuario.getId_universidad());
+        model.addAttribute("universidadDTO", universidadDTO);
+        model.addAttribute("usuarioEdit", usuarioEdit);
+        model.addAttribute("usuario", usuario);
+        return "administrador/usuarioedit";
+    }
+
+    @PostMapping("/postmodificarusuario")
+    private String postModificarUsuario(@ModelAttribute UsuarioRegistroDTO usuarioRegistroDTO){
+        if(usuarioServicio.actualizarUsuarioDTO(usuarioRegistroDTO)){
+            return "redirect:/administrador/usuarios/"+usuarioRegistroDTO.getId_usuario() + "?exito";
+        }
+        return "redirect:/administrador/usuarios/"+usuarioRegistroDTO.getId_usuario()+"?error";
+    }
 
 }

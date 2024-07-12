@@ -46,5 +46,10 @@ public class Rol {
 		this.nombre = nombre;
 	}
 
+	@Override
+	public String toString() {
+		
+		return "rol: " + this.id_rol + ", nombre: " + this.nombre;
+	}
 	
 }

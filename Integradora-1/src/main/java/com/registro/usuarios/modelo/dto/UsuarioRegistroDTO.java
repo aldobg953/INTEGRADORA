@@ -7,7 +7,10 @@ public class UsuarioRegistroDTO {
 	private String apellidoP;
 	private String email;
 	private String password;
-
+	private boolean superUsuario;
+	private boolean usuarioAdmin;
+	private Long idUniversidad;
+	
 	public Long getId_usuario() {
 		return id_usuario;
 	}
@@ -48,6 +51,19 @@ public class UsuarioRegistroDTO {
 		this.password = password;
 	}
 
+	
+
+	public UsuarioRegistroDTO(Long id_usuario, String nombre, String apellidoP, String email, String password,
+			boolean superUsuario, boolean usuarioAdmin,Long id_universidad) {
+		this.id_usuario = id_usuario;
+		this.nombre = nombre;
+		this.apellidoP = apellidoP;
+		this.email = email;
+		this.password = password;
+		this.superUsuario = superUsuario;
+		this.usuarioAdmin = usuarioAdmin;
+		this.idUniversidad = id_universidad;
+	}
 
 	public UsuarioRegistroDTO(String nombre, String apellidoP, String email, String password) {
 		super();
@@ -60,5 +76,34 @@ public class UsuarioRegistroDTO {
 	public UsuarioRegistroDTO() {
 
 	}
+
+	public void setId_usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public boolean isSuperUsuario() {
+		return superUsuario;
+	}
+
+	public void setSuperUsuario(boolean superUsuario) {
+		this.superUsuario = superUsuario;
+	}
+
+	public boolean isUsuarioAdmin() {
+		return usuarioAdmin;
+	}
+
+	public void setUsuarioAdmin(boolean usuarioAdmin) {
+		this.usuarioAdmin = usuarioAdmin;
+	}
+
+	public Long getIdUniversidad() {
+		return idUniversidad;
+	}
+
+	public void setIdUniversidad(Long idUniversidad) {
+		this.idUniversidad = idUniversidad;
+	}
+	
 
 }

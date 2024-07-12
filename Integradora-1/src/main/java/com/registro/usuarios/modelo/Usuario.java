@@ -33,6 +33,7 @@ public class Usuario {
 	private String password;
 	private boolean activo;
 	private boolean darkmode;
+	private Long id_universidad;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
@@ -106,6 +107,23 @@ public class Usuario {
 		this.darkmode = darkmode;
 	}
 
+	public void addRol(Rol rol) {
+        this.roles.add(rol);
+    }
+
+	public void removeRol(Long idRol) {
+        this.roles.removeIf(rol -> rol.getId_rol() == idRol);
+    }
+
+	
+	public Long getId_universidad() {
+		return id_universidad;
+	}
+
+	public void setId_universidad(Long id_universidad) {
+		this.id_universidad = id_universidad;
+	}
+
 	public Usuario(Long id_usuario, String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
 		super();
 		this.id_usuario = id_usuario;
@@ -132,6 +150,7 @@ public class Usuario {
 	public Usuario() {
 		
 	}
+
 
 	
 
