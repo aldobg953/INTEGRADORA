@@ -63,6 +63,8 @@ public class CarreraControlador {
     public String mostrarCarreraByArea( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         List<Carrera> carreras = carreraServicio.getCarrerasByArea(id);
         String area = carreras.get(0).getArea().getNombre_area();
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        model.addAttribute("usuario", usuario);
         model.addAttribute("carreras", carreras);
         model.addAttribute("area", area);
         return "carreras/carreasByArea";
@@ -71,6 +73,8 @@ public class CarreraControlador {
     @GetMapping("/areas")
     public String mostrarAreas( Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<Area> areas = areaServicio.getAllAreas();
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        model.addAttribute("usuario", usuario);
         model.addAttribute("areas",areas); 
         return "carreras/areas";
     }
@@ -92,5 +96,14 @@ public class CarreraControlador {
         model.addAttribute("especialidad", especialidad);
         model.addAttribute("usuario", usuario);
         return "carreras/especialidad";
+    }
+
+    @GetMapping("/all")
+    public String mostrarCarreras(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Carrera> carreras = carreraServicio.getAllCarreras();
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("carreras", carreras);
+        return "carreras/allcarreras";
     }
 }

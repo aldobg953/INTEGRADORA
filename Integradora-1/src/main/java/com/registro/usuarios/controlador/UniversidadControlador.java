@@ -49,6 +49,12 @@ public class UniversidadControlador {
     public String mostrarUniversidad( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         Optional<Universidad> universidad = universidadServicio.getUniversidadesById(id);   
         List<Carrera> carreras = carreraServicio.getCarrerasByUniversidad(id); 
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Long> roleIds = usuario.getRoles().stream()
+                                       .map(Rol::getId_rol)
+                                       .collect(Collectors.toList());
+        model.addAttribute("roles",roleIds );
+        model.addAttribute("usuario", usuario);
         model.addAttribute("universidad",universidad.get()); 
         model.addAttribute("carreras",carreras); 
         return "universidades/universidad";

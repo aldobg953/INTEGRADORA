@@ -249,7 +249,7 @@ public class AdministradorControlador {
             if (!Files.exists(dir)) {
                 Files.createDirectory(dir);
             }
-            Path path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("logo.png").normalize();
+            Path path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("logo.jpg").normalize();
             if(!universidadDTO.getLogo().isEmpty()){
                 Files.copy(universidadDTO.getLogo().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             }
