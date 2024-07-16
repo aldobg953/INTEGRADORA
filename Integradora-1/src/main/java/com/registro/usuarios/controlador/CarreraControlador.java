@@ -45,11 +45,11 @@ public class CarreraControlador {
 
     @GetMapping("/carrera/{id}")
     public String mostrarCarrera(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
-        Carrera carrera = carreraServicio.getCarreraById(id).get();
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        Carrera carrera = carreraServicio.getCarreraById(id, usuario.getLang());
         List<Foro> foros = carreraServicio.getForoByCarrera(id);
         CalificacionesDto califGnral = foroServicio.obtenerCalifCarrera(id);
-        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<Especialidad> especialidades = especialidadServicio.getEspecialidadByCarrera(id);
+        List<Especialidad> especialidades = especialidadServicio.getEspecialidadByCarrera(id,usuario.getLang());
 
         model.addAttribute("especialidades", especialidades);
         model.addAttribute("usuario", usuario);

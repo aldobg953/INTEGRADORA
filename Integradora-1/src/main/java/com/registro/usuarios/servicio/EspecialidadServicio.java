@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.registro.usuarios.modelo.Especialidad;
 import com.registro.usuarios.modelo.Rol;
+import com.registro.usuarios.modelo.traducciones.EspecialidadTraduccion;
 import com.registro.usuarios.repositorio.EspecialidadRepositorio;
 
 @Service
@@ -31,8 +32,15 @@ public class EspecialidadServicio {
         
     }
 
-    public List<Especialidad> getEspecialidadByCarrera(Long carrera){
-        return especialidadRepositorio.findbyCarrera(carrera);
+    public List<Especialidad> getEspecialidadByCarrera(Long carrera, String lang){
+        List<Especialidad> especialidades = especialidadRepositorio.findbyCarrera(carrera);
+        if(lang.equals("es")){
+            return especialidades;
+        }else{
+            return especialidades.stream().map(especialidad -> aplicarTraduccionEsp(especialidad, lang)).
+            collect(Collectors.toList());
+        }
+        
     }
 
     public List<Especialidad> getEspecialidadesbyUsuario(Collection<Rol> roles, Long id_universidad){
@@ -53,5 +61,20 @@ public class EspecialidadServicio {
             return false;
         }
         return true;
+    }
+
+     private Especialidad aplicarTraduccionEsp(Especialidad especialidad, String lang) {
+        EspecialidadTraduccion traduccion = especialidad.getTraducciones().stream()
+            .filter(t -> t.getLang().equals(lang))
+            .findFirst()
+            .orElse(null);
+
+        if (traduccion != null) {
+            especialidad.setNombre(traduccion.getNombre());
+            especialidad.setInformacion(traduccion.getInformacion());
+            especialidad.setDescripcion_breve(traduccion.getDescripcion_breve());
+        }
+
+        return especialidad;
     }
 }

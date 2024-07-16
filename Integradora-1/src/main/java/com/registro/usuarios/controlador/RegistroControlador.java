@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Rol;
@@ -31,15 +32,14 @@ public class RegistroControlador {
 	private CarreraServicio carreraServicio;
 	
 	@GetMapping("/login")
-	public String iniciarSesion() {
+	public String iniciarSesion(@RequestParam(value = "lang", required = false) String lang, Model model) {
+		model.addAttribute("lang", lang);
 		return "login";
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String verPaginaDeInicio(Model model,  @AuthenticationPrincipal UserDetails userDetails) {
 		Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-		Optional<Universidad> universidad =  universidadServicio.getUniversidadesById(3L);
-		String direccion = universidad.get().getDireccionGoogle();
 		List<Carrera> carreras = carreraServicio.getAllCarreras();
 		List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
@@ -47,8 +47,13 @@ public class RegistroControlador {
 		model.addAttribute("carreras", carreras);
 		model.addAttribute("roles",roleIds );
 		model.addAttribute("usuario", usuario);
-		model.addAttribute("direccion", direccion);
 		return "index";
+	}
+	
+	@GetMapping("/")
+	public String redirigirIndex(Model model,  @AuthenticationPrincipal UserDetails userDetails) {
+		Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+		return "redirect:/index?lang="+usuario.getLang();
 	}
 
 	@GetMapping("/inicio")

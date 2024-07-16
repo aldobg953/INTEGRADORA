@@ -39,32 +39,44 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	}
 	
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(
-				"/registro**",
-				"/js/**",
-				"/css/**",
-				"/img/**",
-				"/test/testResultado",
-				"universidades/universidad**",
-				"/inicio", "/contactanos","/acercade").permitAll()
-				.antMatchers("/administrador/usuarios","/administrador/eliminaruniversidad",
-				"/administrador/crearuniversidad", "/administrador/usuarios/**").hasAnyRole("SUPER")
-				.antMatchers("/administrador/**").hasAnyRole("ADMIN", "SUPER")
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.defaultSuccessUrl("/", true)
-		.permitAll()
-		.and()
-		.logout()
-		.invalidateHttpSession(true)
-		.clearAuthentication(true)
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login?logout")
-		.permitAll();
-	}
+protected void configure(HttpSecurity http) throws Exception {
+    http.csrf().disable()
+        .authorizeRequests()
+            .antMatchers(
+                "/registro/**",
+                "/js/**",
+                "/css/**",
+                "/img/**",
+                "/test/testResultado",
+                "/universidades/universidad/**",
+                "/inicio",
+                "/contactanos",
+                "/acercade",
+                "/cualquier-otra-url-que-quieras-permitir-sin-autenticacion"
+            ).permitAll()
+            .antMatchers(
+                "/administrador/usuarios",
+                "/administrador/eliminaruniversidad",
+                "/administrador/crearuniversidad",
+                "/administrador/usuarios/**"
+            ).hasAnyRole("SUPER")
+            .antMatchers("/administrador/**").hasAnyRole("ADMIN", "SUPER")
+            .antMatchers("/login", "/login?**").permitAll() // Permitir acceso a /login y /login?lang=
+            .anyRequest().authenticated()
+        .and()
+        .formLogin()
+            .loginPage("/login")
+            .defaultSuccessUrl("/", true)
+            .permitAll()
+        .and()
+        .logout()
+            .invalidateHttpSession(true)
+            .clearAuthentication(true)
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/login")
+            .permitAll();
+}
+
 }
 
 

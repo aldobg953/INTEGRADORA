@@ -64,11 +64,11 @@
 				</div>
 
 				<div>
-					<p id="register-title">Regístrate</p>
+					<p id="register-title"  th:text="#{registrate}">Regístrate</p>
 				</div>
 				<hr>
-				<form th:action="@{/registro}" method="post" th:object="${usuario}">
-
+				<form th:action="@{/registro}"  method="post" th:object="${usuario}">
+					<input type="hidden" th:field="*{lang}" />
 					<div class="input-group">
 						<input id="nombre" for="nombre" type="text" class="input" placeholder="Nombre y Apellido"
 							name="nombre" required pattern="\S+\s+\S+.*"
@@ -103,13 +103,13 @@
 					</div>
 					<hr class="transparent">
 					<button type="submit" class="btn btn-success">
-						<span class="btn-txt">Registrarse</span>
+						<p class="btn-txt">Registrarse</p>
 					</button>
 					<hr class="transparent">
 
 					<div class="account-message-login">
 						<p id="account-message-login">Si estas registrado
-							<a th:href="@{/login}" id="account-message-login">inicia sesión aqui</a>
+							<a th:href="${#strings.concat('/login', (lang != null and lang != '' ? '?lang=' + lang : ''))}"id="account-message-login">inicia sesión aqui</a>
 						</p>
 					</div>
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,7 @@ import com.registro.usuarios.modelo.dto.CarreraDTO;
 import com.registro.usuarios.modelo.dto.UniversidadDTO;
 import com.registro.usuarios.modelo.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.modelo.resumen.UniversidadResumen;
+import com.registro.usuarios.modelo.traducciones.UniversidadTraduccion;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
 import com.registro.usuarios.servicio.EspecialidadServicio;
@@ -274,7 +276,7 @@ public class AdministradorControlador {
     @GetMapping("/modificaruniversidad")
     private String modificarUniversidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<Universidad> universidades = universidadServicio.getAllUniversidades();
+        List<Universidad> universidades = universidadServicio.getAllUniversidades(usuario.getLang());
         boolean esSuperUsuario = usuario.getRoles().stream().anyMatch(rol -> rol.getId_rol() == 3);
         if(esSuperUsuario){
             model.addAttribute("universidades", universidades);
@@ -332,7 +334,7 @@ public class AdministradorControlador {
     }
 
     @GetMapping("/resetearPassword/{id}")
-    private String resetearPassword( @AuthenticationPrincipal UserDetails userDetails,  @PathVariable("id") Long id){
+    private String resetearPassword(@AuthenticationPrincipal UserDetails userDetails,  @PathVariable("id") Long id){
         Usuario usuario = usuarioServicio.getById(id);
         if(usuarioServicio.resetPassword(usuario)){
             return "redirect:/administrador/usuarios/" + usuario.getId_usuario()+"?exito";
@@ -340,4 +342,35 @@ public class AdministradorControlador {
         return "redirect:/administrador/usuarios/" + usuario.getId_usuario()+"?error";
     }
 
+    @GetMapping("/traduccion")
+    private String traducciones(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        boolean esSuperUsuario = usuario.getRoles().stream().anyMatch(rol -> rol.getId_rol() == 3);
+        List<Universidad> universidades = null;
+
+        if(esSuperUsuario){
+            universidades = universidadServicio.getAllUniversidades(usuario.getLang());
+            
+        }else{
+            universidades = new ArrayList<>();
+            universidades.add(universidadServicio.getUniversidadById(usuario.getId_universidad(), usuario.getLang()).get());
+        }
+        List<Especialidad> especialidades = especialidadServicio.getEspecialidadesbyUsuario(usuario.getRoles(),usuario.getId_universidad());
+        List<Carrera> carreras = carreraServicio.getAllCarreras(usuario.getRoles(),usuario.getId_universidad());
+        model.addAttribute("carreras", carreras);
+        model.addAttribute("especialidades", especialidades);
+        model.addAttribute("universidades", universidades);
+        model.addAttribute("usuario", usuario);
+        return "administrador/traduccion";
+    }
+
+    @GetMapping("/traduccionUni/{id}/{lang}")
+    public String crearModificarTraduccion(@AuthenticationPrincipal UserDetails userDetails,  @PathVariable("id") Long id,
+                                            @PathVariable("lang") String lang, Model model){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        UniversidadTraduccion universidadTraduccion = universidadServicio.getUniTraduccion(id, lang);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("universidadTraduccion", universidadTraduccion);
+        return "administrador/traduccionUni";
+    }   
 }

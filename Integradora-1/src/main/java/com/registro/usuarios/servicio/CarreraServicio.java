@@ -13,6 +13,7 @@ import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.dto.CarreraDTO;
+import com.registro.usuarios.modelo.traducciones.CarreraTraduccion;
 import com.registro.usuarios.repositorio.AreaRepositorio;
 import com.registro.usuarios.repositorio.CarreraRepositorio;
 import com.registro.usuarios.repositorio.ForoRepositorio;
@@ -48,8 +49,13 @@ public class CarreraServicio {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    public Optional<Carrera> getCarreraById(Long id){
-        return carreraRepositorio.findById(id);
+    public Carrera getCarreraById(Long id, String lang){
+        if(lang.equals("es")){
+            return carreraRepositorio.findById(id).get();
+        }else{
+            return aplicarTraduccion(carreraRepositorio.getById(id), lang);
+        }
+        
     }
 
     public List<Carrera> getCarrerasByArea(Long id){
@@ -59,6 +65,36 @@ public class CarreraServicio {
     public List<Carrera> getCarrerasByUniversidad(Long id){
         return carreraRepositorio.findByUniversidad(id);
     }
+
+    public List<Carrera> getCarrerasByUniversidadAndLang(Long id, String lang) {
+        List<Carrera> carreras = carreraRepositorio.findByUniversidad(id);
+        if(lang.equals("es")){
+            return carreras;
+        }
+        return carreras.stream()
+            .map(carrera -> aplicarTraduccion(carrera, lang))
+            .collect(Collectors.toList());
+    }
+
+    private Carrera aplicarTraduccion(Carrera carrera, String lang) {
+        CarreraTraduccion traduccion = carrera.getTraducciones().stream()
+            .filter(t -> t.getLang().equals(lang))
+            .findFirst()
+            .orElse(null);
+
+        if (traduccion != null) {
+            carrera.setNombre(traduccion.getNombre());
+            carrera.setInformacion(traduccion.getInformacion());
+            carrera.setHorario_especifico(traduccion.getHorario_especifico());
+            carrera.setPorque_estudiar(traduccion.getPorque_estudiar());
+            carrera.setDonde_trabajar(traduccion.getDonde_trabajar());
+            carrera.setComo_desemp(traduccion.getComo_desemp());
+            carrera.setDesc_breve(traduccion.getDesc_breve());
+        }
+
+        return carrera;
+    }
+
 
     public List<Foro> getForoByCarrera(Long id){
          return foroRepositorio.findByCarrera(id);
@@ -72,7 +108,7 @@ public class CarreraServicio {
             carreraDTO.getPorque_estudiar(),carreraDTO.getDonde_trabajar(),carreraDTO.getComo_desemp(),
             universidadRepositorio.getById(carreraDTO.getUniversidad()),areaRepositorio.getById(carreraDTO.getArea()),
             modalidadRepositorio.getById(carreraDTO.getModalidad()),periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()),
-            horarioRepositorio.getById(carreraDTO.getHorario()));
+            horarioRepositorio.getById(carreraDTO.getHorario()),carreraDTO.getDesc_breve());
             newCarrera = carreraRepositorio.save(carrera);
         } catch (Exception e) {
             newCarrera = null;
@@ -98,7 +134,8 @@ public class CarreraServicio {
         CarreraDTO carreraDTO = new CarreraDTO(carrera.getId_carrera(), carrera.getNombre(),carrera.getInformacion(),carrera.getRoadmap(),
         carrera.getCosto(),carrera.getHorario_especifico(),carrera.isBilingue(),carrera.getCantidad_periodos(),carrera.getPorque_estudiar(),
         carrera.getDonde_trabajar(),carrera.getComo_desemp(),carrera.getUniversidad().getId_universidad(),carrera.getArea().getId_area(),
-        carrera.getModalidad().getId_modalidad(),carrera.getPeriodoEscolar().getId_periodo_escolar(),carrera.getHorario().getId_horario());
+        carrera.getModalidad().getId_modalidad(),carrera.getPeriodoEscolar().getId_periodo_escolar(),carrera.getHorario().getId_horario(),
+        carrera.getDesc_breve());
         return carreraDTO;
     }
 
@@ -109,7 +146,7 @@ public class CarreraServicio {
             carreraDTO.getPorque_estudiar(),carreraDTO.getDonde_trabajar(),carreraDTO.getComo_desemp(),
             universidadRepositorio.getById(carreraDTO.getUniversidad()),areaRepositorio.getById(carreraDTO.getArea()),
             modalidadRepositorio.getById(carreraDTO.getModalidad()),periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()),
-            horarioRepositorio.getById(carreraDTO.getHorario()));
+            horarioRepositorio.getById(carreraDTO.getHorario()),carreraDTO.getDesc_breve());
             carreraRepositorio.save(carrera);
         } catch (Exception e) {
             return false;

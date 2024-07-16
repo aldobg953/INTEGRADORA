@@ -34,6 +34,7 @@ public class Usuario {
 	private boolean activo;
 	private boolean darkmode;
 	private Long id_universidad;
+	private String lang;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
@@ -124,7 +125,9 @@ public class Usuario {
 		this.id_universidad = id_universidad;
 	}
 
-	public Usuario(Long id_usuario, String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
+	
+
+	public Usuario(Long id_usuario, String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode, String lang,Long id_universidad) {
 		super();
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
@@ -134,9 +137,11 @@ public class Usuario {
 		this.roles = roles;
 		this.activo = activo;
 		this.darkmode = darkmode;
+		this.lang = lang;
+		this.id_universidad =  id_universidad;
 	}
 
-	public Usuario(String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode) {
+	public Usuario(String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode, String lang, Long id_universidad) {
 		super();
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
@@ -145,10 +150,20 @@ public class Usuario {
 		this.roles = roles;
 		this.activo = activo;
 		this.darkmode = darkmode;
+		this.lang = lang;
+		this.id_universidad = id_universidad;
 	}
 
 	public Usuario() {
 		
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 
 

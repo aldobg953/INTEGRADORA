@@ -1,11 +1,19 @@
 package com.registro.usuarios.modelo;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.registro.usuarios.modelo.traducciones.UniversidadTraduccion;
+
 import lombok.Data;
 
 @Data
@@ -31,6 +39,10 @@ public class Universidad {
     private String tipo_institucion; //publica o privada
     @Column(length = 600)
     private String caracteristicas;
+
+    @OneToMany(mappedBy = "universidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UniversidadTraduccion> traducciones;
+
 
     public Universidad(Long id_universidad, String nombre_completo, String nombre_abreviado, String pagina_web,
             String correo, String telefono, String informacion, String direccion, String direccionGoogle,

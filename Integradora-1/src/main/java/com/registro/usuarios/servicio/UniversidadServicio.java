@@ -19,7 +19,9 @@ import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Universidad;
 import com.registro.usuarios.modelo.dto.UniversidadDTO;
 import com.registro.usuarios.modelo.resumen.UniversidadResumen;
+import com.registro.usuarios.modelo.traducciones.UniversidadTraduccion;
 import com.registro.usuarios.repositorio.UniversidadRepositorio;
+import com.registro.usuarios.repositorio.traducciones.UniversidadTradRepositorio;
 
 @Service
 public class UniversidadServicio {
@@ -27,14 +29,34 @@ public class UniversidadServicio {
     @Autowired
     UniversidadRepositorio universidadRepositorio;
 
+    @Autowired
+    UniversidadTradRepositorio universidadTradRepositorio;
+
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    public Optional<Universidad> getUniversidadesById(Long id){
-        return universidadRepositorio.findById(id);
+    public Optional<Universidad> getUniversidadById(Long id, String lang) {
+        Optional<Universidad> universidadOpt = null;
+        if(!lang.equals("es")){
+            universidadOpt = universidadRepositorio.findByIdWithTranslations(id, lang);
+            universidadOpt.ifPresent(u -> {
+                u.getTraducciones().stream()
+                    .filter(t -> t.getLang().equals(lang))
+                    .findFirst()
+                    .ifPresent(traduccion -> {
+                        u.setCaracteristicas(traduccion.getCaracteristicas());
+                        u.setInformacion(traduccion.getInformacion());
+                        u.setTipo_institucion(traduccion.getTipo_institucion());
+                    });
+            });
+        }else{
+            universidadOpt = universidadRepositorio.findById(id);
+        }
+        
+        return universidadOpt;
     }
 
-    public List<Universidad> getAllUniversidades(){
+    public List<Universidad> getAllUniversidades(String lang) {
         return universidadRepositorio.findAll();
     }
 
@@ -62,7 +84,6 @@ public class UniversidadServicio {
         return resumen;
     }
     
-
     public boolean guardarUniversidad(UniversidadDTO universidadDTO){
         try {
             Universidad universidad = new Universidad(universidadDTO.getId_universidad(), universidadDTO.getNombre_completo(),universidadDTO.getNombre_abreviado(),
@@ -106,4 +127,17 @@ public class UniversidadServicio {
         }
         Files.delete(path);
     }
+
+    public UniversidadTraduccion getUniTraduccion(Long id_universidad, String lang){
+        List<UniversidadTraduccion> universidadTraduccion =  universidadTradRepositorio.findByUniversidadIdAndLang(id_universidad, lang);
+        UniversidadTraduccion uniTRaduccion;
+        if(universidadTraduccion.isEmpty()){
+            uniTRaduccion = new UniversidadTraduccion();
+            uniTRaduccion.setUniversidad(universidadRepositorio.getById(id_universidad));
+        }else{
+            uniTRaduccion = universidadTraduccion.get(0);
+        }
+        return uniTRaduccion;
+    }
+    
 }

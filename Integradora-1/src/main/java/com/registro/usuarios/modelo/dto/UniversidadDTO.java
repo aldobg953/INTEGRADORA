@@ -21,6 +21,8 @@ public class UniversidadDTO {
     private MultipartFile logo;
     private MultipartFile portada;
     private MultipartFile imagen1;
+    private Long id_u_traduccion;
+    private String lang;
 
     public UniversidadDTO(Long id_universidad, String nombre_completo, String nombre_abreviado, String pagina_web,
             String correo, String telefono, String informacion, String direccion, String direccionGoogle,

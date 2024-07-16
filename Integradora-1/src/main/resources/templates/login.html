@@ -10,7 +10,24 @@
     <link rel="stylesheet" href="css/global_font.css">
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
     <title>PathFInder | Login</title>
-
+    <script>
+        function changeLang(selectElement) {
+            var selectedLang = selectElement.value;
+            var currentUrl = window.location.href;
+            
+            // Reemplazar o añadir el parámetro lang en la URL actual
+            var updatedUrl;
+            if (currentUrl.includes('?')) {
+                updatedUrl = currentUrl.replace(/(\?lang=)[^\&]+/, '$1' + selectedLang);
+            } else {
+                updatedUrl = currentUrl + '?lang=' + selectedLang;
+            }
+            
+            // Redirigir a la nueva URL
+            window.location.href = updatedUrl;
+        }
+    </script>
+    
 </head>
 
 <body class="malla">
@@ -25,12 +42,13 @@
 
                 <div class="button-container-navbar">
                     <i class="fi fi-rr-earth-americas navbar-icon"></i>
-                    <select name="lenguajes" id="lang">
-                        <option value="javascript">Español</option>
-                        <option value="javascript">English</option>
-                        <option value="javascript">Français</option>
-                      </select>
-            </div>
+                    <select name="lenguajes" id="lang" onchange="changeLang(this)">
+                        <option th:text="#{idioma}">Language</option>
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
 			</div>
 
                 <div class="action-buttons-navbar">
@@ -72,7 +90,7 @@
             <div id="sign-in-form"> <!--PARTE DERECHA DE LA TARJETA DE INICIO DE SESION-->
 
                 <div>
-                    <p id="welcome-title">¡Bienvenido!</p>
+                    <p id="welcome-title" th:text="#{saludo_index}">¡Bienvenido!</p>
                 </div>
 
                 <div>
@@ -129,7 +147,7 @@
 
                 <div class="create-account-message-login"> <!--MENSAJE DEBAJO DEL BOTON DE INICIO DE SESION-->
                     <p id="create-account-message-login">¿No tienes una cuenta?
-                        <a th:href="@{/registro}" id="create-account-message-login">¡Crea una!<a />
+                        <a th:href="${#strings.concat('/registro', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="create-account-message-login">¡Crea una!<a />
                     </p>
                 </div>
             </div>

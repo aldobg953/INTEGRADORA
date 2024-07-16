@@ -106,6 +106,34 @@
             </div>
         </form>
 
+        <form th:action="@{/configuracion/cambiaridioma}" class="border border-blue-800 md:mx-28 rounded-lg my-10 shadow-lg shadow-blue-500/50" method="post">
+            <div class="grid grid-rows-2 grid-flow-col">
+                <div class="col-span-1 pt-6 pl-10 font-bold font-serif dark:text-white">
+                    Cambio de Idioma
+                </div>
+                <div class="pl-10 col-span-1 dark:text-white">
+                    Elija el idioma en el que desea navegar por nuestro sitio web para una mejor experiencia.
+                </div>
+                <div class="col-span-2 row-span-2 justify-end">
+                    <select id="idioma" name="idioma" class="mt-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Lenguage</option>
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="fr">Français</option>
+                      </select>
+                </div>
+                
+            </div>
+            <div class="p-4 flex justify-end pr-20">
+                <button
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
+                    <span
+                        class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                        Actualizar
+                    </span>
+                </button>
+            </div>
+        </form>
 
     </body>
 </html>

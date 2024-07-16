@@ -80,5 +80,14 @@ public class ConfiguracionControlador {
         }
         return "redirect:/configuracion";
     }
+
+    @PostMapping("/cambiaridioma")
+    public String cambiarIdioma(@RequestParam("idioma") String idioma, 
+                                    @AuthenticationPrincipal UserDetails userDetails){
+        if(!idioma.equals("Lenguage")){
+            usuarioServicio.actualizarIdioma(idioma, userDetails.getUsername());
+        }
+        return "redirect:/configuracion";
+    }
     
 }

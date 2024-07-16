@@ -23,6 +23,7 @@ public class CarreraDTO {
     private Long periodoEscolar;
     private Long horario;
     private MultipartFile file;
+    private String desc_breve;
 
     public CarreraDTO(){
 
@@ -31,7 +32,7 @@ public class CarreraDTO {
     public CarreraDTO(Long id_carrera, String nombre, String informacion, String roadmap, float costo,
             String horario_especifico, boolean bilingue, int cantidad_periodos, String porque_estudiar,
             String donde_trabajar, String como_desemp, Long universidad, Long area, Long modalidad, Long periodoEscolar,
-            Long horario) {
+            Long horario, String desc_breve) {
         this.id_carrera = id_carrera;
         this.nombre = nombre;
         this.informacion = informacion;
@@ -48,6 +49,7 @@ public class CarreraDTO {
         this.modalidad = modalidad;
         this.periodoEscolar = periodoEscolar;
         this.horario = horario;
+        this.desc_breve = desc_breve;
     }
 
     

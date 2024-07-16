@@ -35,7 +35,7 @@ public class UniversidadControlador {
 	@GetMapping
 	public String mostrarIndiceUniversidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<Universidad> universidades = universidadServicio.getAllUniversidades();
+        List<Universidad> universidades = universidadServicio.getAllUniversidades(usuario.getLang());
         List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
                                        .collect(Collectors.toList());
@@ -47,9 +47,9 @@ public class UniversidadControlador {
 
     @GetMapping("/universidad/{id}")
     public String mostrarUniversidad( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
-        Optional<Universidad> universidad = universidadServicio.getUniversidadesById(id);   
-        List<Carrera> carreras = carreraServicio.getCarrerasByUniversidad(id); 
-        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername()); 
+        List<Carrera> carreras = carreraServicio.getCarrerasByUniversidadAndLang(id, usuario.getLang()); 
+        Optional<Universidad> universidad = universidadServicio.getUniversidadById(id, usuario.getLang());
         List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
                                        .collect(Collectors.toList());

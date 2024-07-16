@@ -47,7 +47,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 			String apellido = registroDTO.getNombre().substring(firstSpaceIndex + 1);
 			usuario = new Usuario(nombre, 
 			apellido, registroDTO.getEmail(),
-			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false);
+			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false,registroDTO.getLang(), 0L);
 			return usuarioRepositorio.save(usuario);
 		}else{
 			return null;
@@ -132,7 +132,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		usuario.setDarkmode(darkmode);
 		usuarioRepositorio.save(usuario);
 	}
-
+	@Override
+	public void actualizarIdioma(String idioma, String email){
+		Usuario usuario = usuarioRepositorio.findByEmail(email);
+		usuario.setLang(idioma);
+		usuarioRepositorio.save(usuario);
+	}
+	
 	@Override
 	public Usuario getById(Long id){
 		return usuarioRepositorio.getById(id);
@@ -153,7 +159,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		}
 
 		return new UsuarioRegistroDTO(usuario.getId_usuario(), usuario.getNombre(), 
-		usuario.getApellidoP(),usuario.getEmail(), usuario.getPassword(),rolSuper,rolAdmin,usuario.getId_universidad());
+		usuario.getApellidoP(),usuario.getEmail(), usuario.getPassword(),rolSuper,rolAdmin,usuario.getId_universidad(),usuario.getLang());
 	}
 
 	@Override
