@@ -39,7 +39,8 @@ public class UniversidadServicio {
         Optional<Universidad> universidadOpt = null;
         if(!lang.equals("es")){
             universidadOpt = universidadRepositorio.findByIdWithTranslations(id, lang);
-            if (!universidadOpt.isEmpty()) {
+            // Vita - Cambie isEmpty() por isPresent() en el if de justo abajo de este comentario porque no me debaja correr codigo.
+            if (!universidadOpt.isPresent()) {
                 universidadOpt.ifPresent(u -> {
                     u.getTraducciones().stream()
                         .filter(t -> t.getLang().equals(lang))
