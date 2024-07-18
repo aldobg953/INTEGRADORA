@@ -44,10 +44,10 @@
                 </div>
                 <ul class="py-2" aria-labelledby="user-menu-button">
                     <li>
-                        <a th:href="@{/configuracion/perfil}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                        <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
                     </li>
                     <li>
-                        <a th:href="@{/configuracion}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                        <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
                     </li>
                     <li>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
@@ -64,13 +64,13 @@
                 <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
                 </li>
                 <li>
-                <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
                 </li>
                 <li>
-                <a href="#" class="text-2xl py-2 px-3 text-blue-700 md:p-0">Carreras</a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0">Carreras</a>
                 </li>
                 <li>
-                    <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
                 </li>
                 <li>
                     <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
@@ -101,9 +101,9 @@
             <div th:text="${carrera.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
             <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
             <div class="text-xl md:text-lg font-serif font-bold">Area</div>
-            <a class="font-serif text-base md:text-lg" th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area})}"></a>
+            <a class="font-serif text-base md:text-lg" th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area}, lang=${usuario.lang})}"></a>
             <div class="text-xl md:text-lg font-serif font-bold">Universidad</div>
-            <a class="font-serif text-base md:text-lg" th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad})}"></a>
+            <a class="font-serif text-base md:text-lg" th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
         </div>
     </div>
     <div class="w-full my-10 bg-gray-600 flex flex-col md:flex-row">
@@ -130,15 +130,15 @@
     <div th:if="${!#lists.isEmpty(especialidades)}" class="mx-28 flex flex-wrap">
         <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold dark:text-white">Especialidades</p></div>
         <div class="mb-8 max-w-sm mx-4 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800" th:each="especialidad:${especialidades}">
-            <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad})}">
+            <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}">
                 <img class="rounded-t-lg border-b border-blue-800 bg-white" src="/img/utch/logo.jpg" alt="" />
             </a>
             <div class="p-5">
-                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad})}">
+                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${especialidad.nombre}">Noteworthy technology acquisitions 2021</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${especialidad.descripcion_breve}">descripcion breve</p>
-                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Ver mas
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

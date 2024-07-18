@@ -39,16 +39,21 @@ public class UniversidadServicio {
         Optional<Universidad> universidadOpt = null;
         if(!lang.equals("es")){
             universidadOpt = universidadRepositorio.findByIdWithTranslations(id, lang);
-            universidadOpt.ifPresent(u -> {
-                u.getTraducciones().stream()
-                    .filter(t -> t.getLang().equals(lang))
-                    .findFirst()
-                    .ifPresent(traduccion -> {
-                        u.setCaracteristicas(traduccion.getCaracteristicas());
-                        u.setInformacion(traduccion.getInformacion());
-                        u.setTipo_institucion(traduccion.getTipo_institucion());
-                    });
-            });
+            if (!universidadOpt.isEmpty()) {
+                universidadOpt.ifPresent(u -> {
+                    u.getTraducciones().stream()
+                        .filter(t -> t.getLang().equals(lang))
+                        .findFirst()
+                        .ifPresent(traduccion -> {
+                            u.setCaracteristicas(traduccion.getCaracteristicas());
+                            u.setInformacion(traduccion.getInformacion());
+                            u.setTipo_institucion(traduccion.getTipo_institucion());
+                        });
+                });
+            }else{
+                universidadOpt = universidadRepositorio.findById(id);
+            }
+           
         }else{
             universidadOpt = universidadRepositorio.findById(id);
         }

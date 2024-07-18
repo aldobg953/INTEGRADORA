@@ -58,11 +58,13 @@ public class RegistroControlador {
 
 
 	@GetMapping("/contactanos")
-	public String contactanos(){
+	public String contactanos(@RequestParam(value = "lang", required = false) String lang, Model model){
+		model.addAttribute("lang", lang);
 		return "contactanos";
 	}
 	@GetMapping("/acercade")
-	public String acercade(){
+	public String acercade(@RequestParam(value = "lang", required = false) String lang, Model model){
+		model.addAttribute("lang", lang);
 		return "acercade";
 	}
 }

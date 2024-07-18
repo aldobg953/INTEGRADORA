@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-    <title>PathFInder | Inicio</title>
+    <title th:text="#{inicioTitulo}">PathFInder | Inicio</title>
 
     <link href="/css/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
@@ -32,38 +32,55 @@
     </style>
 </head>
 
-<body class="flex flex-col justify-center w-full ">
+    <body class="malla" style="height: 200vh;">
+        <center>
+            <nav>
+                <div class="logo-navbar">
+                    
+                    <img id="logo-navbar" th:src="@{/css/LogoLogoPathFinderHorizontal.svg}" alt=""
+                    style="max-width:20%;height:auto;">
+    
+                    <div class="vertical-line"></div>
+                </div>
+    
+                    <div class="action-buttons-navbar">
+                        <div class="button-container-navbar">
+                                <i class="fi fi-rr-interrogation" id="navbar-icon"></i>
+                                <a th:href="@{/acercade}" id="button-text-navbar" th:text="#{acercaDe}">Acerca de</a>
+                        </div>
+                        <hr class="hr-navbar">
+                        <div class="button-container-navbar">
+                            <i class="fi fi-rr-user-headset" id="navbar-icon"></i>
+                            <a th:href="@{/contactanos}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
+                        </div>
+    
+                    <div class="vertical-line"></div>
+                    
+                    <div class="button-container-navbar">
+                        <i class="fi fi-rr-enter" id="navbar-icon"></i>
+                        <a th:href="@{/login}" id="button-text-navbar" th:text="#{inicioSesion}">Iniciar sesión</a>
+                    </div>
+                    <hr class="hr-navbar">
+                    <div class="button-container-navbar text-color-blue">
+                        <i class="fi fi-rr-user-add" id="navbar-icon"></i>
+                        <a th:href="@{/registro}" id="button-text-navbar" th:text="#{registrate}">Regístrate</a>
+                    </div>
+                    
+                </div>
+                
+            </nav>
 
-    <div></div> <!-- Header con la navbar -->
-    <div class="place-content-center justify-center simple-gradient w-full h-svh px-32">
-        <div class="w-fit max-w-5xl h-fit bg-white bg-opacity-75 border-2 border-white border-opacity-50 rounded-[1vw] pl-20 py-20 pr-60">
-            <div class="w-fit h-fit align-start">
-                <p class="text-6xl font-bold leading-relaxed">¡Con <span class="text-blue font-black">PathFinder</span> es más sencillo encontrar tu futuro!</p>
-            </div>
+        <h1>este es el inicio</h1>
 
-            <br class="h-10">
-            <div class="mt-6 flex space-x-8">
-                <div class="size-10 bg-blue rounded-full"></div>
-                <div class="size-10 bg-purple rounded-full"></div>
-                <div class="size-10 bg-green rounded-full"></div>
-              </div>
-            
+        <div class="form-group">
+            <span><span th:text="#{registrarMensaje}">Si eres nuevo usuario </span><a th:href="@{/registro}" th:text="#{registrate}">regístrate
+                    aqui</a></span>
         </div>
+        <div class="form-group">
+            <span><span th:text="#{tengoCuenta}">Si estas registrado</span> <a th:href="@{/login}" th:text="#{inicioSesion}">inicia sesión aqui</a></span>
+        </div>
+        </center>
 
-        <div class="absolute bottom-8 right-24 aspect-square size-44 bg-white rounded-[1vw]"></div>
-    </div> <!-- Principal text imagen de presentación-->
-    <br class="h-40">
-    <div class="place-content-center justify-center text-center text-6xl font-bold leading-relaxed px-32">La única plataforma en Chihuahua que  reúne toda la información universitaria que necesitas.</div> <!-- Unica plataforma en chihuahua -->
-    <div>Pilares</div> <!-- Pilares -->
-    <div>Diseño</div> <!-- Diseño -->
-    <div>Organización</div> <!-- Organización -->
-    <div>Roadmap</div> <!-- Roadmap -->
-    <div>Opiniones auténticas</div> <!-- Opiniones auténticas -->
-    <div>Carrusel de universidades disponibles</div> <!-- Carrusel de universidades disponibles -->
-    <div>Dedicatoria</div> <!-- Dedicatoria -->
-    <div>Notas adicionales</div> <!-- Notas adicionales -->
-    <div>Footer</div> <!-- Footer -->
-
-</body>
-
+            
+    </body>
 </html>

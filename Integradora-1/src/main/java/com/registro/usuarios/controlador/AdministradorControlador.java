@@ -177,7 +177,7 @@ public class AdministradorControlador {
         carreraServicio.eliminarcarrera(id);
         File archivo = new File(uploadDir+"/carreras/"+id+".jpg");
         archivo.delete();
-        return "redirect:/administrador/modificarCarrera&lang="+usuario.getLang();
+        return "redirect:/administrador/modificarCarrera?lang="+usuario.getLang();
     }
 
     @GetMapping("/crearespecialidad")

@@ -54,21 +54,21 @@
                 <div class="action-buttons-navbar">
                     <div class="button-container-navbar">
                             <i class="fi fi-rr-interrogation navbar-icon"></i>
-                            <a th:href="@{/acercade}" id="button-text-navbar">Acerca de</a>
+                            <a th:href="${#strings.concat('/acercade', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{acercaDe}">About us</a>
                     </div>
 
                     <hr class="hr-navbar">
 					
                     <div class="button-container-navbar">
                         <i class="fi fi-rr-user-headset navbar-icon"></i>
-                        <a th:href="@{/contactanos}" id="button-text-navbar">Contáctanos</a>
+                        <a th:href="${#strings.concat('/contactanos', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
                     </div>
 
 				<div class="vertical-line" id="color-blue"></div>
 				
 				<div class="button-container-navbar">
 					<i class="fi fi-rr-house-chimney navbar-icon"></i>
-				    <a th:href="@{/inicio}" id="button-text-navbar">Regresar al inicio</a>
+				    <a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{regresoInicio}">Regresar al inicio</a>
 				</div>
 				
 			</div>
@@ -94,11 +94,11 @@
                 </div>
 
                 <div>
-                    <p id="sign-in-title">Iniciar sesión</p>
+                    <p id="sign-in-title" th:text="#{inicioSesion}">Iniciar sesión</p>
                 </div>
 
                 <div th:if="${param.error}">
-                    <p id="error">ERROR: Ingresa tus datos nuevamente</p>
+                    <p id="error" >ERROR: Ingresa tus datos nuevamente</p>
                 </div>
                 <div th:if="${mensajeExito}">
                     <p th:text="${mensajeExito}"></p>
@@ -113,7 +113,7 @@
                         <div class="input-group"> <!--INPUTS-->
 
                             <input id="username" required="" type="email" name="username" autocomplete="off" class="input"
-                                placeholder="Ingresa tu correo electrónico" />
+                                th:placeholder="#{ingresaEmail}" />
                             <label for="email" class="email-label">
                                 <i id="login-input-icon" class="fi-rr-envelope"></i>
                             </label>
@@ -126,7 +126,7 @@
 
                     <div class="input-group">
                         <input id="password" name="password" required="" type="password" autocomplete="on" class="input"
-                            placeholder="Ingresa tu contraseña">
+                            th:placeholder="#{ingresaContra}">
 
                         <div for="name">
                             <i id="login-input-icon" class="fi-rr-lock"></i>
@@ -138,7 +138,7 @@
                     <hr>
 
                     <button class="btn btn-primary"> <!--BOTON DE INICIO DE SESION-->
-                        <span class="btn-txt">Iniciar sesión</span>
+                        <span class="btn-txt" th:text="#{inicioSesion}">Iniciar sesión</span>
                     </button>
 
                 </form>
@@ -146,8 +146,8 @@
                 <hr>
 
                 <div class="create-account-message-login"> <!--MENSAJE DEBAJO DEL BOTON DE INICIO DE SESION-->
-                    <p id="create-account-message-login">¿No tienes una cuenta?
-                        <a th:href="${#strings.concat('/registro', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="create-account-message-login">¡Crea una!<a />
+                    <p id="create-account-message-login"><span th:text="#{registrarMensaje}">¿No tienes una cuenta?</span>
+                        <a th:href="${#strings.concat('/registro', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="create-account-message-login" th:text="#{creaCuenta}">¡Crea una!</a>
                     </p>
                 </div>
             </div>
