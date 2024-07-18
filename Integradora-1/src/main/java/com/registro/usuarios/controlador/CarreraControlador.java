@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.registro.usuarios.modelo.Area;
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Especialidad;
 import com.registro.usuarios.modelo.Foro;
 import com.registro.usuarios.modelo.Usuario;
+import com.registro.usuarios.modelo.dto.AreaDTO;
 import com.registro.usuarios.modelo.dto.CalificacionesDto;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
@@ -61,9 +61,11 @@ public class CarreraControlador {
 
     @GetMapping("/area/{id}")
     public String mostrarCarreraByArea( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
-        List<Carrera> carreras = carreraServicio.getCarrerasByArea(id);
-        String area = carreras.get(0).getArea().getNombre_area();
+        
+        
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Carrera> carreras = carreraServicio.getCarrerasByArea(id,usuario.getLang());
+        String area = carreras.get(0).getArea().getNombre_area();
         model.addAttribute("usuario", usuario);
         model.addAttribute("carreras", carreras);
         model.addAttribute("area", area);
@@ -72,8 +74,8 @@ public class CarreraControlador {
 
     @GetMapping("/areas")
     public String mostrarAreas( Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        List<Area> areas = areaServicio.getAllAreas();
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<AreaDTO> areas = areaServicio.getAllAreas(usuario.getLang());
         model.addAttribute("usuario", usuario);
         model.addAttribute("areas",areas); 
         return "carreras/areas";
@@ -85,8 +87,9 @@ public class CarreraControlador {
                                          @RequestParam("comentarioNuevo") String comentarioNuevo,
                                          @RequestParam("calificacion") int calificacion
                                             ) {
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         foroServicio.crearForoCarrera(id_carrera, userDetails.getUsername(), comentarioNuevo, calificacion);
-        return "redirect:/carreras/carrera/" + id_carrera;
+        return "redirect:/carreras/carrera/" + id_carrera+"?lang="+usuario.getLang();
     }
 
     @GetMapping("/especialidad/{id}")
@@ -101,7 +104,7 @@ public class CarreraControlador {
     @GetMapping("/all")
     public String mostrarCarreras(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        List<Carrera> carreras = carreraServicio.getAllCarreras();
+        List<Carrera> carreras = carreraServicio.getAllCarreras(usuario.getLang());
         model.addAttribute("usuario", usuario);
         model.addAttribute("carreras", carreras);
         return "carreras/allcarreras";

@@ -15,4 +15,17 @@ public class PeriodoEscolar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_periodo_escolar;
     private String nombre_periodo;
+    private String nombre_periodo_en;
+    private String nombre_periodo_fr;
+
+    public void cambiarIdioma(String lang){
+        switch (lang.toLowerCase()) {
+            case "en":
+                this.nombre_periodo = this.nombre_periodo_en;
+                break;
+            case "fr":
+                this.nombre_periodo = this.nombre_periodo_fr;
+                break;
+        }
+    }
 }

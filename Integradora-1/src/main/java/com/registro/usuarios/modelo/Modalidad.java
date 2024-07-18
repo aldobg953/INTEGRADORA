@@ -17,5 +17,17 @@ public class Modalidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_modalidad;
     private String nombre_modalidad;
+    private String nombre_modalidad_en;
+    private String nombre_modalidad_fr;
 
+    public void cambiarIdioma(String lang){
+        switch (lang.toLowerCase()) {
+            case "en":
+                this.nombre_modalidad = this.nombre_modalidad_en;
+                break;
+            case "fr":
+                this.nombre_modalidad = this.nombre_modalidad_fr;
+                break;
+        }
+    }
 }

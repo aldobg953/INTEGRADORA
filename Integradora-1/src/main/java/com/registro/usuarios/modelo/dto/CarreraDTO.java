@@ -24,6 +24,8 @@ public class CarreraDTO {
     private Long horario;
     private MultipartFile file;
     private String desc_breve;
+    private String lang;
+    private Long id_c_traduccion;
 
     public CarreraDTO(){
 
