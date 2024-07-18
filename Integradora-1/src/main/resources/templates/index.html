@@ -25,7 +25,7 @@
 			<div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 				<button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
 					id="user-menu-button" aria-expanded="false">
-					<span class="sr-only">Menu usuario</span>
+					<span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
 					<img class="w-8 h-8 rounded-full"
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
 						alt="user photo">
@@ -43,19 +43,19 @@
 				<ul class="py-2" aria-labelledby="user-menu-button">
 					<li>
 						<a th:href="@{/configuracion/perfil}"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfiil}">Perfil</a>
 					</li>
 					<li>
 						<a th:href="@{/configuracion}"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
 					</li>
 					<li>
 						<a href="#"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
 					</li>
 					<li>
 						<a th:href="@{/logout}"
-							class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+							class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
 							sesion</a>
 					</li>
 				</ul>
@@ -64,19 +64,19 @@
 			<div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
 				<ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
 					<li>
-						<a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0 text-blue-700" aria-current="page">Inicio</a>
+						<a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0 text-blue-700" aria-current="page" th:text="#{inicioo}">Inicio</a>
 					</li>
 					<li>
-						<a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+						<a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
 					</li>
 					<li>
-						<a th:href="@{/carreras/all}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+						<a th:href="@{/carreras/all}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carrerass}">Carreras</a>
 					</li>
 					<li>
-						<a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+						<a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
 					</li>
 					<li>
-						<a th:if="${roles.contains(2L)}" th:href="@{/administrador}" class="text-2xl py-2 px-3 md:p-0">Administrador</a>
+						<a th:if="${roles.contains(2L)}" th:href="@{/administrador}" class="text-2xl py-2 px-3 md:p-0" th:text="#{administradores}">Administrador</a>
 					</li>
 				</ul>
 			</div>
@@ -90,9 +90,9 @@
 		<div class="basis-1/2 flex flex-col">
 			<div class="mr-8 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-4">
 				<a th:href="@{/universidades}">
-					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Universidades</h5>
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="#{universidadess}">Universidades</h5>
 				</a>
-				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Conoce todas las universidades.</p>
+				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{textoUniversidadess}">Conoce todas las universidades.</p>
 				<a th:href="@{/universidades}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 					Conocer mas
 					<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -102,9 +102,9 @@
 			</div>
 			<div class="mr-8 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-4">
 				<a th:href="@{/carreras/areas}">
-					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Areas de Estudio</h5>
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="#{areasEstudio}">Areas de Estudio</h5>
 				</a>
-				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Conoce todas las areas en las que puedes estudiar</p>
+				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{textoAreas}">Conoce todas las areas en las que puedes estudiar</p>
 				<a th:href="@{/carreras/areas}"class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 					Conocer mas
 					<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -115,10 +115,10 @@
 
 			<div class="mr-8 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-4">
 				<a href="#">
-					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Carreras</h5>
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="#{carrerass}">Carreras</h5>
 				</a>
-				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Conoce todas las carreras en las que puedes estudiar</p>
-				<a class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{textoCarreras}">Conoce todas las carreras en las que puedes estudiar</p>
+				<a class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" th:text="#{conocerMas}">
 					Conocer mas
 					<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
 						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -129,10 +129,10 @@
 		<div class="basis-1/2 flex flex-col">
 			
 			<div class="mt-4 w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-				<h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+				<h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white" th:text="#{carrerasPopu}">
 					Carreras Populares
 				</h5>
-				<p class="text-sm font-normal text-gray-500 dark:text-gray-400">Conoce las carreras mas populares.</p>
+				<p class="text-sm font-normal text-gray-500 dark:text-gray-400" th:text="#{textoCarrerasPopu}">Conoce las carreras mas populares</p>
 				<ul class="my-4 space-y-3">
 					<li th:each="carrera : ${carreras}">
 						<a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera})}"
@@ -146,7 +146,7 @@
 				</ul>
 				<div>
 					<a href="#"
-						class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
+						class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400" th:text="#{preguntaCarreras}">
 						<svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
 							viewBox="0 0 20 20">
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

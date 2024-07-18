@@ -27,21 +27,21 @@
                 <div class="action-buttons-navbar">
                     <div class="button-container-navbar">
                             <i class="fi fi-rr-interrogation navbar-icon"></i>
-                            <a th:href="@{/acercade}" id="button-text-navbar">Acerca de</a>
+                            <a th:href="@{/acercade}" id="button-text-navbar" th:text="#{acercaDe}">Acerca de</a>
                     </div>
 
                     <hr class="hr-navbar">
 					
                     <div class="button-container-navbar">
                         <i class="fi fi-rr-user-headset navbar-icon"></i>
-                        <a th:href="@{/contactanos}" id="button-text-navbar">Contáctanos</a>
+                        <a th:href="@{/contactanos}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
                     </div>
 
 				<div class="vertical-line" id="color-blue"></div>
 				
 				<div class="button-container-navbar">
 					<i class="fi fi-rr-house-chimney navbar-icon"></i>
-				    <a th:href="@{/inicio}" id="button-text-navbar">Regresar al inicio</a>
+				    <a th:href="@{/inicio}" id="button-text-navbar" th:text="#{regresoInicio}">Regresar al inicio</a>
 				</div>
 				
 			</div>
@@ -57,10 +57,10 @@
 
 			<div id="register-form">
 				<div th:if=${param.exito}>
-					<div class="alert alert-info">Se ha registrado exitosamente. De click en inicio de sesion</div>
+					<div class="alert alert-info" th:text="#{cuentaCreada}">Se ha registrado exitosamente. De click en inicio de sesion</div>
 				</div>
 				<div th:if=${param.error}>
-					<div class="alert alert-info">El correo que intenta registrar ya esta en uso</div>
+					<div class="alert alert-info" th:text="#{correoEnUso}">El correo que intenta registrar ya esta en uso</div>
 				</div>
 
 				<div>
@@ -70,7 +70,7 @@
 				<form th:action="@{/registro}"  method="post" th:object="${usuario}">
 					<input type="hidden" th:field="*{lang}" />
 					<div class="input-group">
-						<input id="nombre" for="nombre" type="text" class="input" placeholder="Nombre y Apellido"
+						<input id="nombre" for="nombre" type="text" class="input" th:placeholder="#{nombreApellido}"
 							name="nombre" required pattern="\S+\s+\S+.*"
 							title="Por favor, ingrese al menos un nombre y un apellido" autofocus th:field="*{nombre}">
 						<div>
@@ -79,7 +79,7 @@
 					</div>
 					<hr class="transparent">
 					<div class="input-group">
-						<input id="email" type="email" class="input" placeholder="Correo electrónico"
+						<input id="email" type="email" class="input" th:placeholder="#{nuevoCorreo}"
 							th:field="*{email}" required autofocus="autofocus">
 						<div>
 							<i id="register-input-icon" class="fi-rr-envelope"></i>
@@ -87,7 +87,7 @@
 					</div>
 					<hr class="transparent">
 					<div class="input-group">
-						<input type="password" id="password" class="input" placeholder="Crea una contraseña"
+						<input type="password" id="password" class="input" th:placeholder="#{creaContra}"
 							th:field="*{password}" required autofocus="autofocus">
 						<div>
 							<i id="register-input-icon" class="fi-rr-key"></i>
@@ -95,7 +95,7 @@
 					</div>
 					<hr class="transparent">
 					<div class="input-group">
-						<input type="password" id="password" class="input" placeholder="Confirma tu contraseña" required
+						<input type="password" id="password" class="input" th:placeholder="#{confirmaContra}" required
 							autofocus="autofocus">
 						<div>
 							<i id="register-input-icon" class="fi-rr-lock"></i>
@@ -103,13 +103,13 @@
 					</div>
 					<hr class="transparent">
 					<button type="submit" class="btn btn-success">
-						<p class="btn-txt">Registrarse</p>
+						<p class="btn-txt" th:text="#{registrate}">Registrarse</p>
 					</button>
 					<hr class="transparent">
 
 					<div class="account-message-login">
-						<p id="account-message-login">Si estas registrado
-							<a th:href="${#strings.concat('/login', (lang != null and lang != '' ? '?lang=' + lang : ''))}"id="account-message-login">inicia sesión aqui</a>
+						<p id="account-message-login"><span th:text="#{tengoCuenta}">Si estas registrado</span>
+							<a th:href="${#strings.concat('/login', (lang != null and lang != '' ? '?lang=' + lang : ''))}"id="account-message-login" th:text="#{inicioSesion}">inicia sesión aqui</a>
 						</p>
 					</div>
 
