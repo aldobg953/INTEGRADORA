@@ -42,11 +42,11 @@
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a th:href="@{/configuracion/perfil}"
+                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
                         </li>
                         <li>
-                            <a th:href="@{/configuracion}"
+                            <a th:href="@{/configuracion?lang=}+${usuario.lang}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
                         </li>
                         <li>
@@ -67,13 +67,13 @@
                             <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
                         </li>
                         <li>
                             <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
@@ -100,15 +100,15 @@
         </form>
         <div id="areas" class="flex md:mx-28 mt-8 flex-wrap">
             <div th:each="area : ${areas}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/carreras/area/{id}(id=${area.id_area})}">
+                <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}">
                     <img class="rounded-t-lg h-64 w-full bg-white" th:src="@{'/img/areas/'+  ${area.id_area} +'.jpg'}" alt="" />
                 </a>
                 <div class="p-5 bortder-2 border-t-indigo-500">
-                    <a th:href="@{/carreras/area/{id}(id=${area.id_area})}">
+                    <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${area.nombre_area}"></h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"th:text="${area.descripcion}"></p>
-                    <a th:href="@{/carreras/area/{id}(id=${area.id_area})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         ver mas
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

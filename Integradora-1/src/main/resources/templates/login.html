@@ -54,21 +54,21 @@
                 <div class="action-buttons-navbar">
                     <div class="button-container-navbar">
                             <i class="fi fi-rr-interrogation navbar-icon"></i>
-                            <a th:href="@{/acercade}" id="button-text-navbar" th:text="#{acercaDe}">About us</a>
+                            <a th:href="${#strings.concat('/acercade', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{acercaDe}">About us</a>
                     </div>
 
                     <hr class="hr-navbar">
 					
                     <div class="button-container-navbar">
                         <i class="fi fi-rr-user-headset navbar-icon"></i>
-                        <a th:href="@{/contactanos}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
+                        <a th:href="${#strings.concat('/contactanos', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
                     </div>
 
 				<div class="vertical-line" id="color-blue"></div>
 				
 				<div class="button-container-navbar">
 					<i class="fi fi-rr-house-chimney navbar-icon"></i>
-				    <a th:href="@{/inicio}" id="button-text-navbar" th:text="#{regresoInicio}">Regresar al inicio</a>
+				    <a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{regresoInicio}">Regresar al inicio</a>
 				</div>
 				
 			</div>

@@ -38,11 +38,11 @@
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a th:href="@{/configuracion/perfil}"
+                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
                         </li>
                         <li>
-                            <a th:href="@{/configuracion}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
                         </li>
                         <li>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
@@ -60,13 +60,13 @@
                             <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
                         </li>
                         <li>
                             <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
@@ -82,15 +82,15 @@
         
         <div class="flex md:mx-28 mt-8 flex-wrap">
             <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/crearcarrera}">
+                <a th:href="@{/administrador/crearcarrera?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg h-64 w-full" src="/img/administrador/crearcarrera.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/crearcarrera}">
+                    <a th:href="@{/administrador/crearcarrera?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Crear Nueva Carrera</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Administra y expande la oferta educativa de tu institución. Agrega nuevas carreras universitarias de manera rápida y sencilla. ¡Asegúrate de que tu universidad ofrezca las mejores opciones académicas para los futuros estudiantes!.</p>
-                    <a th:href="@{/administrador/crearcarrera}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/crearcarrera?lang=}+${usuario.lang}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Crear
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -100,15 +100,15 @@
             </div>
             
             <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/modificarCarrera}">
+                <a th:href="@{/administrador/modificarCarrera?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/modificarcarrera.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/modificarCarrera}">
+                    <a th:href="@{/administrador/modificarCarrera?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar/Eliminar Carrera</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Esta funcionalidad te permite actualizar la información existente de una carrera o eliminarla del sistema. Puedes editar detalles como el nombre de la carrera, la duración, el plan de estudios, y otros aspectos importantes.</p>
-                    <a th:href="@{/administrador/modificarCarrera}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/modificarCarrera?lang=}+${usuario.lang}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Modificar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -118,15 +118,15 @@
             </div>
 
             <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/crearespecialidad}">
+                <a th:href="@{/administrador/crearespecialidad?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/crearespecialidad.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/crearespecialidad}">
+                    <a th:href="@{/administrador/crearespecialidad?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Crear Especialidad</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Añade una nueva especialidad a una carrera universitaria. Define las diferentes ramas de estudio para ofrecer a los estudiantes más opciones de formación especializada.</p>
-                    <a th:href="@{/administrador/crearespecialidad}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/crearespecialidad?lang=}+${usuario.lang}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Crear
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -136,15 +136,15 @@
             </div>
 
             <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/modificarespecialidad}">
+                <a th:href="@{/administrador/modificarespecialidad?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/modificarespecialidad.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/modificarespecialidad}">
+                    <a th:href="@{/administrador/modificarespecialidad?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar/Eliminar Especialidad</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Esta funcionalidad te permite actualizar la información existente de una especialidad o eliminarla del sistema. Puedes editar detalles como el nombre de la especialidad, la duración, los requisitos, y otros aspectos importantes.</p>
-                    <a th:href="@{/administrador/modificarespecialidad}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/modificarespecialidad?lang=}+${usuario.lang}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Modificar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -154,15 +154,15 @@
             </div>
 
             <div th:if="${roles.contains(3L)}" class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/crearuniversidad}">
+                <a th:href="@{/administrador/crearuniversidad?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/agregaruniversidad.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/crearuniversidad}">
+                    <a th:href="@{/administrador/crearuniversidad?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Agregar Universidad</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Permite a los administradores del sitio añadir nuevas universidades, brindando a los usuarios información sobre más opciones educativas.</p>
-                    <a th:href="@{/administrador/crearuniversidad}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/crearuniversidad?lang=}+${usuario.lang}" class="mt-12 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Agregar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -172,15 +172,15 @@
             </div>
 
             <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/modificaruniversidad}">
+                <a th:href="@{/administrador/modificaruniversidad?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/modificaruniversidad.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/modificaruniversidad}">
+                    <a th:href="@{/administrador/modificaruniversidad?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Modificar/Eliminar Universidad</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Esta funcionalidad te permite actualizar la información existente de una universidad o eliminarla del sistema. Puedes editar detalles como el nombre de la universidad, su ubicación, la oferta académica, y otros aspectos relevantes.</p>
-                    <a th:href="@{/administrador/modificaruniversidad}" class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/modificaruniversidad?lang=}+${usuario.lang}" class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Modificar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -190,15 +190,15 @@
             </div>
 
             <div th:if="${roles.contains(3L)}" class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/usuarios}">
+                <a th:href="@{/administrador/usuarios?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/administrarusuarios.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/usuarios}">
+                    <a th:href="@{/administrador/usuarios?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Administrar usuarios</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Permite a los administradores del sitio gestionar los accesos y permisos de los usuarios registrados, asegurando un control efectivo sobre quién puede acceder y qué acciones pueden realizar en la plataforma.</p>
-                    <a th:href="@{/administrador/usuarios}" class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/usuarios?lang=}+${usuario.lang}" class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Administrar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -208,15 +208,15 @@
             </div>
 
             <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/usuarios}">
+                <a th:href="@{/administrador/usuarios?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/traducciones.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/usuarios}">
+                    <a th:href="@{/administrador/usuarios?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Traducciones</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">En esta sección, los administradores pueden agregar y gestionar las descripciones de las carreras en diferentes idiomas. Esto permite que el contenido de las carreras sea accesible para usuarios que hablan distintos idiomas.</p>
-                    <a th:href="@{/administrador/traduccion}" class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a th:href="@{/administrador/traduccion?lang=}+${usuario.lang}"class="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Administrar
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

@@ -32,6 +32,7 @@ public class RegistroUsuarioControlador {
 	public String mostrarFormularioDeRegistro(@RequestParam(value = "lang", required = false) String lang, Model model) {
 		UsuarioRegistroDTO usuarioDTO = new UsuarioRegistroDTO();
 		usuarioDTO.setLang(lang);
+		model.addAttribute("lang", lang);
 		model.addAttribute("usuario", usuarioDTO);
 		return "registro";
 	}

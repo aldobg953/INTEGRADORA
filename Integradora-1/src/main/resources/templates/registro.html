@@ -1,125 +1,152 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+	<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/navbar.css">
-	<link rel="stylesheet" href="css/registro.css">
-	<link rel="stylesheet" href="css/global_font.css">
-	<link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
-	<link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-	<title>PathFInder | Registro</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/navbar.css">
+		<link rel="stylesheet" href="css/registro.css">
+		<link rel="stylesheet" href="css/global_font.css">
+		<link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
+		<link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
+		<title>PathFInder | Registro</title>
+		<script>
+			function changeLang(selectElement) {
+				var selectedLang = selectElement.value;
+				var currentUrl = window.location.href;
+				
+				// Reemplazar o añadir el parámetro lang en la URL actual
+				var updatedUrl;
+				if (currentUrl.includes('?')) {
+					updatedUrl = currentUrl.replace(/(\?lang=)[^\&]+/, '$1' + selectedLang);
+				} else {
+					updatedUrl = currentUrl + '?lang=' + selectedLang;
+				}
+				
+				// Redirigir a la nueva URL
+				window.location.href = updatedUrl;
+			}
+		</script>
+	</head>
 
-</head>
-
-<body class="malla">
-	<center>
-		<nav>
-			<div class="logo-navbar">
-                
-				<img id="logo-navbar" th:src="@{/css/LogoLogoPathFinderHorizontal.svg}" alt=""
-				style="max-width:20%;height:auto;">
-
-				<div class="vertical-line"></div>
-			</div>
-
-                <div class="action-buttons-navbar">
-                    <div class="button-container-navbar">
-                            <i class="fi fi-rr-interrogation navbar-icon"></i>
-                            <a th:href="@{/acercade}" id="button-text-navbar" th:text="#{acercaDe}">Acerca de</a>
-                    </div>
-
-                    <hr class="hr-navbar">
+	<body class="malla">
+		<center>
+			<nav>
+				<div class="logo-navbar">
 					
-                    <div class="button-container-navbar">
-                        <i class="fi fi-rr-user-headset navbar-icon"></i>
-                        <a th:href="@{/contactanos}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
-                    </div>
+					<img id="logo-navbar" th:src="@{/css/LogoLogoPathFinderHorizontal.svg}" alt=""
+					style="max-width:20%;height:auto;">
 
-				<div class="vertical-line" id="color-blue"></div>
-				
-				<div class="button-container-navbar">
-					<i class="fi fi-rr-house-chimney navbar-icon"></i>
-				    <a th:href="@{/inicio}" id="button-text-navbar" th:text="#{regresoInicio}">Regresar al inicio</a>
+					<div class="vertical-line"></div>
+
+					<div class="button-container-navbar">
+						<i class="fi fi-rr-earth-americas navbar-icon"></i>
+						<select name="lenguajes" id="lang" onchange="changeLang(this)">
+							<option th:text="#{idioma}">Language</option>
+							<option value="es">Español</option>
+							<option value="en">English</option>
+							<option value="fr">Français</option>
+						</select>
+					</div>
+
+				</div>
+
+					<div class="action-buttons-navbar">
+						<div class="button-container-navbar">
+								<i class="fi fi-rr-interrogation navbar-icon"></i>
+								<a th:href="${#strings.concat('/acercade', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{acercaDe}">Acerca de</a>
+						</div>
+
+						<hr class="hr-navbar">
+						
+						<div class="button-container-navbar">
+							<i class="fi fi-rr-user-headset navbar-icon"></i>
+							<a th:href="${#strings.concat('/contactanos', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
+						</div>
+
+					<div class="vertical-line" id="color-blue"></div>
+					
+					<div class="button-container-navbar">
+						<i class="fi fi-rr-house-chimney navbar-icon"></i>
+						<a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{regresoInicio}">Regresar al inicio</a>
+					</div>
+					
 				</div>
 				
-			</div>
-			
-		</nav>
+			</nav>
 
-		<div class="tarjeta" id="register">
-			<div id="logo-image">
-				<img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-					style="max-width:40%;height:auto;">
-				<img id="image-login" src="css/register_image.svg" alt="" style="max-width:75%;height:auto;">
-			</div>
-
-			<div id="register-form">
-				<div th:if=${param.exito}>
-					<div class="alert alert-info" th:text="#{cuentaCreada}">Se ha registrado exitosamente. De click en inicio de sesion</div>
-				</div>
-				<div th:if=${param.error}>
-					<div class="alert alert-info" th:text="#{correoEnUso}">El correo que intenta registrar ya esta en uso</div>
+			<div class="tarjeta" id="register">
+				<div id="logo-image">
+					<img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+						style="max-width:40%;height:auto;">
+					<img id="image-login" src="css/register_image.svg" alt="" style="max-width:75%;height:auto;">
 				</div>
 
-				<div>
-					<p id="register-title"  th:text="#{registrate}">Regístrate</p>
+				<div id="register-form">
+					<div th:if=${param.exito}>
+						<div class="alert alert-info" th:text="#{cuentaCreada}">Se ha registrado exitosamente. De click en inicio de sesion</div>
+					</div>
+					<div th:if=${param.error}>
+						<div class="alert alert-info" th:text="#{correoEnUso}">El correo que intenta registrar ya esta en uso</div>
+					</div>
+
+					<div>
+						<p id="register-title"  th:text="#{registrate}">Regístrate</p>
+					</div>
+					<hr>
+					<form th:action="@{/registro}"  method="post" th:object="${usuario}">
+						<input type="hidden" th:field="*{lang}" />
+						<div class="input-group">
+							<input id="nombre" for="nombre" type="text" class="input" th:placeholder="#{nombreApellido}"
+								name="nombre" required pattern="\S+\s+\S+.*"
+								title="Por favor, ingrese al menos un nombre y un apellido" autofocus th:field="*{nombre}">
+							<div>
+								<i id="register-input-icon" class="fi-rr-user"></i>
+							</div>
+						</div>
+						<hr class="transparent">
+						<div class="input-group">
+							<input id="email" type="email" class="input" th:placeholder="#{nuevoCorreo}"
+								th:field="*{email}" required autofocus="autofocus">
+							<div>
+								<i id="register-input-icon" class="fi-rr-envelope"></i>
+							</div>
+						</div>
+						<hr class="transparent">
+						<div class="input-group">
+							<input type="password" id="password" class="input" th:placeholder="#{creaContra}"
+								th:field="*{password}" required autofocus="autofocus">
+							<div>
+								<i id="register-input-icon" class="fi-rr-key"></i>
+							</div>
+						</div>
+						<hr class="transparent">
+						<div class="input-group">
+							<input type="password" id="password" class="input" th:placeholder="#{confirmaContra}" required
+								autofocus="autofocus">
+							<div>
+								<i id="register-input-icon" class="fi-rr-lock"></i>
+							</div>
+						</div>
+						<hr class="transparent">
+						<button type="submit" class="btn btn-success">
+							<p class="btn-txt" th:text="#{registrate}">Registrarse</p>
+						</button>
+						<hr class="transparent">
+
+						<div class="account-message-login">
+							<p id="account-message-login"><span th:text="#{tengoCuenta}">Si estas registrado</span>
+								<a th:href="${#strings.concat('/login', (lang != null and lang != '' ? '?lang=' + lang : ''))}"id="account-message-login" th:text="#{inicioSesion}">inicia sesión aqui</a>
+							</p>
+						</div>
+
+					</form>
+
 				</div>
-				<hr>
-				<form th:action="@{/registro}"  method="post" th:object="${usuario}">
-					<input type="hidden" th:field="*{lang}" />
-					<div class="input-group">
-						<input id="nombre" for="nombre" type="text" class="input" th:placeholder="#{nombreApellido}"
-							name="nombre" required pattern="\S+\s+\S+.*"
-							title="Por favor, ingrese al menos un nombre y un apellido" autofocus th:field="*{nombre}">
-						<div>
-							<i id="register-input-icon" class="fi-rr-user"></i>
-						</div>
-					</div>
-					<hr class="transparent">
-					<div class="input-group">
-						<input id="email" type="email" class="input" th:placeholder="#{nuevoCorreo}"
-							th:field="*{email}" required autofocus="autofocus">
-						<div>
-							<i id="register-input-icon" class="fi-rr-envelope"></i>
-						</div>
-					</div>
-					<hr class="transparent">
-					<div class="input-group">
-						<input type="password" id="password" class="input" th:placeholder="#{creaContra}"
-							th:field="*{password}" required autofocus="autofocus">
-						<div>
-							<i id="register-input-icon" class="fi-rr-key"></i>
-						</div>
-					</div>
-					<hr class="transparent">
-					<div class="input-group">
-						<input type="password" id="password" class="input" th:placeholder="#{confirmaContra}" required
-							autofocus="autofocus">
-						<div>
-							<i id="register-input-icon" class="fi-rr-lock"></i>
-						</div>
-					</div>
-					<hr class="transparent">
-					<button type="submit" class="btn btn-success">
-						<p class="btn-txt" th:text="#{registrate}">Registrarse</p>
-					</button>
-					<hr class="transparent">
-
-					<div class="account-message-login">
-						<p id="account-message-login"><span th:text="#{tengoCuenta}">Si estas registrado</span>
-							<a th:href="${#strings.concat('/login', (lang != null and lang != '' ? '?lang=' + lang : ''))}"id="account-message-login" th:text="#{inicioSesion}">inicia sesión aqui</a>
-						</p>
-					</div>
-
-				</form>
 
 			</div>
+		</center>
 
-		</div>
-	</center>
+	</body>
 
-</body>
-
-</html>
+	</html>

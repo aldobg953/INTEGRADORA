@@ -32,10 +32,10 @@
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a th:href="@{/configuracion/perfil}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
                         </li>
                         <li>
-                            <a th:href="@{/configuracion}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
                         </li>
                         <li>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
@@ -52,13 +52,13 @@
                     <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
                     </li>
                     <li>
-                    <a th:href="@{/universidades}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                    <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
                     </li>
                     <li>
-                    <a href="#" class="text-2xl py-2 px-3 text-blue-700 md:p-0">Carreras</a>
+                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0">Carreras</a>
                     </li>
                     <li>
-                        <a th:href="@{/carreras/areas}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                        <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
                     </li>
                     <li>
                         <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
@@ -89,9 +89,9 @@
                 <div th:text="${especialidad.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
                 <div th:text="${especialidad.carrera.cantidad_periodos} + ' ' +${especialidad.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
                 <div class="text-xl md:text-lg font-serif font-bold">Area</div>
-                <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${especialidad.carrera.area.id_area})}"></a>
+                <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${especialidad.carrera.area.id_area}, lang=${usuario.lang})}"></a>
                 <div class="text-xl md:text-lg font-serif font-bold">Universidad</div>
-                <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${especialidad.carrera.universidad.id_universidad})}"></a>
+                <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${especialidad.carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
             </div>
         </div>
     
