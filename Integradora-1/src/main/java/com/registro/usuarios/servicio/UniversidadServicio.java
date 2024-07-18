@@ -128,16 +128,32 @@ public class UniversidadServicio {
         Files.delete(path);
     }
 
-    public UniversidadTraduccion getUniTraduccion(Long id_universidad, String lang){
-        List<UniversidadTraduccion> universidadTraduccion =  universidadTradRepositorio.findByUniversidadIdAndLang(id_universidad, lang);
-        UniversidadTraduccion uniTRaduccion;
-        if(universidadTraduccion.isEmpty()){
-            uniTRaduccion = new UniversidadTraduccion();
-            uniTRaduccion.setUniversidad(universidadRepositorio.getById(id_universidad));
-        }else{
-            uniTRaduccion = universidadTraduccion.get(0);
+    public UniversidadDTO getUniTraduccion(Long id_universidad, String lang){
+        List<UniversidadTraduccion> universidadTraduccionList =  universidadTradRepositorio.findByUniversidadIdAndLang(id_universidad, lang);
+        UniversidadDTO uniDAOTaduccion = new UniversidadDTO();
+        uniDAOTaduccion.setId_universidad(id_universidad);
+        uniDAOTaduccion.setLang(lang);
+        if(!universidadTraduccionList.isEmpty()){
+            UniversidadTraduccion universidadTraduccion = universidadTraduccionList.get(0);
+            uniDAOTaduccion.setId_u_traduccion(universidadTraduccion.getId_u_traduccion());
+            uniDAOTaduccion.setCaracteristicas(universidadTraduccion.getCaracteristicas());
+            uniDAOTaduccion.setInformacion(universidadTraduccion.getInformacion());
+            uniDAOTaduccion.setTipo_institucion(universidadTraduccion.getTipo_institucion());
         }
-        return uniTRaduccion;
+        return uniDAOTaduccion;
+    }
+
+    public boolean guardarTraduccionUni(UniversidadDTO universidadDTO){
+        UniversidadTraduccion universidadTraduccion = new UniversidadTraduccion(universidadDTO.getId_u_traduccion(), 
+        universidadRepositorio.getById(universidadDTO.getId_universidad()), universidadDTO.getLang(),
+        universidadDTO.getCaracteristicas(), universidadDTO.getInformacion(), universidadDTO.getTipo_institucion());
+        
+        try {
+            universidadTradRepositorio.save(universidadTraduccion);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
     
 }

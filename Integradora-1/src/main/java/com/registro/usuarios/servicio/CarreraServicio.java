@@ -2,7 +2,6 @@ package com.registro.usuarios.servicio;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import com.registro.usuarios.repositorio.HorarioRepositorio;
 import com.registro.usuarios.repositorio.ModalidadRepositorio;
 import com.registro.usuarios.repositorio.PeriodoEscolarRepositorio;
 import com.registro.usuarios.repositorio.UniversidadRepositorio;
+import com.registro.usuarios.repositorio.traducciones.CarreraTradRepositorio;
 
 @Service
 public class CarreraServicio {
@@ -46,6 +46,9 @@ public class CarreraServicio {
     @Autowired
     private HorarioRepositorio horarioRepositorio;
 
+    @Autowired
+    private CarreraTradRepositorio carreraTradRepositorio;
+
     @Value("${file.upload-dir}")
     private String uploadDir;
 
@@ -58,8 +61,10 @@ public class CarreraServicio {
         
     }
 
-    public List<Carrera> getCarrerasByArea(Long id){
-        return carreraRepositorio.findByArea(id);
+    public List<Carrera> getCarrerasByArea(Long id, String lang){
+        List<Carrera> carreras = carreraRepositorio.findByArea(id);
+        return carreras.stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
     }
 
     public List<Carrera> getCarrerasByUniversidad(Long id){
@@ -76,13 +81,17 @@ public class CarreraServicio {
             .collect(Collectors.toList());
     }
 
-    private Carrera aplicarTraduccion(Carrera carrera, String lang) {
+    public Carrera aplicarTraduccion(Carrera carrera, String lang) {
         CarreraTraduccion traduccion = carrera.getTraducciones().stream()
             .filter(t -> t.getLang().equals(lang))
             .findFirst()
             .orElse(null);
 
         if (traduccion != null) {
+            carrera.getArea().cambiarIdioma(lang);
+            carrera.getHorario().cambiarIdioma(lang);
+            carrera.getModalidad().cambiarIdioma(lang);
+            carrera.getPeriodoEscolar().cambiarIdioma(lang);
             carrera.setNombre(traduccion.getNombre());
             carrera.setInformacion(traduccion.getInformacion());
             carrera.setHorario_especifico(traduccion.getHorario_especifico());
@@ -116,14 +125,16 @@ public class CarreraServicio {
         return newCarrera;
     }
 
-    public List<Carrera> getAllCarreras(){
-        return carreraRepositorio.findAll();
+    public List<Carrera> getAllCarreras(String lang){
+        List<Carrera> carreras = carreraRepositorio.findAll();
+        return carreras.stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
     }
 
-    public List<Carrera> getAllCarreras(Collection<Rol> roles,Long id_universidad){
+    public List<Carrera> getAllCarreras(Collection<Rol> roles,Long id_universidad, String lang){
         boolean esSuperUsuario = roles.stream().anyMatch(rol -> rol.getId_rol() == 3);
         if(esSuperUsuario){
-            return getAllCarreras();
+            return getAllCarreras(lang);
         }else{
             return getCarrerasByUniversidad(id_universidad);
         }
@@ -160,20 +171,24 @@ public class CarreraServicio {
     }
 
     //obtiene el id y nombre de todas las carreras
-    public List<CarreraDTO> getAllCarreraDTO(Collection<Rol> roles, Long id_universidad) {
+    public List<CarreraDTO> getAllCarreraDTO(Collection<Rol> roles, Long id_universidad, String lang) {
         boolean esSuperUsuario = roles.stream().anyMatch(rol -> rol.getId_rol() == 3);
     
-        return esSuperUsuario ? getAllCarrerasDTO() : getCarrerasDTOByUniversidad(id_universidad);
+        return esSuperUsuario ? getAllCarrerasDTO(lang) : getCarrerasDTOByUniversidad(id_universidad, lang);
     }
     
-    private List<CarreraDTO> getAllCarrerasDTO() {
-        return carreraRepositorio.findAll().stream()
+    private List<CarreraDTO> getAllCarrerasDTO(String lang) {
+        List<Carrera> carreras = carreraRepositorio.findAll().stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
+        return carreras.stream()
                 .map(this::convertirACarreraDTO)
                 .collect(Collectors.toList());
     }
     
-    private List<CarreraDTO> getCarrerasDTOByUniversidad(Long id_universidad) {
-        return carreraRepositorio.findAll().stream()
+    private List<CarreraDTO> getCarrerasDTOByUniversidad(Long id_universidad, String lang) {
+        List<Carrera> carreras = carreraRepositorio.findAll().stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
+        return carreras.stream()
                 .filter(original -> original.getUniversidad().getId_universidad().equals(id_universidad))
                 .map(this::convertirACarreraDTO)
                 .collect(Collectors.toList());
@@ -186,4 +201,36 @@ public class CarreraServicio {
         return carreraDTO;
     }
     
+    public CarreraDTO getCarreraTraduccion(Long id_carrera, String lang){
+        List<CarreraTraduccion> carreraTraduccionList = carreraTradRepositorio.findByUniversidadIdAndLang(id_carrera,lang);
+        CarreraDTO carreraDTO = new CarreraDTO();
+        carreraDTO.setId_carrera(id_carrera);
+        carreraDTO.setLang(lang);
+        if(!carreraTraduccionList.isEmpty()){
+            CarreraTraduccion carreraTraduccion = carreraTraduccionList.get(0);
+            carreraDTO.setId_c_traduccion(carreraTraduccion.getId_c_traduccion());
+            carreraDTO.setNombre(carreraTraduccion.getNombre());
+            carreraDTO.setHorario_especifico(carreraTraduccion.getHorario_especifico());
+            carreraDTO.setInformacion(carreraTraduccion.getInformacion());
+            carreraDTO.setPorque_estudiar(carreraTraduccion.getPorque_estudiar());
+            carreraDTO.setDonde_trabajar(carreraTraduccion.getDonde_trabajar());
+            carreraDTO.setComo_desemp(carreraTraduccion.getComo_desemp());
+            carreraDTO.setDesc_breve(carreraTraduccion.getDesc_breve());
+        }
+        return carreraDTO;
+    }
+
+    public boolean guardarTraduccionCarrera(CarreraDTO carreraDTO){
+        CarreraTraduccion carreraTraduccion = new CarreraTraduccion(carreraDTO.getId_c_traduccion()
+        ,carreraRepositorio.getById(carreraDTO.getId_carrera()), carreraDTO.getLang(), carreraDTO.getNombre(), 
+        carreraDTO.getHorario_especifico(), carreraDTO.getInformacion(), carreraDTO.getPorque_estudiar(), 
+        carreraDTO.getDonde_trabajar(), carreraDTO.getComo_desemp(), carreraDTO.getDesc_breve());
+
+        try {
+            carreraTradRepositorio.save(carreraTraduccion);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }

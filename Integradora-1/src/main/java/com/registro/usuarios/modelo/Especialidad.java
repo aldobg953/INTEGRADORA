@@ -36,7 +36,8 @@ public class Especialidad {
     private float costo;
     private String horario_especifico;
     private boolean bilingue; 
-
+    private Long id_e_traduccion;
+    private String lang;
     @ManyToOne
     @JoinColumn(name = "fk_carrera")
     private Carrera carrera;
@@ -55,5 +56,41 @@ public class Especialidad {
 
     @OneToMany(mappedBy = "especialidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EspecialidadTraduccion> traducciones;
+
+    public Especialidad() {
+    }
+
+    public Especialidad(Long id_especialidad, String nombre, String descripcion_breve, String informacion,
+            String roadmap, float costo, String horario_especifico, boolean bilingue,
+            Carrera carrera, Modalidad modalidad, PeriodoEscolar periodoEscolar, Horario horario) {
+        this.id_especialidad = id_especialidad;
+        this.nombre = nombre;
+        this.descripcion_breve = descripcion_breve;
+        this.informacion = informacion;
+        this.roadmap = roadmap;
+        this.costo = costo;
+        this.horario_especifico = horario_especifico;
+        this.bilingue = bilingue;
+        this.carrera = carrera;
+        this.modalidad = modalidad;
+        this.periodoEscolar = periodoEscolar;
+        this.horario = horario;
+    }
+
+    public Especialidad(String nombre, String descripcion_breve, String informacion, String roadmap, float costo,
+            String horario_especifico, boolean bilingue, Carrera carrera,
+            Modalidad modalidad, PeriodoEscolar periodoEscolar, Horario horario) {
+        this.nombre = nombre;
+        this.descripcion_breve = descripcion_breve;
+        this.informacion = informacion;
+        this.roadmap = roadmap;
+        this.costo = costo;
+        this.horario_especifico = horario_especifico;
+        this.bilingue = bilingue;
+        this.carrera = carrera;
+        this.modalidad = modalidad;
+        this.periodoEscolar = periodoEscolar;
+        this.horario = horario;
+    }
 
 }

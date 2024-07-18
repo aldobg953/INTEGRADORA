@@ -35,19 +35,20 @@ public class ConfiguracionControlador {
         usuario.setNombre(newNombre);
         usuario.setApellidoP(newApellidoP);
         usuarioServicio.actualizarUsuario(usuario);
-        return "redirect:/configuracion/perfil?exito";
+        return "redirect:/configuracion/perfil?exito&lang="+usuario.getLang();
     }
 
     @PostMapping("/actualizarEmail")
     public String actualizarCorreo(RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserDetails userDetails,
                                                 @RequestParam("newCorreo") String newCorreo,
                                                 @RequestParam("password") String password){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         String msj = usuarioServicio.actualizarEmail(userDetails.getUsername(), newCorreo, password);
         if(msj.equals("exito")){
             return "redirect:/logout";
         }else{
             redirectAttributes.addFlashAttribute("msj",msj);
-            return "redirect:/configuracion/perfil";
+            return "redirect:/configuracion/perfil?lang="+usuario.getLang();
         }
     }
   
@@ -55,11 +56,12 @@ public class ConfiguracionControlador {
     public String actualizarPassword(RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserDetails userDetails,
                                                 @RequestParam("newPass") String newPass,
                                                 @RequestParam("oldPass") String oldPass){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         if(usuarioServicio.actualizarPass(userDetails.getUsername(),oldPass, newPass)){
-            return "redirect:/configuracion/perfil?exito";
+            return "redirect:/configuracion/perfil?exito&lang="+usuario.getLang();
         }else{
             redirectAttributes.addFlashAttribute("msj","La contraseña del usaurio es incorrecta");
-            return "redirect:/configuracion/perfil";
+            return "redirect:/configuracion/perfil?lang="+usuario.getLang();
         } 
     }
 
@@ -73,21 +75,23 @@ public class ConfiguracionControlador {
     @PostMapping("/cambiarDarkMode")
     public String cambiarDarkMode(@RequestParam(name = "miCheckbox", required = false) Boolean checkboxValu, 
                                     @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         if(checkboxValu!=null){
             usuarioServicio.actualizarDarkmode(true, userDetails.getUsername());
         }else{
             usuarioServicio.actualizarDarkmode(false, userDetails.getUsername());
         }
-        return "redirect:/configuracion";
+        return "redirect:/configuracion?lang="+usuario.getLang();
     }
 
     @PostMapping("/cambiaridioma")
     public String cambiarIdioma(@RequestParam("idioma") String idioma, 
                                     @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         if(!idioma.equals("Lenguage")){
             usuarioServicio.actualizarIdioma(idioma, userDetails.getUsername());
         }
-        return "redirect:/configuracion";
+        return "redirect:/configuracion?lang="+usuario.getLang();
     }
     
 }

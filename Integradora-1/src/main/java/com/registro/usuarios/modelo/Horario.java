@@ -17,4 +17,17 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_horario;
     private String nombre_horario;
+    private String nombre_horario_en;
+    private String nombre_horario_fr;
+
+    public void cambiarIdioma(String lang){
+        switch (lang.toLowerCase()) {
+            case "en":
+                this.nombre_horario = this.nombre_horario_en;
+                break;
+            case "fr":
+                this.nombre_horario = this.nombre_horario_fr;
+                break;
+        }
+    }
 }

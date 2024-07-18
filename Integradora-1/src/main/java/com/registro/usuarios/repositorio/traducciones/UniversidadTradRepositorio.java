@@ -12,5 +12,5 @@ import com.registro.usuarios.modelo.traducciones.UniversidadTraduccion;
 @Repository
 public interface UniversidadTradRepositorio extends JpaRepository<UniversidadTraduccion,Long>{
     @Query("SELECT ut FROM UniversidadTraduccion ut WHERE ut.universidad.id = :idUniversidad AND ut.lang = :lang")
-List<UniversidadTraduccion> findByUniversidadIdAndLang(@Param("idUniversidad") Long idUniversidad, @Param("lang") String lang);
+    List<UniversidadTraduccion> findByUniversidadIdAndLang(@Param("idUniversidad") Long idUniversidad, @Param("lang") String lang);
 }
