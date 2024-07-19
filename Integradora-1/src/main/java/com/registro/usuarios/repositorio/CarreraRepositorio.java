@@ -2,6 +2,7 @@ package com.registro.usuarios.repositorio;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,7 @@ public interface CarreraRepositorio extends JpaRepository<Carrera,Long>{
     
     @Query(value = "SELECT * FROM carreras WHERE fk_universidad = :universidad", nativeQuery = true)
     public List<Carrera> findByUniversidad(long universidad);
+
+    @Query("SELECT c FROM Carrera c ORDER BY c.contador DESC")
+    List<Carrera> findTop10ByOrderByContadorDesc(Pageable pageable);
 }

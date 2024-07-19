@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
@@ -233,4 +235,17 @@ public class CarreraServicio {
         }
         return true;
     }
+
+    @Transactional
+    public void incrementarContador(Long id) {
+        Carrera carrera = carreraRepositorio.findById(id).orElseThrow(() -> new RuntimeException("Carrera no encontrada"));
+        carrera.setContador(carrera.getContador() + 1);
+        carreraRepositorio.save(carrera);
+    }
+
+    public List<Carrera> getTop10CarrerasByContador(String lang) {
+    PageRequest pageRequest = PageRequest.of(0, 10);
+    return carreraRepositorio.findTop10ByOrderByContadorDesc(pageRequest).stream().map(carrera -> aplicarTraduccion(carrera, lang))
+    .collect(Collectors.toList());
+}
 }

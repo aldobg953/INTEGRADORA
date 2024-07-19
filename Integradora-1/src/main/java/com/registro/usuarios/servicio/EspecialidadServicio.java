@@ -45,8 +45,15 @@ public class EspecialidadServicio {
         return especialidadRepositorio.findAll();
     }
 
-    public Optional<Especialidad> getEspecialidadById(Long id){
-        return especialidadRepositorio.findById(id);
+    public Especialidad getEspecialidadById(Long id, String lang){
+        if(!lang.equals("es")){
+            Especialidad especialidad = aplicarTraduccion(especialidadRepositorio.findById(id).get(), lang);
+            especialidad.setCarrera(carreraServicio.aplicarTraduccion(especialidad.getCarrera(), lang));
+            return especialidad;
+        }else{
+            return especialidadRepositorio.findById(id).get();
+        }
+       
     }
 
     public Especialidad guardarEspecialidad(Especialidad especialidad){
@@ -118,6 +125,7 @@ public class EspecialidadServicio {
             especialidad.setNombre(traduccion.getNombre());
             especialidad.setInformacion(traduccion.getInformacion());
             especialidad.setDescripcion_breve(traduccion.getDescripcion_breve());
+            especialidad.setHorario_especifico(traduccion.getHorario_especifico());
         }
 
         return especialidad;
@@ -134,6 +142,7 @@ public class EspecialidadServicio {
             especialidadDTO.setNombre(especialidadTraduccion.getNombre());
             especialidadDTO.setDescripcion_breve(especialidadTraduccion.getDescripcion_breve());
             especialidadDTO.setInformacion(especialidadTraduccion.getInformacion());
+            especialidadDTO.setHorario_especifico(especialidadTraduccion.getHorario_especifico());
         }
         return especialidadDTO;
     }
@@ -141,7 +150,7 @@ public class EspecialidadServicio {
     public boolean guardarTraduccionEsp(Especialidad especialidad){
         EspecialidadTraduccion especialidadTraduccion = new EspecialidadTraduccion(especialidad.getId_e_traduccion(),
         especialidad ,especialidad.getLang(),especialidad.getNombre(),
-        especialidad.getDescripcion_breve(),especialidad.getInformacion());
+        especialidad.getDescripcion_breve(),especialidad.getInformacion(), especialidad.getHorario_especifico());
         try {
             especialidadTradRepositorio.save(especialidadTraduccion);
         } catch (Exception e) {
@@ -198,11 +207,13 @@ public class EspecialidadServicio {
     
         if (traduccion != null) {
             // Aplicar traducciones a los campos de Especialidad
+            especialidad.getPeriodoEscolar().cambiarIdioma(lang);
             especialidad.setNombre(traduccion.getNombre());
             especialidad.setDescripcion_breve(traduccion.getDescripcion_breve());
             especialidad.setInformacion(traduccion.getInformacion());
             especialidad.setLang(lang);
             especialidad.setId_e_traduccion(traduccion.getId_e_traduccion());
+            especialidad.setHorario_especifico(traduccion.getHorario_especifico());
         }
     
         return especialidad;

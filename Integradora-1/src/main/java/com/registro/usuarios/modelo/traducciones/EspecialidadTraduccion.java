@@ -28,15 +28,17 @@ public class EspecialidadTraduccion {
     private String descripcion_breve;
     @Column(length = 600)
     private String informacion;
+    private String horario_especifico;
     
     public EspecialidadTraduccion(Long id_e_traduccion, Especialidad especialidad, String lang, String nombre,
-            String descripcion_breve, String informacion) {
+            String descripcion_breve, String informacion, String horario_especifico) {
         this.id_e_traduccion = id_e_traduccion;
         this.especialidad = especialidad;
         this.lang = lang;
         this.nombre = nombre;
         this.descripcion_breve = descripcion_breve;
         this.informacion = informacion;
+        this.horario_especifico =  horario_especifico;
     }
 
     public EspecialidadTraduccion() {
