@@ -53,6 +53,217 @@ body {
     50% { background-position: 100% 50%; }
 }
 
+/* Header y navegación */
+.header {
+    position: fixed;
+    height: 5rem;
+    top: 1rem;
+    left: 10vw;
+    right: 10vw;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(25px);
+    padding: 1rem 2rem;
+    z-index: 1000;
+    border-radius: 1rem;
+    border: var(--header-border) solid 2px;
+    box-shadow: 0 0 35px #00000018;
+    transition: height 0.5s cubic-bezier(0.25, 1.5, 0.5, 1);
+    overflow: hidden;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.navbar-logo {
+    width: 25%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo hr {
+    height: 2rem;
+    margin: 0 1rem;
+    border: none;
+    border-left: 2px solid rgba(255, 255, 255, 0.517);
+}
+
+#navbar-logo {
+    height: 3rem;
+    margin-right: 1rem;
+    filter: invert(1);
+    filter: brightness(100);
+}
+
+.navbar-links {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.navbar-links hr {
+    height: 2rem;
+    margin: 0 1rem;
+    border: none;
+    border-left: 2px solid rgba(255, 255, 255, 0.517);
+}
+
+.link{
+    display: flex;
+    align-items: center;
+    margin: 0 .5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.link:hover{
+    padding: .8rem;
+    border-radius: 2rem;
+    scale: 1.1;
+    background-color: rgba(0, 0, 0, 0.244);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+
+
+}
+
+.link:active{
+    scale: .9;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+.link:not(:hover){
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+
+
+}
+
+#link-register {
+    display: flex;
+    align-items: center;
+    margin: 0 .5rem;
+    font-weight: 700;
+    filter: saturate(3);
+    color: var(--primary-color);
+}
+
+#link-register:hover {
+    padding: .8rem;
+    border-radius: 2rem;
+    scale: 1.1;
+    background-color: rgba(255, 255, 255, 0.619);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+#link-register:not(:hover) {
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+#link-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: .5rem;
+}
+
+/* Estilos para el menú hamburguesa */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.hamburger-menu span {
+    width: 2rem;
+    height: 0.25rem;
+    background: white;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+}
+
+/* Animación para el menú hamburguesa */
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+/* Media query para tablets y móviles */
+@media (max-width: 1140px) {
+    .header {
+        align-items: center;
+        height: fit-content;
+    }
+
+    .header.expanded {
+        height: fit-content;
+    }
+
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar-logo {
+        width: 100%;
+        justify-content: center;
+        position: relative;
+    }
+
+    .hamburger-menu {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    .navbar-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        display: none;
+    }
+
+    .navbar-links * {
+        margin: 0.25rem;
+    }
+
+    .header.expanded .navbar-links {
+        opacity: 1;
+        display: flex;
+    }
+
+    .navbar-links a {
+        margin: 0.5rem 0;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .navbar-logo hr, .navbar-links hr {
+        display: none;
+    }
+}
 
 /* Estilos de la tarjeta principal */
 .tarjeta {

@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
     <link rel="stylesheet" href="css/global_font.css">
@@ -32,48 +31,25 @@
 
 <body class="malla">
     <center>
-        <nav>
-			<div class="logo-navbar">
-                
-				<img id="logo-navbar" th:src="@{/css/LogoLogoPathFinderHorizontal.svg}" alt=""
-				style="max-width:20%;height:auto;">
-
-				<div class="vertical-line"></div>
-
-                <div class="button-container-navbar">
-                    <i class="fi fi-rr-earth-americas navbar-icon"></i>
-                    <select name="lenguajes" id="lang" onchange="changeLang(this)">
-                        <option th:text="#{idioma}">Language</option>
-                        <option value="es">Español</option>
-                        <option value="en">English</option>
-                        <option value="fr">Français</option>
-                    </select>
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <a th:href="@{/inicio}">
+                        <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                    </a>
+                    <hr>
                 </div>
-			</div>
-
-                <div class="action-buttons-navbar">
-                    <div class="button-container-navbar">
-                            <i class="fi fi-rr-interrogation navbar-icon"></i>
-                            <a th:href="${#strings.concat('/acercade', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{acercaDe}">About us</a>
-                    </div>
-
-                    <hr class="hr-navbar">
-					
-                    <div class="button-container-navbar">
-                        <i class="fi fi-rr-user-headset navbar-icon"></i>
-                        <a th:href="${#strings.concat('/contactanos', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{contacto}">Contáctanos</a>
-                    </div>
-
-				<div class="vertical-line" id="color-blue"></div>
-				
-				<div class="button-container-navbar">
-					<i class="fi fi-rr-house-chimney navbar-icon"></i>
-				    <a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="button-text-navbar" th:text="#{regresoInicio}">Regresar al inicio</a>
-				</div>
-				
-			</div>
-			
-		</nav>
+        
+                <div class="navbar-links" id="navbarLinks">
+                    <a href=""><div class="link"><img src="css/assets/lenguage.png" alt="" id="link-icon">Idioma</div></a>
+                    <a th:href="@{/acercade}"><div class="link"><img src="css/assets/about.png" alt="" id="link-icon">¿Quiénes somos?</div></a>
+                    <hr>
+                    <a th:href="@{/login}"><div class="link"><img src="css/assets/login.png" alt="" id="link-icon">Iniciar sesión</div></a>
+                    <a th:href="@{/registro}"><div class="link" id="link-register"><img src="css/assets/register.png" alt="" id="link-icon">Registrarse</div></a>
+                </div>
+    
+            </nav>
+        </header>
 
 
         <div class="tarjeta" id="sign-in"> <!--TARJETA DE INICIO DE SESION-->
