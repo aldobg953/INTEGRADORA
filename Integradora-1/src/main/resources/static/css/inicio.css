@@ -418,6 +418,13 @@ h2 {
     color: var(--primary-color);
 }
 
+
+
+
+
+
+
+
 /* Sección de organización */
 .organizacion {
     width: 100vw;
@@ -475,6 +482,101 @@ h2 {
     font-weight: 700;
     font-style: italic;
 }
+
+
+
+.universidades-disponibles p {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.universidades-disponibles span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.universidades-disponibles > * {
+    margin-top: 1rem;
+}
+
+.carrusel-container {
+    display: flex;
+    margin-left: -10vw;
+    width: 100vw;
+    height: 31.5rem;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    user-select: none;
+}
+
+.carrusel {
+    display: flex;
+    transition: transform 0.1s linear;
+    flex-wrap: nowrap;
+}
+
+.tarjeta {
+    flex: 0 0 calc(100% - 2.5rem);
+    max-width: 30rem;
+    height: auto;
+    min-height: 25rem;
+    border-radius: 1rem;
+    border: var(--card-border) 2px solid;
+    background-color: white;
+    box-shadow: 0 0 35px #00000018;
+    margin-right: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-align: left;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+}
+
+.tarjeta_titulo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-height: 4.5em; /* Aproximadamente 3 líneas */
+    line-height: 1.5em;
+}
+
+.tarjeta-contenido {
+    padding: 1.25rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.tarjeta h2 {
+    margin-top: 0;
+}
+
+.tarjeta p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Aumentado a 4 líneas */
+    -webkit-box-orient: vertical;
+    max-height: 6em; /* Aproximadamente 4 líneas */
+    line-height: 1.5em;
+}
+
+
+
+
 
 
 /* Footer */
