@@ -189,3 +189,28 @@ form {
 #account-message-login {
     color: #ffffff;
 }
+
+/* Estilo de los mensajes de error */
+
+/* clase para el mensaje de error */
+.error-message {
+    width: auto;
+    color: red;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    margin-top: 2.5px; 
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* id del caso cuando se trata de usar un correo que ya a registrado */
+#emailUsed{
+    width: 100%;
+    color: red;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 2.5px; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}

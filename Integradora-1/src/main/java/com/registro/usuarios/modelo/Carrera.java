@@ -44,6 +44,7 @@ public class Carrera {
     private String como_desemp; //como desempeñar la carrera
     @Column(length = 500)
     private String desc_breve;
+    private Long contador;
 
     @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CarreraTraduccion> traducciones;
