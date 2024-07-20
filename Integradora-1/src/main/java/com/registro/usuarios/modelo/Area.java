@@ -54,7 +54,7 @@ public class Area {
                 this.nombre_area = this.nombre_area_ingles;
                 break;
             case "fr":
-                this.nombre_area = this.nombre_area_ingles;
+                this.nombre_area = this.nombre_area_frances;
                 break;
         }
     }

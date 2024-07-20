@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,31 +34,25 @@ public class UniversidadServicio {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    public Optional<Universidad> getUniversidadById(Long id, String lang) {
-        Optional<Universidad> universidadOpt = null;
-        if(!lang.equals("es")){
-            universidadOpt = universidadRepositorio.findByIdWithTranslations(id, lang);
-            // Vita - Cambie isEmpty() por isPresent() en el if de justo abajo de este comentario porque no me debaja correr codigo.
-            if (!universidadOpt.isPresent()) {
-                universidadOpt.ifPresent(u -> {
-                    u.getTraducciones().stream()
-                        .filter(t -> t.getLang().equals(lang))
-                        .findFirst()
-                        .ifPresent(traduccion -> {
-                            u.setCaracteristicas(traduccion.getCaracteristicas());
-                            u.setInformacion(traduccion.getInformacion());
-                            u.setTipo_institucion(traduccion.getTipo_institucion());
-                        });
-                });
-            }else{
-                universidadOpt = universidadRepositorio.findById(id);
-            }
-           
-        }else{
-            universidadOpt = universidadRepositorio.findById(id);
+
+    private Universidad aplicarTraduccion(Universidad universidad, String lang) {
+        UniversidadTraduccion traduccion = universidad.getTraducciones().stream()
+            .filter(t -> t.getLang().equals(lang))
+            .findFirst()
+            .orElse(null);
+
+        if (traduccion != null) {
+            universidad.setInformacion(traduccion.getInformacion());
+            universidad.setCaracteristicas(traduccion.getCaracteristicas());
+            universidad.setTipo_institucion(traduccion.getTipo_institucion());
         }
-        
-        return universidadOpt;
+
+        return universidad;
+    }
+
+    public Universidad getUniversidadById(Long id, String lang) {
+        Universidad universidad = universidadRepositorio.getById(id);
+        return aplicarTraduccion(universidad, lang);
     }
 
     public List<Universidad> getAllUniversidades(String lang) {

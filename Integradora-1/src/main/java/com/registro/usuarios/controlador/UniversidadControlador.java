@@ -49,13 +49,13 @@ public class UniversidadControlador {
     public String mostrarUniversidad( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername()); 
         List<Carrera> carreras = carreraServicio.getCarrerasByUniversidadAndLang(id, usuario.getLang()); 
-        Optional<Universidad> universidad = universidadServicio.getUniversidadById(id, usuario.getLang());
+        Universidad universidad = universidadServicio.getUniversidadById(id, usuario.getLang());
         List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
                                        .collect(Collectors.toList());
         model.addAttribute("roles",roleIds );
         model.addAttribute("usuario", usuario);
-        model.addAttribute("universidad",universidad.get()); 
+        model.addAttribute("universidad",universidad); 
         model.addAttribute("carreras",carreras); 
         return "universidades/universidad";
     }
