@@ -161,6 +161,18 @@
 
             </div>
 
+            <div class="universidades-disponibles">
+                <h1 class="text-gradient">Universidades disponibles</h1>
+                <p>Algunas universidades que puedes encontrar en <span>PathFinder</span>:</p>
+                <div class="carrusel-container">
+                <div class="carrusel" id="carrusel">
+                    <!-- Las tarjetas se agregarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+            </div>
+
+            
+
             <div class="dedicatoria">
                 <p>Con cariño</p>
                 <h2 class="text-gradient">PathFinder Team</h2>
@@ -252,6 +264,74 @@
     // Agregar event listener para el cambio de tamaño de la ventana
     window.addEventListener('resize', handleResize);
 });
+
+
+const carrusel = document.getElementById('carrusel');
+        let currentPosition = 0;
+        const cardWidth = 5000; // 30rem de ancho + 5rem de margen (calculado en píxeles)
+        let animationID;
+
+        function generarTarjeta(titulo, imagen) {
+            return { imagen, titulo };
+        }
+
+        const tarjetas = [
+            generarTarjeta('Universidad Autónoma de Chihuahua', '/css/assets/universidadesimg/uach.jpg'),
+            generarTarjeta('Universidad Tecnológica de Chihuahua', '/css/assets/universidadesimg/utch.jpg'),
+            generarTarjeta('Instituto Tecnológico de Chihuahua', '/css/assets/universidadesimg/itch.jpg'),
+            generarTarjeta('Instituto Tecnológico de Chihuahua II', '/css/assets/universidadesimg/itchii.jpeg'),
+            generarTarjeta('Universidad Politécnica de Chihuahua', '/css/assets/universidadesimg/upch.png'),
+            generarTarjeta('Instituto Tecnológico de Estudios Superiores de Monterrey', '/css/assets/universidadesimg/tecnm.jpg'),
+            generarTarjeta('Universidade del Valle de México', '/css/assets/universidadesimg/uvm.jpg'),
+            generarTarjeta('Instituto Superior de Arquitectura y Diseño', '/css/assets/universidadesimg/isad.jpg'),
+        ];
+
+        function crearTarjetas() {
+            const tarjetasHTML = tarjetas.map(tarjeta => `
+                <div class="tarjeta">
+                    <img src="${tarjeta.imagen}" alt="${tarjeta.titulo}">
+                    <div class="tarjeta-contenido">
+                        <h4 class="tarjeta_titulo">${tarjeta.titulo}</h4>
+                    </div>
+                </div>
+            `).join('');
+            carrusel.innerHTML = tarjetasHTML + tarjetasHTML; // Duplicamos las tarjetas
+        }
+
+        function animarCarrusel() {
+            currentPosition -= 1;
+            carrusel.style.transform = `translateX(${currentPosition}px)`;
+
+            const tarjetas = Array.from(document.querySelectorAll('.tarjeta'));
+            const primerTarjeta = tarjetas[0];
+            const ultimaTarjeta = tarjetas[tarjetas.length - 1];
+
+            // Verifica si la primera tarjeta ha salido de la vista
+            if (-currentPosition >= cardWidth) {
+                carrusel.appendChild(primerTarjeta);
+                currentPosition += cardWidth;
+                carrusel.style.transition = 'none';
+                carrusel.style.transform = `translateX(${currentPosition}px)`;
+                setTimeout(() => {
+                    carrusel.style.transition = 'transform 0.1s linear';
+                });
+            }
+
+            animationID = requestAnimationFrame(animarCarrusel);
+        }
+
+        function iniciarCarrusel() {
+            crearTarjetas();
+            animarCarrusel();
+        }
+
+        window.addEventListener('load', iniciarCarrusel);
+        window.addEventListener('resize', () => {
+            cancelAnimationFrame(animationID);
+            currentPosition = 0;
+            carrusel.style.transform = `translateX(0)`;
+            animarCarrusel();
+        });
     </script>
 </body>
 
