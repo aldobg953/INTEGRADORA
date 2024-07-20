@@ -28,14 +28,20 @@
                     <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
                 <hr>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">Idioma</div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon">Cerrar sesión</div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon">Universidades</div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon">Areas</div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon">Carreras</div></a>
             </div>
     
             <div class="navbar-links" id="navbarLinks">
-                <a href=""><div class="link"><img src="css/assets/lenguage.png" alt="" id="link-icon">Idioma</div></a>
-                <a th:href="@{/acercade}"><div class="link"><img src="css/assets/about.png" alt="" id="link-icon">¿Quiénes somos?</div></a>
+                <a href="" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">Idioma</div></a>
+                <a th:href="@{/acercade}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon">¿Quiénes somos?</div></a>
                 <hr>
-                <a th:href="@{/login}"><div class="link"><img src="css/assets/login.png" alt="" id="link-icon">Iniciar sesión</div></a>
-                <a th:href="@{/registro}"><div class="link" id="link-register"><img src="css/assets/register.png" alt="" id="link-icon">Registrarse</div></a>
+                <a th:href="@{/login}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon">Iniciar sesión</div></a>
+                <a th:href="@{/perfil}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon">Perfil</div></a>
+                <a th:href="@{/registro}" style="display: yes;"><div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt="" class="link-icon">Registrarse</div></a>
             </div>
 
         </nav>
