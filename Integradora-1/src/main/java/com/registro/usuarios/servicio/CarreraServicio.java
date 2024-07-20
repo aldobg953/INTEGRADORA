@@ -217,11 +217,12 @@ public class CarreraServicio {
     }
     
     public CarreraDTO getCarreraTraduccion(Long id_carrera, String lang){
-        List<CarreraTraduccion> carreraTraduccionList = carreraTradRepositorio.findByUniversidadIdAndLang(id_carrera,lang);
+        List<CarreraTraduccion> carreraTraduccionList = carreraTradRepositorio.findByCarreraIdAndLang(id_carrera,lang);
         CarreraDTO carreraDTO = new CarreraDTO();
         carreraDTO.setId_carrera(id_carrera);
         carreraDTO.setLang(lang);
         if(!carreraTraduccionList.isEmpty()){
+            System.out.println("Entra: \n\n\n\n\n");
             CarreraTraduccion carreraTraduccion = carreraTraduccionList.get(0);
             carreraDTO.setId_c_traduccion(carreraTraduccion.getId_c_traduccion());
             carreraDTO.setNombre(carreraTraduccion.getNombre());

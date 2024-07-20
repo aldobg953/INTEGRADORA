@@ -14,4 +14,9 @@ public interface CarreraTradRepositorio extends JpaRepository<CarreraTraduccion,
 
     @Query("SELECT ct FROM CarreraTraduccion ct WHERE ct.carrera.universidad.id = :idCarrera AND ct.lang = :lang")
     List<CarreraTraduccion> findByUniversidadIdAndLang(@Param("idCarrera") Long idCarrera, @Param("lang") String lang);
+
+    @Query("SELECT ct FROM CarreraTraduccion ct WHERE ct.carrera.id = :idCarrera AND ct.lang = :lang")
+    List<CarreraTraduccion> findByCarreraIdAndLang(@Param("idCarrera") Long idCarrera, @Param("lang") String lang);
+
+    
 }
