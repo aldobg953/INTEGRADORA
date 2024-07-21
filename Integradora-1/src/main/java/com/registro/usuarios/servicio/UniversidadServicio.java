@@ -56,7 +56,8 @@ public class UniversidadServicio {
     }
 
     public List<Universidad> getAllUniversidades(String lang) {
-        return universidadRepositorio.findAll();
+        return universidadRepositorio.findAll().stream().map(universidad -> aplicarTraduccion(universidad, lang))
+        .collect(Collectors.toList());
     }
 
     public List<UniversidadResumen> getAllUniversidadResumen(Collection<Rol> roles, Long id_universidad) {
@@ -65,7 +66,7 @@ public class UniversidadServicio {
         return esSuperUsuario ? getAllUniversidadesResumen() : getUniversidadResumenById(id_universidad);
     }
     
-    private List<UniversidadResumen> getAllUniversidadesResumen() {
+    public List<UniversidadResumen> getAllUniversidadesResumen() {
         return universidadRepositorio.findAll().stream()
                 .map(this::convertirAResumen)
                 .collect(Collectors.toList());

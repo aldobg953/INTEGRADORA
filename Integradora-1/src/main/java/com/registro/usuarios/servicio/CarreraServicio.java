@@ -1,12 +1,16 @@
 package com.registro.usuarios.servicio;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.registro.usuarios.modelo.Carrera;
@@ -222,7 +226,6 @@ public class CarreraServicio {
         carreraDTO.setId_carrera(id_carrera);
         carreraDTO.setLang(lang);
         if(!carreraTraduccionList.isEmpty()){
-            System.out.println("Entra: \n\n\n\n\n");
             CarreraTraduccion carreraTraduccion = carreraTraduccionList.get(0);
             carreraDTO.setId_c_traduccion(carreraTraduccion.getId_c_traduccion());
             carreraDTO.setNombre(carreraTraduccion.getNombre());
@@ -257,8 +260,53 @@ public class CarreraServicio {
     }
 
     public List<Carrera> getTop10CarrerasByContador(String lang) {
-    PageRequest pageRequest = PageRequest.of(0, 10);
-    return carreraRepositorio.findTop10ByOrderByContadorDesc(pageRequest).stream().map(carrera -> aplicarTraduccion(carrera, lang))
-    .collect(Collectors.toList());
-}
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        return carreraRepositorio.findTop10ByOrderByContadorDesc(pageRequest).stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
+    }
+
+    public List<Carrera> buscarCarreras(Long idModalidad, Long idHorario, Long idUniversidad, Long idArea, Integer bilingue, String lang) {
+        System.out.println("idModalidad: " + idModalidad);
+        System.out.println("idHorario: " + idHorario);
+        System.out.println("idUniversidad: " + idUniversidad);
+        System.out.println("idArea: " + idArea);
+        System.out.println("bilingue: " + bilingue);
+    
+        Specification<Carrera> spec = (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+    
+            if (idModalidad != null && idModalidad > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("modalidad").get("id_modalidad"), idModalidad));
+            }
+    
+            if (idHorario != null && idHorario > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("horario").get("id_horario"), idHorario));
+            }
+    
+            if (idUniversidad != null && idUniversidad > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("universidad").get("id_universidad"), idUniversidad));
+            }
+    
+            if (idArea != null && idArea > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("area").get("id_area"), idArea));
+            }
+    
+            if (bilingue != null && bilingue >= 0 && bilingue <= 1) {  // Asume que 0 y 1 son valores válidos
+                Predicate p = bilingue == 1 ? criteriaBuilder.isTrue(root.get("bilingue")) : criteriaBuilder.isFalse(root.get("bilingue"));
+                predicates.add(p);
+            }
+    
+            Predicate finalPredicate = predicates.isEmpty() ? criteriaBuilder.conjunction() : criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+    
+            return finalPredicate;
+        };
+    
+        List<Carrera> carreras = carreraRepositorio.findAll(spec).stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
+    
+        return carreras;
+    }
+    
+    
+    
 }
