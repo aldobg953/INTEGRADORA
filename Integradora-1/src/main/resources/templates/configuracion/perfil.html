@@ -2,7 +2,7 @@
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
 <head>
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-    <title>PathFinder | Perfil</title>
+    <title th:text="#{tituloPerfil}">PathFinder | Perfil</title>
     <link href="/css/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="css/global_font.css">
     <script src="/js/navbar.js"></script>
@@ -63,16 +63,16 @@
                 <ul class="py-2" aria-labelledby="user-menu-button">
                     <li>
                         <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfiil}">Perfil</a>
                     </li>
                     <li>
                         <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
                     </li>
                     <li>
-                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
                             sesion</a>
                     </li>
                 </ul>
@@ -81,19 +81,19 @@
             <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
                 <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                     <li>
-                        <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                        <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicioo}">Inicio</a>
                     </li>
                     <li>
-                        <a th:href="@{/universidades?lang=}+${usuario.lang}"class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                        <a th:href="@{/universidades?lang=}+${usuario.lang}"class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
                     </li>
                     <li>
-                        <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                        <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carrerass}">Carreras</a>
                     </li>
                     <li>
-                        <a th:href="@{/carreras/areas?lang=}+${usuario.lang}"class="text-2xl py-2 px-3 md:p-0">Area</a>
+                        <a th:href="@{/carreras/areas?lang=}+${usuario.lang}"class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
                     </li>
                     <li>
-                        <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                        <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -102,7 +102,7 @@
 
     <!-- informacion del usuario-->
 
-    <p class="md:mx-28 mt-8 font-bold text-3xl font-sans-serif dark:text-white">Informacion del perfil</p>
+    <p class="md:mx-28 mt-8 font-bold text-3xl font-sans-serif dark:text-white" th:text="#{infoPerfil}">Informacion del perfil</p>
 
     <div id="alert-additional-content-3" th:if="${param.exito}" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 md:mx-28 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
         <div class="flex items-center">
