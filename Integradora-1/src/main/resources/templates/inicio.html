@@ -40,6 +40,7 @@
                 <a th:href="@{/acercade}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon">¿Quiénes somos?</div></a>
                 <hr>
                 <a th:href="@{/login}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon">Iniciar sesión</div></a>
+                <a th:href="@{/inicio}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/home.png" alt="" class="link-icon">Volver al inicio</div></a>
                 <a th:href="@{/perfil}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon">Perfil</div></a>
                 <a th:href="@{/registro}" style="display: yes;"><div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt="" class="link-icon">Registrarse</div></a>
             </div>
@@ -177,8 +178,6 @@
             </div>
             </div>
 
-            
-
             <div class="dedicatoria">
                 <p>Con cariño</p>
                 <h2 class="text-gradient">PathFinder Team</h2>
@@ -254,7 +253,7 @@
             const navbarLinks = document.querySelector('.navbar-links');
             header.style.height = `${5 + navbarLinks.scrollHeight / 16}rem`;
         } else {
-            header.style.height = 'fit-content';
+            header.style.height = '6rem';
         }
     });
 
@@ -263,7 +262,7 @@
         if (window.innerWidth > 768) {
             header.classList.remove('expanded');
             hamburger.classList.remove('active');
-            header.style.height = 'fit-content';
+            header.style.height = '6rem';
         }
     }
 

@@ -22,6 +22,7 @@
 /* Estilos generales */
 * {
     font-size: 1vw;
+    transition: all 0.5s ease;
 }
 
 body {
@@ -213,4 +214,38 @@ form {
     font-size: 1.2em;
     margin-top: 2.5px; 
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+@media (max-width: 1140px) {
+    /* Estilos de la tarjeta principal */
+.tarjeta {
+    background-image: linear-gradient(90deg, #ffffff4f 50%, #ffffff4f 50%);
+}
+
+#logo-image,
+#register-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#logo-image {
+    display: none;
+}
+
+.input {
+    width: 50rem;
+    height: 1.5rem;
+}
+
+.input:focus {
+    border-color: #0047FF;
+    outline: none;
+}
 }

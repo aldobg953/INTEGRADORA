@@ -57,6 +57,7 @@ body {
     background-size: 200% 200%;
     background-attachment: fixed;
     animation: gradientShift 10s infinite;
+    filter: saturate(2);
 }
 
 @keyframes gradientShift {
@@ -73,7 +74,7 @@ body {
 /* Header and Navigation */
 .header {
     position: fixed;
-    height: 5rem;
+    height: 6rem;
     top: 1rem;
     left: 10vw;
     right: 10vw;
@@ -84,7 +85,7 @@ body {
     border-radius: 1rem;
     border: var(--header-border) solid 2px;
     box-shadow: 0 0 35px #00000018;
-    transition: height 0.5s cubic-bezier(0.25, 1.5, 0.5, 1), 0.3s ease-out;
+    transition: width 0.5s cubic-bezier(0.25, 1.5, 0.5, 1), 0.3s ease-out;
     overflow: hidden;
 }
 
@@ -404,12 +405,16 @@ h2 {
     margin-top: 1rem;
 }
 
+
+
+
+
 /* Carousel */
 .carrusel-container {
     display: flex;
     margin-left: -10vw;
     width: 100vw;
-    height: 31.5rem;
+    height: 27rem;
     overflow: hidden;
     position: relative;
     align-items: center;
@@ -424,9 +429,9 @@ h2 {
 
 .tarjeta {
     flex: 0 0 calc(100% - 2.5rem);
-    max-width: 30rem;
+    max-width: 35rem;
     height: auto;
-    min-height: 25rem;
+    min-height: 15rem;
     border-radius: 1rem;
     border: var(--card-border) 2px solid;
     background-color: white;
@@ -478,6 +483,10 @@ h2 {
     max-height: 6em;
     line-height: 1.5em;
 }
+
+
+
+
 
 /* Footer */
 .footer {
@@ -582,6 +591,9 @@ h2 {
     color: var(--header-bg);
 }
 
+
+
+
 /* Media Queries */
 @media (max-width: 1140px) {
     .header {
@@ -589,12 +601,7 @@ h2 {
         right: 2vw;
         padding: 1rem 2rem;
         align-items: center;
-        height: fit-content;
         transition: 0.5s ease-out;
-    }
-
-    .header.expanded {
-        height: fit-content;
     }
 
     .navbar {
