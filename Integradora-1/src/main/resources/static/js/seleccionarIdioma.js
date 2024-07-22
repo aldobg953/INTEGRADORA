@@ -9,5 +9,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 console.log("idioma");
