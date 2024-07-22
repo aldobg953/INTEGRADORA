@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
+    <title th:text="#{inicioTitulo}">PathFInder | Inicio</title>
+
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/global_font.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
     <link rel="stylesheet" href="css/global_font.css">
@@ -30,109 +35,105 @@
 </head>
 
 <body class="malla">
-    <center>
-        <header class="header">
-            <nav class="navbar">
-                <div class="navbar-logo">
-                    <a th:href="@{/inicio}">
-                        <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
-                    </a>
-                    <hr>
-                    
-                </div>
-        
-                <div class="navbar-links" id="navbarLinks">
-                    <a href=""><div class="link"><img src="css/assets/lenguage.png" alt="" id="link-icon">Idioma</div></a>
-                    <a th:href="@{/acercade}"><div class="link"><img src="css/assets/about.png" alt="" id="link-icon">¿Quiénes somos?</div></a>
-                    <hr>
-                    <a th:href="@{/login}"><div class="link"><img src="css/assets/login.png" alt="" id="link-icon">Iniciar sesión</div></a>
-                    <a th:href="@{/registro}"><div class="link" id="link-register"><img src="css/assets/register.png" alt="" id="link-icon">Registrarse</div></a>
-                </div>
-    
-            </nav>
-        </header>
-
-
-        <div class="tarjeta" id="sign-in"> <!--TARJETA DE INICIO DE SESION-->
-
-            <div id="logo-image"> <!--PARTE IZQUIERDA DE LA TARJETA DE INICIO DE SESION-->
-
-                <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                    style="max-width:40%;height:auto;">
-
-                <img id="image-login" src="css/decision-77.svg" alt="" style="max-width:75%;height:auto;">
-
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/inicio}">
+                    <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                </a>
+                <hr>
+                <a href="" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">Idioma
+                    </div>
+                </a>
+                <a href="" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon">Cerrar sesión
+                    </div>
+                </a>
+                <a href="" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/universidad.png" alt=""
+                            class="link-icon">Universidades</div>
+                </a>
+                <a href="" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon">Areas</div>
+                </a>
+                <a href="" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon">Carreras
+                    </div>
+                </a>
             </div>
 
-            <div id="sign-in-form"> <!--PARTE DERECHA DE LA TARJETA DE INICIO DE SESION-->
-
-                <div>
-                    <p id="welcome-title" th:text="#{saludo_index}">¡Bienvenido!</p>
-                </div>
-
-                <div>
-                    <p id="sign-in-title" th:text="#{inicioSesion}">Iniciar sesión</p>
-                </div>
-
-                <div th:if="${param.error}">
-                    <p id="error" >ERROR: Ingresa tus datos nuevamente</p>
-                </div>
-                <div th:if="${mensajeExito}">
-                    <p th:text="${mensajeExito}"></p>
-                </div>
-
-                <hr>
-
-                <form th:action="@{/login}" method="post"> <!--FORMULARIO-->
-
-                    <div class="input-group"> <!--INPUTS-->
-
-                        <div class="input-group"> <!--INPUTS-->
-
-                            <input id="username" required="" type="email" name="username" autocomplete="off" class="input"
-                                th:placeholder="#{ingresaEmail}" />
-                            <label for="email" class="email-label">
-                                <i id="login-input-icon" class="fi-rr-envelope"></i>
-                            </label>
-    
-                        </div>
-
+            <div class="navbar-links" id="navbarLinks">
+                <a href="" style="display: yes;">
+                    <div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">Idioma
                     </div>
-
-                    <hr>
-
-                    <div class="input-group">
-                        <input id="password" name="password" required="" type="password" autocomplete="on" class="input"
-                            th:placeholder="#{ingresaContra}">
-
-                        <div for="name">
-                            <i id="login-input-icon" class="fi-rr-lock"></i>
-                        </div>
-
-
-                    </div>
-
-                    <hr>
-
-                    <button class="btn btn-primary"> <!--BOTON DE INICIO DE SESION-->
-                        <span class="btn-txt" th:text="#{inicioSesion}">Iniciar sesión</span>
-                    </button>
-
-                </form>
-
+                </a>
+                <a th:href="@{/acercade}" style="display: yes;">
+                    <div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon">¿Quiénes
+                        somos?</div>
+                </a>
                 <hr>
-
-                <div class="create-account-message-login"> <!--MENSAJE DEBAJO DEL BOTON DE INICIO DE SESION-->
-                    <p id="create-account-message-login"><span th:text="#{registrarMensaje}">¿No tienes una cuenta?</span>
-                        <a th:href="${#strings.concat('/registro', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="create-account-message-login" th:text="#{creaCuenta}">¡Crea una!</a>
-                    </p>
-                </div>
+                <a th:href="@{/login}" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon">Iniciar
+                        sesión</div>
+                </a>
+                <a th:href="@{/inicio}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/home.png" alt="" class="link-icon">Volver al inicio</div></a>
+                <a th:href="@{/perfil}" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon"
+                            class="link-icon">Perfil</div>
+                </a>
+                <a th:href="@{/registro}" style="display: none;">
+                    <div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt=""
+                            class="link-icon">Registrarse</div>
+                </a>
             </div>
+
+        </nav>
+
+        <div>
 
         </div>
+    </header>
+    <center>
 
+        <div class="main-content">
+            <div class="tarjeta">
+                <div class="login-image">
+                    <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="">
+                    <img src="/css/decision-77.svg" alt="">
+                </div>
+
+                <div class="login-form">
+                    <h1 id="welcome-title" th:text="#{saludo_index}">¡Bienvenido!</h1>
+                    <h2 id="sign-in-title" th:text="#{inicioSesion}">Iniciar sesión</h2>
+                    <p th:if="${param.error}" id="error">ERROR: Ingresa tus datos nuevamente</p>
+                    <p th:if="${mensajeExito}" th:text="${mensajeExito}"></p>
+
+                    <form th:action="@{/login}" method="post"> <!--FORMULARIO-->
+
+                        <div class="form-input">
+                            <span class="input-icon"><i class="fi fi-rr-envelope"></i></span>
+                            <input id="username" required="" type="email" name="username" th:placeholder="#{ingresaEmail}" />
+                        </div>
+
+                        <div class="form-input">
+                            <span class="input-icon"><i class="fi fi-rr-lock"></i></span>
+                            <input id="password" name="password" required="" type="password" th:placeholder="#{ingresaContra}">
+                        </div>
+
+                        <button class="btn btn-primary"> <!--BOTON DE INICIO DE SESION-->
+                            <span class="btn-txt" th:text="#{inicioSesion}">Iniciar sesión</span>
+                        </button>
+
+                        <p id="create-account-message-login"><span th:text="#{registrarMensaje}">¿No tienes una cuenta?</span>
+                            <a th:href="${#strings.concat('/registro', (lang != null and lang != '' ? '?lang=' + lang : ''))}" id="create-account-message-login" th:text="#{creaCuenta}">¡Crea una!</a>
+                        </p>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </center>
-
 </body>
 
 </html>
