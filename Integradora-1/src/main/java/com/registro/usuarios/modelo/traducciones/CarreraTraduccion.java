@@ -21,7 +21,7 @@ public class CarreraTraduccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_c_traduccion;
     @ManyToOne
-    @JoinColumn(name = "id_carrera")
+    @JoinColumn(name = "fk_carrera")
     private Carrera carrera;
     private String lang;
     private String nombre;

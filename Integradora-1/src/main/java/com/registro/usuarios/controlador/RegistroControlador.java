@@ -35,7 +35,7 @@ public class RegistroControlador {
 	@GetMapping("/index")
 	public String verPaginaDeInicio(Model model,  @AuthenticationPrincipal UserDetails userDetails) {
 		Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-		List<Carrera> carreras = carreraServicio.getAllCarreras(usuario.getLang());
+		List<Carrera> carreras = carreraServicio.getTop10CarrerasByContador(usuario.getLang());
 		List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
                                        .collect(Collectors.toList());

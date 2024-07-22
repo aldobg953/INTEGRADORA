@@ -103,8 +103,10 @@
                 </div>
 
                 <div class="mx-10 my-5">
-                    <label for="nombre_completo" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white">Informacion:</label>
-                    <input id="nombre_completo" th:field="*{informacion}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Informacion de la universidad:</label>
+                    <textarea id="informacion" rows="4" th:field="*{informacion}"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Escribe las informacion principal de la universidad...."></textarea>
                 </div>
 
                 <div class="mx-10 my-5">
