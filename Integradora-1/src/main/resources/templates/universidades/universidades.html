@@ -8,6 +8,39 @@
         <link href="/css/tailwind.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/buscador.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                    $('form').on('submit', function(e) {
+                    e.preventDefault();
+                    var tipoSeleccionado = $('#tipo-universidad').val().toLowerCase();
+                    var searchTerm = $('#search').val().toLowerCase();
+
+                    $('#unis .w-72').each(function() {
+                        var $universidad = $(this);
+                        var tipoInstitucion = $universidad.find('span').text().toLowerCase();
+                        var nombreUniversidad = $universidad.find('h5').text().toLowerCase();
+
+                        // Incluyendo variaciones para "pública" y "privada"
+                        var tipoMatch = tipoSeleccionado === 'tipo de universidad' || 
+                                        tipoInstitucion.includes(tipoSeleccionado) || 
+                                        (tipoSeleccionado === 'publica' && 
+                                        (tipoInstitucion.includes('public') || tipoInstitucion.includes('publier'))) || 
+                                        (tipoSeleccionado === 'privada' && 
+                                        (tipoInstitucion.includes('private') || tipoInstitucion.includes('privé')));
+
+                        var nombreMatch = nombreUniversidad.includes(searchTerm);
+
+                        if (tipoMatch && nombreMatch) {
+                            $universidad.show();
+                        } else {
+                            $universidad.hide();
+                        }
+                    });
+                });
+            });
+
+         </script>
     </head>
     <body class="bg-gray-100 dark:bg-gray-800"> 
 
@@ -88,8 +121,13 @@
 
         <form class="max-w-lg mx-auto">
             <div class="flex">
+                <select id="tipo-universidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-s-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Tipo de universidad</option>
+                    <option value="publica">Pública</option>
+                    <option value="privada">Privada</option>
+                </select>
                 <div class="relative w-full">
-                    <input type="search" id="search" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-gray-50 border-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Buscar universidad..." required />
+                    <input type="search" id="search" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-gray-50 border-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Buscar universidad..."/>
                     <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -109,7 +147,7 @@
                     <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${universidad.nombre_completo}"></h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" ></p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" >Tipo de institucion: <span th:text="${universidad.tipo_institucion}"></span></p>
                     <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         ver mas
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

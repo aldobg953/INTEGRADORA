@@ -367,7 +367,7 @@ public class AdministradorControlador {
             
         }else{
             universidades = new ArrayList<>();
-            universidades.add(universidadServicio.getUniversidadById(usuario.getId_universidad(), usuario.getLang()).get());
+            universidades.add(universidadServicio.getUniversidadById(usuario.getId_universidad(), usuario.getLang()));
         }
         List<Especialidad> especialidades = especialidadServicio.getEspecialidadesbyUsuario(usuario.getRoles(),usuario.getId_universidad(),usuario.getLang());
         List<Carrera> carreras = carreraServicio.getAllCarreras(usuario.getRoles(),usuario.getId_universidad(),usuario.getLang());

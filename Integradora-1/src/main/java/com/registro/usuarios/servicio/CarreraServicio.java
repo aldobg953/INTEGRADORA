@@ -1,14 +1,17 @@
 package com.registro.usuarios.servicio;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Foro;
@@ -58,7 +61,7 @@ public class CarreraServicio {
         if(lang.equals("es")){
             return carreraRepositorio.findById(id).get();
         }else{
-            return aplicarTraduccion(carreraRepositorio.getById(id), lang);
+            return aplicarTraduccion(carreraRepositorio.findById(id).get(), lang);
         }
         
     }
@@ -69,8 +72,10 @@ public class CarreraServicio {
         .collect(Collectors.toList());
     }
 
-    public List<Carrera> getCarrerasByUniversidad(Long id){
-        return carreraRepositorio.findByUniversidad(id);
+    public List<Carrera> getCarrerasByUniversidad(Long id, String lang){
+        return carreraRepositorio.findByUniversidad(id).stream()
+        .map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
     }
 
     public List<Carrera> getCarrerasByUniversidadAndLang(Long id, String lang) {
@@ -84,25 +89,26 @@ public class CarreraServicio {
     }
 
     public Carrera aplicarTraduccion(Carrera carrera, String lang) {
-        CarreraTraduccion traduccion = carrera.getTraducciones().stream()
-            .filter(t -> t.getLang().equals(lang))
-            .findFirst()
-            .orElse(null);
+        carrera.getArea().cambiarIdioma(lang);
+        carrera.getHorario().cambiarIdioma(lang);
+        carrera.getModalidad().cambiarIdioma(lang);
+        carrera.getPeriodoEscolar().cambiarIdioma(lang);
+        if(!lang.equals("es")){
+            CarreraTraduccion traduccion = carrera.getTraducciones().stream()
+                .filter(t -> t.getLang().equals(lang))
+                .findFirst()
+                .orElse(null);
 
-        if (traduccion != null) {
-            carrera.getArea().cambiarIdioma(lang);
-            carrera.getHorario().cambiarIdioma(lang);
-            carrera.getModalidad().cambiarIdioma(lang);
-            carrera.getPeriodoEscolar().cambiarIdioma(lang);
-            carrera.setNombre(traduccion.getNombre());
-            carrera.setInformacion(traduccion.getInformacion());
-            carrera.setHorario_especifico(traduccion.getHorario_especifico());
-            carrera.setPorque_estudiar(traduccion.getPorque_estudiar());
-            carrera.setDonde_trabajar(traduccion.getDonde_trabajar());
-            carrera.setComo_desemp(traduccion.getComo_desemp());
-            carrera.setDesc_breve(traduccion.getDesc_breve());
+            if (traduccion != null) {
+                carrera.setNombre(traduccion.getNombre());
+                carrera.setInformacion(traduccion.getInformacion());
+                carrera.setHorario_especifico(traduccion.getHorario_especifico());
+                carrera.setPorque_estudiar(traduccion.getPorque_estudiar());
+                carrera.setDonde_trabajar(traduccion.getDonde_trabajar());
+                carrera.setComo_desemp(traduccion.getComo_desemp());
+                carrera.setDesc_breve(traduccion.getDesc_breve());
+            }
         }
-
         return carrera;
     }
 
@@ -119,7 +125,7 @@ public class CarreraServicio {
             carreraDTO.getPorque_estudiar(),carreraDTO.getDonde_trabajar(),carreraDTO.getComo_desemp(),
             universidadRepositorio.getById(carreraDTO.getUniversidad()),areaRepositorio.getById(carreraDTO.getArea()),
             modalidadRepositorio.getById(carreraDTO.getModalidad()),periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()),
-            horarioRepositorio.getById(carreraDTO.getHorario()),carreraDTO.getDesc_breve());
+            horarioRepositorio.getById(carreraDTO.getHorario()),carreraDTO.getDesc_breve(),0L);
             newCarrera = carreraRepositorio.save(carrera);
         } catch (Exception e) {
             newCarrera = null;
@@ -138,7 +144,7 @@ public class CarreraServicio {
         if(esSuperUsuario){
             return getAllCarreras(lang);
         }else{
-            return getCarrerasByUniversidad(id_universidad);
+            return getCarrerasByUniversidad(id_universidad, lang);
         }
     }
 
@@ -154,12 +160,23 @@ public class CarreraServicio {
 
     public boolean modificarCarrera(CarreraDTO carreraDTO) {
         try {
-            Carrera carrera = new Carrera(carreraDTO.getId_carrera(),carreraDTO.getNombre(), carreraDTO.getInformacion(),carreraDTO.getRoadmap(),
-            carreraDTO.getCosto(), carreraDTO.getHorario_especifico(), carreraDTO.isBilingue(),carreraDTO.getCantidad_periodos(),
-            carreraDTO.getPorque_estudiar(),carreraDTO.getDonde_trabajar(),carreraDTO.getComo_desemp(),
-            universidadRepositorio.getById(carreraDTO.getUniversidad()),areaRepositorio.getById(carreraDTO.getArea()),
-            modalidadRepositorio.getById(carreraDTO.getModalidad()),periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()),
-            horarioRepositorio.getById(carreraDTO.getHorario()),carreraDTO.getDesc_breve());
+            Carrera carrera = carreraRepositorio.getById(carreraDTO.getId_carrera());
+            carrera.setNombre(carreraDTO.getNombre());
+            carrera.setInformacion(carreraDTO.getInformacion());
+            carrera.setCosto(carreraDTO.getCosto());
+            carrera.setHorario_especifico(carreraDTO.getHorario_especifico());
+            carrera.setBilingue(carreraDTO.isBilingue());
+            carrera.setCantidad_periodos(carreraDTO.getCantidad_periodos());
+            carrera.setRoadmap(carreraDTO.getRoadmap());
+            carrera.setPorque_estudiar(carreraDTO.getPorque_estudiar());
+            carrera.setDonde_trabajar(carreraDTO.getDonde_trabajar());
+            carrera.setComo_desemp(carreraDTO.getComo_desemp());
+            carrera.setUniversidad(universidadRepositorio.getById(carreraDTO.getUniversidad()));
+            carrera.setArea(areaRepositorio.getById(carreraDTO.getArea()));
+            carrera.setModalidad(modalidadRepositorio.getById(carreraDTO.getModalidad()));
+            carrera.setPeriodoEscolar(periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()));
+            carrera.setHorario(horarioRepositorio.getById(carreraDTO.getHorario()));
+            carrera.setDesc_breve(carreraDTO.getDesc_breve());
             carreraRepositorio.save(carrera);
         } catch (Exception e) {
             return false;
@@ -204,7 +221,7 @@ public class CarreraServicio {
     }
     
     public CarreraDTO getCarreraTraduccion(Long id_carrera, String lang){
-        List<CarreraTraduccion> carreraTraduccionList = carreraTradRepositorio.findByUniversidadIdAndLang(id_carrera,lang);
+        List<CarreraTraduccion> carreraTraduccionList = carreraTradRepositorio.findByCarreraIdAndLang(id_carrera,lang);
         CarreraDTO carreraDTO = new CarreraDTO();
         carreraDTO.setId_carrera(id_carrera);
         carreraDTO.setLang(lang);
@@ -236,16 +253,60 @@ public class CarreraServicio {
         return true;
     }
 
-    @Transactional
     public void incrementarContador(Long id) {
-        Carrera carrera = carreraRepositorio.findById(id).orElseThrow(() -> new RuntimeException("Carrera no encontrada"));
+        Carrera carrera = carreraRepositorio.findById(id).get();
         carrera.setContador(carrera.getContador() + 1);
         carreraRepositorio.save(carrera);
     }
 
     public List<Carrera> getTop10CarrerasByContador(String lang) {
-    PageRequest pageRequest = PageRequest.of(0, 10);
-    return carreraRepositorio.findTop10ByOrderByContadorDesc(pageRequest).stream().map(carrera -> aplicarTraduccion(carrera, lang))
-    .collect(Collectors.toList());
-}
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        return carreraRepositorio.findTop10ByOrderByContadorDesc(pageRequest).stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
+    }
+
+    public List<Carrera> buscarCarreras(Long idModalidad, Long idHorario, Long idUniversidad, Long idArea, Integer bilingue, String lang) {
+        System.out.println("idModalidad: " + idModalidad);
+        System.out.println("idHorario: " + idHorario);
+        System.out.println("idUniversidad: " + idUniversidad);
+        System.out.println("idArea: " + idArea);
+        System.out.println("bilingue: " + bilingue);
+    
+        Specification<Carrera> spec = (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+    
+            if (idModalidad != null && idModalidad > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("modalidad").get("id_modalidad"), idModalidad));
+            }
+    
+            if (idHorario != null && idHorario > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("horario").get("id_horario"), idHorario));
+            }
+    
+            if (idUniversidad != null && idUniversidad > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("universidad").get("id_universidad"), idUniversidad));
+            }
+    
+            if (idArea != null && idArea > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("area").get("id_area"), idArea));
+            }
+    
+            if (bilingue != null && bilingue >= 0 && bilingue <= 1) {  // Asume que 0 y 1 son valores válidos
+                Predicate p = bilingue == 1 ? criteriaBuilder.isTrue(root.get("bilingue")) : criteriaBuilder.isFalse(root.get("bilingue"));
+                predicates.add(p);
+            }
+    
+            Predicate finalPredicate = predicates.isEmpty() ? criteriaBuilder.conjunction() : criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+    
+            return finalPredicate;
+        };
+    
+        List<Carrera> carreras = carreraRepositorio.findAll(spec).stream().map(carrera -> aplicarTraduccion(carrera, lang))
+        .collect(Collectors.toList());
+    
+        return carreras;
+    }
+    
+    
+    
 }

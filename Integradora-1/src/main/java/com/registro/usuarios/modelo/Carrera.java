@@ -76,7 +76,7 @@ public class Carrera {
     public Carrera(Long id_carrera, String nombre, String informacion, String roadmap, float costo,
             String horario_especifico, boolean bilingue, int cantidad_periodos, String porque_estudiar,
             String donde_trabajar, String como_desemp, Universidad universidad, Area area, Modalidad modalidad,
-            PeriodoEscolar periodoEscolar, Horario horario, String desc_breve) {
+            PeriodoEscolar periodoEscolar, Horario horario, String desc_breve, Long contador) {
         this.id_carrera = id_carrera;
         this.nombre = nombre;
         this.informacion = informacion;
@@ -94,11 +94,13 @@ public class Carrera {
         this.periodoEscolar = periodoEscolar;
         this.horario = horario;
         this.desc_breve = desc_breve;
+        this.contador = contador;
     }
 
     public Carrera(String nombre, String informacion, String roadmap, float costo, String horario_especifico,
             boolean bilingue, int cantidad_periodos, String porque_estudiar, String donde_trabajar, String como_desemp,
-            Universidad universidad, Area area, Modalidad modalidad, PeriodoEscolar periodoEscolar, Horario horario, String desc_breve) {
+            Universidad universidad, Area area, Modalidad modalidad, PeriodoEscolar periodoEscolar, Horario horario, String desc_breve,
+            Long contador) {
         this.nombre = nombre;
         this.informacion = informacion;
         this.roadmap = roadmap;
@@ -115,6 +117,7 @@ public class Carrera {
         this.periodoEscolar = periodoEscolar;
         this.horario = horario;
         this.desc_breve = desc_breve;
+        this.contador = contador;
     }
 
     
