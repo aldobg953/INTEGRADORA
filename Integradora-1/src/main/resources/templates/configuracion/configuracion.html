@@ -2,7 +2,7 @@
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
     <head>
         <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-        <title>Perfil | Configuración</title>
+        <title th:text="#{configuracionPerfil}">Perfil | Configuración</title>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
     </head>
@@ -20,7 +20,7 @@
                 <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
                         id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
+                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
                         <img class="w-8 h-8 rounded-full"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
                             alt="user photo">
@@ -31,23 +31,23 @@
                     id="user-dropdown">
                     <div class="px-4 py-3">
                         <span class="block text-sm text-black-900 dark:text-white"
-                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
+                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}" >usuario</span>
                         <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                            th:text="${usuario.email} ">correo</span>
+                            th:text="${usuario.email} " >correo</span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfiil}">Perfil</a>
                         </li>
                         <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
                         </li>
                         <li>
-                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
                                 sesion</a>
                         </li>
                     </ul>
@@ -56,33 +56,33 @@
                 <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
                     <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                         <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicioo}">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carrerass}">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <p class="md:mx-28 mt-8 font-bold text-3xl dark:text-white">Configuraciones</p>
+        <p class="md:mx-28 mt-8 font-bold text-3xl dark:text-white" th:text="#{configuracioness}">Configuraciones</p>
 
         <form th:action="@{/configuracion/cambiarDarkMode}" class="border border-blue-800 md:mx-28 rounded-lg my-10 shadow-lg shadow-blue-500/50" method="post">
     <div class="grid grid-rows-2 grid-flow-col">
-        <div class="col-span-1 pt-6 pl-10 font-bold dark:text-white">
+        <div class="col-span-1 pt-6 pl-10 font-bold dark:text-white" th:text="#{modoOscuro}">
             Modo oscuro
         </div>
-        <div class="pl-10 col-span-1 dark:text-white">
+        <div class="pl-10 col-span-1 dark:text-white" th:text="#{ajusteVista}">
             Ajusta el aspecto de PathFinder para reducir el reflejo y dar un descanso a la vista.
         </div>
         <div class="col-span-2 row-span-2 justify-end">
@@ -107,15 +107,15 @@
 
         <form th:action="@{/configuracion/cambiaridioma}" class="border border-blue-800 md:mx-28 rounded-lg my-10 shadow-lg shadow-blue-500/50" method="post">
             <div class="grid grid-rows-2 grid-flow-col">
-                <div class="col-span-1 pt-6 pl-10 font-bold dark:text-white">
+                <div class="col-span-1 pt-6 pl-10 font-bold dark:text-white" th:text="#{idioma}">
                     Cambio de Idioma
                 </div>
-                <div class="pl-10 col-span-1 dark:text-white">
+                <div class="pl-10 col-span-1 dark:text-white" th:text="#{cambioIdioma}">
                     Elija el idioma en el que desea navegar por nuestro sitio web para una mejor experiencia.
                 </div>
                 <div class="col-span-2 row-span-2 justify-end">
                     <select id="idioma" name="idioma" class="mt-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Lenguage</option>
+                        <option selected th:text="#{idioma}">Lenguage</option>
                         <option value="es">Español</option>
                         <option value="en">English</option>
                         <option value="fr">Français</option>
