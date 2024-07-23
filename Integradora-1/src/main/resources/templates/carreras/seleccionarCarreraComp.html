@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-        <title>PathFinder | Áreas</title>
+        <title>PathFinder | Comparar Carrera</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
@@ -84,8 +84,10 @@
 
         <div class="bg-gray-600 p-6">
             <div class="text-black text-6xl font-serif font-extrabold text-white ml-12 text-center">Carreras</div>
-            <form class="flex flex-col space-y-6 mt-6" th:action="@{/carreras/buscarCarreras}" method="get">
+            
+            <form class="flex flex-col space-y-6 mt-6" th:action="@{/carreras/buscarCarrerasComp}" method="get">
                 <input class="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
+                <input class="hidden" name="id_carrera_comp" id="id_carrera_comp" th:value="${carreraAComparar.id_carrera}"/>
                 <div class="flex items-center mx-auto w-full max-w-md">
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="relative w-full">
@@ -134,25 +136,26 @@
                 <div class="flex items-center justify-center space-x-4">
                     <div class="flex items-center">
                         <input type="radio" id="bilingue_si" name="bilingue" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_si" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bilingüe</label>
+                        <label for="bilingue_si" class="ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">Bilingüe</label>
                     </div>
                     <div class="flex items-center">
                         <input type="radio" id="bilingue_no" name="bilingue" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_no" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No Bilingüe</label>
+                        <label for="bilingue_no" class="ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">No Bilingüe</label>
                     </div>
                     <div class="flex items-center">
                         <input type="radio" id="bilingue_todos" name="bilingue" value="2" checked class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_todos" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Todos</label>
+                        <label for="bilingue_todos" class="ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">Todos</label>
                     </div>
                 </div>
             </form>
         </div>
 
-        
+        <div class="mx-28">   
+            <h1 class="mb-4 text-xl font-bold text-gray-900 dark:text-white md:text-5xl lg:text-3xl"> <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400" th:text="${carreraAComparar.nombre}">Carrera</span></h1>
+            <p class="text-lg font-normal text-gray-500 lg:text-lg dark:text-gray-400">Selecciona la segunda carrera a comparar o vuelve para <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">comparar otras carreras</a></p>
+        </div>
 
-
-
-        <div id="carrerasCard" class="flex md:mx-28 my-8 flex-wrap">
+        <div id="areas" class="flex md:mx-28 my-8 flex-wrap">
             <div th:each="carrera : ${carreras}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 dark:bg-gray-800 flex flex-col">
                 <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                     <img class="rounded-t-lg h-64 w-full bg-white" th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
@@ -166,13 +169,12 @@
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${carrera.desc_breve}">desc breve</p>
                     </div>
                     <div class="mt-auto pt-4">
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            ver mas
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                        <a th:href="@{/carreras/all/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="cursor-pointer ml-4 md:ml-8 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">Comparar</a>
+                        <form th:action="@{/carreras/compararCarreras}" method="get">
+                            <input class="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
+                            <input class="hidden" name="id_carrera_1" id="id_carrera_1" th:value="${carreraAComparar.id_carrera}"/>
+                            <input class="hidden" name="id_carrera_2" id="id_carrera_2" th:value="${carrera.id_carrera}"/>
+                            <button class="cursor-pointer focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-24 py-2 me-2 mb-2 dark:focus:ring-yellow-900">Comparar</button>
+                        </form> 
                     </div>
                 </div>
             </div>
