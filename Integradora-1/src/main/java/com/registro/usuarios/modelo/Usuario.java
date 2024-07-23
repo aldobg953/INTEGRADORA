@@ -1,6 +1,8 @@
 package com.registro.usuarios.modelo;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -125,6 +127,13 @@ public class Usuario {
 		this.id_universidad = id_universidad;
 	}
 
+	@ManyToMany
+    @JoinTable(
+        name = "usuario_carreras_favoritas",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "carrera_id")
+    )
+    private Set<Carrera> carrerasFavoritas = new HashSet<>();
 	
 
 	public Usuario(Long id_usuario, String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode, String lang,Long id_universidad) {
@@ -164,6 +173,14 @@ public class Usuario {
 
 	public void setLang(String lang) {
 		this.lang = lang;
+	}
+
+	public Set<Carrera> getCarrerasFavoritas() {
+		return carrerasFavoritas;
+	}
+
+	public void setCarrerasFavoritas(Set<Carrera> carrerasFavoritas) {
+		this.carrerasFavoritas = carrerasFavoritas;
 	}
 
 
