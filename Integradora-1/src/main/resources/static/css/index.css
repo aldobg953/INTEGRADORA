@@ -1,0 +1,292 @@
+/* Global Variables */
+@import url('https://cdn-uicons.flaticon.com/2.4.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+:root {
+    --primary-color: #0047FF;
+    --text-gradient: linear-gradient(50deg, #0047ff, #9590ff, #6abaa4, #0047ff, #9590ff, #6abaa4);
+    --header-bg: rgba(0, 0, 0, 0.329);
+    --header-border: #ffffff72;
+    --nav-hover-bg: rgba(255, 255, 255, 0.2);
+    --card-border: #B9B9B9;
+    --card-shadow: #b9b9b993;
+}
+
+/* General Styles */
+body {
+    margin: 0;
+    width: 100%;
+    height: fit-content;
+}
+
+
+
+
+
+
+/* Text Gradient Animation */
+.text-gradient {
+    background-image: var(--text-gradient);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: gradientAnimation 6s linear infinite;
+    background-size: 300% 100%;
+    filter: saturate(2);
+}
+
+@keyframes gradientAnimation {
+    0%, 100% { background-position: 0; }
+    100% { background-position: 100%; }
+}
+
+
+
+
+/* Background Animation */
+.principal-text {
+    display: flex;
+    padding: 0 10vw;
+    flex-direction: column-reverse;
+    height: 30vh;
+    width: 100%;
+    background:
+        radial-gradient(at 18% 99%, #0047FF 0, transparent 50%),
+        radial-gradient(at 97% 8%, #6ABAA4 0, transparent 50%),
+        radial-gradient(at 79% 82%, #6ABAA4 0, transparent 50%),
+        radial-gradient(at 96% 10%, #0047FF 0, transparent 50%),
+        radial-gradient(at 42% 20%, #9590FF 0, transparent 50%),
+        radial-gradient(at 4% 49%, #9590FF 0, transparent 50%),
+        radial-gradient(at 57% 33%, rgb(218, 83, 228) 0, #a299ff 50%);
+    background-size: 200% 200%;
+    background-attachment: fixed;
+    animation: gradientShift 10s infinite;
+    filter: saturate(2);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+
+
+
+
+
+
+/* Header and Navigation */
+.header {
+    position: fixed;
+    height: 6rem;
+    top: 1rem;
+    left: 10vw;
+    right: 10vw;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(25px);
+    padding: 1rem 2rem;
+    z-index: 10;
+    border-radius: 1rem;
+    border: var(--header-border) solid 2px;
+    box-shadow: 0 0 35px #00000018;
+    transition: width 0.5s cubic-bezier(0.25, 1.5, 0.5, 1), 0.3s ease-out;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.navbar-logo, .navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    justify-content: right;
+}
+
+.navbar-links {
+    justify-content: right;
+}
+
+.navbar-logo hr, .navbar-links hr {
+    height: 2rem;
+    margin: 0 1rem;
+    border: none;
+    border-left: 2px solid rgba(255, 255, 255, 0.517);
+}
+
+#navbar-logo {
+    height: 3rem;
+    margin-right: 1rem;
+    filter: invert(1) brightness(100);
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    margin: 0 .5rem;
+    font-weight: 700;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+.navbar a {
+    text-decoration: none;
+}
+
+.link:hover {
+    padding: .8rem;
+    border-radius: 2rem;
+    scale: 1.1;
+    background-color: rgba(0, 0, 0, 0.244);
+    cursor: pointer;
+}
+
+.link:active {
+    scale: .9;
+}
+
+#profile-icon {
+    scale: 1.2;
+    border-radius: 50rem;
+    object-fit: cover;
+}
+
+#link-register {
+    filter: saturate(3);
+    color: var(--primary-color);
+}
+
+#link-register:hover {
+    background-color: rgba(255, 255, 255, 0.619);
+}
+
+.link-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: .5rem;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.hamburger-menu span {
+    width: 2rem;
+    height: 0.25rem;
+    background: white;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+select {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none; /* Desactiva el borde */
+    outline: none;
+}
+
+
+/* Main Content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: fit-content;
+    width: 100%;
+    height: fit-content;
+    padding: 3rem 10vw;
+}
+
+.principal-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: fit-content;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.tarjetas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.tarjeta {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    border: var(--card-border) solid 2px;
+    box-shadow: 0 0 35px var(--card-shadow);
+    background-color: white;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+.texto-boton {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+}
+
+.tarjeta a {
+    width: fit-content;
+    background-color: var(--primary-color);
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: 50rem;
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    justify-content: left;
+}
