@@ -41,12 +41,12 @@
 				<h2 th:text="#{universidadess}">Universidades</h2>
                 <p th:text="#{textoUniversidadess}">Conoce todas las universidades.</p>
                 <a th:href="@{/universidades?lang=}+${usuario.lang}">
-                    Conocer mas
+                    Explorar
                 </a>
 				</div>
 
-				<div class="imgen-tarjeta">
-
+				<div class="imagen-tarjeta">
+					<img src="/css/assets/universidad-icon.png" alt="">
 				</div>
                     
             </div>
@@ -56,8 +56,12 @@
 					<h2>Areas de Estudio</h2>
                 <p>Conoce todas las areas en las que puedes estudiar</p>
                 <a th:href="@{/carreras/areas?lang=}+${usuario.lang}">
-                    Conocer mas
+                    Descubrir
                 </a>
+				</div>
+
+				<div class="imagen-tarjeta">
+					<img src="/css/assets/areas-icon.png" alt="">
 				</div>
                     
             </div>
@@ -67,8 +71,12 @@
 					<h2>Carreras</h2>
                 <p>Conoce todas las carreras en las que puedes estudiar</p>
                 <a th:href="@{/carreras/all?lang=}+${usuario.lang}">
-                    Conocer mas
+                    Mostrar todas
                 </a>
+				</div>
+
+				<div class="imagen-tarjeta">
+					<img src="/css/assets/carrera-icon.png" alt="">
 				</div>
                     
             </div>
