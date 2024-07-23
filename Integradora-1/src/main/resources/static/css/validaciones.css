@@ -1,0 +1,67 @@
+/* Estilo general de los campos */
+input, select, textarea {
+    border: 1px solid #da2828;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo para campos con error */
+.input-error, .select-error, .textarea-error {
+    border-color: #fc0000; /* Color rojo para el borde en caso de error */
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3); /* Sombra alrededor del borde */
+}
+
+/* Estilo para campos válidos (opcional) */
+.input-valid, .select-valid, .textarea-valid {
+    border-color: #0e47e28e; /* Color verde para el borde en caso de éxito */
+    box-shadow: 0 0 0 2px rgba(0, 190, 253, 0.707); /* Sombra alrededor del borde */
+}
+
+
+
+.validationErrors{
+    color: red;
+    text-shadow: 2px 2px 2.7px rgb(255, 119, 119);
+    transition: text-shadow 0.3s ease, box-shadow 0.3s ease;
+}
+
+#universidad #universidadError{
+    border-color: red;
+}
+
+#formError{
+    margin: auto;
+    display: block;
+}
+
+
+.myForm input{
+    
+    border-color: #08ff4e; /* Color verde para el borde en caso de éxito */
+    box-shadow: 0 0 0 2px rgba(63, 253, 0, 0.887); /* Sombra alrededor del borde */
+}
+
+/* Aplica estilos a todos los inputs dentro de un contenedor con la clase .form-group */
+.myForm input {
+    border: 2px solid #007BFF; /* Estilo del borde del input */
+    padding: 8px; /* Espaciado interno del input */
+    border-radius: 4px; /* Bordes redondeados del input */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra del input */
+}
+
+/* Estilo para inputs cuando tienen un error */
+.form-group input.input-error {
+    border: 2px solid red; /* Borde rojo para inputs con error */
+    box-shadow: 0 0 5px red; /* Sombra roja para inputs con error */
+}
+
+/* Estilo para inputs válidos */
+.form-group input.input-valid {
+    border: 2px solid green; /* Borde verde para inputs válidos */
+    box-shadow: 0 0 5px green; /* Sombra verde para inputs válidos */
+}
+
+/* Opcional: estilo para inputs deshabilitados */
+.form-group input:disabled {
+    background-color: #f0f0f0; /* Color de fondo para inputs deshabilitados */
+    cursor: not-allowed; /* Cursor en forma de prohibido para inputs deshabilitados */
+}
