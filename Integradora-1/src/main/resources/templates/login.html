@@ -5,61 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-    <title th:text="#{inicioTitulo}">PathFInder | Inicio</title>
+    <title th:text="#{inicioSesionTitulo}"></title>
 
     <link href="/css/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="css/global_font.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
-    <link rel='stylesheet'
-        href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-
-    <style>
-        ::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const header = document.querySelector('.header');
-            const navbar = document.querySelector('.navbar');
-            const navbarLogo = document.querySelector('.navbar-logo');
-
-            // Crear el botón del menú hamburguesa
-            const hamburger = document.createElement('div');
-            hamburger.classList.add('hamburger-menu');
-            hamburger.innerHTML = '<span></span><span></span><span></span>';
-
-            // Insertar el botón después del logo
-            navbarLogo.appendChild(hamburger);
-
-            hamburger.addEventListener('click', function () {
-                header.classList.toggle('expanded');
-                hamburger.classList.toggle('active');
-
-                // Ajustar la altura máxima del header para la animación
-                if (header.classList.contains('expanded')) {
-                    const navbarLinks = document.querySelector('.navbar-links');
-                    header.style.height = `${5 + navbarLinks.scrollHeight / 16}rem`;
-                } else {
-                    header.style.height = '6rem';
-                }
-            });
-
-            // Función para manejar el cambio de tamaño de la ventana
-            function handleResize() {
-                if (window.innerWidth > 768) {
-                    header.classList.remove('expanded');
-                    hamburger.classList.remove('active');
-                    header.style.height = '6rem';
-                }
-            }
-
-            // Agregar event listener para el cambio de tamaño de la ventana
-            window.addEventListener('resize', handleResize);
-        });
-    </script>
+    <script src="/js/cambiarIdioma.js"></script>
 </head>
 
 <body class="malla">
@@ -70,57 +22,32 @@
                     <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
                 <hr>
-                <a href="" style="display: none;">
-                    <div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">Idioma
-                    </div>
-                </a>
-                <a href="" style="display: none;">
-                    <div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon">Cerrar sesión
-                    </div>
-                </a>
-                <a href="" style="display: none;">
-                    <div class="link"><img src="css/assets/navbaricons/universidad.png" alt=""
-                            class="link-icon">Universidades</div>
-                </a>
-                <a href="" style="display: none;">
-                    <div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon">Areas</div>
-                </a>
-                <a href="" style="display: none;">
-                    <div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon">Carreras
-                    </div>
-                </a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon" th:text="#{idioma}"></div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon" th:text="#{cerrarSesion}">Cerrar </div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
             </div>
-
+    
             <div class="navbar-links" id="navbarLinks">
-                <a href="" style="display: yes;">
-                    <div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">Idioma
-                    </div>
-                </a>
-                <a th:href="@{/acercade}" style="display: yes;">
-                    <div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon">¿Quiénes
-                        somos?</div>
-                </a>
+                <div class="link">
+                    <img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">
+                    <select name="lenguajes" id="lang" onchange="changeLang(this)">
+                        <option th:text="#{idioma}"></option>
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+                <a th:href="@{/acercade}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon" th:text="#{quienesSomos}"></div></a>
                 <hr>
-                <a th:href="@{/login}" style="display: none;">
-                    <div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon">Iniciar
-                        sesión</div>
-                </a>
-                <a th:href="@{/inicio}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/home.png" alt="" class="link-icon">Volver al inicio</div></a>
-                <a th:href="@{/perfil}" style="display: none;">
-                    <div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon"
-                            class="link-icon">Perfil</div>
-                </a>
-                <a th:href="@{/registro}" style="display: none;">
-                    <div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt=""
-                            class="link-icon">Registrarse</div>
-                </a>
+                <a th:href="@{/login}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon" th:text="#{inicioSesion}"></div></a>
+                <a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/home.png" alt="" class="link-icon" th:text="#{regresoInicio}"></div></a>
+                <a th:href="@{/perfil}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon" th:text="#{perfil}"></div></a>
+                <a th:href="@{/registro}" style="display: none;"><div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt="" class="link-icon" th:text="#{creaCuenta}"></div></a>
             </div>
 
         </nav>
-
-        <div>
-
-        </div>
     </header>
     <center>
 
@@ -162,6 +89,47 @@
             </div>
         </div>
     </center>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.header');
+    const navbar = document.querySelector('.navbar');
+    const navbarLogo = document.querySelector('.navbar-logo');
+
+    // Crear el botón del menú hamburguesa
+    const hamburger = document.createElement('div');
+    hamburger.classList.add('hamburger-menu');
+    hamburger.innerHTML = '<span></span><span></span><span></span>';
+
+    // Insertar el botón después del logo
+    navbarLogo.appendChild(hamburger);
+
+    hamburger.addEventListener('click', function() {
+        header.classList.toggle('expanded');
+        hamburger.classList.toggle('active');
+        
+        // Ajustar la altura máxima del header para la animación
+        if (header.classList.contains('expanded')) {
+            const navbarLinks = document.querySelector('.navbar-links');
+            header.style.height = `${5 + navbarLinks.scrollHeight / 16}rem`;
+        } else {
+            header.style.height = '6rem';
+        }
+    });
+
+    // Función para manejar el cambio de tamaño de la ventana
+    function handleResize() {
+        if (window.innerWidth > 768) {
+            header.classList.remove('expanded');
+            hamburger.classList.remove('active');
+            header.style.height = '6rem';
+        }
+    }
+
+    // Agregar event listener para el cambio de tamaño de la ventana
+    window.addEventListener('resize', handleResize);
+});
+    </script>
 </body>
 
 </html>
