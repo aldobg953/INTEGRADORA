@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
     <title th:text="#{registroTitulo}"></title>
-
+    
     <link href="/css/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="css/global_font.css">
     <link rel="stylesheet" href="css/login.css">
@@ -29,6 +29,7 @@
                 window.location.href = updatedUrl;
             }
         </script>
+        <script src="/js/validacionesRegistro.js"></script>
 </head>
 
 <body class="malla">
@@ -90,7 +91,6 @@
                             name="nombre" required pattern="\S+\s+\S+.*"
                             th:title="#{errorNombre}" autofocus th:field="*{nombre}">
                         </div>
-
                         <div class="form-input">
                             <span class="input-icon"><i class="fi fi-rr-envelope"></i></span>
                             <input id="email" type="email" class="input" th:placeholder="#{nuevoCorreo}"

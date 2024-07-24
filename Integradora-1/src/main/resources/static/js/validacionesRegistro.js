@@ -52,4 +52,6 @@ document.addEventListener("DOMContentLoaded", function() {
             emailUsedDiv.style.display = 'none';
         }, 5000); // Oculta la alerta después de 5 segundos
     }
-});        
+});
+
+console.log("gffff");
