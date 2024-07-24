@@ -105,7 +105,7 @@ public class ConfiguracionControlador {
     public String cambiarFoto(@RequestParam("selectedImage") String imagen, 
     @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        System.out.println(imagen + "\n\n\n\n\n");
+        usuarioServicio.cambiarFotoUsuario(usuario, imagen);
         return "redirect:/configuracion/perfil?lang="+usuario.getLang();
     }
     

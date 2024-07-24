@@ -206,4 +206,15 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		}
 		return true;
 	}
+
+	public boolean cambiarFotoUsuario(Usuario usuario, String fotoPerfil){
+		
+		usuario.setFoto_perfil(fotoPerfil);
+		try {
+			usuarioRepositorio.save(usuario);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 }
