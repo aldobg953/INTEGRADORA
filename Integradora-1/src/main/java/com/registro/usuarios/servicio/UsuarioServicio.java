@@ -15,6 +15,7 @@ public interface UsuarioServicio extends UserDetailsService{
 	public List<Usuario> listarUsuarios();
 
 	Usuario findByEmail(String username);
+	Usuario findByEmailwithFavoritos(String username);
 	
 	public boolean actualizarUsuario(Usuario usuario);
 
