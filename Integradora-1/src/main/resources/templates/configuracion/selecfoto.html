@@ -7,28 +7,6 @@
     <link rel="stylesheet" href="css/global_font.css">
     <script src="/js/navbar.js"></script>
     <script src="/js/utils.js"></script>
-    <script>
-        /*Funcionalidad acordion*/
-        document.addEventListener('DOMContentLoaded', function () {
-            const accordionButtons = document.querySelectorAll('[data-accordion-target]');
-
-            accordionButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const target = document.querySelector(this.getAttribute('data-accordion-target'));
-                    const expanded = this.getAttribute('aria-expanded') === 'true';
-                    accordionButtons.forEach(btn => {
-                        const panel = document.querySelector(btn.getAttribute('data-accordion-target'));
-                        btn.setAttribute('aria-expanded', 'false');
-                        panel.classList.add('hidden');
-                    });
-                    if (!expanded) {
-                        this.setAttribute('aria-expanded', 'true');
-                        target.classList.remove('hidden');
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 
     <body class="bg-gray-100 dark:bg-gray-800">
@@ -99,6 +77,56 @@
                 </div>
             </div>
         </nav>
+        <h1 class="mx-28 mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">Selecciona tu foto de perfil de <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span></h1>
+        <p class="mx-28 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Puedes cambiar la foto de perfil, siempre que gustes.</p>
+
+        <div class="border border-blue-800 md:mx-28 rounded-lg my-10 shadow-lg shadow-blue-500/50 p-6">
+                <div class="flex flex-wrap justify-center">
+                    <div th:each="i : ${#numbers.sequence(1, 4)}" class="image-option m-4 cursor-pointer">
+                        <div class="relative">
+                            <img th:src="@{'/img/perfilUsuario/perfil' + ${i} + '.jpg'}" 
+                                 th:alt="'perfil ' + ${i}"
+                                 th:data-name="'perfil' + ${i}" 
+                                 class="w-56 h-56 rounded-full "
+                                 data-index="${i}" />
+                            <div class="absolute inset-0 rounded-full ring-4 ring-transparent transition-all duration-200 select-border"></div>
+                        </div>
+                    </div>
+                </div>
+                <form th:action="@{/configuracion/seleccionarperfil}" method="post">
+                <input type="hidden" id="selectedImage" name="selectedImage" />
+                <div class="mt-8 flex justify-center">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Enviar selección
+                    </button>
+                </div>
+            </form>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+    const imageContainers = document.querySelectorAll(".image-option");
+    const hiddenInput = document.getElementById("selectedImage");
+
+    imageContainers.forEach(container => {
+        container.addEventListener("click", function() {
+            // Eliminar el borde de todas las imágenes
+            imageContainers.forEach(container => {
+                container.querySelector(".select-border").classList.remove("ring-blue-500");
+                container.querySelector(".select-border").classList.add("ring-transparent");
+            });
+
+            // Añadir el borde a la imagen seleccionada
+            this.querySelector(".select-border").classList.remove("ring-transparent");
+            this.querySelector(".select-border").classList.add("ring-blue-500");
+
+            // Establecer el valor del campo oculto usando el data-name de la imagen
+            hiddenInput.value = this.querySelector("img").getAttribute("data-name");
+            console.log("Selected Image:", hiddenInput.value); // Para depuración
+        });
+    });
+});
+
+        </script>
         
     </body>
 </html>

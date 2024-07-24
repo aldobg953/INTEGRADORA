@@ -100,5 +100,13 @@ public class ConfiguracionControlador {
         model.addAttribute("usuario", usuario);
         return "configuracion/selecfoto";
     }
+
+    @PostMapping("seleccionarperfil")
+    public String cambiarFoto(@RequestParam("selectedImage") String imagen, 
+    @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        System.out.println(imagen + "\n\n\n\n\n");
+        return "redirect:/configuracion/perfil?lang="+usuario.getLang();
+    }
     
 }
