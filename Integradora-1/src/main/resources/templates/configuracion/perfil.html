@@ -110,13 +110,13 @@
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
           </svg>
           <span class="sr-only">Info</span>
-          <h3 class="text-lg font-medium">¡Actualizado con exito!</h3>
+          <h3 class="text-lg font-medium" th:text="#{actualizadoExito}">¡Actualizado con exito!</h3>
         </div>
-        <div class="mt-2 mb-4 text-sm">
+        <div class="mt-2 mb-4 text-sm" th:text="#{actualizadoExitoLargo}">
             La informacion a sido actualizada con exito, para cualquier duda o comentario, ¡contactanos!
         </div>
         <div class="flex">
-          <button type="button" onclick="ocultarAlerta()" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close">
+          <button type="button" onclick="ocultarAlerta()" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close" th:text="#{cerrar}">
             Cerrar
           </button>
         </div>
@@ -128,12 +128,12 @@
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
           </svg>
           <span class="sr-only">Info</span>
-          <h3 class="text-lg font-medium">Error al actualizar!</h3>
+          <h3 class="text-lg font-medium" th:text="#{errorActualizacion}">Error al actualizar</h3>
         </div>
         <div class="mt-2 mb-4 text-sm" th:text="${msj}">mensaje
         </div>
         <div class="flex">
-          <button type="button" onclick="ocultarAlerta()" class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+          <button type="button" onclick="ocultarAlerta()" class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close" th:text="#{cerrar}">
             Cerrar
           </button>
         </div>
@@ -147,7 +147,7 @@
                 class="flex bg-gradient-to-r from-cyan-500 to-blue-500 items-center justify-between w-full p-5 font-medium rtl:text-right border border-b-0 border-gray-200 rounded-t-xl focus:border-t-4 focus:border-x-4 focus:border-blue-300 gap-3"
                 data-accordion-target="#accordion-color-body-1" aria-expanded="true"
                 aria-controls="accordion-color-body-1">
-                <span>Actualizar Informacion del perfil</span>
+                <span th:text="#{actualizarInfoPerfil}">Actualizar Informacion del perfil</span>
                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -161,12 +161,12 @@
                 <form th:action="@{/configuracion/actualizar}" method="post"
                     class="md:pl-7 ">
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{nombre}">Nombre:</label>
                         <input type="text" id="newNombre" name="newNombre" th:value="${usuario.nombre}"
                             class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 mt-2 dark:text-white">Apellido Paterno:</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 mt-2 dark:text-white" th:text="#{apellido}">Apellido Paterno:</label>
                         <input type="text" id="newApellidoP" name="newApellidoP" th:value="${usuario.apellidoP}"
                             class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
                     </div>
@@ -174,7 +174,7 @@
                         <button
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                             <span
-                                class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                                class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0" th:text="#{actualizarPerfil}">
                                 Actualizar Perfil
                             </span>
                         </button>
@@ -186,7 +186,7 @@
                 class="bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-between w-full p-5 font-medium rtl:text-right border border-b-0 border-gray-200 focus:border-x-4 focus:border-t-4 focus:border-blue-300 hover:bg-blue-100  gap-3"
                 data-accordion-target="#accordion-color-body-2" aria-expanded="false"
                 aria-controls="accordion-color-body-2">
-                <span>Actualizar Correo Electronico</span>
+                <span th:text="#{actualizarCorreo}">Actualizar Correo Electronico</span>
                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -197,23 +197,23 @@
         <div id="accordion-color-body-2" class="hidden border-4 border-blue-300 rounded-b-lg" aria-labelledby="accordion-color-heading-2">
             <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
                 <div class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
-                    <span class="font-medium">¡Información importante!</span>  Una vez modificado el correo, tendrá que esperar 2 días para volver a actualizarlo. Se cerrará la sesión.
+                    <span class="font-medium" th:text="#{infoImportante}">¡Información importante!</span> <span th:text="#{correoDias}">Una vez modificado el correo, tendrá que esperar 2 días para volver a actualizarlo. Se cerrará la sesión.</span> 
                   </div>
                 <form th:action="@{/configuracion/actualizarEmail}" method="post">
-                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nuevo correo electrónico: </div>
+                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{nuevoCorreo}">Nuevo correo electrónico: </div>
                     <input type="text" id="newCorreo" name="newCorreo" th:value="${usuario.email}"
                         class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
-                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirma correo electrónico: </div>
+                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{confirmaCorreo}">Confirma correo electrónico: </div>
                     <input type="text" id="newConfirmacionCorreo" name="newConfirmacionCorreo" th:value="${usuario.email}"
                         class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
-                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingresa tu contraseña: </div>
+                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{ingresaContra}">Ingresa tu contraseña: </div>
                     <input type="Password" id="password" name="password"
                         class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
                     <div class="p-4 flex justify-end pr-20">
 
                         <button
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
-                            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0" th:text="#{actualizarCorreo}">
                                 Actualizar Correo Electronico
                             </span>
                         </button>
@@ -226,7 +226,7 @@
                 class="bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-between w-full p-5 font-medium rtl:text-right border border-gray-200 focus:border-x-4 focus:border-t-4 focus:border-blue-300  hover:bg-blue-100 gap-3"
                 data-accordion-target="#accordion-color-body-3" aria-expanded="false"
                 aria-controls="accordion-color-body-3">
-                <span>Actualizar contraseña</span>
+                <span th:text="#{actualizarContra}">Actualizar contraseña</span>
                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -237,19 +237,19 @@
         <div id="accordion-color-body-3" class="hidden border-4 border-blue-300 rounded-b-lg" aria-labelledby="accordion-color-heading-3">
             <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700 flex flex-col">
                 <form th:action="@{/configuracion/actualizarPassword}" method="post">
-                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingrese la contraseña nueva: </div>
+                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{nuevaContra}">Ingrese la contraseña nueva: </div>
                     <input type="password" id="newPass" name="newPass"
                         class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
-                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirme la contraseña nueva: </div>
+                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{confirmaContraNueva}">Confirme la contraseña nueva: </div>
                     <input type="password" id="confNewPass" name="confNewPass"
                         class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
-                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingrese su contraseña actual: </div>
+                    <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{contraActual}">Ingrese su contraseña actual: </div>
                     <input type="password" id="oldPass" name="oldPass"
                         class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 outline-dashed">
                     <div class="p-4 flex justify-end pr-20">
                         <button
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
-                            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0" th:text="#{actualizarContra}">
                                 Actualizar Contaseña
                             </span>
                         </button>

@@ -116,7 +116,7 @@
 					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="#{universidadess}">Universidades</h5>
 				</a>
 				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{textoUniversidadess}">Conoce todas las universidades.</p>
-				<a th:href="@{/universidades?lang=}+${usuario.lang}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue rounded-full hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue dark:focus:ring-blue-800">
+				<a th:href="@{/universidades?lang=}+${usuario.lang}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue rounded-full hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue dark:focus:ring-blue-800" th:text="#{conocerMas}">
 					Conocer mas
 					<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
 						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -125,10 +125,10 @@
 			</div>
 			<div class="mr-8 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-4">
 				<a th:href="@{/carreras/areas?lang=}+${usuario.lang}">
-					<h5 class="mb-2 text-3xl font-bold tracking-tight dark:text-white">Areas de Estudio</h5>
+					<h5 class="mb-2 text-3xl font-bold tracking-tight dark:text-white" th:text="#{areaEstudio}">Areas de Estudio</h5>
 				</a>
-				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Conoce todas las areas en las que puedes estudiar</p>
-				<a th:href="@{/carreras/areas?lang=}+${usuario.lang}"class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue rounded-full hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue dark:focus:ring-blue-800">
+				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{textoAreas}">Conoce todas las areas en las que puedes estudiar</p>
+				<a th:href="@{/carreras/areas?lang=}+${usuario.lang}"class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue rounded-full hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue dark:focus:ring-blue-800" th:text="#{conocerMas}">
 					Conocer mas
 					<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
 						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -138,10 +138,10 @@
 
 			<div class="mr-8 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-4">
 				<a th:href="@{/carreras/all?lang=}+${usuario.lang}">
-					<h5 class="mb-2 text-3xl font-bold tracking-tight dark:text-white">Carreras</h5>
+					<h5 class="mb-2 text-3xl font-bold tracking-tight dark:text-white" th:text="#{carrerass}">Carreras</h5>
 				</a>
-				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Conoce todas las carreras en las que puedes estudiar</p>
-				<a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue rounded-full hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue dark:focus:ring-blue-800">
+				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{textoCarreras}">Conoce todas las carreras en las que puedes estudiar</p>
+				<a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue rounded-full hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue dark:focus:ring-blue-800" th:text="#{conocerMas}">
 					Conocer mas
 					<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
 						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -152,10 +152,10 @@
 		<div class="basis-1/2 flex flex-col">
 			
 			<div class="mt-4 w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-				<h5 class="mb-3 text-base font-semibold md:text-3xl dark:text-white">
+				<h5 class="mb-3 text-base font-semibold md:text-3xl dark:text-white" th:text="#{carrerasPopu}">
 					Carreras Populares en <span class="text-3xl font-bold text-gradient">PathFinder <i class="fi fi-rr-interrogation navbar-icon "></i></span>
 				</h5>
-				<p class="text-sm font-normal text-gray-500 dark:text-gray-400" th:text="#{textoCarrerasPopu}">Conoce las carreras mas populares</p>
+				<p class="text-sm font-normal text-gray-500 dark:text-gray-400" th:text="#{textoCarrerasPopu}" th:text="#{textoCarrerasPopu}">Conoce las carreras mas populares</p>
 				<ul class="my-4 space-y-3">
 					<li th:each="carrera : ${carreras}">
 						<a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}"
