@@ -158,15 +158,6 @@ body::-webkit-scrollbar {
     object-fit: cover;
 }
 
-#link-register {
-    filter: saturate(3);
-    color: var(--primary-color);
-}
-
-#link-register:hover {
-    background-color: rgba(255, 255, 255, 0.619);
-}
-
 .link-icon {
     width: 1.5rem;
     height: 1.5rem;
