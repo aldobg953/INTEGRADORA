@@ -36,7 +36,7 @@
 
                 <hr>
                 <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
-                    <div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon"
+                    <div class="link"><img th:src="@{/img/perfilUsuario/perfil1.jpg}" alt="" id="profile-icon"
                             class="link-icon" th:text="#{perfil}"></div>
                 </a>
             </div>
@@ -114,15 +114,15 @@
             </div>
         </div>
 
-        <div class="favoritos">
+        <div class="favoritos dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
             <div class="titulo-favoritos">
                 <h2 th:utext="#{favoritos}"></h2>
             </div>
         
-            <ul class="favoritos-grid">
-                <li th:each="carrera : ${carreras}"> <!-- Aqui iría la variable que guarda los favoritos del usuario-->
+            <ul class="favoritos-grid dark:bg-gray-800 dark:border-gray-700">
+                <li th:each="carrera : ${carreras}" class="dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:hover:shadow-none"> <!-- Aqui iría la variable que guarda los favoritos del usuario-->
                     <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                        <span th:text="${carrera.nombre}" class="dark:text-white" id="titulo-favorito"></span>
+                        <span th:text="${carrera.nombre}" class="titulo-favorito dark:text-white"></span>
                         <span id="favorito" class="text-gradient" th:utext="#{favoritoTag}"></span>
                     </a>
                 </li>
