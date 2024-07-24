@@ -74,8 +74,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 	@Override
     public Usuario findByEmail(String username) {
-        return usuarioRepositorio.findByEmail(username);
+		Usuario usuario =usuarioRepositorio.findByEmail(username);
+		usuario.setCarrerasFavoritas(null);
+        return usuario;
     }
+	@Override
+	public Usuario findByEmailwithFavoritos(String username){
+		return usuarioRepositorio.findByEmail(username);
+	}
 
 	@Override
 	public boolean actualizarUsuario(Usuario usuario){

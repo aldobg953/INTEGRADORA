@@ -75,6 +75,10 @@ public class Carrera {
     @ManyToMany(mappedBy = "carrerasFavoritas")
     private Set<Usuario> usuariosFavoritos = new HashSet<>();
 
+    public boolean esFavoritaParaUsuario(Usuario usuario) {
+        return usuariosFavoritos.contains(usuario);
+    }
+    
     public Carrera(){
 
     }
