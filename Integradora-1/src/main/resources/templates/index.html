@@ -36,7 +36,7 @@
     </header>
 
     <div class="principal-text">
-        <h1 th:text="'¡' + #{saludo} + ', ' + ${usuario.nombre} + '!'"></h1>
+        <h1 th:text="#{saludo} + ', ' + ${usuario.nombre} + '!'"></h1>
     </div>
 
 	<div class="main-content dark:bg-gray-800">
@@ -46,7 +46,7 @@
 				<div class="texto-boton">
 				<h2 th:text="#{universidadess}" class="dark:text-white">Universidades</h2>
                 <p th:text="#{textoUniversidadess}" class="dark:text-white">Conoce todas las universidades.</p>
-                <a th:href="@{/universidades?lang=}+${usuario.lang}">
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" class="dark:shadow-none dark:hover:shadow-none">
                     Explorar
                 </a>
 				</div>
@@ -61,7 +61,7 @@
 				<div class="texto-boton">
 					<h2 class="dark:text-white">Areas de Estudio</h2>
                 <p class="dark:text-white">Conoce todas las areas en las que puedes estudiar</p>
-                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}">
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="dark:shadow-none dark:hover:shadow-none">
                     Descubrir
                 </a>
 				</div>
@@ -76,7 +76,7 @@
 				<div class="texto-boton">
 					<h2 class="dark:text-white" th:text="#{carrerass}">Carreras</h2>
                 <p class="dark:text-white" th:text="#{textoCarreras}">Conoce todas las carreras en las que puedes estudiar</p>
-                <a th:href="@{/carreras/all?lang=}+${usuario.lang}">
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="dark:shadow-none dark:hover:shadow-none">
                     Mostrar todas
                 </a>
 				</div>
@@ -97,7 +97,7 @@
                     <li th:each="carrera : ${carreras}">
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                             <span th:text="${carrera.nombre}" class="dark:text-white"></span>
-                            <span id="popular-tag" class="text-gradient dark:text-white">Popular</span>
+                            <span id="popular-tag" class="text-gradient">Popular</span>
                         </a>
                     </li>
                 </ul>
