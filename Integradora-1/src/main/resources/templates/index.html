@@ -57,7 +57,6 @@
                     
             </div>
 
-<<<<<<< HEAD
 			<div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
 				<ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
 					<li>
@@ -129,7 +128,7 @@
 				<h5 class="mb-3 text-base font-semibold md:text-3xl dark:text-white" th:text="#{carrerasPopu}">
 					Carreras Populares en <span class="text-3xl font-bold text-gradient">PathFinder <i class="fi fi-rr-interrogation navbar-icon "></i></span>
 				</h5>
-				<p class="text-sm font-normal text-gray-500 dark:text-gray-400" th:text="#{textoCarrerasPopu}" th:text="#{textoCarrerasPopu}">Conoce las carreras mas populares</p>
+				<p class="text-sm font-normal text-gray-500 dark:text-gray-400" th:text="#{textoCarrerasPopu}">Conoce las carreras mas populares</p>
 				<ul class="my-4 space-y-3">
 					<li th:each="carrera : ${carreras}">
 						<a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}"
@@ -150,15 +149,6 @@
 								d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 						</svg>
 						Quieres ver mas carreras?</a>
-=======
-            <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
-				<div class="texto-boton">
-					<h2 class="dark:text-white">Areas de Estudio</h2>
-                <p class="dark:text-white">Conoce todas las areas en las que puedes estudiar</p>
-                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}">
-                    Descubrir
-                </a>
->>>>>>> e636d328050c99325505d5e6f42865c571792b4f
 				</div>
 
 				<div class="imagen-tarjeta">
@@ -169,8 +159,8 @@
 
             <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
 				<div class="texto-boton">
-					<h2 class="dark:text-white">Carreras</h2>
-                <p class="dark:text-white">Conoce todas las carreras en las que puedes estudiar</p>
+					<h2 class="dark:text-white" th:text="#{carrerass}">Carreras</h2>
+                <p class="dark:text-white" th:text="#{textoCarreras}">Conoce todas las carreras en las que puedes estudiar</p>
                 <a th:href="@{/carreras/all?lang=}+${usuario.lang}">
                     Mostrar todas
                 </a>
@@ -183,6 +173,7 @@
             </div>
         </div>
 
+		
         <div class="populares dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
                 <h2 class="dark:text-white">
                     Carreras populares en <span class="text-gradient">PathFinder</span>
@@ -191,13 +182,13 @@
                     <li th:each="carrera : ${carreras}">
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                             <span th:text="${carrera.nombre}" class="dark:text-white"></span>
-                            <span id="popular-tag" class="text-gradient" class="dark:text-white">Popular</span>
+                            <span id="popular-tag" class="text-gradient dark:text-white">Popular</span>
                         </a>
                     </li>
                 </ul>
 
 				<img src="/css/assets/fuego.png" alt="">
-        </div>
+        </div> 
     </div>
 </div>
 </div>
