@@ -36,7 +36,7 @@
 
                 <hr>
                 <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
-                    <div class="link"><img th:src="@{/img/perfilUsuario/perfil1.jpg}" alt="" id="profile-icon"
+                    <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
                             class="link-icon" th:text="#{perfil}"></div>
                 </a>
             </div>

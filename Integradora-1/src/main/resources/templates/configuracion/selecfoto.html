@@ -82,7 +82,7 @@
 
         <div class="border border-blue-800 md:mx-28 rounded-lg my-10 shadow-lg shadow-blue-500/50 p-6">
                 <div class="flex flex-wrap justify-center">
-                    <div th:each="i : ${#numbers.sequence(1, 4)}" class="image-option m-4 cursor-pointer">
+                    <div th:each="i : ${#numbers.sequence(1, 8)}" class="image-option m-4 cursor-pointer">
                         <div class="relative">
                             <img th:src="@{'/img/perfilUsuario/perfil' + ${i} + '.jpg'}" 
                                  th:alt="'perfil ' + ${i}"
@@ -104,28 +104,22 @@
         </div>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-    const imageContainers = document.querySelectorAll(".image-option");
-    const hiddenInput = document.getElementById("selectedImage");
+                const imageContainers = document.querySelectorAll(".image-option");
+                const hiddenInput = document.getElementById("selectedImage");
 
-    imageContainers.forEach(container => {
-        container.addEventListener("click", function() {
-            // Eliminar el borde de todas las imágenes
-            imageContainers.forEach(container => {
-                container.querySelector(".select-border").classList.remove("ring-blue-500");
-                container.querySelector(".select-border").classList.add("ring-transparent");
+                imageContainers.forEach(container => {
+                    container.addEventListener("click", function() {
+                        imageContainers.forEach(container => {
+                            container.querySelector(".select-border").classList.remove("ring-blue-500");
+                            container.querySelector(".select-border").classList.add("ring-transparent");
+                        });
+                        this.querySelector(".select-border").classList.remove("ring-transparent");
+                        this.querySelector(".select-border").classList.add("ring-blue-500");
+                        hiddenInput.value = this.querySelector("img").getAttribute("data-name");
+                        console.log("Selected Image:", hiddenInput.value); 
+                    });
+                });
             });
-
-            // Añadir el borde a la imagen seleccionada
-            this.querySelector(".select-border").classList.remove("ring-transparent");
-            this.querySelector(".select-border").classList.add("ring-blue-500");
-
-            // Establecer el valor del campo oculto usando el data-name de la imagen
-            hiddenInput.value = this.querySelector("img").getAttribute("data-name");
-            console.log("Selected Image:", hiddenInput.value); // Para depuración
-        });
-    });
-});
-
         </script>
         
     </body>

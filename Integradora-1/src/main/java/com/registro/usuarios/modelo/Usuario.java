@@ -37,6 +37,7 @@ public class Usuario {
 	private boolean darkmode;
 	private Long id_universidad;
 	private String lang;
+	private String foto_perfil;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
@@ -182,6 +183,15 @@ public class Usuario {
 	public void setCarrerasFavoritas(Set<Carrera> carrerasFavoritas) {
 		this.carrerasFavoritas = carrerasFavoritas;
 	}
+
+	public String getFoto_perfil() {
+		return foto_perfil;
+	}
+
+	public void setFoto_perfil(String foto_perfil) {
+		this.foto_perfil = foto_perfil;
+	}
+
 
 
 	
