@@ -61,12 +61,11 @@ body {
     background-color: var(--header-bg);
     backdrop-filter: blur(25px);
     padding: 1rem 2rem;
-    z-index: 1000;
+    z-index: 10;
     border-radius: 1rem;
     border: var(--header-border) solid 2px;
     box-shadow: 0 0 35px #00000018;
     transition: width 0.5s cubic-bezier(0.25, 1.5, 0.5, 1), 0.3s ease-out;
-    overflow: hidden;
 }
 
 .navbar {
@@ -120,6 +119,7 @@ body {
     border-radius: 2rem;
     scale: 1.1;
     background-color: rgba(0, 0, 0, 0.244);
+    cursor: pointer;
 }
 
 .link:active {
@@ -183,6 +183,16 @@ body {
     transform: rotate(-45deg);
 }
 
+select {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none; /* Desactiva el borde */
+    outline: none;
+}
+
 /* Main Content */
 .main-content {
     display: flex;
@@ -191,6 +201,12 @@ body {
     height: 100vh;
     width: 100%;
     padding: 3rem 10vw;
+}
+
+#mensaje-de-Error {
+    color: red;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 /* Modificaciones y adiciones para hacer la tarjeta responsiva */
@@ -219,8 +235,17 @@ body {
     align-items: center;
     width: 50%;
     height: 100%;
-    padding: clamp(100px, 7rem, 112px);
+    padding: 5rem;
     transition: all 0.3s ease; /* Agregamos transición para suavizar los cambios */
+}
+
+.login-image img:first-child{
+    height: 15%;
+}
+
+.login-image img:last-child{
+    height: 85%;
+    scale: 1.5;
 }
 
 .login-image, .login-form > *{
@@ -242,13 +267,7 @@ body {
     font-size: var(--principal-subtitle-size);
 }
 
-.login-image img:first-child{
-    width: 15rem;
-}
 
-.login-image img:last-child{
-    scale: 1.2;
-}
 
 form {
     display: flex;
@@ -256,9 +275,11 @@ form {
     align-items: center;
     width: 100%;
 }
+
 form > * {
     margin: .5rem;
 }
+
 .form-input {
     position: relative;
     display: flex;
@@ -274,7 +295,7 @@ form > * {
     align-items: center;
     left: .7rem;
     pointer-events: none; /* Permite hacer clic a través del icono */
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     line-height: 0;
 }
 
@@ -282,7 +303,7 @@ i, ::placeholder{
     color: #7E7E7E;
 }
 
-input:focus {
+input:focus{
     border-color: #0047FF;
 }
 
@@ -290,21 +311,24 @@ input:focus {
 input{
     box-shadow: 0 0 15px #0000001e;
     width: 100%;
-    height: 4.8rem;
+    height: 4rem;
     border-radius: 1.3rem;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     background: #fff;
     padding: 1rem 1rem 1rem 3rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
 }
 
 /* Button Styles */
 .btn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
     width: 100%;
     max-width: 600px;
-    height: 4.8rem;
+    height: 4rem;
     border-radius: 1.3rem;
     border: none;
     font-weight: 600;
@@ -335,7 +359,11 @@ input{
 }
 
 .btn-txt {
-    font-size: 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
     color: #fff;
 }
 
@@ -365,7 +393,7 @@ input{
 
     .login-form {
         width: 100%;
-        padding: clamp(60px, 7rem, 100px);
+        padding: clamp(60px, 5rem, 100px);
     }
 
     #welcome-title {
@@ -389,7 +417,7 @@ input{
 /* Media query para móviles */
 @media screen and (max-width: 480px) {
     .tarjeta {
-        width: 95vw;
+        width: 100vw;
         min-height: 450px;
     }
 
@@ -405,12 +433,77 @@ input{
         font-size: calc(var(--principal-subtitle-size) * 0.8);
     }
 
-    input, .btn {
+    input {
         height: 3.5rem;
+        font-size: 1rem;
+        padding: 1rem 1rem 1rem 2.5rem;
+    }
+
+    .btn {
+        height: 3.5rem;
+        font-size: 1rem;
+    }
+
+    .btn-txt {
         font-size: 1rem;
     }
 
     .input-icon {
         font-size: 1.3rem;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 1000px) {
+    .header {
+        left: 2vw;
+        right: 2vw;
+        padding: 1rem 2rem;
+        align-items: center;
+        transition: 0.5s ease-out;
+    }
+
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar-logo {
+        width: 100%;
+        justify-content: center;
+        position: relative;
+    }
+
+    .hamburger-menu {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    .navbar-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        display: none;
+    }
+
+    .navbar-links * {
+        margin: 0.25rem;
+    }
+
+    .header.expanded .navbar-links {
+        opacity: 1;
+        display: flex;
+    }
+
+    .navbar-links a {
+        margin: 0.5rem 0;
+    }
+
+    .navbar-logo hr, .navbar-links hr {
+        display: none;
     }
 }

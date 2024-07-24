@@ -136,36 +136,104 @@ public class CarreraControlador {
 
     @GetMapping("/buscarCarreras")
     public String buscarCarreras(
-    @RequestParam(name = "search", required = false) String search,
-    @RequestParam(name = "idModalidad", required = false) Long idModalidad,
-    @RequestParam(name = "idHorario", required = false) Long idHorario,
-    @RequestParam(name = "idUniversidad", required = false) Long idUniversidad,
-    @RequestParam(name = "idArea", required = false) Long idArea,
-    @RequestParam(name = "bilingue", required = false) Integer bilingue,
-    @RequestParam(name = "lang", required = false) String lang, // Agregado para recibir el parámetro lang
-    @AuthenticationPrincipal UserDetails userDetails,
-    Model model) {
-    
+        @RequestParam(name = "search", required = false) String search,
+        @RequestParam(name = "idModalidad", required = false) Long idModalidad,
+        @RequestParam(name = "idHorario", required = false) Long idHorario,
+        @RequestParam(name = "idUniversidad", required = false) Long idUniversidad,
+        @RequestParam(name = "idArea", required = false) Long idArea,
+        @RequestParam(name = "bilingue", required = false) Integer bilingue,
+        @RequestParam(name = "lang", required = false) String lang, // Agregado para recibir el parámetro lang
+        @AuthenticationPrincipal UserDetails userDetails,
+        Model model) {
 
-    Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-    lang = usuario.getLang();
-    // Usamos el parámetro lang para obtener datos localizados
-    List<Modalidad> modalidades = modalidadServicio.getAllModalidades(lang);
-    List<Horario> horarios = horarioServicio.getAllHorarios(lang);
-    List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadesResumen();
-    List<AreaDTO> areas = areaServicio.getAllAreas(lang);
-    
-    // Pasamos todos los parámetros a la búsqueda de carreras
-    List<Carrera> carreras = carreraServicio.buscarCarreras(idModalidad, idHorario, idUniversidad, idArea, bilingue, lang);
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        lang = usuario.getLang();
+        List<Modalidad> modalidades = modalidadServicio.getAllModalidades(lang);
+        List<Horario> horarios = horarioServicio.getAllHorarios(lang);
+        List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadesResumen();
+        List<AreaDTO> areas = areaServicio.getAllAreas(lang);
+        
+        List<Carrera> carreras = carreraServicio.buscarCarreras(idModalidad, idHorario, idUniversidad, idArea, bilingue, lang);
 
-    // Agregamos todos los datos al modelo
-    model.addAttribute("modalidades", modalidades);
-    model.addAttribute("horarios", horarios);
-    model.addAttribute("universidades", universidades);
-    model.addAttribute("areas", areas);
-    model.addAttribute("carreras", carreras);
-    model.addAttribute("usuario", usuario);
-    
-    return "carreras/allcarreras";
-}
+        model.addAttribute("modalidades", modalidades);
+        model.addAttribute("horarios", horarios);
+        model.addAttribute("universidades", universidades);
+        model.addAttribute("areas", areas);
+        model.addAttribute("carreras", carreras);
+        model.addAttribute("usuario", usuario);
+        
+        return "carreras/allcarreras";
+    }
+
+    @GetMapping("/all/{id}")
+    public String mostrarCarrerasComparacion(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        String lang = usuario.getLang();
+        List<Carrera> carreras = carreraServicio.getAllCarreras(lang);
+        List<Modalidad> modalidades = modalidadServicio.getAllModalidades(lang);
+        List<Horario> horarios = horarioServicio.getAllHorarios(lang);
+        List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadesResumen();
+        List<AreaDTO> areas = areaServicio.getAllAreas(lang);
+        Carrera carreraAComparar = carreraServicio.getCarreraById(id, lang);
+        model.addAttribute("carreraAComparar", carreraAComparar);
+        model.addAttribute("modalidades", modalidades);
+        model.addAttribute("horarios", horarios);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("carreras", carreras);
+        model.addAttribute("universidades", universidades);
+        model.addAttribute("areas", areas);
+        return "carreras/seleccionarCarreraComp";
+    }
+
+    @GetMapping("/buscarCarrerasComp")
+    public String buscarCarrerasComp(
+        @RequestParam(name = "search", required = false) String search,
+        @RequestParam(name = "idModalidad", required = false) Long idModalidad,
+        @RequestParam(name = "idHorario", required = false) Long idHorario,
+        @RequestParam(name = "idUniversidad", required = false) Long idUniversidad,
+        @RequestParam(name = "idArea", required = false) Long idArea,
+        @RequestParam(name = "bilingue", required = false) Integer bilingue,
+        @RequestParam(name = "lang", required = false) String lang, // Agregado para recibir el parámetro lang
+        @RequestParam(name = "id_carrera_comp", required = false) Long id_carrera_comp,
+        @AuthenticationPrincipal UserDetails userDetails,
+        Model model) {
+
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        lang = usuario.getLang();
+        List<Modalidad> modalidades = modalidadServicio.getAllModalidades(lang);
+        List<Horario> horarios = horarioServicio.getAllHorarios(lang);
+        List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadesResumen();
+        List<AreaDTO> areas = areaServicio.getAllAreas(lang);
+        
+        List<Carrera> carreras = carreraServicio.buscarCarreras(idModalidad, idHorario, idUniversidad, idArea, bilingue, lang);
+        Carrera carreraAComparar = carreraServicio.getCarreraById(id_carrera_comp, lang);
+        
+        model.addAttribute("carreraAComparar", carreraAComparar);
+        model.addAttribute("modalidades", modalidades);
+        model.addAttribute("horarios", horarios);
+        model.addAttribute("universidades", universidades);
+        model.addAttribute("areas", areas);
+        model.addAttribute("carreras", carreras);
+        model.addAttribute("usuario", usuario);
+        
+        return "carreras/seleccionarCarreraComp";
+    }
+
+    @GetMapping("/compararCarreras")
+    public String compararCarreras(
+        @RequestParam(name = "id_carrera_1", required = true) Long id_carrera_1,
+        @RequestParam(name = "id_carrera_2", required = true) Long id_carrera_2,
+        @RequestParam(name = "lang", required = false) String lang,
+        @AuthenticationPrincipal UserDetails userDetails,
+        Model model) {
+            Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+            Carrera carrera1 = carreraServicio.getCarreraById(id_carrera_1, lang);
+            Carrera carrera2 = carreraServicio.getCarreraById(id_carrera_2, lang);
+            model.addAttribute("carrera1", carrera1);
+            model.addAttribute("carrera2", carrera2);
+            model.addAttribute("usuario", usuario);
+            return "carreras/compararCarreras";
+        }
+
+        
 }

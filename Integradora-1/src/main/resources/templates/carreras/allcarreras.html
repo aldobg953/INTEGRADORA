@@ -83,7 +83,11 @@
         </nav>
 
         <div class="bg-gray-600 p-6">
+<<<<<<< HEAD
             <div class="text-black text-3xl font-serif font-bold dark:text-white ml-12 text-center" th:text="#{carrerass}">Carreras</div>
+=======
+            <div class="text-black text-6xl font-serif font-extrabold text-white ml-12 text-center">Carreras</div>
+>>>>>>> e636d328050c99325505d5e6f42865c571792b4f
             <form class="flex flex-col space-y-6 mt-6" th:action="@{/carreras/buscarCarreras}" method="get">
                 <input class="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
                 <div class="flex items-center mx-auto w-full max-w-md">
@@ -152,7 +156,7 @@
 
 
 
-        <div id="areas" class="flex md:mx-28 my-8 flex-wrap">
+        <div id="carrerasCard" class="flex md:mx-28 my-8 flex-wrap">
             <div th:each="carrera : ${carreras}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 dark:bg-gray-800 flex flex-col">
                 <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                     <img class="rounded-t-lg h-64 w-full bg-white" th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
@@ -172,6 +176,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
                         </a>
+                        <a th:href="@{/carreras/all/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="cursor-pointer ml-4 md:ml-8 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">Comparar</a>
                     </div>
                 </div>
             </div>

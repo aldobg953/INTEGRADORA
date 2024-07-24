@@ -1,89 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:classappend="${usuario.darkmode} ? 'dark' : ''">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:classappend="${usuario.darkmode} ? 'dark' : ''">
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="css/global_font.css">
-<link href="/css/tailwind.css" rel="stylesheet">
-<script src="/js/navbar.js"></script>
-<link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-<link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
-<title>PathFinder</title>
-	
-	 <style>
-    /* Ensure the text gradient spans the entire text */
-    .text-gradient {
-  background-image: linear-gradient(45deg, #0047ff, #9590ff, #6abaa4, #0047ff, #9590ff, #6abaa4);
-  color: transparent;
-  -webkit-background-clip: text; /* Edge, Chrome */
-  background-clip: text; /* Safari, FF */
-  animation: gradientAnimation 4s linear infinite;
-  background-size: 300% 100%;
-}
-
-@keyframes gradientAnimation {
-  0%, 100%{
-    background-position: 0;
-  }
-  to {
-    background-position: 100%;
-  }
-}
-
-
-  </style>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/global_font.css">
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <script src="/js/navbar.js"></script>
+	<link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
+    <title>PathFinder</title>
 </head>
-<body class="bg-gray-100 dark:bg-gray-800">
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/}">
+                    <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                </a>
+                <hr>
+                <a th:href="@{/logout}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon" th:text="#{cerrarSesion}"></div></a>
+            </div>
+    
+            <div class="navbar-links" id="navbarLinks">
 
-	<nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
-		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-			<a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-				<div id="logo-image">
-					<img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-						style="max-width:40%;height:auto;">
+				<div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <input type="text" id="search-bar" placeholder="¿Buscas algo en específico?">
+                </div>
+
+                <hr>
+                <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon" th:text="#{perfil}"></div></a>
+            </div>
+
+        </nav>
+    </header>
+
+    <div class="principal-text">
+        <h1 th:text="'¡' + #{saludo} + ', ' + ${usuario.nombre} + '!'"></h1>
+    </div>
+
+	<div class="main-content dark:bg-gray-800">
+    <div class="principal-content">
+        <div class="tarjetas">
+            <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+				<div class="texto-boton">
+				<h2 th:text="#{universidadess}" class="dark:text-white">Universidades</h2>
+                <p th:text="#{textoUniversidadess}" class="dark:text-white">Conoce todas las universidades.</p>
+                <a th:href="@{/universidades?lang=}+${usuario.lang}">
+                    Explorar
+                </a>
 				</div>
-				<span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
-			</a>
 
-			<div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-				<button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
-					id="user-menu-button" aria-expanded="false">
-					<span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
-					<img class="w-8 h-8 rounded-full"
-						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
-						alt="user photo">
-				</button>
-
-			</div>
-			<div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
-				id="user-dropdown">
-				<div class="px-4 py-3">
-					<span class="block text-sm text-black-900 dark:text-white"
-						th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-					<span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-						th:text="${usuario.email} ">correo</span>
+				<div class="imagen-tarjeta">
+					<img src="/css/assets/universidad-icon.png" alt="">
 				</div>
-				<ul class="py-2" aria-labelledby="user-menu-button">
-					<li>
-						<a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white"  th:text="#{perfiil}">Perfil</a>
-					</li>
-					<li>
-						<a th:href="@{/configuracion?lang=}+${usuario.lang}"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white"  th:text="#{configuracioness}">Configuraciones</a>
-					</li>
-					<li>
-						<a href="#"
-							class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
-					</li>
-					<li>
-						<a th:href="@{/logout}"
-							class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
-							sesion</a>
-					</li>
-				</ul>
-			</div>
+                    
+            </div>
 
+<<<<<<< HEAD
 			<div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
 				<ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
 					<li>
@@ -176,23 +150,69 @@
 								d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 						</svg>
 						Quieres ver mas carreras?</a>
+=======
+            <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+				<div class="texto-boton">
+					<h2 class="dark:text-white">Areas de Estudio</h2>
+                <p class="dark:text-white">Conoce todas las areas en las que puedes estudiar</p>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}">
+                    Descubrir
+                </a>
+>>>>>>> e636d328050c99325505d5e6f42865c571792b4f
 				</div>
-			</div>
-		</div>
-	</div>
+
+				<div class="imagen-tarjeta">
+					<img src="/css/assets/areas-icon.png" alt="">
+				</div>
+                    
+            </div>
+
+            <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+				<div class="texto-boton">
+					<h2 class="dark:text-white">Carreras</h2>
+                <p class="dark:text-white">Conoce todas las carreras en las que puedes estudiar</p>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}">
+                    Mostrar todas
+                </a>
+				</div>
+
+				<div class="imagen-tarjeta">
+					<img src="/css/assets/carrera-icon.png" alt="">
+				</div>
+                    
+            </div>
+        </div>
+
+        <div class="populares dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+                <h2 class="dark:text-white">
+                    Carreras populares en <span class="text-gradient">PathFinder</span>
+                </h2>
+                <ul>
+                    <li th:each="carrera : ${carreras}">
+                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
+                            <span th:text="${carrera.nombre}" class="dark:text-white"></span>
+                            <span id="popular-tag" class="text-gradient" class="dark:text-white">Popular</span>
+                        </a>
+                    </li>
+                </ul>
+
+				<img src="/css/assets/fuego.png" alt="">
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    const formInput = document.querySelector('.form-input');
+    const searchBar = document.getElementById('search-bar');
+    
+    searchBar.addEventListener('keydown', function() {
+        formInput.classList.add('shrink');
+    });
+
+    searchBar.addEventListener('keyup', function() {
+        formInput.classList.remove('shrink');
+    });
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

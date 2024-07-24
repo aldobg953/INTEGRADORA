@@ -80,17 +80,30 @@
         </div>
     </nav>
 
-    <div class="bg-fixed w-full min-h-80 bg-cover" style="background-image: url(/img/utch/portada.jpg); background-position: center 70%;">
+    <div id="dynamicBackground" th:data-background-image="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/portada.jpg'}" class="bg-fixed w-full min-h-80 bg-cover" style="background-position: center 70%;">
         <div class="bg-sky-900 w-full h-80 flex items-center justify-center bg-opacity-50">
             <span class="font-serif text-5xl text-white font-bold z-10 ml-12 text-center" th:text="${carrera.nombre}">nombre_completo</span>
         </div>
     </div>
+    
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', function() {
+            var elemento = document.getElementById('dynamicBackground');
+            var imagenFondo = /*[[${'/img/' + carrera.universidad.nombre_abreviado + '/portada.jpg'}]]*/ 'default-image.jpg';
+            
+            if (imagenFondo) {
+                elemento.style.backgroundImage = 'url("' + imagenFondo + '")';
+            }
+        });
+        /*]]>*/
+    </script>
     <div class=" my-8 mx-2 md:mx-28 border-l-4 pl-10 dark:text-white" >
         <span class="text-justify font-serif text-sm md:text-xl" th:text="${carrera.informacion}">informacion</span>
     </div>
     <div class="flex flex-col md:flex-row my-7 w-full ">
         <div class="md:basis-1/2 flex justify-center items-center mt-5 bg-white">
-            <img src="/img/utch/logo.jpg" class="h-auto max-w-full md:max-w-[80%]">
+            <img th:src="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/logo.jpg'}" class="h-auto max-w-full md:max-w-[80%]">
         </div>
         <div class="my-0 md:mx-16 md:basis-1/2 w-full flex flex-col space-y-4 rounded-lg border-sky-600 border-2 p-4 bg-gradient-to-r from-cyan-500 to-blue-500">
             <div class="ml-32 mt-5 h-10 text-xl md:text-3xl font-bold font-serif" th:text="#{infoCarrera}">Informacion de la carrera</div>

@@ -1,6 +1,10 @@
 /* Global Variables */
 @import url('https://cdn-uicons.flaticon.com/2.4.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 :root {
     --primary-color: #0047FF;
     --text-gradient: linear-gradient(50deg, #0047ff, #9590ff, #6abaa4, #0047ff, #9590ff, #6abaa4);
@@ -81,12 +85,11 @@ body {
     background-color: var(--header-bg);
     backdrop-filter: blur(25px);
     padding: 1rem 2rem;
-    z-index: 1000;
+    z-index: 10;
     border-radius: 1rem;
     border: var(--header-border) solid 2px;
     box-shadow: 0 0 35px #00000018;
     transition: width 0.5s cubic-bezier(0.25, 1.5, 0.5, 1), 0.3s ease-out;
-    overflow: hidden;
 }
 
 .navbar {
@@ -131,11 +134,16 @@ body {
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
 }
 
+.navbar a {
+    text-decoration: none;
+}
+
 .link:hover {
     padding: .8rem;
     border-radius: 2rem;
     scale: 1.1;
     background-color: rgba(0, 0, 0, 0.244);
+    cursor: pointer;
 }
 
 .link:active {
@@ -197,6 +205,17 @@ body {
 
 .hamburger-menu.active span:nth-child(3) {
     transform: rotate(-45deg);
+}
+
+select {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none; /* Desactiva el borde */
+    outline: none;
 }
 
 
@@ -451,7 +470,7 @@ h2 {
 
 .tarjeta_titulo {
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 700;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -508,7 +527,8 @@ h2 {
 }
 
 .footer-section {
-    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1rem;
 }
 
