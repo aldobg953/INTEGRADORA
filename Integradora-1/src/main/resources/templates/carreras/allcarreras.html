@@ -83,11 +83,7 @@
         </nav>
 
         <div class="bg-gray-600 p-6">
-<<<<<<< HEAD
             <div class="text-black text-3xl font-serif font-bold dark:text-white ml-12 text-center" th:text="#{carrerass}">Carreras</div>
-=======
-            <div class="text-black text-6xl font-serif font-extrabold text-white ml-12 text-center">Carreras</div>
->>>>>>> e636d328050c99325505d5e6f42865c571792b4f
             <form class="flex flex-col space-y-6 mt-6" th:action="@{/carreras/buscarCarreras}" method="get">
                 <input class="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
                 <div class="flex items-center mx-auto w-full max-w-md">
@@ -166,7 +162,7 @@
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${carrera.nombre}"></h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{universidad}">Universidad: <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" ><span th:text="#{universidad}"></span> <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${carrera.desc_breve}">desc breve</p>
                     </div>
                     <div class="mt-auto pt-4">

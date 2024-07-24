@@ -20,4 +20,6 @@ public interface CarreraRepositorio extends JpaRepository<Carrera,Long>, JpaSpec
 
     @Query("SELECT c FROM Carrera c ORDER BY c.contador DESC")
     List<Carrera> findTop10ByOrderByContadorDesc(Pageable pageable);
+
+    
 }
