@@ -81,7 +81,7 @@ public class ConfiguracionControlador {
         }else{
             usuarioServicio.actualizarDarkmode(false, userDetails.getUsername());
         }
-        return "redirect:/configuracion?lang="+usuario.getLang();
+        return "redirect:/configuracion/perfil?lang="+usuario.getLang();
     }
 
     @PostMapping("/cambiaridioma")
@@ -91,7 +91,14 @@ public class ConfiguracionControlador {
         if(!idioma.equals("Lenguage")){
             usuarioServicio.actualizarIdioma(idioma, userDetails.getUsername());
         }
-        return "redirect:/configuracion?lang="+usuario.getLang();
+        return "redirect:/configuracion/perfil?lang="+usuario.getLang();
+    }
+
+    @GetMapping("/selectphoto")
+    public String seleccionarFoto(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        model.addAttribute("usuario", usuario);
+        return "configuracion/selecfoto";
     }
     
 }
