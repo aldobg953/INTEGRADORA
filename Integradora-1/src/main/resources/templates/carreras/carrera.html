@@ -4,7 +4,7 @@
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/global_font.css">
     
-    <title >PathFinder | Carrera</title>
+    <title th:text="#{carreraa}">PathFinder | Carrera</title>
     <style>
         .star {
             cursor: pointer;
@@ -32,7 +32,7 @@
 
             <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600" id="user-menu-button" aria-expanded="false">
-                    <span class="sr-only">Menu usuario</span>
+                    <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
                     <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s" alt="user photo">
                 </button>
                 
@@ -44,16 +44,16 @@
                 </div>
                 <ul class="py-2" aria-labelledby="user-menu-button">
                     <li>
-                        <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                        <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfiil}">Perfil</a>
                     </li>
                     <li>
-                        <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                        <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{xonfiguracioness}">Configuraciones</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
                     </li>
                     <li>
-                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" >Cerrar sesion</a>
+                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar sesion</a>
                     </li>
                 </ul>
             </div>
@@ -61,19 +61,19 @@
             <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1 " >
             <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                 <li>
-                <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicioo}">Inicio</a>
                 </li>
                 <li>
-                <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
                 </li>
                 <li>
-                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0">Carreras</a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0" th:text="#{carrerass}">Carreras</a>
                 </li>
                 <li>
-                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
                 </li>
                 <li>
-                    <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                    <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
                 </li>
             </ul>
             </div>
@@ -137,16 +137,16 @@
             <img th:src="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/logo.jpg'}" class="h-auto max-w-full md:max-w-[80%]">
         </div>
         <div class="my-0 md:mx-16 md:basis-1/2 w-full flex flex-col space-y-4 rounded-lg border-sky-600 border-2 p-4 bg-gradient-to-r from-cyan-500 to-blue-500">
-            <div class="ml-32 mt-5 h-10 text-xl md:text-3xl font-bold font-serif">Informacion de la carrera</div>
-            <div class="text-xl md:text-lg font-serif font-bold">Horarios y costos</div>
+            <div class="ml-32 mt-5 h-10 text-xl md:text-3xl font-bold font-serif" th:text="#{infoCarrera}">Informacion de la carrera</div>
+            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{horariosCostos}">Horarios y costos</div>
             <div th:utext="${carrera.horario_especifico}" class="text-base md:text-lg">horario</div>
             <div th:text="'Costo de la carrera: ' + ${carrera.costo} + '0$'" class="text-base md:text-lg">costos</div>
-            <div class="text-xl md:text-lg font-serif font-bold">Modalidad</div>
+            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{modalidad}">Modalidad</div>
             <div th:text="${carrera.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
             <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
-            <div class="text-xl md:text-lg font-serif font-bold">Area</div>
+            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{areass}">Area</div>
             <a class="font-serif text-base md:text-lg" th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area}, lang=${usuario.lang})}"></a>
-            <div class="text-xl md:text-lg font-serif font-bold">Universidad</div>
+            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{universidad}">Universidad</div>
             <a class="font-serif text-base md:text-lg" th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
         </div>
     </div>
@@ -162,17 +162,17 @@
     
     <div class="w-full my-10 flex flex-col md:flex-row dark:text-white">
         <div class="basis-1/2 text-center">
-            <span class="font-serif text-2xl font-bold text-sky-600"> ¿Donde puedo trabajar?</span><br/>
+            <span class="font-serif text-2xl font-bold text-sky-600" th:text="#{dondeTrabajar}"> ¿Donde puedo trabajar?</span><br/>
             <div class="px-3 my-5 border-l-4 ml-7 text-left"><span class="font-serif text-lg text-justify" th:text="${carrera.donde_trabajar}"></span></div>
         </div>
         <div class="basis-1/2 text-center">
-            <span class="font-serif text-2xl font-bold text-sky-600"> ¿Cómo Puedo Desempeñarme?</span><br/>
+            <span class="font-serif text-2xl font-bold text-sky-600" th:text="#{comoDes}"> ¿Cómo Puedo Desempeñarme?</span><br/>
             <div class="px-3 my-5  ml-7 text-left pl-10"><ul class="font-serif text-lg list-disc " th:utext="${carrera.como_desemp}"></ul></div>
         </div>
     </div>
 
     <div th:if="${!#lists.isEmpty(especialidades)}" class="mx-28 flex flex-wrap">
-        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold dark:text-white">Especialidades</p></div>
+        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold dark:text-white" th:text="#{especialidadess}">Especialidades</p></div>
         <div class="mb-8 max-w-sm mx-4 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800" th:each="especialidad:${especialidades}">
             <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}">
                 <img class="rounded-t-lg border-b border-blue-800 bg-white" src="/img/utch/logo.jpg" alt="" />
@@ -182,7 +182,7 @@
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${especialidad.nombre}">Noteworthy technology acquisitions 2021</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${especialidad.descripcion_breve}">descripcion breve</p>
-                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" th:text="#{verMas}">
                     Ver mas
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -194,7 +194,7 @@
     </div>
 
     <div th:if="${#lists.isEmpty(especialidades)}">
-        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold">Plan de estudio </p></div>
+        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold" th:text="#{planEstudio}">Plan de estudio </p></div>
         <div class="md:mx-32 border-sky-600 border-2 mb-7 h-80 md:h-[1700px]" height="1700px">
             <iframe class="bg-sky-200 w-full h-full iframe-zoom" th:src="${carrera.roadmap}" width="100%" height="100%" frameBorder="0"></iframe>
         </div>
@@ -205,7 +205,7 @@
     <div class="flex flex-col lg:flex-row">
         <!-- calificaciones de usuarios, estrellas-->
         <div class="p-6 rounded-lg shadow-lg basis-full lg:basis-1/4 font-mono dark:text-white">
-            <h2 class="text-2xl font-bold w-full">Calificaciones de usuarios</h2>
+            <h2 class="text-2xl font-bold w-full" th:text="#{calificacionesUsuarios}">Calificaciones de usuarios</h2>
             <div class="flex">
                 <span class="ml-1" th:each="i : ${#numbers.sequence(1, 5)}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
@@ -292,7 +292,7 @@
             
 
             <form th:action="@{/carreras/agregarComentario}" method="post" class="my-7">
-                <h2 class="text-2xl font-bold">Califica esta carrera</h2>
+                <h2 class="text-2xl font-bold" th:text="#{calificaCarrera}">Califica esta carrera</h2>
                 <div id="star-rating" class="flex space-x-1">
                     <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
@@ -311,11 +311,11 @@
                     </svg>
                 </div>
                 <input type="hidden" id="calificacion" name="calificacion" th:value="0">
-                <h3>Deja un comentario:</h3>
+                <h3 th:xt="#{dejaComentario}">Deja un comentario:</h3>
                 <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
                 <textarea id="comentarioNuevo" name="comentarioNuevo" rows="4" class="my-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escribe tu comentario aqui..."></textarea>
                 <div>
-                    <button class="bg-green-500 w-full max-w-96 rounded-lg font-bold" type="submit" >Enviar</button>
+                    <button class="bg-green-500 w-full max-w-96 rounded-lg font-bold" type="submit" th:text="#{enviar}">Enviar</button>
                 </div>
             </form>
         
@@ -324,7 +324,7 @@
 
 
         <div class="basis-full lg:basis-3/4 ml-5 my-7 dark:text-white">
-        <h2 class="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold ">Comentarios</h2>
+        <h2 class="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold " th:text="#{comentarios}">Comentarios</h2>
             <div th:each="comentario : ${foros}">
                 <div>
                     <p class="font-mono font-bold" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}">Autor</p>
@@ -345,7 +345,7 @@
                 </div>
                 <hr class="w-full my-7"/>
             </div>
-            <div class="ml-5 my-7" th:if="${foros == null or #lists.isEmpty(foros)}">
+            <div class="ml-5 my-7" th:if="${foros == null or #lists.isEmpty(foros)}" th:text="#{noComentarios}">
                 <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
             </div>
         </div>

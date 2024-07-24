@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-        <title>PathFinder | Áreas</title>
+        <title th:text="#{titleArea}">PathFinder | Áreas</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
@@ -24,7 +24,7 @@
                 <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
                         id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
+                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
                         <img class="w-8 h-8 rounded-full"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
                             alt="user photo">
@@ -42,19 +42,19 @@
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfiil}">Perfil</a>
                         </li>
                         <li>
                             <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
                         </li>
                         <li>
                             <a th:href="@{/logout?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
                                 sesion</a>
                         </li>
                     </ul>
@@ -63,19 +63,19 @@
                 <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
                     <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                         <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicioo}">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carrerass}">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -83,11 +83,15 @@
         </nav>
 
         <div class="bg-gray-600 p-6">
+<<<<<<< HEAD
+            <div class="text-black text-3xl font-serif font-bold dark:text-white ml-12 text-center" th:text="#{carrerass}">Carreras</div>
+=======
             <div class="text-black text-6xl font-serif font-extrabold text-white ml-12 text-center">Carreras</div>
+>>>>>>> e636d328050c99325505d5e6f42865c571792b4f
             <form class="flex flex-col space-y-6 mt-6" th:action="@{/carreras/buscarCarreras}" method="get">
                 <input class="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
                 <div class="flex items-center mx-auto w-full max-w-md">
-                    <label for="simple-search" class="sr-only">Search</label>
+                    <label for="simple-search" class="sr-only" th:text="#{buscador}">Search</label>
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
@@ -100,32 +104,32 @@
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
-                        <span class="sr-only">Search</span>
+                        <span class="sr-only" th:text="#{buscador}">Search</span>
                     </button>
                 </div>
             
                 <div class="flex flex-col md:flex-row md:space-x-6 mx-auto w-full max-w-3xl space-y-4 md:space-y-0">
                     <div class="w-full md:w-auto">
                         <select id="modalidades" name="idModalidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todas las modalidades</option>
+                            <option value="0" th:text="#{todaModalidad}">Todas las modalidades</option>
                             <option th:each="modalidad : ${modalidades}" th:text="${modalidad.nombre_modalidad}" th:value="${modalidad.id_modalidad}"></option>
                         </select>
                     </div>
                     <div class="w-full md:w-auto">
                         <select id="horarios" name="idHorario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todos los horarios</option>
+                            <option value="0" th:text="#{todoHorario}">Todos los horarios</option>
                             <option th:each="horario : ${horarios}" th:text="${horario.nombre_horario}" th:value="${horario.id_horario}"></option>
                         </select>
                     </div>
                     <div class="w-full md:w-auto">
                         <select id="universidades" name="idUniversidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todas las Universidades</option>
+                            <option value="0" th:text="#{todaUniversidad}">Todas las Universidades</option>
                             <option th:each="universidad : ${universidades}" th:text="${universidad.nombre_completo}" th:value="${universidad.id_universidad}"></option>
                         </select>
                     </div>
                     <div class="w-full md:w-auto">
                         <select id="areas" name="idArea" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todas las Areas</option>
+                            <option value="0" th:text="#{todaArea}">Todas las Areas</option>
                             <option th:each="area : ${areas}" th:text="${area.nombre_area}" th:value="${area.id_area}"></option>
                         </select>
                     </div>
@@ -134,15 +138,15 @@
                 <div class="flex items-center justify-center space-x-4">
                     <div class="flex items-center">
                         <input type="radio" id="bilingue_si" name="bilingue" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_si" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bilingüe</label>
+                        <label for="bilingue_si" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" th:text="#{bilingue}">Bilingüe</label>
                     </div>
                     <div class="flex items-center">
                         <input type="radio" id="bilingue_no" name="bilingue" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_no" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No Bilingüe</label>
+                        <label for="bilingue_no" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" th:text="#{noBilingue}">No Bilingüe</label>
                     </div>
                     <div class="flex items-center">
                         <input type="radio" id="bilingue_todos" name="bilingue" value="2" checked class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_todos" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Todos</label>
+                        <label for="bilingue_todos" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" th:text="#{todos}">Todos</label>
                     </div>
                 </div>
             </form>
@@ -162,11 +166,11 @@
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${carrera.nombre}"></h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Universidad: <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{universidad}">Universidad: <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${carrera.desc_breve}">desc breve</p>
                     </div>
                     <div class="mt-auto pt-4">
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" th:text="#{verMas}">
                             ver mas
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
