@@ -22,6 +22,12 @@
             </div>
     
             <div class="navbar-links" id="navbarLinks">
+
+				<div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <input type="text" id="search-bar" placeholder="¿Buscas algo en específico?">
+                </div>
+
                 <hr>
                 <a th:href="@{/perfil}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon" th:text="#{perfil}"></div></a>
             </div>
@@ -81,32 +87,37 @@
                     
             </div>
         </div>
-        <div>
-            <div>
+
+        <div class="populares">
                 <h2>
-                    Carreras Populares en <span class="text-gradient">PathFinder <i class="fi fi-rr-interrogation navbar-icon"></i></span>
+                    Carreras populares en <span class="text-gradient">PathFinder</span>
                 </h2>
-                <p th:text="#{textoCarrerasPopu}">Conoce las carreras mas populares</p>
                 <ul>
                     <li th:each="carrera : ${carreras}">
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                             <span th:text="${carrera.nombre}"></span>
-                            <span>Popular</span>
+                            <span id="popular-tag" class="text-gradient">Popular</span>
                         </a>
                     </li>
                 </ul>
-                <div>
-                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" th:text="#{preguntaCarreras}">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                        Quieres ver mas carreras?
-                    </a>
-                </div>
-            </div>
+
+				<img src="/css/assets/fuego.png" alt="">
         </div>
     </div>
 </div>
 </div>
+
+<script>
+    const formInput = document.querySelector('.form-input');
+    const searchBar = document.getElementById('search-bar');
+    
+    searchBar.addEventListener('keydown', function() {
+        formInput.classList.add('shrink');
+    });
+
+    searchBar.addEventListener('keyup', function() {
+        formInput.classList.remove('shrink');
+    });
+</script>
 </body>
 </html>
