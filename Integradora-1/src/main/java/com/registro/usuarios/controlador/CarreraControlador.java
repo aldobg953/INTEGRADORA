@@ -24,6 +24,7 @@ import com.registro.usuarios.modelo.resumen.UniversidadResumen;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
 import com.registro.usuarios.servicio.EspecialidadServicio;
+import com.registro.usuarios.servicio.FavoritoService;
 import com.registro.usuarios.servicio.ForoServicio;
 import com.registro.usuarios.servicio.HorarioServicio;
 import com.registro.usuarios.servicio.ModalidadServicio;
@@ -55,7 +56,11 @@ public class CarreraControlador {
     @Autowired 
     private HorarioServicio horarioServicio;
 
-    @Autowired UniversidadServicio universidadServicio;
+    @Autowired 
+    private UniversidadServicio universidadServicio;
+
+    @Autowired
+    private FavoritoService favoritoService;
 
     @GetMapping("/carrera/{id}")
     public String mostrarCarrera(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
@@ -233,7 +238,19 @@ public class CarreraControlador {
             model.addAttribute("carrera2", carrera2);
             model.addAttribute("usuario", usuario);
             return "carreras/compararCarreras";
-        }
+    }
 
-        
+    @PostMapping("/carreras/agregarFav")
+    public String agregarFavorito(@RequestParam("carreraId") Long carreraId, @AuthenticationPrincipal UserDetails userDetails) {
+        Usuario usuario = usuarioServicio.findByEmailwithFavoritos(userDetails.getUsername());
+        favoritoService.agregarFavorito(usuario, carreraId);
+        return "redirect:/carreras/carrera/"+carreraId+"?lang="+usuario.getLang();
+    }
+
+    @PostMapping("/carreras/quitarFav")
+    public String quitarFavorito(@RequestParam("carreraId") Long carreraId, @AuthenticationPrincipal UserDetails userDetails) {
+        Usuario usuario = usuarioServicio.findByEmailwithFavoritos(userDetails.getUsername());
+        favoritoService.eliminarFavorito(usuario, carreraId);
+        return "redirect:/carreras/carrera/"+carreraId+"?lang="+usuario.getLang();
+    }
 }
