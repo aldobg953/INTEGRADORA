@@ -29,7 +29,7 @@
                 </div>
 
                 <hr>
-                <a th:href="@{/perfil}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon" th:text="#{perfil}"></div></a>
+                <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon" th:text="#{perfil}"></div></a>
             </div>
 
         </nav>
@@ -39,13 +39,13 @@
         <h1 th:text="'¡' + #{saludo} + ', ' + ${usuario.nombre} + '!'"></h1>
     </div>
 
-	<div class="main-content">
+	<div class="main-content dark:bg-gray-800">
     <div class="principal-content">
         <div class="tarjetas">
-            <div class="tarjeta">
+            <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
 				<div class="texto-boton">
-				<h2 th:text="#{universidadess}">Universidades</h2>
-                <p th:text="#{textoUniversidadess}">Conoce todas las universidades.</p>
+				<h2 th:text="#{universidadess}" class="dark:text-white">Universidades</h2>
+                <p th:text="#{textoUniversidadess}" class="dark:text-white">Conoce todas las universidades.</p>
                 <a th:href="@{/universidades?lang=}+${usuario.lang}">
                     Explorar
                 </a>
@@ -57,10 +57,10 @@
                     
             </div>
 
-            <div class="tarjeta">
+            <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
 				<div class="texto-boton">
-					<h2>Areas de Estudio</h2>
-                <p>Conoce todas las areas en las que puedes estudiar</p>
+					<h2 class="dark:text-white">Areas de Estudio</h2>
+                <p class="dark:text-white">Conoce todas las areas en las que puedes estudiar</p>
                 <a th:href="@{/carreras/areas?lang=}+${usuario.lang}">
                     Descubrir
                 </a>
@@ -72,10 +72,10 @@
                     
             </div>
 
-            <div class="tarjeta">
+            <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
 				<div class="texto-boton">
-					<h2>Carreras</h2>
-                <p>Conoce todas las carreras en las que puedes estudiar</p>
+					<h2 class="dark:text-white">Carreras</h2>
+                <p class="dark:text-white">Conoce todas las carreras en las que puedes estudiar</p>
                 <a th:href="@{/carreras/all?lang=}+${usuario.lang}">
                     Mostrar todas
                 </a>
@@ -88,15 +88,15 @@
             </div>
         </div>
 
-        <div class="populares">
-                <h2>
+        <div class="populares dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+                <h2 class="dark:text-white">
                     Carreras populares en <span class="text-gradient">PathFinder</span>
                 </h2>
                 <ul>
                     <li th:each="carrera : ${carreras}">
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                            <span th:text="${carrera.nombre}"></span>
-                            <span id="popular-tag" class="text-gradient">Popular</span>
+                            <span th:text="${carrera.nombre}" class="dark:text-white"></span>
+                            <span id="popular-tag" class="text-gradient" class="dark:text-white">Popular</span>
                         </a>
                     </li>
                 </ul>
