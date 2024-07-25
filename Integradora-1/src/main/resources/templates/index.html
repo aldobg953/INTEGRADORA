@@ -31,12 +31,12 @@
 
                 <div class="form-input ">
                     <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
-                    <input type="text" id="search-bar" placeholder="¿Buscas algo en específico?">
+                    <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
                 </div>
 
                 <hr>
                 <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
-                    <div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon"
+                    <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
                             class="link-icon" th:text="#{perfil}"></div>
                 </a>
             </div>
@@ -45,7 +45,7 @@
     </header>
 
     <div class="principal-text">
-        <h1 th:text="#{saludo} + ', ' + ${usuario.nombre} + '!'"></h1>
+        <h1 th:text="#{saludo(${usuario.nombre})}"></h1>
     </div>
 
     <div class="main-content dark:bg-gray-800">
@@ -53,11 +53,10 @@
             <div class="tarjetas">
                 <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
                     <div class="texto-boton">
-                        <h2 th:text="#{universidadess}" class="dark:text-white">Universidades</h2>
-                        <p th:text="#{textoUniversidadess}" class="dark:text-white">Conoce todas las universidades.</p>
+                        <h2 th:text="#{universidades}" class="dark:text-white"></h2>
+                        <p th:text="#{textoUniversidades}" class="dark:text-white"></p>
                         <a th:href="@{/universidades?lang=}+${usuario.lang}"
-                            class="dark:shadow-none dark:hover:shadow-none">
-                            Explorar
+                            class="dark:shadow-none dark:hover:shadow-none" th:text="#{explorar}">
                         </a>
                     </div>
 
@@ -69,11 +68,10 @@
 
                 <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
                     <div class="texto-boton">
-                        <h2 class="dark:text-white">Areas de Estudio</h2>
-                        <p class="dark:text-white">Conoce todas las areas en las que puedes estudiar</p>
+                        <h2 class="dark:text-white" th:text="#{areasEstudio}"></h2>
+                        <p class="dark:text-white" th:text="#{textoAreas}"></p>
                         <a th:href="@{/carreras/areas?lang=}+${usuario.lang}"
-                            class="dark:shadow-none dark:hover:shadow-none">
-                            Descubrir
+                            class="dark:shadow-none dark:hover:shadow-none" th:text="#{descubrir}">
                         </a>
                     </div>
 
@@ -85,12 +83,10 @@
 
                 <div class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
                     <div class="texto-boton">
-                        <h2 class="dark:text-white" th:text="#{carrerass}">Carreras</h2>
-                        <p class="dark:text-white" th:text="#{textoCarreras}">Conoce todas las carreras en las que
-                            puedes estudiar</p>
+                        <h2 class="dark:text-white" th:text="#{carreras}"></h2>
+                        <p class="dark:text-white" th:text="#{textoCarreras}"></p>
                         <a th:href="@{/carreras/all?lang=}+${usuario.lang}"
-                            class="dark:shadow-none dark:hover:shadow-none">
-                            Mostrar todas
+                            class="dark:shadow-none dark:hover:shadow-none" th:text="#{mostrarTodas}">
                         </a>
                     </div>
 
@@ -103,14 +99,13 @@
 
 
             <div class="populares dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
-                <h2 class="dark:text-white">
-                    Carreras populares en <span class="text-gradient">PathFinder</span>
+                <h2 class="dark:text-white" th:utext="#{carrerasPopu}">
                 </h2>
                 <ul>
                     <li th:each="carrera : ${carreras}">
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                             <span th:text="${carrera.nombre}" class="dark:text-white"></span>
-                            <span id="popular-tag" class="text-gradient">Popular</span>
+                            <span id="popular-tag" class="text-gradient" th:text="#{popularTag}"></span>
                         </a>
                     </li>
                 </ul>
@@ -119,16 +114,18 @@
             </div>
         </div>
 
-        <div class="favoritos">
+        <div class="favoritos dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
             <div class="titulo-favoritos">
-                <h2><i class="fi-sr-heart"></i> Favoritos</h2>
+                <h2 th:utext="#{favoritos}"></h2>
             </div>
-        
-            <ul class="favoritos-grid">
-                <li th:each="carrera : ${carreras}"> <!-- Aqui iría la variable que guarda los favoritos del usuario-->
-                    <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                        <span th:text="${carrera.nombre}" class="dark:text-white" id="titulo-favorito"></span>
-                        <span id="favorito" class="text-gradient"><i class="fi-sr-heart"></i> Favorito</span>
+            <div th:if="${carrerasFavoritas == null or #lists.isEmpty(carrerasFavoritas)}" class="text-white">
+                Aun no tienes carreras favoritas, mensaje tipo, ve y busca mas jasjsjs
+            </div>
+            <ul class="favoritos-grid dark:bg-gray-800 dark:border-gray-700">
+                <li th:each="carreraFav : ${carrerasFavoritas}" class="dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:hover:shadow-none"> <!-- Aqui iría la variable que guarda los favoritos del usuario-->
+                    <a th:href="@{/carreras/carrera/{id}(id=${carreraFav.id_carrera}, lang=${usuario.lang})}">
+                        <span th:text="${carreraFav.nombre}" class="titulo-favorito dark:text-white"></span>
+                        <span id="favorito" class="text-gradient" th:utext="#{favoritoTag}"></span>
                     </a>
                 </li>
             </ul>

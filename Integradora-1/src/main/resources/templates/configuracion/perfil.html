@@ -47,7 +47,7 @@
                     id="user-menu-button" aria-expanded="false">
                     <span class="sr-only">Menu usuario</span>
                     <img class="w-8 h-8 rounded-full"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
+                        th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}"
                         alt="user photo">
                 </button>
 
@@ -102,8 +102,7 @@
 
     <!-- informacion del usuario-->
 
-    <p class="md:mx-28 mt-8 font-bold text-3xl font-sans-serif dark:text-white" th:text="#{infoPerfil}">Informacion del perfil</p>
-
+    <h1 class=" md:mx-28 mt-8 mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400" th:text="#{infoPerfil}">info</span></h1>
     <div id="alert-additional-content-3" th:if="${param.exito}" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 md:mx-28 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
         <div class="flex items-center">
           <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -142,7 +141,7 @@
         <div class="border border-blue-800 md:ml-28 mr-8 w-80 rounded-lg my-10 shadow-lg shadow-blue-500/50 p-5 flex flex-col basis-1/4">
             <div class="flex justify-center">
                 <a th:href="@{/configuracion/selectphoto?lang=}+${usuario.lang}">
-                <img class="w-56 h-56 rounded-full cursor-pointer" th:src="@{/img/perfilUsuario/perfil1.jpg}" alt="Rounded avatar">
+                <img class="w-56 h-56 rounded-full cursor-pointer" th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="Rounded avatar">
                 </a>
             </div>
             <div>
@@ -209,7 +208,7 @@
             class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 ">
         <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{contraActual}">Ingrese su contraseña actual: </div>
         <input type="password" id="oldPass" name="oldPass"
-            class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 outline-dashed">
+            class="mt-2 w-11/12 block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500">
         <div class="p-4 flex justify-end pr-20">
             <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                 <span class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0" th:text="#{actualizarContra}">

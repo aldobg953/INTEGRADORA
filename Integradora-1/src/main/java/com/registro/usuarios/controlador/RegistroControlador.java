@@ -1,6 +1,7 @@
 package com.registro.usuarios.controlador;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.registro.usuarios.modelo.Carrera;
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.servicio.CarreraServicio;
+import com.registro.usuarios.servicio.FavoritoService;
 import com.registro.usuarios.servicio.UsuarioServicio;
 
 @Controller
@@ -25,7 +27,10 @@ public class RegistroControlador {
 
 	@Autowired
 	private CarreraServicio carreraServicio;
-	
+
+	@Autowired
+	private FavoritoService favoritoService;
+
 	@GetMapping("/login")
 	public String iniciarSesion(@RequestParam(value = "lang", required = false) String lang, Model model) {
 		model.addAttribute("lang", lang);
@@ -39,6 +44,8 @@ public class RegistroControlador {
 		List<Long> roleIds = usuario.getRoles().stream()
                                        .map(Rol::getId_rol)
                                        .collect(Collectors.toList());
+		Set<Carrera> carrerasFavoritas = favoritoService.obtenerFavoritos(userDetails.getUsername());
+		model.addAttribute("carrerasFavoritas", carrerasFavoritas);			   
 		model.addAttribute("carreras", carreras);
 		model.addAttribute("roles",roleIds );
 		model.addAttribute("usuario", usuario);

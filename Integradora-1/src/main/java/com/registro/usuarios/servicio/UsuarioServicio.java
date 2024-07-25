@@ -12,10 +12,11 @@ public interface UsuarioServicio extends UserDetailsService{
 
 	public Usuario guardar(UsuarioRegistroDTO registroDTO);
 	
+	public boolean cambiarFotoUsuario(Usuario usuario, String fotoPerfil);
+
 	public List<Usuario> listarUsuarios();
 
 	Usuario findByEmail(String username);
-	Usuario findByEmailwithFavoritos(String username);
 	
 	public boolean actualizarUsuario(Usuario usuario);
 
