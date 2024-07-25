@@ -47,7 +47,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 			String apellido = registroDTO.getNombre().substring(firstSpaceIndex + 1);
 			usuario = new Usuario(nombre, 
 			apellido, registroDTO.getEmail(),
-			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false,registroDTO.getLang(), 0L);
+			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false,registroDTO.getLang(), 0L,"perfil3");
 			return usuarioRepositorio.save(usuario);
 		}else{
 			return null;

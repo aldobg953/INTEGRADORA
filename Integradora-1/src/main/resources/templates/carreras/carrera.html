@@ -327,8 +327,17 @@
         <h2 class="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold " th:text="#{comentarios}">Comentarios</h2>
             <div th:each="comentario : ${foros}">
                 <div>
-                    <p class="font-mono font-bold" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}">Autor</p>
-                    <p class="font-mono text-xs" th:text="${#dates.format(comentario.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</p>
+                    <div class="flex flex-row items-center">
+                        <div>
+                            <img th:src="@{'/img/perfilUsuario/' + ${comentario.usuario.foto_perfil} + '.jpg'}" alt="" 
+                            class="h-10 w-10 rounded-full">
+                        </div>
+                        <div class="ml-1">
+                            <p class="font-mono font-bold" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}">Autor</p>
+                            <p class="font-mono text-xs" th:text="${#dates.format(comentario.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</p>
+                        </div>
+                    </div>
+                                       
                     <div class="flex space-x-1 my-3">
                         <span th:each="i : ${#numbers.sequence(1, 5)}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
