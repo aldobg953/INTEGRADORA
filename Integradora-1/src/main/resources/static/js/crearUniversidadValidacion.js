@@ -5,18 +5,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const sections = [
         {
             fields: [
-                { id: "nombre_completo", errorId: "nombreErrorV", minLength: 8, maxLength: 50, required: true },
-                { id: "nombre_abreviado", errorId: "nombreAbreviadoErrorV", minLength:3, maxLength:20, required: true},
-                { id: "pagina_web", errorId: "linkErrorV",minLength: 8, maxLength: 50, required: true },
-                { id: "correo", errorId: "correoErrorV", minLength: 8, maxLength: 50, required: true},
+                { id: "nombre_completo", errorId: "nombreErrorV", minLength: 8, maxLength: 100, required: true },
+                { id: "nombre_abreviado", errorId: "nombreAbreviadoErrorV", minLength:3, maxLength:50, required: true},
+                { id: "pagina_web", errorId: "linkErrorV",minLength: 8, maxLength: 150, required: true },
+                { id: "correo", errorId: "correoErrorV", minLength: 8, maxLength: 150, required: true},
                 { id: "telefono", errorId: "telefonoErrorV",minLength: 8, maxLength: 50, required: true },
-                { id: "message", errorId: "messageErrorV", minLength: 15, maxLength: 300, required: true },
-                { id: "direccion", errorId: "direccionErrorV", minLength: 8, maxLength: 50, required: true },
-                { id: "direccionGoogle", errorId: "direccionGoogleErrorV", minLength: 8, maxLength: 50, required: true  },
-                { id: "file_input", errorId: "logoErrorV", required: true  },
-                { id: "", errorId: "logoErrorV", required: true  },
-                { id: "file_input_help", errorId: "logoErrorV", required: true  },
-
+                { id: "message", errorId: "messageErrorV", minLength: 15, maxLength: 400, required: true },
+                { id: "direccion", errorId: "direccionErrorV", minLength: 8, maxLength: 250, required: true },
+                { id: "direccionGoogle", errorId: "direccionGoogleErrorV", minLength: 8, maxLength: 250, required: true  },
+                { id: "tipo_institucion", errorId: "tipoErrorV", minLength: 8, maxLength: 50, required: true  },
+                { id: "messageC", errorId: "caracteristicasErrorV", minLength: 8, maxLength: 550, required: true  },
+                { id: "file_input1", errorId: "logoErrorV", required: true  },
+                { id: "file_input2", errorId: "portadaErrorV", required: true  },
+                { id: "file_input3", errorId: "imagenErrorV", required: true  }
             ]
         },
         // Añadir más secciones según sea necesario

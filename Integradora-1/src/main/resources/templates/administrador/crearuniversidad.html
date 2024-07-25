@@ -188,8 +188,8 @@
 
                 <!--caracteristicas-->
                 <div class="mx-10 my-5">
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caracteristicas de la universidad:</label>
-                    <textarea id="message" rows="4" th:field="*{caracteristicas}"
+                    <label for="messageC" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caracteristicas de la universidad:</label>
+                    <textarea id="messageC" rows="4" th:field="*{caracteristicas}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe las caracteristicas principal de la universidad...."></textarea>
                         <div id="caracteristicasErrorV" class="validationErrors" style="display: none;"></div>
@@ -197,7 +197,7 @@
 
                 <!--logo-->
                 <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega el logo:</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input1">Agrega el logo:</label>
                     <input th:field="*{logo}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input1" type="file">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
                     <div id="logoErrorV" class="validationErrors" style="display: none;"></div>
@@ -206,7 +206,7 @@
 
                 <!--Portada-->
                 <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega la portada</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input2">Agrega la portada</label>
                     <input th:field="*{portada}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input2" type="file">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
                     <div id="portadaErrorV" class="validationErrors" style="display: none;"></div>
@@ -214,14 +214,16 @@
 
                 <!--AgregarImagen-->
                 <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega una imagen</label>
-                    <input th:field="*{imagen1}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input3">Agrega una imagen</label>
+                    <input th:field="*{imagen1}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input3" type="file">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
                     <div id="imagenErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
 
                 <!-- AgregarUniversidad -->
                 <div class="p-4 flex justify-end pr-20">
+                    <div id="formError" class="validationErrors" style="display: none;"></div>
+
                     <button
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span

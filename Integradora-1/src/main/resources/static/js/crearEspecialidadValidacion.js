@@ -5,17 +5,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const sections = [
         {
             fields: [
-                { id: "nombre", errorId: "nombreError", minLength: 8, maxLength: 50, required: true },
+                { id: "nombre", errorId: "nombreError", minLength: 8, maxLength: 80, required: true },
                 { id: "carrera", errorId: "universidadErrorE", required: true },
-                { id: "descripcion_breve", errorId: "descBreveErrorE", minLength: 8, maxLength: 50, required: true },
-                { id: "informacion", errorId: "infoErrorE", minLength: 8, maxLength: 50, required: true },
-                { id: "RoadMap", errorId: "roadErrorE", minLength: 8, maxLength: 50, required: true },
-                { id: "horario", errorId: "horarioEspecialidadE", minLength: 8, maxLength: 50, required: true },
+                { id: "descripcion_breve", errorId: "descBreveErrorE", minLength: 8, maxLength: 200, required: true },
+                { id: "informacion", errorId: "infoErrorE", minLength: 8, maxLength: 550, required: true },
+                { id: "RoadMap", errorId: "roadErrorE", minLength: 8, maxLength: 150, required: true },
+                { id: "horario", errorId: "horarioEspecialidadE", minLength: 8, maxLength: 150, required: true },
                 { id: "slctHorario", errorId: "horarioErrorE", type: "select", required: true },
                 { id: "txtCosto", errorId: "costoErrorE", required: true },
                 { id: "slctModalidad", errorId: "selectModalidadError", type: "select", required: true },
                 { id: "slctPeriodoEscolar", errorId: "peroidoErrorE", type: "select", required: true },
-                { id: "horario", errorId: "horarioEspecialidadE", minLength: 8, maxLength: 50, required: true }
+                { id: "horario", errorId: "horarioEspecialidadE", minLength: 8, maxLength: 150, required: true }
             ]
         },
         // Añadir más secciones según sea necesario
