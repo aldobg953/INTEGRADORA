@@ -118,11 +118,13 @@
             <div class="titulo-favoritos">
                 <h2 th:utext="#{favoritos}"></h2>
             </div>
-        
+            <div th:if="${carrerasFavoritas == null or #lists.isEmpty(carrerasFavoritas)}" class="text-white">
+                Aun no tienes carreras favoritas, mensaje tipo, ve y busca mas jasjsjs
+            </div>
             <ul class="favoritos-grid dark:bg-gray-800 dark:border-gray-700">
-                <li th:each="carrera : ${carreras}" class="dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:hover:shadow-none"> <!-- Aqui iría la variable que guarda los favoritos del usuario-->
-                    <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                        <span th:text="${carrera.nombre}" class="titulo-favorito dark:text-white"></span>
+                <li th:each="carreraFav : ${carrerasFavoritas}" class="dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:hover:shadow-none"> <!-- Aqui iría la variable que guarda los favoritos del usuario-->
+                    <a th:href="@{/carreras/carrera/{id}(id=${carreraFav.id_carrera}, lang=${usuario.lang})}">
+                        <span th:text="${carreraFav.nombre}" class="titulo-favorito dark:text-white"></span>
                         <span id="favorito" class="text-gradient" th:utext="#{favoritoTag}"></span>
                     </a>
                 </li>

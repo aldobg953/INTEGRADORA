@@ -47,7 +47,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 			String apellido = registroDTO.getNombre().substring(firstSpaceIndex + 1);
 			usuario = new Usuario(nombre, 
 			apellido, registroDTO.getEmail(),
-			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false,registroDTO.getLang(), 0L);
+			passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(RolRespository.getById(1L)),true,false,registroDTO.getLang(), 0L,"perfil3");
 			return usuarioRepositorio.save(usuario);
 		}else{
 			return null;
@@ -75,13 +75,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	@Override
     public Usuario findByEmail(String username) {
 		Usuario usuario =usuarioRepositorio.findByEmail(username);
-		usuario.setCarrerasFavoritas(null);
         return usuario;
     }
-	@Override
-	public Usuario findByEmailwithFavoritos(String username){
-		return usuarioRepositorio.findByEmail(username);
-	}
 
 	@Override
 	public boolean actualizarUsuario(Usuario usuario){

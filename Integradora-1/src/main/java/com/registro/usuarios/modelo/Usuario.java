@@ -137,7 +137,7 @@ public class Usuario {
     private Set<Carrera> carrerasFavoritas = new HashSet<>();
 	
 
-	public Usuario(Long id_usuario, String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode, String lang,Long id_universidad) {
+	public Usuario(Long id_usuario, String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode, String lang,Long id_universidad, String foto_perfil) {
 		super();
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
@@ -149,9 +149,10 @@ public class Usuario {
 		this.darkmode = darkmode;
 		this.lang = lang;
 		this.id_universidad =  id_universidad;
+		this.foto_perfil = foto_perfil;
 	}
 
-	public Usuario(String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode, String lang, Long id_universidad) {
+	public Usuario(String nombre, String apellidoP, String email, String password, Collection<Rol> roles, boolean activo, boolean darkmode, String lang, Long id_universidad, String foto_perfil) {
 		super();
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
@@ -162,6 +163,7 @@ public class Usuario {
 		this.darkmode = darkmode;
 		this.lang = lang;
 		this.id_universidad = id_universidad;
+		this.foto_perfil = foto_perfil;
 	}
 
 	public Usuario() {
