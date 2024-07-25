@@ -2,7 +2,6 @@ package com.registro.usuarios.controlador;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ import com.registro.usuarios.servicio.MotorServicio;
 public class MotorControlador {
     private final MotorServicio motorServicio;
 
-    @Autowired
     public MotorControlador(MotorServicio motorServicio) {
         this.motorServicio = motorServicio;
     }

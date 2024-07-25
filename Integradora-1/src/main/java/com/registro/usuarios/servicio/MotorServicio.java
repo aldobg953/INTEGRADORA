@@ -3,7 +3,7 @@ package com.registro.usuarios.servicio;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.registro.usuarios.modelo.Carrera;
@@ -18,7 +18,7 @@ public class MotorServicio {
     private final AreaRepositorio areaRepositorio;
     private final UniversidadRepositorio universidadRepositorio;
     private final CarreraServicio carreraServicio;
-    @Autowired
+
     public MotorServicio(CarreraRepositorio carreraRepositorio, 
                          AreaRepositorio areaRepositorio, 
                          UniversidadRepositorio universidadRepositorio,
