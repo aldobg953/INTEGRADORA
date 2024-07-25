@@ -242,14 +242,14 @@ public class CarreraControlador {
 
     @PostMapping("/carreras/agregarFav")
     public String agregarFavorito(@RequestParam("carreraId") Long carreraId, @AuthenticationPrincipal UserDetails userDetails) {
-        Usuario usuario = usuarioServicio.findByEmailwithFavoritos(userDetails.getUsername());
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         favoritoService.agregarFavorito(usuario, carreraId);
         return "redirect:/carreras/carrera/"+carreraId+"?lang="+usuario.getLang();
     }
 
     @PostMapping("/carreras/quitarFav")
     public String quitarFavorito(@RequestParam("carreraId") Long carreraId, @AuthenticationPrincipal UserDetails userDetails) {
-        Usuario usuario = usuarioServicio.findByEmailwithFavoritos(userDetails.getUsername());
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         favoritoService.eliminarFavorito(usuario, carreraId);
         return "redirect:/carreras/carrera/"+carreraId+"?lang="+usuario.getLang();
     }

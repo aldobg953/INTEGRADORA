@@ -18,8 +18,6 @@ public interface UsuarioServicio extends UserDetailsService{
 
 	Usuario findByEmail(String username);
 	
-	Usuario findByEmailwithFavoritos(String username);
-	
 	public boolean actualizarUsuario(Usuario usuario);
 
 	public boolean actualizarPass (String email, String oldPass, String newPass);
