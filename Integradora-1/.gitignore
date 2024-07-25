@@ -34,5 +34,5 @@ build/
 ### VS Code ###
 .vscode/
 
-
+/src/main/resources/application.properties
 G:\My Drive\UTCH\3er CUATRIMESTRE MAY-SEP 2024\INTEGRADORA I\INTEGRADORA\Integradora-1\src\main\resources\application.properties
