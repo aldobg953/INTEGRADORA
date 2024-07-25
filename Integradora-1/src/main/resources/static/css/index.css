@@ -358,7 +358,6 @@ h1 {
 
 .tarjeta a:active {
     scale: 0.9;
-    box-shadow: 0 0 35px var(--card-shadow);
 }
 
 h2 {
@@ -450,7 +449,6 @@ h2 span {
     box-shadow: 0 0 35px var(--card-shadow);
     background-color: white;
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
-    overflow: hidden;
 }
 
 .titulo-favoritos h2, .titulo-favoritos i {
@@ -469,6 +467,7 @@ h2 span {
     padding: 1rem;
     padding-right: 0.5rem; /* Compensar el ancho de la barra de desplazamiento */
     list-style-type: none; /* Eliminar los puntos de la lista */
+    overflow-x: hidden;
 }
 
 .favoritos-grid li {
@@ -476,7 +475,6 @@ h2 span {
     border-radius: 1rem;
     border: var(--card-border) 2px solid;
     background-color: white;
-    overflow: hidden;
     box-shadow: none;
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
 }
@@ -539,12 +537,6 @@ h2 span {
     background: #555;
 }
 
-/* Media query para asegurar máximo 4 tarjetas por fila en pantallas grandes */
-@media (min-width: 1024px) {
-    .favoritos-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 
 
 
