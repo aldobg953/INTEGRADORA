@@ -63,3 +63,13 @@ input, select, textarea {
     background-color: #f0f0f0; /* Color de fondo para inputs deshabilitados */
     cursor: not-allowed; /* Cursor en forma de prohibido para inputs deshabilitados */
 }
+
+
+#actCorreoErrorEstilo{
+    display: block;
+    margin: auto;
+    color: red;
+    text-shadow: 2px 2px 2.7px rgb(255, 119, 119);
+    transition: text-shadow 0.3s ease, box-shadow 0.3s ease;
+
+}
