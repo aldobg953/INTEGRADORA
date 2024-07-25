@@ -5,19 +5,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const sections = [
         {
             fields: [
-                { id: "nombre_completo", errorId: "nombreErrorV", minLength: 8, maxLength: 100, required: true },
-                { id: "nombre_abreviado", errorId: "nombreAbreviadoErrorV", minLength:3, maxLength:50, required: true},
-                { id: "pagina_web", errorId: "linkErrorV",minLength: 8, maxLength: 150, required: true },
-                { id: "correo", errorId: "correoErrorV", minLength: 8, maxLength: 150, required: true},
-                { id: "telefono", errorId: "telefonoErrorV",minLength: 8, maxLength: 50, required: true },
-                { id: "message", errorId: "messageErrorV", minLength: 15, maxLength: 400, required: true },
-                { id: "direccion", errorId: "direccionErrorV", minLength: 8, maxLength: 250, required: true },
-                { id: "direccionGoogle", errorId: "direccionGoogleErrorV", minLength: 8, maxLength: 250, required: true  },
-                { id: "tipo_institucion", errorId: "tipoErrorV", minLength: 8, maxLength: 50, required: true  },
-                { id: "messageC", errorId: "caracteristicasErrorV", minLength: 8, maxLength: 550, required: true  },
-                { id: "file_input1", errorId: "logoErrorV", required: true  },
-                { id: "file_input2", errorId: "portadaErrorV", required: true  },
-                { id: "file_input3", errorId: "imagenErrorV", required: true  }
+                { id: "nombre", errorId: "nombreError", minLength: 8, maxLength: 80, required: true },
+                { id: "carrera", errorId: "universidadErrorE", required: true },
+                { id: "descripcion_breve", errorId: "descBreveErrorE", minLength: 8, maxLength: 200, required: true },
+                { id: "informacion", errorId: "infoErrorE", minLength: 8, maxLength: 550, required: true },
+                { id: "RoadMap", errorId: "roadErrorE", minLength: 8, maxLength: 150, required: true },
+                { id: "horario", errorId: "horarioEspecialidadE", minLength: 8, maxLength: 150, required: true },
+                { id: "slctHorario", errorId: "horarioErrorE", type: "select", required: true },
+                { id: "txtCosto", errorId: "costoErrorE", required: true },
+                { id: "slctModalidad", errorId: "selectModalidadError", type: "select", required: true },
+                { id: "slctPeriodoEscolar", errorId: "peroidoErrorE", type: "select", required: true },
+                { id: "horario", errorId: "horarioEspecialidadE", minLength: 8, maxLength: 150, required: true }
             ]
         },
         // Añadir más secciones según sea necesario

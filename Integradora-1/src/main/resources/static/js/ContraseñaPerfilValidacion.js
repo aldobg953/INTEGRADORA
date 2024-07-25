@@ -1,22 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("myForm");
+    const form = document.getElementById("myForm3");
     const fields = [
-        { id: "nombre", errorId: "nombreError", minLength: 8, maxLength: 50 },
-        { id: "message", errorId: "messageError", minLength: 10, maxLength: 500 },
-        { id: "desc_breve", errorId: "desc_breveError", minLength: 10, maxLength: 400 },
-        { id: "horario", errorId: "horarioError", minLength: 10, maxLength: 300 },
-        { id: "txtDesempeniarse", errorId: "comoDesempError", minLength: 10, maxLength: 500 },
-        { id: "txtDondeTrabajar", errorId: "dondeTrabajarError", minLength: 10, maxLength: 400 },
-        { id: "txtPqEstudiar", errorId: "pqEstudiarError", minLength: 10, maxLength: 600 },
-        { id: "universidad", errorId: "universidadError", required: true },
-        { id: "slctPeriodoEscolar", errorId: "periodoEscolarError", required: true },
-        { id: "slctArea", errorId: "selectAreaError", required: true },
-        { id: "slctHorario", errorId: "selectHorarioError", required: true },
-        { id: "slctModalidad", errorId: "modalidadError", required: true },
-        { id: "file_input", errorId: "imagenError", required: true },
-        { id: "numero_periodos", errorId: "numeroError", required: true },
-        { id: "txtCosto", errorId: "costoError", required: true },
-        { id: "RoadMap", errorId: "roadError", required: true}
+        { id: "newPass", errorId: "newPassError", minLength: 6, maxLength: 50, required: true },
+        { id: "confNewPass", errorId: "confNewPassError", minLength: 6, maxLength: 50, required: true },
+        { id: "oldPass", errorId: "oldPassError", minLength: 6, maxLength: 50, required: true },
+        
     ];
 
     function validateField(field, errorElement, minLength, maxLength) {
@@ -37,6 +25,55 @@ document.addEventListener("DOMContentLoaded", function() {
             field.classList.remove("input-error");
             errorElement.style.display = "none";
             errorElement.textContent = "";
+            return true;
+        }
+    }
+
+    function validateEmail(field, errorElement) {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (field.value.trim() === "") {
+            field.classList.add("input-error");
+            field.classList.remove("input-valid");
+            errorElement.style.display = "block";
+            errorElement.textContent = "Este campo no puede estar vacío";
+            return false;
+        } else if (!emailPattern.test(field.value)) {
+            field.classList.add("input-error");
+            field.classList.remove("input-valid");
+            errorElement.style.display = "block";
+            errorElement.textContent = "Por favor, ingrese un correo electrónico válido";
+            return false;
+        } else {
+            field.classList.add("input-valid");
+            field.classList.remove("input-error");
+            errorElement.style.display = "none";
+            errorElement.textContent = "";
+            return true;
+        }
+    }
+
+    function validateEmailConfirmation() {
+        const emailField = document.getElementById("newCorreo");
+        const confirmEmailField = document.getElementById("newConfirmacionCorreo");
+        const confirmEmailError = document.getElementById("confirmacionCorreoError");
+
+        if (confirmEmailField.value.trim() === "") {
+            confirmEmailField.classList.add("input-error");
+            confirmEmailField.classList.remove("input-valid");
+            confirmEmailError.style.display = "block";
+            confirmEmailError.textContent = "Este campo no puede estar vacío";
+            return false;
+        } else if (emailField.value !== confirmEmailField.value) {
+            confirmEmailField.classList.add("input-error");
+            confirmEmailField.classList.remove("input-valid");
+            confirmEmailError.style.display = "block";
+            confirmEmailError.textContent = "Los correos electrónicos no coinciden";
+            return false;
+        } else {
+            confirmEmailField.classList.add("input-valid");
+            confirmEmailField.classList.remove("input-error");
+            confirmEmailError.style.display = "none";
+            confirmEmailError.textContent = "";
             return true;
         }
     }
@@ -114,12 +151,19 @@ document.addEventListener("DOMContentLoaded", function() {
                         isValid = false;
                     }
                 }
+            } else if (field.type === "email") {
+                if (!validateEmail(field, errorElement)) {
+                    isValid = false;
+                }
             } else {
                 if (!validateField(field, errorElement, minLength, maxLength)) {
                     isValid = false;
                 }
             }
         });
+        if (!validateEmailConfirmation()) {
+            isValid = false;
+        }
         return isValid;
     }
 
@@ -134,10 +178,14 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (field.id === "txtCosto") {
                 field.addEventListener("input", validateFloatInput);
             }
+        } else if (field.type === "email") {
+            field.addEventListener("input", () => validateEmail(field, errorElement));
         } else {
             field.addEventListener("input", () => validateField(field, errorElement, minLength, maxLength));
         }
     });
+
+    document.getElementById("newConfirmacionCorreo").addEventListener("input", validateEmailConfirmation);
 
     form.addEventListener("submit", function(event) {
         const isFormValid = validateForm();
@@ -152,8 +200,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-
-
-console.log("Hola");
-

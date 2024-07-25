@@ -158,15 +158,6 @@ body::-webkit-scrollbar {
     object-fit: cover;
 }
 
-#link-register {
-    filter: saturate(3);
-    color: var(--primary-color);
-}
-
-#link-register:hover {
-    background-color: rgba(255, 255, 255, 0.619);
-}
-
 .link-icon {
     width: 1.5rem;
     height: 1.5rem;
@@ -367,7 +358,6 @@ h1 {
 
 .tarjeta a:active {
     scale: 0.9;
-    box-shadow: 0 0 35px var(--card-shadow);
 }
 
 h2 {
@@ -387,7 +377,7 @@ h2 span {
     display: flex;
     flex-direction: column;
     width: 45%;
-    height: calc(100vh - 16rem); /* Adjust based on your layout */
+    height: 34rem; /* Adjust based on your layout */
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 1rem;
@@ -459,7 +449,6 @@ h2 span {
     box-shadow: 0 0 35px var(--card-shadow);
     background-color: white;
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
-    overflow: hidden;
 }
 
 .titulo-favoritos h2, .titulo-favoritos i {
@@ -478,6 +467,7 @@ h2 span {
     padding: 1rem;
     padding-right: 0.5rem; /* Compensar el ancho de la barra de desplazamiento */
     list-style-type: none; /* Eliminar los puntos de la lista */
+    overflow-x: hidden;
 }
 
 .favoritos-grid li {
@@ -485,7 +475,6 @@ h2 span {
     border-radius: 1rem;
     border: var(--card-border) 2px solid;
     background-color: white;
-    overflow: hidden;
     box-shadow: none;
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
 }
@@ -511,7 +500,7 @@ h2 span {
 }
 
 
-#titulo-favorito {
+.titulo-favorito {
     font-size: 125%;
     font-weight: 700;
     color: var(--primary-color);
@@ -548,12 +537,6 @@ h2 span {
     background: #555;
 }
 
-/* Media query para asegurar máximo 4 tarjetas por fila en pantallas grandes */
-@media (min-width: 1024px) {
-    .favoritos-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 
 
 

@@ -1,162 +1,119 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:classappend="${usuario.darkmode} ? 'dark' : ''"> 
-    <head>
-        <meta charset="utf-8">
-        <title>Universidades</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link href="/css/tailwind.css" rel="stylesheet">
-        <script src="/js/navbar.js"></script>
-        <script src="/js/buscador.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                    $('form').on('submit', function(e) {
-                    e.preventDefault();
-                    var tipoSeleccionado = $('#tipo-universidad').val().toLowerCase();
-                    var searchTerm = $('#search').val().toLowerCase();
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:classappend="${usuario.darkmode} ? 'dark' : ''">
+<head>
+    <meta charset="utf-8">
+    <title>Universidades</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/buscador.css">
+    <script src="/js/navbar.js"></script>
+    <script src="/js/buscador.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+                $('form').on('submit', function(e) {
+                e.preventDefault();
+                var tipoSeleccionado = $('#tipo-universidad').val().toLowerCase();
+                var searchTerm = $('#search').val().toLowerCase();
 
-                    $('#unis .w-72').each(function() {
-                        var $universidad = $(this);
-                        var tipoInstitucion = $universidad.find('span').text().toLowerCase();
-                        var nombreUniversidad = $universidad.find('h5').text().toLowerCase();
+                $('#unis .tarjeta').each(function() {
+                    var $universidad = $(this);
+                    var tipoInstitucion = $universidad.find('span').text().toLowerCase();
+                    var nombreUniversidad = $universidad.find('h5').text().toLowerCase();
 
-                        // Incluyendo variaciones para "pública" y "privada"
-                        var tipoMatch = tipoSeleccionado === 'tipo de universidad' || 
-                                        tipoInstitucion.includes(tipoSeleccionado) || 
-                                        (tipoSeleccionado === 'publica' && 
-                                        (tipoInstitucion.includes('public') || tipoInstitucion.includes('publier'))) || 
-                                        (tipoSeleccionado === 'privada' && 
-                                        (tipoInstitucion.includes('private') || tipoInstitucion.includes('privé')));
+                    // Incluyendo variaciones para "pública" y "privada"
+                    var tipoMatch = tipoSeleccionado === 'tipo de universidad' || 
+                                    tipoInstitucion.includes(tipoSeleccionado) || 
+                                    (tipoSeleccionado === 'publica' && 
+                                    (tipoInstitucion.includes('public') || tipoInstitucion.includes('publier'))) || 
+                                    (tipoSeleccionado === 'privada' && 
+                                    (tipoInstitucion.includes('private') || tipoInstitucion.includes('privé')));
 
-                        var nombreMatch = nombreUniversidad.includes(searchTerm);
+                    var nombreMatch = nombreUniversidad.includes(searchTerm);
 
-                        if (tipoMatch && nombreMatch) {
-                            $universidad.show();
-                        } else {
-                            $universidad.hide();
-                        }
-                    });
+                    if (tipoMatch && nombreMatch) {
+                        $universidad.show();
+                    } else {
+                        $universidad.hide();
+                    }
                 });
             });
+        });
 
-         </script>
-    </head>
-    <body class="bg-gray-100 dark:bg-gray-800"> 
-
-        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <div id="logo-image">
-                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                            style="max-width:40%;height:auto;">
-                    </div>
-                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
+     </script>
+</head>
+<body class="dark:bg-gray-800">
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/}">
+                    <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
-    
-                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
-                        id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
-                            alt="user photo">
-                    </button>
-    
-                </div>
-                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-black-900 dark:text-white"
-                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                            th:text="${usuario.email} ">correo</span>
-                    </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/logout}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
-                                sesion</a>
-                        </li>
-                    </ul>
-                </div>
-    
-                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
-                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                        <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
-                        </li>
-                        <li>
-                            <a th:if="${roles.contains(2L)}" th:href="@{/administrador?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Administrador</a>
-                        </li>
-                    </ul>
-                </div>
+                <hr>
+
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
             </div>
+
+            <div class="navbar-links" id="navbarLinks">
+
+                <div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
+                </div>
+
+                <hr>
+                <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
+                            class="link-icon" th:text="#{perfil}"></div>
+                </a>
+            </div>
+
         </nav>
+    </header>
 
-        <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white">Universidades</span>
-        </div>
+    <div class="title-gradient">
+        <h1 th:text="#{universidades}"></h1>
+    </div>
 
-        <form class="max-w-lg mx-auto">
-            <div class="flex">
-                <select id="tipo-universidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-s-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Tipo de universidad</option>
-                    <option value="publica">Pública</option>
-                    <option value="privada">Privada</option>
-                </select>
-                <div class="relative w-full">
-                    <input type="search" id="search" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-gray-50 border-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Buscar universidad..."/>
-                    <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                        <span class="sr-only">Search</span>
-                    </button>
-                </div>
+    <center>
+    <form class="contenedor-barra-busqueda">
+        <div class="contenedor">
+            <select id="tipo-universidad" class="filtro-tipo dark:text-white dark:border-gray-700">
+                <option class="dark:text-white dark:bg-gray-800">Tipo</option>
+                <option class="dark:text-white dark:bg-gray-800" value="publica">Pública</option>
+                <option class="dark:text-white dark:bg-gray-800" value="privada">Privada</option>
+            </select>
+            <div class="barra-busqueda">
+                <input type="search" id="search" class="dark:border-gray-700 dark:text-white" placeholder="Buscar universidad..."/>
+                <button type="submit" class="">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
             </div>
-        </form>
+        </div>
+    </form>
+</center>
 
-        <div id="unis" class="flex md:mx-28 mt-8 flex-wrap">
-            <div th:each="universidad : ${universidades}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
+    <div id="unis" class="tarjetas-unis">
+        <div th:each="universidad : ${universidades}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+            <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="imagen-uni">
+                <img th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/logo.jpg'}" alt="" />
+            </a>
+            <div class="tarjeta-contenido dark:text-white">
                 <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}">
-                    <img class="rounded-t-lg h-64 w-full bg-white" th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/logo.jpg'}" alt="" />
+                    <h2 th:text="${universidad.nombre_completo}"></h2>
                 </a>
-                <div class="p-5 bortder-2 border-t-indigo-500">
-                    <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${universidad.nombre_completo}"></h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" >Tipo de institucion: <span th:text="${universidad.tipo_institucion}"></span></p>
-                    <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        ver mas
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
-                </div>
+                <p class="dark:text-white">Tipo de institucion: <span th:text="${universidad.tipo_institucion}"></span></p>
+                <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
+                    Ver más
+                </a>
             </div>
         </div>
-        
-    </body>
+    </div>
+</body>
 </html>
