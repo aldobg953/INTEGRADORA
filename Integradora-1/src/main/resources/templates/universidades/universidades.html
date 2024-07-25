@@ -12,16 +12,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('form').on('submit', function(e) {
+                $('form').on('submit', function(e) {
                 e.preventDefault();
                 var tipoSeleccionado = $('#tipo-universidad').val().toLowerCase();
                 var searchTerm = $('#search').val().toLowerCase();
 
-                $('#unis > div').each(function() {
+                $('#unis .tarjeta').each(function() {
                     var $universidad = $(this);
                     var tipoInstitucion = $universidad.find('span').text().toLowerCase();
                     var nombreUniversidad = $universidad.find('h5').text().toLowerCase();
 
+                    // Incluyendo variaciones para "pública" y "privada"
                     var tipoMatch = tipoSeleccionado === 'tipo de universidad' || 
                                     tipoInstitucion.includes(tipoSeleccionado) || 
                                     (tipoSeleccionado === 'publica' && 
@@ -39,7 +40,8 @@
                 });
             });
         });
-    </script>
+
+     </script>
 </head>
 <body class="dark:bg-gray-800">
     <header class="header">
@@ -50,9 +52,9 @@
                 </a>
                 <hr>
 
-                <a href="" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
-                <a href="" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
-                <a href="" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
             </div>
 
             <div class="navbar-links" id="navbarLinks">
@@ -76,26 +78,28 @@
         <h1 th:text="#{universidades}"></h1>
     </div>
 
-    <form>
-        <div class="filtro">
-            <select id="tipo-universidad">
-                <option selected>Tipo de universidad</option>
-                <option value="publica">Pública</option>
-                <option value="privada">Privada</option>
+    <center>
+    <form class="contenedor-barra-busqueda">
+        <div class="contenedor">
+            <select id="tipo-universidad" class="filtro-tipo dark:text-white dark:border-gray-700">
+                <option class="dark:text-white dark:bg-gray-800">Tipo</option>
+                <option class="dark:text-white dark:bg-gray-800" value="publica">Pública</option>
+                <option class="dark:text-white dark:bg-gray-800" value="privada">Privada</option>
             </select>
-            <div>
-                <input type="search" id="search" placeholder="Buscar universidad..."/>
-                <button type="submit">
-                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <div class="barra-busqueda">
+                <input type="search" id="search" class="dark:border-gray-700 dark:text-white" placeholder="Buscar universidad..."/>
+                <button type="submit" class="">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
-                    <span>Search</span>
+                    <span class="sr-only">Search</span>
                 </button>
             </div>
         </div>
     </form>
+</center>
 
-    <div class="tarjetas-unis">
+    <div id="unis" class="tarjetas-unis">
         <div th:each="universidad : ${universidades}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
             <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="imagen-uni">
                 <img th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/logo.jpg'}" alt="" />

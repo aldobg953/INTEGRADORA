@@ -175,7 +175,7 @@ body::-webkit-scrollbar {
     margin-right: .5rem;
 }
 
-input {
+.navbar input {
     width: 20rem;
     height: 2rem;
     background-color: rgba(0, 0, 0, 0.236);
@@ -273,11 +273,92 @@ h1 {
     margin-bottom: 1rem;
 }
 
-.filtro {
+
+
+.contenedor-barra-busqueda {
+    display: flex;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.contenedor {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 3rem;
+    border-radius: 1rem;
+    padding: .5rem 2rem;
+    font-size: 1rem;
+    transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
+    outline: none;
 }
+
+.filtro-tipo {
+    width: fit-content;
+    height: 3rem;
+    justify-content: left;
+    border-radius: 1rem 0 0 1rem;
+    background-color: transparent;
+    border-top: var(--card-border) solid 2px;
+    border-left: var(--card-border) solid 2px;
+    border-bottom: var(--card-border) solid 2px;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
+    outline: none;
+}
+
+select option:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+  
+
+.barra-busqueda {
+    display: flex;
+}
+
+.barra-busqueda input {
+    width: 20rem;
+    height: 3rem;
+    background-color: transparent;
+    border-top: var(--card-border) solid 2px;
+    border-left: var(--card-border) solid 2px;
+    border-bottom: var(--card-border) solid 2px;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
+    outline: none;
+}
+
+.barra-busqueda button {
+    width: fit-content;
+    height: 3rem;
+    border-radius: 0 1rem 1rem 0;
+    background-color: var(--primary-color);
+    padding: .5rem 2rem;
+    font-size: 1rem;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+    outline: none;
+}
+
+svg {
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+button:hover > svg {
+    scale: 1.5;
+}
+
+button:active > svg {
+    scale: 0.8;
+}
+
+
 
 .tarjetas-unis {
     display: grid;
