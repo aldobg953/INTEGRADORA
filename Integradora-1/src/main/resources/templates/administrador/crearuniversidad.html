@@ -4,6 +4,7 @@
         <link rel="icon" href="css/IsotipoAdminDeveloper.ico" type="image/x-icon">
         <title>Crear Universidad</title>
         <link href="/css/tailwind.css" rel="stylesheet">
+        <link href="/css/validaciones.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/utils.js"></script>
     </head>
@@ -115,73 +116,114 @@
             <span class="text-black text-3xl font-bold dark:text-white">Crear Universidad</span>
         </div>
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
-            <form th:action="@{/administrador/postguardaruniversidad}" th:object="${universidad}" method="post" enctype="multipart/form-data">
+            <form id="myForm" th:action="@{/administrador/postguardaruniversidad}" th:object="${universidad}" method="post" enctype="multipart/form-data">
+                
+                <!--Nombre Universidad-->
                 <div class="mx-10 my-5">
                     <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Añadir universidad</span></div>
                     <label for="nombre_completo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Universidad (sin abreviar):</label>
                     <input id="nombre_completo" th:field="*{nombre_completo}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <div id="nombreErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--NombreAbreviado-->
                 <div class="mx-10 my-5">
                     <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Universidad abreviado:</label>
                     <input id="nombre_abreviado" th:field="*{nombre_abreviado}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <div id="nombreAbreviadoErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--link-->
                 <div class="mx-10 my-5">
                     <label for="pagina_web" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir link de la pagina oficial:</label>
                     <input id="pagina_web" th:field="*{pagina_web}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <div id="linkErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--correo-->
                 <div class="mx-10 my-5">
                     <label for="correo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir correo oficial de la universidad:</label>
                     <input id="correo" th:field="*{correo}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <div id="correoErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--telefono-->
                 <div class="mx-10 my-5">
                     <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir telefono:</label>
                     <input id="telefono" th:field="*{telefono}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <div id="telefonoErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--infoPrincipal-->
                 <div class="mx-10 my-5">
                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Informacion de la universidad:</label>
                     <textarea id="message" rows="4" th:field="*{informacion}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe la informacion principal de la universidad...."></textarea>
+                        <div id="messageErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--direccion-->
                 <div class="mx-10 my-5">
                     <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir direccion:</label>
                     <input id="direccion" th:field="*{direccion}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <div id="direccionErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--direccionGoogle-->
                 <div class="mx-10 my-5">
                     <label for="direccionGoogle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir direccion de google:</label>
                     <input id="direccionGoogle" th:field="*{direccionGoogle}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ejemplo: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7003.141572755976!2d">
+                    <div id="direccionGoogleErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
+
+                <!--tipoInstitucion-->
                 <div class="mx-10 my-5">
                     <label for="tipo_institucion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de institución:</label>
                     <input id="tipo_institucion" th:field="*{tipo_institucion}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ejemplo: Publica o Privada">
+                    <div id="tipoErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
 
+                <!--caracteristicas-->
                 <div class="mx-10 my-5">
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caracteristicas de la universidad:</label>
-                    <textarea id="message" rows="4" th:field="*{caracteristicas}"
+                    <label for="messageC" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caracteristicas de la universidad:</label>
+                    <textarea id="messageC" rows="4" th:field="*{caracteristicas}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe las caracteristicas principal de la universidad...."></textarea>
+                        <div id="caracteristicasErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
 
+                <!--logo-->
                 <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega el logo:</label>
-                    <input th:field="*{logo}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input1">Agrega el logo:</label>
+                    <input th:field="*{logo}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input1" type="file">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
-                </div>
-                <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega la portada</label>
-                    <input th:field="*{portada}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
-                </div>
-                <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega una imagen</label>
-                    <input th:field="*{imagen1}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
+                    <div id="logoErrorV" class="validationErrors" style="display: none;"></div>
+
                 </div>
 
+                <!--Portada-->
+                <div class="mx-10 my-5">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input2">Agrega la portada</label>
+                    <input th:field="*{portada}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input2" type="file">
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
+                    <div id="portadaErrorV" class="validationErrors" style="display: none;"></div>
+                </div>
+
+                <!--AgregarImagen-->
+                <div class="mx-10 my-5">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input3">Agrega una imagen</label>
+                    <input th:field="*{imagen1}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input3" type="file">
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
+                    <div id="imagenErrorV" class="validationErrors" style="display: none;"></div>
+                </div>
+
+                <!-- AgregarUniversidad -->
                 <div class="p-4 flex justify-end pr-20">
+                    <div id="formError" class="validationErrors" style="display: none;"></div>
+
                     <button
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span
@@ -192,5 +234,6 @@
                 </div-->
             </form>
         </div>
+        <script src="/js/crearUniversidadValidacion.js"></script>
     </body>
 </html>
