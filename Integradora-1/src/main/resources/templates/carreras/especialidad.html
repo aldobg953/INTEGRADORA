@@ -38,7 +38,7 @@
                             <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
                         </li>
                         <li>
                             <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar sesion</a>
@@ -52,13 +52,13 @@
                     <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicioo}">Inicio</a>
                     </li>
                     <li>
-                    <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
+                    <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidades}">Universidades</a>
                     </li>
                     <li>
-                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0" th:text="#{carrerass}">Carreras</a>
+                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0" th:text="#{carreras}">Carreras</a>
                     </li>
                     <li>
-                        <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
+                        <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
                     </li>
                     <li>
                         <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
@@ -88,7 +88,7 @@
                 <div class="text-xl md:text-lg font-serif font-bold" th:text="#{modalidad}">Modalidad</div>
                 <div th:text="${especialidad.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
                 <div th:text="${especialidad.carrera.cantidad_periodos} + ' ' +${especialidad.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
-                <div class="text-xl md:text-lg font-serif font-bold" th:text="areass">Area</div>
+                <div class="text-xl md:text-lg font-serif font-bold" th:text="areas">Area</div>
                 <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${especialidad.carrera.area.id_area}, lang=${usuario.lang})}"></a>
                 <div class="text-xl md:text-lg font-serif font-bold" th:text="#{universidad}">Universidad</div>
                 <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${especialidad.carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
