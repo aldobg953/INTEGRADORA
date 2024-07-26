@@ -73,3 +73,29 @@ input, select, textarea {
     transition: text-shadow 0.3s ease, box-shadow 0.3s ease;
 
 }
+
+/* comentario */
+/* Estilos generales para bordes y estrellas */
+.star {
+    transition: color 0.2s ease;
+}
+
+textarea,
+button {
+    transition: border-color 0.2s ease;
+}
+
+/* Estilo para los errores */
+.error-border {
+    border-color: red !important;
+    box-shadow: 0 0 5px red; /* Sombra roja para inputs con error */
+}
+
+.error-star {
+    color: red !important;
+}
+
+.errorCom{
+    color: red;
+    text-shadow: 2px 2px 2.7px rgba(0, 0, 0, 0.304);
+}
