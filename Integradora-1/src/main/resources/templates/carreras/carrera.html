@@ -18,21 +18,17 @@
                     <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
                 <hr>
-                <a th:href="@{/logout}" style="display: yes;">
-                    <div class="link"><img src="/css/assets/navbaricons/exit1.png" alt="" class="link-icon"
-                            th:text="#{cerrarSesion}"></div>
-                </a>
+
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
             </div>
 
             <div class="navbar-links" id="navbarLinks">
-                <!-- Motor de busqueda-->
-                <div class="form-input">
-                    <div id="searchForm">
-                        <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
-                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
-                        <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
-                        </div>
-                    </div>
+
+                <div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
                 </div>
 
                 <hr>
@@ -42,27 +38,8 @@
                 </a>
             </div>
 
-            <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1 " >
-            <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                <li>
-                <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicioo}">Inicio</a>
-                </li>
-                <li>
-                <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
-                </li>
-                <li>
-                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0" th:text="#{carrerass}">Carreras</a>
-                </li>
-                <li>
-                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
-                </li>
-                <li>
-                    <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
-                </li>
-            </ul>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <div id="dynamicBackground" th:data-background-image="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/portada.jpg'}" class="bg-fixed w-full min-h-80 bg-cover" style="background-position: center 70%;">
         <div class="bg-sky-900 w-full h-72 flex items-center justify-center bg-opacity-50">
