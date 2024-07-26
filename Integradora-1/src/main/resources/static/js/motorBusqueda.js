@@ -10,22 +10,49 @@ document.addEventListener('click', function(event) {
 
 document.getElementById('search-bar').addEventListener('input', function() {
     var searchTerm = this.value;
-    var lang = document.body.getAttribute('data-lang'); // Asegúrate de que este dato esté disponible
+    var lang = document.body.getAttribute('data-lang');
+    
+    // Obtener las traducciones
+    var translations = document.getElementById('translations');
+    var typeTranslations = {
+        'carrera': translations.getAttribute('data-carrera'),
+        'area': translations.getAttribute('data-area'),
+        'universidad': translations.getAttribute('data-universidad')
+    };
 
     fetch(`/api/motor?query=${encodeURIComponent(searchTerm)}&lang=${encodeURIComponent(lang)}`)
         .then(response => response.json())
         .then(data => {
             var resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = ''; // Limpiar resultados previos
+            resultsDiv.innerHTML = '';
             
             if (data.length > 0) {
-                resultsDiv.classList.remove('hidden'); // Mostrar el div si hay resultados
+                resultsDiv.classList.remove('hidden');
                 
                 data.forEach(item => {
                     var a = document.createElement('a');
-                    a.textContent = item.nombre;
                     
-                    // Configurar la URL con el parámetro lang
+                    // Crear el span para el tipo
+                    var typeSpan = document.createElement('span');
+                    typeSpan.classList.add('result-type');
+                    
+                    // Usar la traducción correspondiente
+                    typeSpan.textContent = typeTranslations[item.tipo] || item.tipo;
+                    typeSpan.classList.add('type-' + item.tipo);
+                    
+                    // Crear un contenedor para el nombre y el tipo
+                    var contentDiv = document.createElement('div');
+                    contentDiv.classList.add('result-content');
+                    
+                    var nameSpan = document.createElement('span');
+                    nameSpan.textContent = item.nombre;
+                    nameSpan.classList.add('result-name');
+                    
+                    contentDiv.appendChild(nameSpan);
+                    contentDiv.appendChild(typeSpan);
+                    
+                    a.appendChild(contentDiv);
+                    
                     var baseUrl;
                     switch(item.tipo) {
                         case 'carrera':
@@ -40,11 +67,11 @@ document.getElementById('search-bar').addEventListener('input', function() {
                     }
                     
                     a.href = `${baseUrl}?lang=${lang}`;
-                    a.classList.add('block', 'px-4', 'py-2', 'hover:bg-gray-100', 'dark:hover:bg-gray-600');
+                    a.classList.add('show-results', 'dark:text-white', 'dark:bg-gray-800');
                     resultsDiv.appendChild(a);
                 });
             } else {
-                resultsDiv.classList.add('hidden'); // Ocultar el div si no hay resultados
+                resultsDiv.classList.add('hidden');
             }
         })
         .catch(error => console.error('Error:', error));

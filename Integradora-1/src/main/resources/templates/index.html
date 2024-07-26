@@ -16,6 +16,14 @@
 </head>
 
 <body th:data-lang="${usuario.lang}">
+
+    <div id="translations" 
+     th:attr="data-carrera=#{carreraTag},
+              data-area=#{areaTag},
+              data-universidad=#{universidadTag}" 
+     style="display: none;">
+</div>
+
     <header class="header">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -31,11 +39,11 @@
 
             <div class="navbar-links" id="navbarLinks">
                 <!-- Motor de busqueda-->
-                <div class="form-input relative">
+                <div class="form-input">
                     <div id="searchForm">
                         <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
                         <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
-                        <div id="results" class="absolute hidden left-0 right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto z-10 dark:text-white dark:bg-gray-800">
+                        <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
                         </div>
                     </div>
                 </div>
