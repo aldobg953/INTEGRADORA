@@ -84,10 +84,6 @@ body::-webkit-scrollbar {
     filter: saturate(2);
 }
 
-.dark .title-gradient > h1{
-    z-index: 10;
-}
-
 @keyframes gradientShift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }

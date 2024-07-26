@@ -71,6 +71,21 @@ body::-webkit-scrollbar {
     50% { background-position: 100% 50%; }
 }
 
+.dark .principal-text{
+    background:
+    radial-gradient(at 18% 99%, #0038CC 0, transparent 50%),
+    radial-gradient(at 97% 8%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 79% 82%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 96% 10%, #0038CC 0, transparent 50%),
+    radial-gradient(at 42% 20%, #7370CC 0, transparent 50%),
+    radial-gradient(at 4% 49%, #7370CC 0, transparent 50%),
+    radial-gradient(at 57% 33%, rgb(174, 66, 182) 0, #8073CC 50%);
+    background-size: 200% 200%;
+    background-attachment: fixed;
+    animation: gradientShift 10s infinite;
+    filter: saturate(2);
+}
+
 
 
 
