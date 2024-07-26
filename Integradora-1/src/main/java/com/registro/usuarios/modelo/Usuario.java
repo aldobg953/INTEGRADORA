@@ -1,5 +1,6 @@
 package com.registro.usuarios.modelo;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +39,8 @@ public class Usuario {
 	private Long id_universidad;
 	private String lang;
 	private String foto_perfil;
-	
+	private LocalDateTime fechaDesbloqueo;
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "usuarios_roles",
@@ -192,6 +194,14 @@ public class Usuario {
 
 	public void setFoto_perfil(String foto_perfil) {
 		this.foto_perfil = foto_perfil;
+	}
+
+	public LocalDateTime getFechaDesbloqueo() {
+		return fechaDesbloqueo;
+	}
+
+	public void setFechaDesbloqueo(LocalDateTime fechaDesbloqueo) {
+		this.fechaDesbloqueo = fechaDesbloqueo;
 	}
 
 

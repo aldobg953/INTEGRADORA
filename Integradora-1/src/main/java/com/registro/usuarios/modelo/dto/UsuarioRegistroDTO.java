@@ -11,7 +11,9 @@ public class UsuarioRegistroDTO {
 	private boolean usuarioAdmin;
 	private Long idUniversidad;
 	private String lang;
+	private boolean activo;
 
+	
 	public Long getId_usuario() {
 		return id_usuario;
 	}
@@ -55,7 +57,7 @@ public class UsuarioRegistroDTO {
 	
 	
 	public UsuarioRegistroDTO(Long id_usuario, String nombre, String apellidoP, String email, String password,
-			boolean superUsuario, boolean usuarioAdmin,Long id_universidad, String lang) {
+			boolean superUsuario, boolean usuarioAdmin,Long id_universidad, String lang, boolean activo) {
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
@@ -65,9 +67,10 @@ public class UsuarioRegistroDTO {
 		this.usuarioAdmin = usuarioAdmin;
 		this.idUniversidad = id_universidad;
 		this.lang = lang;
+		this.activo = activo;
 	}
 
-	public UsuarioRegistroDTO(String nombre, String apellidoP, String email, String password, Long id_universidad, String lang) {
+	public UsuarioRegistroDTO(String nombre, String apellidoP, String email, String password, Long id_universidad, String lang, boolean activo) {
 		super();
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
@@ -75,6 +78,7 @@ public class UsuarioRegistroDTO {
 		this.password = password;
 		this.lang = lang;
 		this.idUniversidad = id_universidad;
+		this.activo = activo;
 	}
 
 	public UsuarioRegistroDTO() {
@@ -115,6 +119,14 @@ public class UsuarioRegistroDTO {
 
 	public void setLang(String lang) {
 		this.lang = lang;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 
