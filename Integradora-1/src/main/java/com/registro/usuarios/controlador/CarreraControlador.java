@@ -81,11 +81,9 @@ public class CarreraControlador {
 
     @GetMapping("/area/{id}")
     public String mostrarCarreraByArea( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
-        
-        
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         List<Carrera> carreras = carreraServicio.getCarrerasByArea(id,usuario.getLang());
-        String area = carreras.get(0).getArea().getNombre_area();
+        String area = areaServicio.getAreaByid(id).getNombreSegunIdioma(usuario.getLang());
         model.addAttribute("usuario", usuario);
         model.addAttribute("carreras", carreras);
         model.addAttribute("area", area);

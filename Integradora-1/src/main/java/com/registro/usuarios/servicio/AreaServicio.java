@@ -33,4 +33,8 @@ public class AreaServicio {
         areaDTO.setDescripcion(area.getDescripcionSegunIdioma(lang));
         return areaDTO;
     }
+
+    public Area getAreaByid(Long id){
+        return areaRepositorio.getById(id);
+    }
 }
