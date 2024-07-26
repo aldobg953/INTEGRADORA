@@ -15,6 +15,11 @@ function ocultarModal(){
     alerta.classList.add("hidden");
 }
 
+function ocultarModalDos(){
+    const alerta = document.getElementById("popup-modal2");
+    alerta.classList.add("hidden");
+}
+
 function confirmDeleteEspecialidad(id){
     const input_id = document.getElementById("input_id_especialidad");
     const alerta = document.getElementById("popup-modal");
@@ -24,6 +29,27 @@ function confirmDeleteEspecialidad(id){
 
 function confirmDeleteUniversidad(id){
     const input_id = document.getElementById("input_id_universidad");
+    const alerta = document.getElementById("popup-modal");
+    input_id.value = id;
+    alerta.classList.remove("hidden");
+}
+
+function confirmBloquearUsuario(id){
+    const input_id = document.getElementById("input_id_usuarioB");
+    const alerta = document.getElementById("popup-modal");
+    input_id.value = id;
+    alerta.classList.remove("hidden");
+}
+
+function confirmDesbloquearUsuario(id){
+    const input_id = document.getElementById("input_id_usuarioB");
+    const alerta = document.getElementById("popup-modal2");
+    input_id.value = id;
+    alerta.classList.remove("hidden");
+}
+
+function confirmDeleteUsuario(id){
+    const input_id = document.getElementById("input_id_usuarioB");
     const alerta = document.getElementById("popup-modal");
     input_id.value = id;
     alerta.classList.remove("hidden");

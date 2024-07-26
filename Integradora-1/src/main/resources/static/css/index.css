@@ -71,6 +71,21 @@ body::-webkit-scrollbar {
     50% { background-position: 100% 50%; }
 }
 
+.dark .principal-text{
+    background:
+    radial-gradient(at 18% 99%, #0038CC 0, transparent 50%),
+    radial-gradient(at 97% 8%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 79% 82%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 96% 10%, #0038CC 0, transparent 50%),
+    radial-gradient(at 42% 20%, #7370CC 0, transparent 50%),
+    radial-gradient(at 4% 49%, #7370CC 0, transparent 50%),
+    radial-gradient(at 57% 33%, rgb(174, 66, 182) 0, #8073CC 50%);
+    background-size: 200% 200%;
+    background-attachment: fixed;
+    animation: gradientShift 10s infinite;
+    filter: saturate(2);
+}
+
 
 
 
@@ -164,14 +179,61 @@ body::-webkit-scrollbar {
     margin-right: .5rem;
 }
 
+
+.result-name {
+    flex-grow: 1;
+}
+
+.result-type {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.type-carrera {
+    background-color: #e6f3ff;
+    color: #0066cc;
+}
+
+.type-area {
+    background-color: #e6ffe6;
+    color: #006600;
+}
+
+.type-universidad {
+    background-color: #fff0e6;
+    color: #cc6600;
+}
+
+/* Estilos para modo oscuro */
+.dark .type-carrera {
+    background-color: #004080;
+    color: #ffffff;
+}
+
+.dark .type-area {
+    background-color: #004d00;
+    color: #ffffff;
+}
+
+.dark .type-universidad {
+    background-color: #804000;
+    color: #ffffff;
+}
+
+.dark .result-name {
+    color: white;
+}
+
 input {
-    width: 20rem;
+    width: 30rem;
     height: 2rem;
     background-color: rgba(0, 0, 0, 0.236);
     color: white;
     border: var(--header-border) solid 2px;
     border-radius: 1rem;
-    padding: .5rem 2rem;
+    padding: .5rem 2rem .5rem 2.5rem; /* Asegura espacio para el icono */
     font-size: 1rem;
     transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
     outline: none;
@@ -194,11 +256,12 @@ input {
 
 .input-icon {
     position: absolute;
-    align-items: center;
+    top: 57%; /* Cambia el valor a 60% para mover el icono más hacia abajo */
+    transform: translateY(-50%);
     left: .8rem;
+    font-size: 1.2rem; /* Ajusta el tamaño del icono si es necesario */
     pointer-events: none; /* Permite hacer clic a través del icono */
-    font-size: 1rem;
-    line-height: 0;
+    line-height: 1; /* Asegura que el icono no tenga espacio extra alrededor */
 }
 
 #search-bar::placeholder {
@@ -206,12 +269,60 @@ input {
     font-weight: 600;
 }
 
-#search-bar:focus {
-    width: 30rem;
+
+/* Estilizar la barra de desplazamiento */
+#results::-webkit-scrollbar {
+    width: 8px;
 }
 
-.form-input.shrink {
-    transform: scale(0.95);
+#results::-webkit-scrollbar-track {
+    background: rgba(117, 117, 117, 0.067);
+    border-radius: 4px;
+}
+
+#results::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#results::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#results{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: .5rem;
+    border: var(--card-border) solid 2px;
+    border-radius: 1rem;
+    max-height: 20rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-weight: 600;
+    box-shadow: 0 0 35px #00000018;
+}
+
+.show-results {
+    display: block;
+    padding: 1rem 2rem;
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+#results a:hover{
+    color: white;
+    background-color: var(--primary-color);
+    scale: 1.05;
+}
+
+#results a:active{
+    scale: .95;
+    border-radius: 1rem;
+}
+
+#results a:hover .result-name{
+    color: white;
 }
 
 
