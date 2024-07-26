@@ -438,4 +438,12 @@ public class AdministradorControlador {
         }
     }
 
+    @GetMapping("/eliminarusuario/{id}")
+    private String eliminarUsuario(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        if(usuarioServicio.eliminarUsuario(id)){
+            return "redirect:/administrador/usuarios?exito&lang="+usuario.getLang();
+        }
+        return "redirect:/administrador/usuarios?error&lang="+usuario.getLang();
+    }
 }

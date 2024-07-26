@@ -35,4 +35,12 @@ public interface UsuarioServicio extends UserDetailsService{
 	public UsuarioRegistroDTO getUsuarioRegistroDTO(Long id);
 
 	public boolean actualizarUsuarioDTO( UsuarioRegistroDTO usuarioRegistroDTO);
+
+	public void bloquearUsuario(Long id_usuario);
+
+	public void desbloquearUsuarios();
+
+	public void desbloquearUsuarioInd(Long id_usuario);
+
+	public boolean eliminarUsuario(Long id_usuario);
 }

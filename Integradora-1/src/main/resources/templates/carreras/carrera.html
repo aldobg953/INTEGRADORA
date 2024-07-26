@@ -17,6 +17,7 @@
     </style>
     <script src="/js/navbar.js"></script>
     <link href="/css/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/validaciones.css">
 </head>
 <body class="dark:bg-gray-800 ">
     
@@ -291,33 +292,35 @@
             </div>        
             
 
-            <form th:action="@{/carreras/agregarComentario}" method="post" class="my-7">
+            <form id="comentarioForm" th:action="@{/carreras/agregarComentario}" method="post" class="my-7">
                 <h2 class="text-2xl font-bold" th:text="#{calificaCarrera}">Califica esta carrera</h2>
                 <div id="star-rating" class="flex space-x-1">
-                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="star w-5 h-5 cursor-pointer" data-value="1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
                     </svg>
-                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="star w-5 h-5 cursor-pointer" data-value="2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
                     </svg>
-                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="star w-5 h-5 cursor-pointer" data-value="3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
                     </svg>
-                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="star w-5 h-5 cursor-pointer" data-value="4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
                     </svg>
-                    <svg class="star w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="star w-5 h-5 cursor-pointer" data-value="5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
                     </svg>
                 </div>
-                <input type="hidden" id="calificacion" name="calificacion" th:value="0">
-                <h3 th:xt="#{dejaComentario}">Deja un comentario:</h3>
+                <input type="hidden" id="calificacion" name="calificacion" value="0">
+                <h3 th:text="#{dejaComentario}">Deja un comentario:</h3>
                 <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
-                <textarea id="comentarioNuevo" name="comentarioNuevo" rows="4" class="my-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escribe tu comentario aqui..."></textarea>
+                <textarea id="comentarioNuevo" name="comentarioNuevo" rows="4" class="my-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escribe tu comentario aquí..."></textarea>
                 <div>
-                    <button class="bg-green-500 w-full max-w-96 rounded-lg font-bold" type="submit" th:text="#{enviar}">Enviar</button>
+                    <button id="enviarButton" class="bg-green-500 w-full max-w-96 rounded-lg font-bold" type="submit" th:text="#{enviar}">Enviar</button>
                 </div>
+                <div id="error-messages" class="errorCom"></div>
             </form>
+            
         
         </div>
 
@@ -361,7 +364,7 @@
     </div>
 
 
-    
+    <script src="/js/comentarioValidacion.js" ></script>
     <script>
         const stars = document.querySelectorAll('.star');
         const ratingValue = document.getElementById('rating-value');

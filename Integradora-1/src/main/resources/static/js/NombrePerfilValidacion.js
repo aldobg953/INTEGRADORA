@@ -1,22 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("myForm");
+    const form = document.getElementById("myForm1");
     const fields = [
-        { id: "nombre", errorId: "nombreError", minLength: 8, maxLength: 50 },
-        { id: "message", errorId: "messageError", minLength: 10, maxLength: 500 },
-        { id: "desc_breve", errorId: "desc_breveError", minLength: 10, maxLength: 400 },
-        { id: "horario", errorId: "horarioError", minLength: 10, maxLength: 300 },
-        { id: "txtDesempeniarse", errorId: "comoDesempError", minLength: 10, maxLength: 500 },
-        { id: "txtDondeTrabajar", errorId: "dondeTrabajarError", minLength: 10, maxLength: 400 },
-        { id: "txtPqEstudiar", errorId: "pqEstudiarError", minLength: 10, maxLength: 600 },
-        { id: "universidad", errorId: "universidadError", required: true },
-        { id: "slctPeriodoEscolar", errorId: "periodoEscolarError", required: true },
-        { id: "slctArea", errorId: "selectAreaError", required: true },
-        { id: "slctHorario", errorId: "selectHorarioError", required: true },
-        { id: "slctModalidad", errorId: "modalidadError", required: true },
-        { id: "file_input", errorId: "imagenError", required: true },
-        { id: "numero_periodos", errorId: "numeroError", required: true },
-        { id: "txtCosto", errorId: "costoError", required: true },
-        { id: "RoadMap", errorId: "roadError", required: true}
+        { id: "newNombre", errorId: "nuevoNombreError", minLength: 3, maxLength: 50, required: true },
+        { id: "newApellidoP", errorId: "nuevoApellidoError", minLength: 4, maxLength: 50, required: true }
+        
     ];
 
     function validateField(field, errorElement, minLength, maxLength) {
@@ -139,6 +126,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    document.getElementById("newConfirmacionCorreo").addEventListener("input", validateEmailConfirmation);
+
     form.addEventListener("submit", function(event) {
         const isFormValid = validateForm();
         const formError = document.getElementById("formError");
@@ -152,8 +141,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-
-
-console.log("Hola");
-
