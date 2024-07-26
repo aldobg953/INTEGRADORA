@@ -12,6 +12,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('#tipo-universidad').on('change', function() {
+                var selectedOption = $(this).val();
+                $('#tipo-universidad').submit();
+                
+                if (selectedOption === 'Todas') {
+                    $('.tarjeta').show();
+                }
+            });
+        });
+
+        $(document).ready(function() {
                 $('form').on('submit', function(e) {
                 e.preventDefault();
                 var tipoSeleccionado = $('#tipo-universidad').val().toLowerCase();
@@ -20,7 +31,7 @@
                 $('#unis .tarjeta').each(function() {
                     var $universidad = $(this);
                     var tipoInstitucion = $universidad.find('span').text().toLowerCase();
-                    var nombreUniversidad = $universidad.find('h5').text().toLowerCase();
+                    var nombreUniversidad = $universidad.find('h2').text().toLowerCase();
 
                     // Incluyendo variaciones para "pública" y "privada"
                     var tipoMatch = tipoSeleccionado === 'tipo de universidad' || 
@@ -82,22 +93,21 @@
     <form class="contenedor-barra-busqueda">
         <div class="contenedor">
             <select id="tipo-universidad" class="filtro-tipo dark:text-white dark:border-gray-700">
-                <option class="dark:text-white dark:bg-gray-800">Tipo</option>
+                <option class="dark:text-white dark:bg-gray-800">Todas</option>
                 <option class="dark:text-white dark:bg-gray-800" value="publica">Pública</option>
                 <option class="dark:text-white dark:bg-gray-800" value="privada">Privada</option>
             </select>
             <div class="barra-busqueda">
                 <input type="search" id="search" class="dark:border-gray-700 dark:text-white" placeholder="Buscar universidad..."/>
-                <button type="submit" class="">
+                <button type="submit">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
-                    <span class="sr-only">Search</span>
                 </button>
             </div>
         </div>
     </form>
-</center>
+    </center>
 
     <div id="unis" class="tarjetas-unis">
         <div th:each="universidad : ${universidades}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
@@ -109,9 +119,12 @@
                     <h2 th:text="${universidad.nombre_completo}"></h2>
                 </a>
                 <p class="dark:text-white">Tipo de institucion: <span th:text="${universidad.tipo_institucion}"></span></p>
-                <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
+                <div class="tarjeta-botones">
+                    <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
                     Ver más
                 </a>
+                </div>
+                
             </div>
         </div>
     </div>

@@ -31,6 +31,7 @@ body::-webkit-scrollbar {
 /* Text Gradient Animation */
 .title-gradient {
     background-image: var(--text-gradient);
+    align-items: center;
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
@@ -52,7 +53,7 @@ body::-webkit-scrollbar {
     display: flex;
     padding: 0 10vw;
     flex-direction: column-reverse;
-    height: 30vh;
+    height: 20rem;
     width: 100%;
     background:
         radial-gradient(at 18% 99%, #0047FF 0, transparent 50%),
@@ -66,6 +67,25 @@ body::-webkit-scrollbar {
     background-attachment: fixed;
     animation: gradientShift 10s infinite;
     filter: saturate(2);
+}
+
+.dark .title-gradient{
+    background:
+    radial-gradient(at 18% 99%, #0038CC 0, transparent 50%),
+    radial-gradient(at 97% 8%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 79% 82%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 96% 10%, #0038CC 0, transparent 50%),
+    radial-gradient(at 42% 20%, #7370CC 0, transparent 50%),
+    radial-gradient(at 4% 49%, #7370CC 0, transparent 50%),
+    radial-gradient(at 57% 33%, rgb(174, 66, 182) 0, #8073CC 50%);
+    background-size: 200% 200%;
+    background-attachment: fixed;
+    animation: gradientShift 10s infinite;
+    filter: saturate(2);
+}
+
+.dark .title-gradient > h1{
+    z-index: 10;
 }
 
 @keyframes gradientShift {
@@ -267,7 +287,7 @@ body::-webkit-scrollbar {
 
 
 h1 {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 900;
     color: white;
     margin-bottom: 1rem;
@@ -277,7 +297,7 @@ h1 {
 
 .contenedor-barra-busqueda {
     display: flex;
-    width: 80vw;
+    width: fit-content;
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
@@ -287,24 +307,22 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: fit-content;
     height: 3rem;
     border-radius: 1rem;
-    padding: .5rem 2rem;
+    border: var(--card-border) solid 2px;
+    border-right: none;
     font-size: 1rem;
     transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
-    outline: none;
+    outline: hidden;
 }
 
 .filtro-tipo {
     width: fit-content;
     height: 3rem;
     justify-content: left;
-    border-radius: 1rem 0 0 1rem;
     background-color: transparent;
-    border-top: var(--card-border) solid 2px;
-    border-left: var(--card-border) solid 2px;
-    border-bottom: var(--card-border) solid 2px;
+    border-right: var(--card-border) solid 2px;
     padding: .5rem 1rem;
     font-size: 1rem;
     transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
@@ -325,9 +343,6 @@ select option:hover {
     width: 20rem;
     height: 3rem;
     background-color: transparent;
-    border-top: var(--card-border) solid 2px;
-    border-left: var(--card-border) solid 2px;
-    border-bottom: var(--card-border) solid 2px;
     padding: .5rem 1rem;
     font-size: 1rem;
     transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
@@ -338,13 +353,16 @@ select option:hover {
     width: fit-content;
     height: 3rem;
     border-radius: 0 1rem 1rem 0;
+    border: var(--primary-color) solid 2px;
     background-color: var(--primary-color);
     padding: .5rem 2rem;
     font-size: 1rem;
     color: white;
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
     outline: none;
+    z-index: 10;
 }
+
 
 svg {
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
@@ -358,6 +376,122 @@ button:active > svg {
     scale: 0.8;
 }
 
+.contenedor-barra-busqueda-carreras {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.contenedor-barra-busqueda-carreras > * {
+    margin: .5rem 0;
+    
+}
+
+.contenedor-carreras {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}	
+
+.contenedor-carreras select {
+    width: 20rem;
+    height: 3rem;
+    background-color: white;
+    border-radius: 1rem;
+    border: var(--card-border) solid 2px;
+    padding: .5rem 1rem;
+    margin: .5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+    outline: none;
+}
+
+.contenedor-carreras select:hover{
+    border-color: var(--primary-color);
+    scale: 1.05;
+    cursor: pointer;
+}
+
+.contenedor-carreras select:active{
+    border-color: var(--primary-color);
+    scale: 0.9;
+}
+
+.contenedor-carreras select:focus{
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+option {
+    background-color: white;
+    color: black;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+#radios{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.radios-contenedor {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 3.5rem;
+    background-color: white;
+    border-radius: 1rem;
+    border: var(--card-border) solid 2px;
+}
+
+label:hover {
+    color: var(--primary-color);
+    scale: 1.1;
+}
+
+label:active{
+    scale: .9;
+}
+
+.radios-contenedor input[type="radio"] {
+    display: none;
+  }
+
+label {
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+  }
+  
+
+.radios-contenedor{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.radios-contenedor > input[type="radio"] + label {
+    margin: 0 .5rem;
+    cursor: pointer;
+}
+
+.radios-contenedor input[type="radio"]:checked + label {
+    color: #ffffff;
+    background-color: #0047FF;
+    padding: 0.5rem 1rem;
+    border-radius: 50rem;
+    font-weight: 700;
+  }
+  
 
 
 .tarjetas-unis {
@@ -369,8 +503,10 @@ button:active > svg {
 }
 
 .tarjeta {
+    position: relative;
     border: 2px solid var(--card-border);
     border-radius: 1rem;
+    padding-bottom: 3rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -388,6 +524,7 @@ button:active > svg {
 
 .tarjeta:hover > .imagen-uni {
     scale: .8;
+    border-radius: 1rem;
 }
 
 .imagen-uni {
@@ -400,7 +537,7 @@ button:active > svg {
 .imagen-uni img {
     width: 100%;
     height: 100%;
-    object-fit: scale-down;
+    object-fit: cover;
 }
 
 .tarjeta-contenido {
@@ -425,24 +562,41 @@ button:active > svg {
     text-decoration: none;
 }
 
-.ver-mas {
-    font-weight: 700;
-    margin-top: auto;
-    display: inline-block;
-    padding: 0.5em 0.9375em;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 50rem;
+.tarjeta-botones {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    position: absolute;
+    bottom: 1rem;  /* Adjust this value as needed */
+    left: 1rem;  /* Adjust this value as needed */
+    right: 1rem;  /* Adjust this value as needed */
+}
+
+.tarjeta-botones a {
+    flex: 1;
     text-align: center;
+    font-weight: 700;
+    padding: 0.5em 0.9375em;
+    border-radius: 50rem;
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
 }
 
-.ver-mas:hover {
+.ver-mas {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.comparar {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.ver-mas:hover, .comparar:hover {
     scale: 1.05;
     box-shadow: 0 0 35px var(--card-shadow);
 }
 
-.ver-mas:active {
+.ver-mas:active, .comparar:active {
     scale: 0.9;
 }
 
