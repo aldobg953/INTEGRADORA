@@ -84,7 +84,7 @@
                 <div class="ml-32 mt-5 h-10 text-xl md:text-3xl font-bold font-serif" th:text="#{infoEspecialidad}">Informacion de la especialidad</div>
                 <div class="text-xl md:text-lg font-serif font-bold" th:text="#{horariosCostos}">Horarios y costos</div>
                 <div th:utext="${especialidad.horario_especifico}" class="text-base md:text-lg">horario</div>
-                <div th:text="'Costo de la carrera: ' + ${especialidad.costo} + '0$'" class="text-base md:text-lg" th:text="#{costos}">costos</div>
+                <div  class="text-base md:text-lg" ><span th:text="#{costos}"></span> <span th:text="${especialidad.costo} + '0$'"></span></div>
                 <div class="text-xl md:text-lg font-serif font-bold" th:text="#{modalidad}">Modalidad</div>
                 <div th:text="${especialidad.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
                 <div th:text="${especialidad.carrera.cantidad_periodos} + ' ' +${especialidad.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
