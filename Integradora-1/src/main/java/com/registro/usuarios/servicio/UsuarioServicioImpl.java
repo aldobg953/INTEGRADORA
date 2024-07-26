@@ -1,5 +1,6 @@
 package com.registro.usuarios.servicio;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -59,6 +60,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		Usuario usuario = usuarioRepositorio.findByEmail(username);
 		if(usuario == null) {
 			throw new UsernameNotFoundException("Usuario o password inválidos");
+		}
+		if(!usuario.isActivo()){
+			throw new UsernameNotFoundException("Usuario bloqueado temporalmente");
 		}
 		return new User(usuario.getEmail(),usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
 	}
@@ -160,7 +164,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		}
 
 		return new UsuarioRegistroDTO(usuario.getId_usuario(), usuario.getNombre(), 
-		usuario.getApellidoP(),usuario.getEmail(), usuario.getPassword(),rolSuper,rolAdmin,usuario.getId_universidad(),usuario.getLang());
+		usuario.getApellidoP(),usuario.getEmail(), usuario.getPassword(),rolSuper,rolAdmin,usuario.getId_universidad(),usuario.getLang(),usuario.isActivo());
 	}
 
 	@Override
@@ -207,6 +211,48 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		usuario.setFoto_perfil(fotoPerfil);
 		try {
 			usuarioRepositorio.save(usuario);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void bloquearUsuario(Long id_usuario){
+		Usuario usuario = usuarioRepositorio.findById(id_usuario).get();
+        
+        usuario.setActivo(false);
+        usuario.setFechaDesbloqueo(LocalDateTime.now().plusMinutes(3));
+        
+        usuarioRepositorio.save(usuario);
+	}
+
+	@Override
+	public void desbloquearUsuarios() {
+        LocalDateTime ahora = LocalDateTime.now();
+        List<Usuario> usuariosBloqueados = usuarioRepositorio.findByActivoFalse();
+        
+        for (Usuario usuario : usuariosBloqueados) {
+            if (usuario.getFechaDesbloqueo().isBefore(ahora)) {
+                usuario.setActivo(true);
+                usuario.setFechaDesbloqueo(null);
+                usuarioRepositorio.save(usuario);
+            }
+        }
+    }
+
+	@Override
+	public void desbloquearUsuarioInd(Long id_usuario){
+		Usuario usuario = usuarioRepositorio.getById(id_usuario);
+		usuario.setActivo(true);
+        usuario.setFechaDesbloqueo(null);
+		usuarioRepositorio.save(usuario);
+	}
+
+	@Override
+	public boolean eliminarUsuario(Long id_usuario){
+		try {
+			usuarioRepositorio.deleteById(id_usuario);
 		} catch (Exception e) {
 			return false;
 		}
