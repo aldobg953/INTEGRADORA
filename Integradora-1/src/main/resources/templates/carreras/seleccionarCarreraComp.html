@@ -156,7 +156,7 @@
         </div>
 
         <div id="areas" class="flex md:mx-28 my-8 flex-wrap">
-            <div th:each="carrera : ${carreras}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 dark:bg-gray-800 flex flex-col">
+            <div th:each="carrera : ${carreras}"  th:if="${carrera.id_carrera}!=${carreraAComparar.id_carrera}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 dark:bg-gray-800 flex flex-col">
                 <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                     <img class="rounded-t-lg h-64 w-full bg-white" th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
                 </a>

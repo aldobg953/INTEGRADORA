@@ -115,7 +115,7 @@
             <span class="text-black text-3xl font-bold dark:text-white">Modificar Universidad</span>
         </div>
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
-            <form th:action="@{/administrador/postguardaruniversidad}" th:object="${universidad}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/administrador/postmodificaruniversidad}" th:object="${universidad}" method="post" enctype="multipart/form-data">
                 <input class="hidden" id="id_universidad" th:field="*{id_universidad}">
                 <div class="mx-10 my-5">
                     <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Modificar universidad</span></div>
@@ -187,7 +187,7 @@
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span
                             class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
-                            Modificar Carrera
+                            Modificar Universidad
                         </span>
                     </button>
                 </div>

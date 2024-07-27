@@ -21,4 +21,7 @@ public interface UniversidadRepositorio extends JpaRepository<Universidad,Long>{
        nativeQuery = true)
     List<Universidad> findByNombreContainingIgnoreCase(@Param("searchTerm") String searchTerm);
 
+    @Query("SELECT u FROM Universidad u WHERE u.nombre_abreviado = :nombreAbreviado")
+    Universidad findByNombre_abreviado(@Param("nombreAbreviado") String nombreAbreviado);
+
 }

@@ -264,6 +264,9 @@ public class AdministradorControlador {
     @PostMapping("/postguardaruniversidad")
     private String postGuardarUniversidad(@ModelAttribute UniversidadDTO universidadDTO, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        if(universidadServicio.existeUniversidad(universidadDTO.getNombre_abreviado())){
+            return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
+        }
         try {
             Path dir = Paths.get(uploadDir,universidadDTO.getNombre_abreviado());
             if (!Files.exists(dir)) {
@@ -281,7 +284,39 @@ public class AdministradorControlador {
                 path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("imagen1.jpg").normalize();
                 Files.copy(universidadDTO.getImagen1().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             }
-            if(universidadServicio.guardarUniversidad(universidadDTO)){
+            Universidad universidadnueva = universidadServicio.guardarUniversidad(universidadDTO); 
+            if(universidadnueva != null){
+                return "redirect:/administrador/modificaruniversidad/"+universidadnueva.getId_universidad()+"?exito&lang="+usuario.getLang();
+            }else{
+                return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
+            }
+        } catch (Exception e) {
+            return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
+        } 
+    }
+
+
+    @PostMapping("/postmodificaruniversidad")
+    private String postModificarUniversidad(@ModelAttribute UniversidadDTO universidadDTO, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        try {
+            Path dir = Paths.get(uploadDir,universidadDTO.getNombre_abreviado());
+            if (!Files.exists(dir)) {
+                Files.createDirectory(dir);
+            }
+            Path path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("logo.jpg").normalize();
+            if(!universidadDTO.getLogo().isEmpty()){
+                Files.copy(universidadDTO.getLogo().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            }
+            if(!universidadDTO.getPortada().isEmpty()){
+                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("portada.jpg").normalize();
+                Files.copy(universidadDTO.getPortada().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            }
+            if(!universidadDTO.getImagen1().isEmpty()){
+                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("imagen1.jpg").normalize();
+                Files.copy(universidadDTO.getImagen1().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            }
+            if(universidadServicio.guardarUniversidad(universidadDTO) != null){
                 return "redirect:/administrador/modificaruniversidad/"+universidadDTO.getId_universidad()+"?exito&lang="+usuario.getLang();
             }else{
                 return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
@@ -290,6 +325,7 @@ public class AdministradorControlador {
             return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
         } 
     }
+
 
     @GetMapping("/modificaruniversidad")
     private String modificarUniversidad(Model model, @AuthenticationPrincipal UserDetails userDetails){
