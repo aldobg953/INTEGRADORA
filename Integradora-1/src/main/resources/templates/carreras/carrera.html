@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html th:classappend="${usuario.darkmode} ? 'dark' : ''">
 <head>
     <link rel="icon" href="/css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
     <title th:text="'PathFinder | ' + ${carrera.nombre}"></title>
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/carrera.css">
     <link rel="stylesheet" href="/css/validaciones.css">
 </head>
-<body class="dark:bg-gray-800">
+<body class="dark:bg-gray-800 dark:bg-gray-800">
     
     <header class="header">
         <nav class="navbar">
@@ -88,7 +88,7 @@
 
     <div class="carrera-acercade">
         <div class="vertical-line"></div>
-        <p th:text="${carrera.informacion}"></p>
+        <p class="dark:text-white" th:text="${carrera.informacion}"></p>
     </div>
 
     <div class="logo-informacion">
@@ -96,7 +96,7 @@
             <img th:src="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/logo.jpg'}">
         </div>
 
-        <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+        <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:text-white">
 
             <h2 th:text="#{infoCarrera}">Informacion de la carrera</h2>
 
@@ -143,7 +143,7 @@
         </div>
     </div> 
     
-    <div class="trabajo-desempeno">
+    <div class="trabajo-desempeno dark:text-white">
         <div class="donde-trabajar">
             <h2 th:text="#{dondeTrabajar}"></h2><br/>
             <p th:text="${carrera.donde_trabajar}"></p>
@@ -192,7 +192,7 @@
     </div>
 
     
-    <div class="seccion-comentarios">
+    <div class="seccion-comentarios dark:text-white">
         <div class="calificaciones">
             <h2 th:text="#{calificacionesUsuarios}"></h2>
             <div>

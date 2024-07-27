@@ -84,17 +84,16 @@ public class UniversidadServicio {
         return resumen;
     }
     
-    public boolean guardarUniversidad(UniversidadDTO universidadDTO){
+    public Universidad guardarUniversidad(UniversidadDTO universidadDTO){
         try {
             Universidad universidad = new Universidad(universidadDTO.getId_universidad(), universidadDTO.getNombre_completo(),universidadDTO.getNombre_abreviado(),
             universidadDTO.getPagina_web(),universidadDTO.getCorreo(),universidadDTO.getTelefono(),universidadDTO.getInformacion(),
             universidadDTO.getDireccion(), universidadDTO.getDireccionGoogle(),universidadDTO.getTipo_institucion(), 
             universidadDTO.getCaracteristicas());
-            universidadRepositorio.save(universidad);
+            return universidadRepositorio.save(universidad);
         } catch (Exception e) {
-            return false;
+            return null;
         }
-        return true;
     }
 
     public UniversidadDTO getUniversidadDTO(Long id){
@@ -154,6 +153,15 @@ public class UniversidadServicio {
             return false;
         }
         return true;
+    }
+
+    public boolean existeUniversidad(String nombre_abreviado){
+        Universidad universidad = universidadRepositorio.findByNombre_abreviado(nombre_abreviado);
+        if(universidad!=null){
+            return true;
+        }else{
+            return false;
+        }
     }
     
 }
