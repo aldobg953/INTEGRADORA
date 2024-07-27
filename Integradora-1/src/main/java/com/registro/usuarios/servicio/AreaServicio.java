@@ -37,4 +37,10 @@ public class AreaServicio {
     public Area getAreaByid(Long id){
         return areaRepositorio.getById(id);
     }
+
+    public Area getAreaByidLang(Long id, String lang){
+        Area area = areaRepositorio.getById(id);
+        area.cambiarIdioma(lang);
+        return area;
+    }
 }

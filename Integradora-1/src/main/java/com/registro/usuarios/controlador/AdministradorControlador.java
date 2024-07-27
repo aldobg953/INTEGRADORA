@@ -473,4 +473,14 @@ public class AdministradorControlador {
         model.addAttribute("usuario", usuario);
         return "administrador/modificarpregunta";
     }
+
+    @PostMapping("/postGuardarPregunta")
+    public String actualizarPregunta(@ModelAttribute("pregunta") Pregunta pregunta, @AuthenticationPrincipal UserDetails userDetails) {
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        if(preguntasServicio.guardarPregunta(pregunta)){
+            return "redirect:/administrador/modificarpregunta/"+pregunta.getId_pregunta()+"?exito&lang="+usuario.getLang();
+        }else{
+            return "redirect:/administrador/modificarpregunta/"+pregunta.getId_pregunta()+"?error&lang="+usuario.getLang();
+        }
+    }
 }

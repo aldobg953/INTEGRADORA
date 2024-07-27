@@ -52,9 +52,11 @@ public class Area {
         switch (lang.toLowerCase()) {
             case "en":
                 this.nombre_area = this.nombre_area_ingles;
+                this.descripcion = this.descripcion_ingles;
                 break;
             case "fr":
-                this.nombre_area = this.nombre_area_frances;
+                this.descripcion = this.nombre_area_frances;
+                this.descripcion = this.descripcion_frances;
                 break;
         }
     }

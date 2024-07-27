@@ -26,9 +26,11 @@ public class Pregunta {
 
     public void cambiarIdioma(String lang){
         if(lang.equals("en")){
+            respuestas.forEach(respuesta -> respuesta.cambiarIdioma(lang));
             this.text=this.text_ingles;
         }
         if(lang.equals("fr")){
+            respuestas.forEach(respuesta -> respuesta.cambiarIdioma(lang));
             this.text=this.text_frances;
         }
     }
