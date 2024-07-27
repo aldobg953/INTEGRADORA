@@ -45,9 +45,9 @@
     </div>
         <div class="mx-28 mt-4">
             <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 mb-4">Por favor, selecciona una opción en cada una de las siguientes preguntas para descubrir tus intereses y aptitudes.</p>
-            <form th:action="@{/test/mostrarresultado}" method="post">
+            <form id="testForm" th:action="@{/test/mostrarresultado}" method="post" onsubmit="return validateForm()">
                 <div class="rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 px-4 my-4" th:each="pregunta : ${preguntas}">    
-                    <p class="max-w-lg text-2xl font-bold leading-loose text-gray-900 dark:text-white">
+                    <p class="w-full text-2xl font-bold leading-loose text-gray-900 dark:text-blue-300">
                         <span th:text="${pregunta.id_pregunta}"></span>
                         <span>.-</span>
                         <span th:text="${pregunta.text}"></span>
@@ -84,5 +84,40 @@
                 </button>
             </form>
         </div>
+        <script th:inline="javascript">
+            function validateForm() {
+                const form = document.getElementById('testForm');
+                const questions = form.querySelectorAll('div[class^="rounded-lg border"]');
+                const unansweredQuestions = [];
+            
+                questions.forEach((question, index) => {
+                    const radios = question.querySelectorAll('input[type="radio"]:checked');
+                    if (radios.length === 0) {
+                        unansweredQuestions.push(index + 1);
+                    }
+                });
+            
+                if (unansweredQuestions.length > 0) {
+                    const lang = /*[[${usuario.lang}]]*/ 'es';
+                    let message;
+            
+                    switch(lang) {
+                        case 'fr':
+                            message = `Veuillez répondre à toutes les questions. Questions non répondues : ${unansweredQuestions.join(', ')}`;
+                            break;
+                        case 'en':
+                            message = `Please answer all questions. Unanswered questions: ${unansweredQuestions.join(', ')}`;
+                            break;
+                        default:
+                            message = `Por favor, responde todas las preguntas. Preguntas sin responder: ${unansweredQuestions.join(', ')}`;
+                    }
+            
+                    alert(message);
+                    return false;
+                }
+            
+                return true;
+            }
+            </script>
     </body>
 </html>
