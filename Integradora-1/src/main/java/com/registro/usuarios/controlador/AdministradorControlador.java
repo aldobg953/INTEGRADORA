@@ -27,6 +27,7 @@ import com.registro.usuarios.modelo.Especialidad;
 import com.registro.usuarios.modelo.Horario;
 import com.registro.usuarios.modelo.Modalidad;
 import com.registro.usuarios.modelo.PeriodoEscolar;
+import com.registro.usuarios.modelo.Pregunta;
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Universidad;
 import com.registro.usuarios.modelo.Usuario;
@@ -42,6 +43,7 @@ import com.registro.usuarios.servicio.EspecialidadServicio;
 import com.registro.usuarios.servicio.HorarioServicio;
 import com.registro.usuarios.servicio.ModalidadServicio;
 import com.registro.usuarios.servicio.PeriodoEscolarServicio;
+import com.registro.usuarios.servicio.PreguntasServicio;
 import com.registro.usuarios.servicio.UniversidadServicio;
 import com.registro.usuarios.servicio.UsuarioServicio;
 
@@ -72,6 +74,9 @@ public class AdministradorControlador {
 
     @Autowired
     EspecialidadServicio especialidadServicio;
+
+    @Autowired
+    PreguntasServicio preguntasServicio;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -445,5 +450,27 @@ public class AdministradorControlador {
             return "redirect:/administrador/usuarios?exito&lang="+usuario.getLang();
         }
         return "redirect:/administrador/usuarios?error&lang="+usuario.getLang();
+    }
+
+
+    @GetMapping("/test")
+    private String agregarPreguntas(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        List<Pregunta> preguntas = preguntasServicio.getAllPreguntas(usuario.getLang());
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("preguntas", preguntas);
+        return "administrador/testadmin";
+    }
+
+    @GetMapping("/modificarpregunta/{id}")
+    private String modificarPreguntaID(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
+        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        Pregunta pregunta = preguntasServicio.getPreguntaByID(id);
+        System.out.println(pregunta.getRespuestas().get(0).getText());
+        List<AreaDTO> areasDTO = areaServicio.getAllAreas(usuario.getLang());
+        model.addAttribute("areasDTO", areasDTO);
+        model.addAttribute("pregunta", pregunta);
+        model.addAttribute("usuario", usuario);
+        return "administrador/modificarpregunta";
     }
 }

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html th:classappend="${usuario.darkmode} ? 'dark' : ''">
+    <head>
+        <link rel="icon" href="css/IsotipoAdminDeveloper.ico" type="image/x-icon">
+        <title>Crear Universidad</title>
+        <link href="/css/tailwind.css" rel="stylesheet">
+        <script src="/js/navbar.js"></script>
+        <script src="/js/utils.js"></script>
+    </head>
+    <body class="bg-gray-100 dark:bg-gray-800">
+        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
+                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
+                    <div id="logo-image">
+                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
+                            style="max-width:40%;height:auto;">
+                    </div>
+                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
+                </a>
+    
+                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
+                        id="user-menu-button" aria-expanded="false">
+                        <span class="sr-only">Menu usuario</span>
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
+                            alt="user photo">
+                    </button>
+    
+                </div>
+                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-black-900 dark:text-white"
+                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
+                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
+                            th:text="${usuario.email} ">correo</span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                                sesion</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
+                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
+                        <li>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="ml-28 mt-4 text-black text-3xl font-bold dark:text-white">
+            <span >Modificar Pregunta</span> <span th:text="${pregunta.id_pregunta}"></span>
+        </div>
+
+        <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
+            <form action="#" th:action="@{/preguntas/editar/{id}(id=${pregunta.id_pregunta})}" th:object="${pregunta}" method="post">
+                <input type="hidden" th:field="*{id_pregunta}" />
+               
+                <div class="mx-10 my-5">
+                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto de pregunta:</label>
+                    <input type="text" id="text" th:field="*{text}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="mx-10 my-5">
+                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en inglés:</label>
+                    <input type="text" id="text_ingles" th:field="*{text_ingles}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="mx-10 my-5">
+                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en francés:</label>
+                    <input type="text" id="text_frances" th:field="*{text_frances}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                
+                <div class="ml-10 mt-4 text-black text-2xl font-bold dark:text-white">
+                    <span >Respuestas de la pregunta </span> <span th:text="${pregunta.id_pregunta}"></span>
+                </div>
+
+                <div th:each="respuesta, stat : *{respuestas}">
+                    <h4 class="ml-10 mt-4 text-black text-xl font-bold dark:text-white" >Respuesta [[${stat.index + 1}]]</h4>
+                    <input type="hidden" th:field="*{respuestas[__${stat.index}__].id_respuesta}" />
+                    <div class="mx-10 my-5">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en español:</label>
+                        <input type="text" th:field="*{respuestas[__${stat.index}__].text}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="mx-10 my-5">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en inglés:</label>
+                        <input type="text" th:field="*{respuestas[__${stat.index}__].text_ingles}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="mx-10 my-5">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en francés:</label>
+                        <input type="text" th:field="*{respuestas[__${stat.index}__].text_frances}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="mx-10 my-5">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Área ID:</label>
+                        <select id="area" th:field="*{respuestas[__${stat.index}__].id_area}" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" aria-required="true">
+                            <option th:each="area : ${areasDTO}" 
+                                th:value="${area.id_area}" 
+                                th:text="${area.nombre_area}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="p-4 flex justify-end pr-20">
+                    <button
+                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
+                        <span
+                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                            Modificar Pregunta
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

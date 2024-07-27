@@ -95,6 +95,32 @@ VALUES
  "Servicios", "Services", "Services");
 
 
+
+
+-- Crear las preguntas iniciales
+INSERT INTO pregunta (text, text_ingles, text_frances) VALUES
+('Pregunta 1 en español', 'Question 1 in English', 'Question 1 in French'),
+('Pregunta 2 en español', 'Question 2 in English', 'Question 2 in French'),
+('Pregunta 3 en español', 'Question 3 in English', 'Question 3 in French'),
+('Pregunta 4 en español', 'Question 4 in English', 'Question 4 in French'),
+('Pregunta 5 en español', 'Question 5 in English', 'Question 5 in French'),
+('Pregunta 6 en español', 'Question 6 in English', 'Question 6 in French'),
+('Pregunta 7 en español', 'Question 7 in English', 'Question 7 in French'),
+('Pregunta 8 en español', 'Question 8 in English', 'Question 8 in French'),
+('Pregunta 9 en español', 'Question 9 in English', 'Question 9 in French'),
+('Pregunta 10 en español', 'Question 10 in English', 'Question 10 in French'),
+('Pregunta 11 en español', 'Question 11 in English', 'Question 11 in French'),
+('Pregunta 12 en español', 'Question 12 in English', 'Question 12 in French'),
+('Pregunta 13 en español', 'Question 13 in English', 'Question 13 in French'),
+('Pregunta 14 en español', 'Question 14 in English', 'Question 14 in French'),
+('Pregunta 15 en español', 'Question 15 in English', 'Question 15 in French'),
+('Pregunta 16 en español', 'Question 16 in English', 'Question 16 in French'),
+('Pregunta 17 en español', 'Question 17 in English', 'Question 17 in French'),
+('Pregunta 18 en español', 'Question 18 in English', 'Question 18 in French'),
+('Pregunta 19 en español', 'Question 19 in English', 'Question 19 in French'),
+('Pregunta 20 en español', 'Question 20 in English', 'Question 20 in French');
+
+
 insert into carreras (bilingue, costo, horario_especifico, informacion, nombre, roadmap, fk_area, fk_horario, fk_modalidad, fk_periodo_escolar, fk_universidad,
  como_desemp, donde_trabajar, porque_estudiar)
 values
@@ -116,3 +142,126 @@ de cualquier país. Hoy en día el entorno empresarial es competitivo, exigente 
 con profesionales capaces de tomar decisiones que generen valor social y económico en una empresa u organización, a través del estudio de la gestión eficiente 
 de los recursos humanos, financieros y materiales de éstas, para alcanzar la sostenibilidad y el cumplimiento de objetivos.',
 'NEGOCIOS Y MERCADOTECNIA', 'https://roadmap.sh/r/embed?id=6663849ee724e39e4d12ce1d',1,5,1,1,1,null,null,null);
+
+
+-- Insertar respuestas para cada pregunta
+INSERT INTO respuesta (text, text_ingles, text_frances, id_pregunta, id_area) VALUES
+-- Pregunta 1
+('Respuesta 1 para Pregunta 1 en español', 'Answer 1 for Question 1 in English', 'Answer 1 for Question 1 in French', 1, 1),
+('Respuesta 2 para Pregunta 1 en español', 'Answer 2 for Question 1 in English', 'Answer 2 for Question 1 in French', 1, 2),
+('Respuesta 3 para Pregunta 1 en español', 'Answer 3 for Question 1 in English', 'Answer 3 for Question 1 in French', 1, 3),
+('Respuesta 4 para Pregunta 1 en español', 'Answer 4 for Question 1 in English', 'Answer 4 for Question 1 in French', 1, 4),
+
+-- Pregunta 2
+('Respuesta 1 para Pregunta 2 en español', 'Answer 1 for Question 2 in English', 'Answer 1 for Question 2 in French', 2, 1),
+('Respuesta 2 para Pregunta 2 en español', 'Answer 2 for Question 2 in English', 'Answer 2 for Question 2 in French', 2, 2),
+('Respuesta 3 para Pregunta 2 en español', 'Answer 3 for Question 2 in English', 'Answer 3 for Question 2 in French', 2, 3),
+('Respuesta 4 para Pregunta 2 en español', 'Answer 4 for Question 2 in English', 'Answer 4 for Question 2 in French', 2, 4),
+
+-- Pregunta 3
+('Respuesta 1 para Pregunta 3 en español', 'Answer 1 for Question 3 in English', 'Answer 1 for Question 3 in French', 3, 1),
+('Respuesta 2 para Pregunta 3 en español', 'Answer 2 for Question 3 in English', 'Answer 2 for Question 3 in French', 3, 2),
+('Respuesta 3 para Pregunta 3 en español', 'Answer 3 for Question 3 in English', 'Answer 3 for Question 3 in French', 3, 3),
+('Respuesta 4 para Pregunta 3 en español', 'Answer 4 for Question 3 in English', 'Answer 4 for Question 3 in French', 3, 4),
+
+-- Pregunta 4
+('Respuesta 1 para Pregunta 4 en español', 'Answer 1 for Question 4 in English', 'Answer 1 for Question 4 in French', 4, 1),
+('Respuesta 2 para Pregunta 4 en español', 'Answer 2 for Question 4 in English', 'Answer 2 for Question 4 in French', 4, 2),
+('Respuesta 3 para Pregunta 4 en español', 'Answer 3 for Question 4 in English', 'Answer 3 for Question 4 in French', 4, 3),
+('Respuesta 4 para Pregunta 4 en español', 'Answer 4 for Question 4 in English', 'Answer 4 for Question 4 in French', 4, 4),
+
+-- Pregunta 5
+('Respuesta 1 para Pregunta 5 en español', 'Answer 1 for Question 5 in English', 'Answer 1 for Question 5 in French', 5, 1),
+('Respuesta 2 para Pregunta 5 en español', 'Answer 2 for Question 5 in English', 'Answer 2 for Question 5 in French', 5, 2),
+('Respuesta 3 para Pregunta 5 en español', 'Answer 3 for Question 5 in English', 'Answer 3 for Question 5 in French', 5, 3),
+('Respuesta 4 para Pregunta 5 en español', 'Answer 4 for Question 5 in English', 'Answer 4 for Question 5 in French', 5, 4),
+
+-- Pregunta 6
+('Respuesta 1 para Pregunta 6 en español', 'Answer 1 for Question 6 in English', 'Answer 1 for Question 6 in French', 6, 1),
+('Respuesta 2 para Pregunta 6 en español', 'Answer 2 for Question 6 in English', 'Answer 2 for Question 6 in French', 6, 2),
+('Respuesta 3 para Pregunta 6 en español', 'Answer 3 for Question 6 in English', 'Answer 3 for Question 6 in French', 6, 3),
+('Respuesta 4 para Pregunta 6 en español', 'Answer 4 for Question 6 in English', 'Answer 4 for Question 6 en French', 6, 4),
+
+-- Pregunta 7
+('Respuesta 1 para Pregunta 7 en español', 'Answer 1 for Question 7 in English', 'Answer 1 for Question 7 in French', 7, 1),
+('Respuesta 2 para Pregunta 7 en español', 'Answer 2 for Question 7 in English', 'Answer 2 for Question 7 en French', 7, 2),
+('Respuesta 3 para Pregunta 7 en español', 'Answer 3 for Question 7 in English', 'Answer 3 for Question 7 en French', 7, 3),
+('Respuesta 4 para Pregunta 7 en español', 'Answer 4 for Question 7 in English', 'Answer 4 for Question 7 en French', 7, 4),
+
+-- Pregunta 8
+('Respuesta 1 para Pregunta 8 en español', 'Answer 1 for Question 8 in English', 'Answer 1 for Question 8 en French', 8, 1),
+('Respuesta 2 para Pregunta 8 en español', 'Answer 2 for Question 8 in English', 'Answer 2 for Question 8 en French', 8, 2),
+('Respuesta 3 para Pregunta 8 en español', 'Answer 3 for Question 8 in English', 'Answer 3 for Question 8 en French', 8, 3),
+('Respuesta 4 para Pregunta 8 en español', 'Answer 4 for Question 8 en English', 'Answer 4 for Question 8 en French', 8, 4),
+
+-- Pregunta 9
+('Respuesta 1 para Pregunta 9 en español', 'Answer 1 for Question 9 in English', 'Answer 1 for Question 9 en French', 9, 1),
+('Respuesta 2 para Pregunta 9 en español', 'Answer 2 for Question 9 in English', 'Answer 2 for Question 9 en French', 9, 2),
+('Respuesta 3 para Pregunta 9 en español', 'Answer 3 for Question 9 in English', 'Answer 3 for Question 9 en French', 9, 3),
+('Respuesta 4 para Pregunta 9 en español', 'Answer 4 for Question 9 en English', 'Answer 4 for Question 9 en French', 9, 4),
+
+-- Pregunta 10
+('Respuesta 1 para Pregunta 10 en español', 'Answer 1 for Question 10 in English', 'Answer 1 for Question 10 en French', 10, 1),
+('Respuesta 2 para Pregunta 10 en español', 'Answer 2 for Question 10 in English', 'Answer 2 for Question 10 en French', 10, 2),
+('Respuesta 3 para Pregunta 10 en español', 'Answer 3 for Question 10 in English', 'Answer 3 for Question 10 en French', 10, 3),
+('Respuesta 4 para Pregunta 10 en español', 'Answer 4 for Question 10 en English', 'Answer 4 for Question 10 en French', 10, 4),
+
+-- Pregunta 11
+('Respuesta 1 para Pregunta 11 en español', 'Answer 1 for Question 11 in English', 'Answer 1 for Question 11 in French', 11, 1),
+('Respuesta 2 para Pregunta 11 en español', 'Answer 2 for Question 11 in English', 'Answer 2 for Question 11 in French', 11, 2),
+('Respuesta 3 para Pregunta 11 en español', 'Answer 3 for Question 11 in English', 'Answer 3 for Question 11 in French', 11, 3),
+('Respuesta 4 para Pregunta 11 en español', 'Answer 4 for Question 11 in English', 'Answer 4 for Question 11 in French', 11, 4),
+
+-- Pregunta 12
+('Respuesta 1 para Pregunta 12 en español', 'Answer 1 for Question 12 in English', 'Answer 1 for Question 12 in French', 12, 1),
+('Respuesta 2 para Pregunta 12 en español', 'Answer 2 for Question 12 in English', 'Answer 2 for Question 12 in French', 12, 2),
+('Respuesta 3 para Pregunta 12 en español', 'Answer 3 for Question 12 in English', 'Answer 3 for Question 12 in French', 12, 3),
+('Respuesta 4 para Pregunta 12 en español', 'Answer 4 for Question 12 in English', 'Answer 4 for Question 12 in French', 12, 4),
+
+-- Pregunta 13
+('Respuesta 1 para Pregunta 13 en español', 'Answer 1 for Question 13 in English', 'Answer 1 for Question 13 in French', 13, 1),
+('Respuesta 2 para Pregunta 13 en español', 'Answer 2 for Question 13 in English', 'Answer 2 for Question 13 in French', 13, 2),
+('Respuesta 3 para Pregunta 13 en español', 'Answer 3 for Question 13 in English', 'Answer 3 for Question 13 in French', 13, 3),
+('Respuesta 4 para Pregunta 13 en español', 'Answer 4 for Question 13 in English', 'Answer 4 for Question 13 in French', 13, 4),
+
+-- Pregunta 14
+('Respuesta 1 para Pregunta 14 en español', 'Answer 1 for Question 14 in English', 'Answer 1 for Question 14 in French', 14, 1),
+('Respuesta 2 para Pregunta 14 en español', 'Answer 2 for Question 14 in English', 'Answer 2 for Question 14 in French', 14, 2),
+('Respuesta 3 para Pregunta 14 en español', 'Answer 3 for Question 14 in English', 'Answer 3 for Question 14 in French', 14, 3),
+('Respuesta 4 para Pregunta 14 en español', 'Answer 4 for Question 14 in English', 'Answer 4 for Question 14 in French', 14, 4),
+
+-- Pregunta 15
+('Respuesta 1 para Pregunta 15 en español', 'Answer 1 for Question 15 in English', 'Answer 1 for Question 15 in French', 15, 1),
+('Respuesta 2 para Pregunta 15 en español', 'Answer 2 for Question 15 in English', 'Answer 2 for Question 15 in French', 15, 2),
+('Respuesta 3 para Pregunta 15 en español', 'Answer 3 for Question 15 in English', 'Answer 3 for Question 15 in French', 15, 3),
+('Respuesta 4 para Pregunta 15 en español', 'Answer 4 for Question 15 in English', 'Answer 4 for Question 15 in French', 15, 4),
+
+-- Pregunta 16
+('Respuesta 1 para Pregunta 16 en español', 'Answer 1 for Question 16 in English', 'Answer 1 for Question 16 in French', 16, 1),
+('Respuesta 2 para Pregunta 16 en español', 'Answer 2 for Question 16 in English', 'Answer 2 for Question 16 in French', 16, 2),
+('Respuesta 3 para Pregunta 16 en español', 'Answer 3 for Question 16 in English', 'Answer 3 for Question 16 in French', 16, 3),
+('Respuesta 4 para Pregunta 16 en español', 'Answer 4 for Question 16 in English', 'Answer 4 for Question 16 en French', 16, 4),
+
+-- Pregunta 17
+('Respuesta 1 para Pregunta 17 en español', 'Answer 1 for Question 17 in English', 'Answer 1 for Question 17 in French', 17, 1),
+('Respuesta 2 para Pregunta 17 en español', 'Answer 2 for Question 17 in English', 'Answer 2 for Question 17 en French', 17, 2),
+('Respuesta 3 para Pregunta 17 en español', 'Answer 3 for Question 17 in English', 'Answer 3 for Question 17 en French', 17, 3),
+('Respuesta 4 para Pregunta 17 en español', 'Answer 4 for Question 17 in English', 'Answer 4 for Question 17 en French', 17, 4),
+
+-- Pregunta 18
+('Respuesta 1 para Pregunta 18 en español', 'Answer 1 for Question 18 in English', 'Answer 1 for Question 18 en French', 18, 1),
+('Respuesta 2 para Pregunta 18 en español', 'Answer 2 for Question 18 in English', 'Answer 2 for Question 18 en French', 18, 2),
+('Respuesta 3 para Pregunta 18 en español', 'Answer 3 for Question 18 in English', 'Answer 3 for Question 18 en French', 18, 3),
+('Respuesta 4 para Pregunta 18 en español', 'Answer 4 for Question 18 en English', 'Answer 4 for Question 18 en French', 18, 4),
+
+-- Pregunta 19
+('Respuesta 1 para Pregunta 19 en español', 'Answer 1 for Question 19 in English', 'Answer 1 for Question 19 en French', 19, 1),
+('Respuesta 2 para Pregunta 19 en español', 'Answer 2 for Question 19 in English', 'Answer 2 for Question 19 en French', 19, 2),
+('Respuesta 3 para Pregunta 19 en español', 'Answer 3 for Question 19 in English', 'Answer 3 for Question 19 en French', 19, 3),
+('Respuesta 4 para Pregunta 19 en español', 'Answer 4 for Question 19 en English', 'Answer 4 for Question 19 en French', 19, 4),
+
+-- Pregunta 20
+('Respuesta 1 para Pregunta 20 en español', 'Answer 1 for Question 20 in English', 'Answer 1 for Question 20 en French', 20, 1),
+('Respuesta 2 para Pregunta 20 en español', 'Answer 2 for Question 20 in English', 'Answer 2 for Question 20 en French', 20, 2),
+('Respuesta 3 para Pregunta 20 en español', 'Answer 3 for Question 20 in English', 'Answer 3 for Question 20 en French', 20, 3),
+('Respuesta 4 para Pregunta 20 en español', 'Answer 4 for Question 20 en English', 'Answer 4 for Question 20 en French', 20, 4);
