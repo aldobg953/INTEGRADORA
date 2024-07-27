@@ -28,12 +28,20 @@
         <nav class="navbar">
             <div class="navbar-logo">
                 <a th:href="@{/}">
-                    <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                    <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
                 <hr>
                 <a th:href="@{/logout}" style="display: yes;">
-                    <div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon"
+                    <div class="link"><img src="/css/assets/navbaricons/exit1.png" alt="" class="link-icon"
                             th:text="#{cerrarSesion}"></div>
+                </a>
+                <a th:href="@{/administrador}" style="display: yes;">
+                    <div class="link"><img src="/css/assets/navbaricons/herramientas.png" alt="" class="link-icon"
+                            th:text="#{administrador}"></div>
+                </a>
+                <a th:href="@{/presentacionTest}" style="display: yes;">
+                    <div class="link"><img src="/css/assets/navbaricons/test.png" alt="" class="link-icon"
+                            th:text="#{testVocacional}"></div>
                 </a>
             </div>
 
