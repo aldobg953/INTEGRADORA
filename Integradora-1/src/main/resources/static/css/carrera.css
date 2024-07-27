@@ -12,6 +12,8 @@
     --card-border: #B9B9B9;
     --card-shadow: #b9b9b993;
     --opacity: 25%;
+    --card-min-width: 25rem;  /* 240px at default font size */
+    --card-gap: 2rem;
 }
 
 /* General Styles */
@@ -436,7 +438,6 @@ h1 {
 }
 /* #endregion */
 
-
 /* #region carrera-acercade */
 .carrera-acercade {
     position: relative;
@@ -647,6 +648,123 @@ h1 {
     box-shadow: 0 0 35px #00000018;
 }
 
+/* #endregion */
+
+/* #region especialidades */
+.tarjetas-especialidades {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-min-width), 1fr));
+    gap: var(--card-gap);
+    padding: var(--card-gap);
+}
+
+.especialidades-titulo > h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.tarjeta {
+    position: relative;
+    border: 2px solid var(--card-border);
+    border-radius: 1rem;
+    padding-bottom: 3rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 0 35px var(--card-shadow);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+    z-index: 1;
+}
+
+.tarjeta:hover {
+    border: #0047FF solid 2px;
+    scale: 1.05;
+    z-index: 2;
+}
+
+.tarjeta:hover > .imagen-uni {
+    scale: .8;
+    border-radius: 1rem;
+}
+
+.imagen-uni {
+    width: 100%;
+    height: 12.5rem;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+.imagen-uni img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tarjeta-contenido {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta h2 {
+    margin: 0 0 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.tarjeta p {
+    margin: 0 0 0.9375rem;  /* 15px */
+    color: #666;
+}
+
+.tarjeta a {
+    text-decoration: none;
+}
+
+.tarjeta-botones {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    position: absolute;
+    bottom: 1rem;  /* Adjust this value as needed */
+    left: 1rem;  /* Adjust this value as needed */
+    right: 1rem;  /* Adjust this value as needed */
+}
+
+.tarjeta-botones a {
+    flex: 1;
+    text-align: center;
+    font-weight: 700;
+    padding: 0.5em 0.9375em;
+    border-radius: 50rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+.ver-mas {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.comparar {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.ver-mas:hover, .comparar:hover {
+    scale: 1.05;
+    box-shadow: 0 0 35px var(--card-shadow);
+}
+
+.ver-mas:active, .comparar:active {
+    scale: 0.9;
+}
 /* #endregion */
 
 /* #region seccion-comentarios */
