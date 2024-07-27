@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-
-    <title th:text="#{carreraa}">PathFinder | Carrera</title>
+    <link rel="icon" href="/css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
+    <title th:text="'PathFinder | ' + ${carrera.nombre}"></title>
     <link href="/css/tailwind.css" rel="stylesheet">
     <script src="/js/navbar.js"></script>
     <link rel="stylesheet" href="/css/carrera.css">
@@ -146,7 +145,7 @@
     
     <div class="trabajo-desempeno">
         <div class="donde-trabajar">
-            <h2 th:text="#{dondeTrabajar}"> ¿Donde puedo trabajar?</h2><br/>
+            <h2 th:text="#{dondeTrabajar}"></h2><br/>
             <p th:text="${carrera.donde_trabajar}"></p>
         </div>
 
@@ -157,24 +156,31 @@
     </div>
 
     <div th:if="${!#lists.isEmpty(especialidades)}">
-        <div><p th:text="#{especialidadess}">Especialidades</p></div>
-        <div th:each="especialidad:${especialidades}">
-            <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}">
-                <img src="/img/utch/logo.jpg" alt="" />
+        <div class="especialidades-titulo">
+            <h2 th:text="#{especialidadess}" ></h2>
+        </div>
+        
+        <div class="tarjetas-especialidades">
+            <div th:each="especialidad:${especialidades}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+            <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" class="imagen-uni">
+                <img src="/img/utch/logo.jpg" alt=""/>
             </a>
-            <div>
+
+            <div class="tarjeta-contenido dark:text-white">
                 <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}">
-                    <h5 th:text="${especialidad.nombre}">Noteworthy technology acquisitions 2021</h5>
+                    <h2 th:text="${especialidad.nombre}">Noteworthy technology acquisitions 2021</h2>
                 </a>
-                <p th:text="${especialidad.descripcion_breve}">descripcion breve</p>
-                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" th:text="#{verMas}">
-                    Ver mas
-                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                    </svg>
+                <p th:text="${especialidad.descripcion_breve}" class="dark:text-white">descripcion breve</p>
+
+                <div class="tarjeta-botones">
+                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" th:text="#{verMas}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
                 </a>
+                </div>
+                
             </div>
         </div>
+        </div>
+        
     </div>
 
     <div th:if="${#lists.isEmpty(especialidades)}" class="roadmap">
