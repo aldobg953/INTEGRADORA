@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.registro.usuarios.modelo.Area;
 import com.registro.usuarios.modelo.Pregunta;
 import com.registro.usuarios.modelo.Usuario;
-import com.registro.usuarios.modelo.dto.AreaDTO;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.PreguntasServicio;
 import com.registro.usuarios.servicio.UsuarioServicio;
