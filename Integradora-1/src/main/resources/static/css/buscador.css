@@ -1,5 +1,6 @@
-/* #region Variables Globales */
+/* Global Variables */
 @import url('https://cdn-uicons.flaticon.com/2.4.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
 
 :root {
     --primary-color: #0047FF;
@@ -10,12 +11,11 @@
     --nav-hover-bg: rgba(255, 255, 255, 0.2);
     --card-border: #B9B9B9;
     --card-shadow: #b9b9b993;
-    --card-min-width: 25rem;
+    --card-min-width: 25rem;  /* 240px at default font size */
     --card-gap: 2rem;
 }
-/* #endregion */
 
-/* #region Estilos Generales */
+/* General Styles */
 body {
     margin: 0;
     width: 100%;
@@ -26,9 +26,9 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
-/* #endregion */
 
-/* #region Animación del Gradiente de Texto */
+
+/* Text Gradient Animation */
 .title-gradient {
     background-image: var(--text-gradient);
     align-items: center;
@@ -44,9 +44,11 @@ body::-webkit-scrollbar {
     0%, 100% { background-position: 0; }
     100% { background-position: 100%; }
 }
-/* #endregion */
 
-/* #region Animación del Fondo */
+
+
+
+/* Background Animation */
 .title-gradient {
     display: flex;
     padding: 0 10vw;
@@ -67,15 +69,15 @@ body::-webkit-scrollbar {
     filter: saturate(2);
 }
 
-.dark .title-gradient {
+.dark .title-gradient{
     background:
-        radial-gradient(at 18% 99%, #0038CC 0, transparent 50%),
-        radial-gradient(at 97% 8%, #4A8C76 0, transparent 50%),
-        radial-gradient(at 79% 82%, #4A8C76 0, transparent 50%),
-        radial-gradient(at 96% 10%, #0038CC 0, transparent 50%),
-        radial-gradient(at 42% 20%, #7370CC 0, transparent 50%),
-        radial-gradient(at 4% 49%, #7370CC 0, transparent 50%),
-        radial-gradient(at 57% 33%, rgb(174, 66, 182) 0, #8073CC 50%);
+    radial-gradient(at 18% 99%, #0038CC 0, transparent 50%),
+    radial-gradient(at 97% 8%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 79% 82%, #4A8C76 0, transparent 50%),
+    radial-gradient(at 96% 10%, #0038CC 0, transparent 50%),
+    radial-gradient(at 42% 20%, #7370CC 0, transparent 50%),
+    radial-gradient(at 4% 49%, #7370CC 0, transparent 50%),
+    radial-gradient(at 57% 33%, rgb(174, 66, 182) 0, #8073CC 50%);
     background-size: 200% 200%;
     background-attachment: fixed;
     animation: gradientShift 10s infinite;
@@ -86,9 +88,14 @@ body::-webkit-scrollbar {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
 }
-/* #endregion */
 
-/* #region Encabezado y Navegación */
+
+
+
+
+
+
+/* Header and Navigation */
 .header {
     position: fixed;
     height: 6rem;
@@ -216,7 +223,7 @@ body::-webkit-scrollbar {
     position: absolute;
     align-items: center;
     left: .8rem;
-    pointer-events: none;
+    pointer-events: none; /* Permite hacer clic a través del icono */
     font-size: 1rem;
     line-height: 0;
 }
@@ -233,9 +240,9 @@ body::-webkit-scrollbar {
 .form-input.shrink {
     transform: scale(0.95);
 }
-/* #endregion */
 
-/* #region Menú Hamburguesa */
+
+/* Hamburger Menu */
 .hamburger-menu {
     display: none;
     flex-direction: column;
@@ -270,18 +277,20 @@ body::-webkit-scrollbar {
 .hamburger-menu.active span:nth-child(3) {
     transform: rotate(-45deg);
 }
-/* #endregion */
 
-/* #region Estilos de Título */
+
+
+
+
 h1 {
     font-size: 5rem;
     font-weight: 900;
     color: white;
     margin-bottom: 1rem;
 }
-/* #endregion */
 
-/* #region Barra de Búsqueda */
+
+
 .contenedor-barra-busqueda {
     display: flex;
     width: fit-content;
@@ -320,6 +329,7 @@ select option:hover {
     background-color: var(--primary-color);
     color: white;
 }
+  
 
 .barra-busqueda {
     display: flex;
@@ -349,6 +359,7 @@ select option:hover {
     z-index: 10;
 }
 
+
 svg {
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
 }
@@ -360,9 +371,7 @@ button:hover > svg {
 button:active > svg {
     scale: 0.8;
 }
-/* #endregion */
 
-/* #region Búsqueda de Carreras */
 .contenedor-barra-busqueda-carreras {
     display: flex;
     flex-direction: column;
@@ -373,6 +382,7 @@ button:active > svg {
 
 .contenedor-barra-busqueda-carreras > * {
     margin: .5rem 0;
+    
 }
 
 .contenedor-carreras {
@@ -420,14 +430,13 @@ option {
     font-weight: 500;
     font-size: 1rem;
 }
-/* #endregion */
 
-/* #region Botones de Radio */
 #radios{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 
 .radios-contenedor {
     display: flex;
@@ -452,12 +461,13 @@ label:active{
 
 .radios-contenedor input[type="radio"] {
     display: none;
-}
+  }
 
 label {
     z-index: 2;
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
-}
+  }
+  
 
 .radios-contenedor{
     display: flex;
@@ -476,10 +486,10 @@ label {
     padding: 0.5rem 1rem;
     border-radius: 50rem;
     font-weight: 700;
-}
-/* #endregion */
+  }
+  
 
-/* #region Tarjetas de Universidades */
+
 .tarjetas-unis {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--card-min-width), 1fr));
@@ -540,7 +550,7 @@ label {
 }
 
 .tarjeta p {
-    margin: 0 0 0.9375rem;
+    margin: 0 0 0.9375rem;  /* 15px */
     color: #666;
 }
 
@@ -553,9 +563,9 @@ label {
     flex-direction: row;
     gap: 0.5rem;
     position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
+    bottom: 1rem;  /* Adjust this value as needed */
+    left: 1rem;  /* Adjust this value as needed */
+    right: 1rem;  /* Adjust this value as needed */
 }
 
 .tarjeta-botones a {
@@ -585,16 +595,13 @@ label {
 .ver-mas:active, .comparar:active {
     scale: 0.9;
 }
-/* #endregion */
 
-/* #region Media Queries */
-@media (max-width: 48rem) {
+@media (max-width: 48rem) {  /* 768px */
     body {
-        font-size: 14px;
+        font-size: 14px;  /* Smaller base font size for mobile */
     }
 
     .tarjetas-unis {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr;  /* Single column for small screens */
     }
 }
-/* #endregion */
