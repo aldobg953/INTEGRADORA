@@ -2,7 +2,7 @@
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
     <head>
         <link rel="icon" href="css/IsotipoAdminDeveloper.ico" type="image/x-icon">
-        <title>Crear Universidad</title>
+        <title th:text="#{titleCrearUniversidad}">Crear Universidad</title>
         <link href="/css/tailwind.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/utils.js"></script>
@@ -21,7 +21,7 @@
                 <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
                         id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
+                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
                         <img class="w-8 h-8 rounded-full"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
                             alt="user photo">
@@ -39,16 +39,16 @@
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfil}">Perfil</a>
                         </li>
                         <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
                         </li>
                         <li>
-                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
                                 sesion</a>
                         </li>
                     </ul>
@@ -57,19 +57,19 @@
                 <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
                     <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                         <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{incio}">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidades}">Universidades</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carreras}">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contactanos}">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -82,13 +82,13 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
               <span class="sr-only">Info</span>
-              <h3 class="text-lg font-medium">¡Universidad modificada con éxito!</h3>
+              <h3 class="text-lg font-medium" th:text="#{universidadModificadaExito}">¡Universidad modificada con éxito!</h3>
             </div>
-            <div class="mt-2 mb-4 text-sm">
+            <div class="mt-2 mb-4 text-sm" th:text="#{textoCarreraExito}">
                 Se ha publicado con éxito en Pathfinder, para cualquier duda o comentario, contactanos!
             </div>
             <div class="flex">
-              <button type="button" onclick="ocultarAlerta()" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close">
+              <button type="button" onclick="ocultarAlerta()" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close" th:text="#{cerrar}">
                 Cerrar
               </button>
             </div>
@@ -100,11 +100,11 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
               <span class="sr-only">Info</span>
-              <h3 class="text-lg font-medium">!Error al modificar la Universidad!</h3>
+              <h3 class="text-lg font-medium" th:text="#{errorModificarUniversidad}">!Error al modificar la Universidad!</h3>
             </div>
-            <div class="mt-2 mb-4 text-sm">Favor de contactarte con nosotros para cualquier aclaracion.</div>
+            <div class="mt-2 mb-4 text-sm" th:text="#{contactoAclaracion}">Favor de contactarte con nosotros para cualquier aclaracion.</div>
             <div class="flex">
-              <button type="button" onclick="ocultarAlerta()" class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+              <button type="button" onclick="ocultarAlerta()" class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close" th:text="#{cerrar}">
                 Cerrar
               </button>
             </div>
@@ -112,72 +112,72 @@
 
 
         <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white">Modificar Universidad</span>
+            <span class="text-black text-3xl font-bold dark:text-white" th:text="#{modificarUniversidad}">Modificar Universidad</span>
         </div>
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
             <form th:action="@{/administrador/postguardaruniversidad}" th:object="${universidad}" method="post" enctype="multipart/form-data">
                 <input class="hidden" id="id_universidad" th:field="*{id_universidad}">
                 <div class="mx-10 my-5">
-                    <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Modificar universidad</span></div>
-                    <label for="nombre_completo" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white">Nombre Universidad (sin abreviar):</label>
+                    <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white" th:text="#{modificarUniversidad}">Modificar universidad</span></div>
+                    <label for="nombre_completo" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white" th:text="#{nombreUniversidad}">Nombre Universidad (sin abreviar):</label>
                     <input id="nombre_completo" th:field="*{nombre_completo}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Universidad abreviado:</label>
+                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{nombreAbreviado}">Nombre Universidad abreviado:</label>
                     <input id="nombre_abreviado" th:field="*{nombre_abreviado}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="pagina_web" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir link de la pagina oficial:</label>
+                    <label for="pagina_web" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{linkOficial}">Añadir link de la pagina oficial:</label>
                     <input id="pagina_web" th:field="*{pagina_web}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="correo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir correo oficial de la universidad:</label>
+                    <label for="correo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{correoOficial}">Añadir correo oficial de la universidad:</label>
                     <input id="correo" th:field="*{correo}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir telefono:</label>
+                    <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{telefono}">Añadir telefono:</label>
                     <input id="telefono" th:field="*{telefono}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Informacion de la universidad:</label>
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{infoUniversidad}">Informacion de la universidad:</label>
                     <textarea id="message" rows="4" th:field="*{informacion}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe la informacion principal de la universidad...."></textarea>
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir direccion:</label>
+                    <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{direccion}">Añadir direccion:</label>
                     <input id="direccion" th:field="*{direccion}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="direccionGoogle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Añadir direccion de google:</label>
+                    <label for="direccionGoogle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{ubiGoogle}">Añadir direccion de google:</label>
                     <input id="direccionGoogle" th:field="*{direccionGoogle}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ejemplo: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7003.141572755976!2d">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="tipo_institucion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de institución:</label>
+                    <label for="tipo_institucion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{tipoInstitucion}">Tipo de institución:</label>
                     <input id="tipo_institucion" th:field="*{tipo_institucion}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ejemplo: Publica o Privada">
                 </div>
 
                 <div class="mx-10 my-5">
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caracteristicas de la universidad:</label>
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{caracteristicasU}">Caracteristicas de la universidad:</label>
                     <textarea id="message" rows="4" th:field="*{caracteristicas}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe las caracteristicas principal de la universidad...."></textarea>
                 </div>
 
                 <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega el logo:</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" th:text="#{logo}">Agrega el logo:</label>
                     <input th:field="*{logo}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
                 </div>
                 <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega la portada</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" th:text="#{portada}">Agrega la portada</label>
                     <input th:field="*{portada}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
                 </div>
                 <div class="mx-10 my-5">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Agrega una imagen</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" th:text="#{imagen}">Agrega una imagen</label>
                     <input th:field="*{imagen1}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>    
                 </div>
@@ -186,7 +186,7 @@
                     <button
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span
-                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0" th:text="#{modificarUniversidad}">
                             Modificar Carrera
                         </span>
                     </button>

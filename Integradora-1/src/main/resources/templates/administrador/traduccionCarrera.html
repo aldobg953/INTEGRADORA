@@ -2,7 +2,7 @@
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
     <head>
         <link rel="icon" href="css/IsotipoAdminDeveloper.ico" type="image/x-icon">
-        <title>Crear Carrera</title>
+        <title th:text="#{titleCrearCarrera}">Crear Carrera</title>
         <link href="/css/tailwind.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/utils.js"></script>
@@ -30,7 +30,7 @@
                 <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
                         id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
+                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
                         <img class="w-8 h-8 rounded-full"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
                             alt="user photo">
@@ -48,19 +48,19 @@
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfil}">Perfil</a>
                         </li>
                         <li>
                             <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
                         </li>
                         <li>
                             <a th:href="@{/logout}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
                                 sesion</a>
                         </li>
                     </ul>
@@ -69,26 +69,26 @@
                 <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
                     <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                         <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicio}">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{unoversidades}">Universidades</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carreras}">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contactanos}">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white">Traduccion Carrera</span>
+            <span class="text-black text-3xl font-bold dark:text-white" th:text="#{traduccionCarrera}">Traduccion Carrera</span>
         </div>
 
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
@@ -97,40 +97,40 @@
                 <input class="hidden" id="id_carrera" th:field="*{id_carrera}">
                 <input class="hidden" id="lang" th:field="*{lang}">
                 <div class="mx-10 my-5">
-                    <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white">Modificar Carrera</span></div>
-                    <label for="nombre" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white">Nombre:</label>
+                    <div class="mb-5"><span class="text-black text-2xl font-bold dark:text-white" th:text="#{modificarCarrera}">Modificar Carrera</span></div>
+                    <label for="nombre" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white" th:text="#{nombreCarrera}">Nombre:</label>
                     <input id="nombre" th:field="*{nombre}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="horario_especifico" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white">Horario especifico:</label>
+                    <label for="horario_especifico" class="block mb-2 text-sm font-mnedium text-gray-900 dark:text-white" th:text="#{horarioEspecifico}">Horario especifico:</label>
                     <input id="horario_especifico" th:field="*{horario_especifico}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Informacion de la carrera:</label>
+                    <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{infoCarrera}">Informacion de la carrera:</label>
                     <textarea id="informacion" rows="4" th:field="*{informacion}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe las caracteristicas principal de la universidad...."></textarea>
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="porque_estudiar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porque estudiar esta carrera:</label>
+                    <label for="porque_estudiar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{porqueEstudiar}">Porque estudiar esta carrera:</label>
                     <textarea id="porque_estudiar" rows="4" th:field="*{porque_estudiar}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe porque estudiar esta carrera...."></textarea>
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="donde_trabajar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Donde trabajar:</label>
+                    <label for="donde_trabajar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{dondeTrabajar}">Donde trabajar:</label>
                     <textarea id="donde_trabajar" rows="4" th:field="*{donde_trabajar}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe donde trabajar con esta carrera..."></textarea>
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="como_desemp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Como desempeñarse:</label>
+                    <label for="como_desemp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{desemp}">Como desempeñarse:</label>
                     <textarea id="como_desemp" rows="4" th:field="*{como_desemp}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe como desempeñarse con esta carrera...."></textarea>
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="desc_breve" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion Breve (para tarjetas):</label>
+                    <label for="desc_breve" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{descripcionCarrera}">Descripcion Breve (para tarjetas):</label>
                     <textarea id="desc_breve" rows="4" th:field="*{desc_breve}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe las descripcion breve para la tarjeta de esta carrera...."></textarea>
@@ -139,7 +139,7 @@
                     <button
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span
-                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0" th:text="#{modificarCarrera}">
                             Modificar Carrera
                         </span>
                     </button>
