@@ -1,125 +1,80 @@
 <!DOCTYPE html>
-<html th:classappend="${usuario.darkmode} ? 'dark' : ''">
+<html>
 <head>
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/global_font.css">
-    
+
     <title th:text="#{carreraa}">PathFinder | Carrera</title>
-    <style>
-        .star {
-            cursor: pointer;
-            color: gray;
-        }
-        .star.selected {
-            color: gold;
-            fill:gold;
-        }
-    </style>
-    <script src="/js/navbar.js"></script>
     <link href="/css/tailwind.css" rel="stylesheet">
+    <script src="/js/navbar.js"></script>
+    <link rel="stylesheet" href="/css/carrera.css">
     <link rel="stylesheet" href="/css/validaciones.css">
 </head>
-<body class="dark:bg-gray-800 ">
+<body class="dark:bg-gray-800">
     
-    <nav class="sticky top-0 z-50 border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-            <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                <div id="logo-image"> 
-                    <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                    style="max-width:40%;height:auto;">
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/}">
+                    <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                </a>
+                <hr>
+
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
+            </div>
+
+            <div class="navbar-links" id="navbarLinks">
+
+                <div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
                 </div>
-                <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
-            </a>
 
-            <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600" id="user-menu-button" aria-expanded="false">
-                    <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
-                    <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s" alt="user photo">
-                </button>
-                
-            </div>
-            <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20" id="user-dropdown">
-                <div class="px-4 py-3">
-                    <span class="block text-sm text-black-900 dark:text-white" th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                    <span class="block text-sm text-gray-500 truncate dark:text-gray-400" th:text="${usuario.email} ">correo</span>
-                </div>
-                <ul class="py-2" aria-labelledby="user-menu-button">
-                    <li>
-                        <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfil}">Perfil</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{xonfiguracioness}">Configuraciones</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar sesion</a>
-                    </li>
-                </ul>
+                <hr>
+                <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
+                            class="link-icon" th:text="#{perfil}"></div>
+                </a>
             </div>
 
-            <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1 " >
-            <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                <li>
-                <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicio}">Inicio</a>
-                </li>
-                <li>
-                <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidades}">Universidades</a>
-                </li>
-                <li>
-                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0" th:text="#{carreras}">Carreras</a>
-                </li>
-                <li>
-                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
-                </li>
-                <li>
-                    <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
-                </li>
-            </ul>
-            </div>
+        </nav>
+    </header>
+
+    <div id="dynamicBackground" th:data-background-image="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/portada.jpg'}" class="bg-fixed w-full bg-cover" style="background-position: center 70%;">
+        <div class="title-gradient bg-opacity-50">
+            <h1 th:text="${carrera.nombre}">nombre_completo</h1>
         </div>
-    </nav>
-
-    <div id="dynamicBackground" th:data-background-image="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/portada.jpg'}" class="bg-fixed w-full min-h-80 bg-cover" style="background-position: center 70%;">
-        <div class="bg-sky-900 w-full h-72 flex items-center justify-center bg-opacity-50">
-            <span class="font-serif text-5xl text-white font-bold z-10 ml-12 text-center" th:text="${carrera.nombre}">nombre_completo</span>
-        </div>
-        <div class="bg-sky-900 w-full flex items-center justify-end bg-opacity-50">
+    </div>
+        <div class="me-gusta">
             <!-- Botón para agregar a favoritos -->
             <form th:if="${carrera.esFavoritaParaUsuario(usuario)}" 
                 th:action="@{/carreras/carreras/quitarFav}" 
-                method="post">
+                method="post" class="me-gusta-boton">
+
             <input type="hidden" name="carreraId" th:value="${carrera.id_carrera}" />
-            <button type="submit" 
-                    class="flex items-center justify-center mr-8 mb-3 px-4 py-2 bg-[#0047FF] font-bold text-white rounded-full border border-[#0047FF] hover:bg-gray-200 hover:text-[#0047FF] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#0047FF] focus:ring-opacity-50">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" />
                 </svg>
-                Favoritos
+                <p>Me gusta</p>
             </button>
             </form>
 
-            <!-- Botón para quitar de favoritos -->
             <form th:if="${!carrera.esFavoritaParaUsuario(usuario)}" 
                 th:action="@{/carreras/carreras/agregarFav}" 
-                method="post">
+                method="post" class="me-gusta-boton">
                 <input type="hidden" name="carreraId" th:value="${carrera.id_carrera}" />
-                <button type="submit" 
-                        class="flex items-center justify-center mr-8 mb-3 px-4 py-2 bg-gray-200 font-bold text-[#0047FF] rounded-full border border-[#0047FF] hover:bg-[#0047FF] hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#0047FF] focus:ring-opacity-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L12 8.343l3.172-3.171a4 4 0 115.656 5.656L12 19.657l-8.828-8.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                <button type="submit" id="inactive">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
+                        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
                     </svg>
-                    Favoritos
+                    <p>Me gusta</p>
                 </button>
             </form>
-
-  
         </div>
-    </div>
     
     <script th:inline="javascript">
-        /*<![CDATA[*/
         document.addEventListener('DOMContentLoaded', function() {
             var elemento = document.getElementById('dynamicBackground');
             var imagenFondo = /*[[${'/img/' + carrera.universidad.nombre_abreviado + '/portada.jpg'}]]*/ 'default-image.jpg';
@@ -128,260 +83,234 @@
                 elemento.style.backgroundImage = 'url("' + imagenFondo + '")';
             }
         });
-        /*]]>*/
     </script>
-    <div class=" my-8 mx-2 md:mx-28 border-l-4 pl-10 dark:text-white" >
-        <span class="text-justify font-serif text-sm md:text-xl" th:text="${carrera.informacion}">informacion</span>
+
+    <div class="main-content dark:bg-gray-800">
+
+    <div class="carrera-acercade">
+        <div class="vertical-line"></div>
+        <p th:text="${carrera.informacion}"></p>
     </div>
-    <div class="flex flex-col md:flex-row my-7 w-full ">
-        <div class="md:basis-1/2 flex justify-center items-center mt-5 bg-white">
-            <img th:src="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/logo.jpg'}" class="h-auto max-w-full md:max-w-[80%]">
+
+    <div class="logo-informacion">
+        <div class="logo-carrera">
+            <img th:src="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/logo.jpg'}">
         </div>
-        <div class="my-0 md:mx-16 md:basis-1/2 w-full flex flex-col space-y-4 rounded-lg border-sky-600 border-2 p-4 bg-gradient-to-r from-cyan-500 to-blue-500">
-            <div class="ml-32 mt-5 h-10 text-xl md:text-3xl font-bold font-serif" th:text="#{infoCarrera}">Informacion de la carrera</div>
-            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{horariosCostos}">Horarios y costos</div>
-            <div th:utext="${carrera.horario_especifico}" class="text-base md:text-lg">horario</div>
-            <div th:text="'Costo de la carrera: ' + ${carrera.costo} + '0$'" class="text-base md:text-lg">costos</div>
-            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{modalidad}">Modalidad</div>
-            <div th:text="${carrera.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
-            <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
-            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{areas}">Area</div>
-            <a class="font-serif text-base md:text-lg" th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area}, lang=${usuario.lang})}"></a>
-            <div class="text-xl md:text-lg font-serif font-bold" th:text="#{universidad}">Universidad</div>
-            <a class="font-serif text-base md:text-lg" th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
+
+        <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+
+            <h2 th:text="#{infoCarrera}">Informacion de la carrera</h2>
+
+            <div>
+                <h3 th:text="#{horariosCostos}">Horarios</h3>
+                <p th:utext="${carrera.horario_especifico}">horario</p>
+            </div>
+            
+            <div>
+                <h3>Costo de la carrera:</h3>
+                <p th:text="${carrera.costo} + '0$' + ' *por periodo'" ></p> 
+            </div>
+            
+            <div>
+                <h3 th:text="#{modalidad}">Modalidad</h3>
+                <p th:text="${carrera.modalidad.nombre_modalidad}">modalidad</p>
+            </div>
+            
+            <div>
+                <h3>Periodos</h3>
+                <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'">nombre_periodo</div>
+            </div>
+            
+            <div>
+                <h3 th:text="#{areas}"></h3>
+                <a th:text="${carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${carrera.area.id_area}, lang=${usuario.lang})}"></a>
+            </div>
+            
+            <div>
+                <h3 th:text="#{universidad}"></h3>
+            <a th:text="${carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
+            </div>
+            
         </div>
     </div>
-    <div class="w-full my-10 bg-gray-600 flex flex-col md:flex-row">
-        <div class="basis-1/2 text-right pl-16 pr-10 content-center" >
-            <span class="font-serif text-2xl font-bold text-white" th:text="'¿Por qué estudiar ' + ${carrera.nombre} + '?'">carrera</span><br/>
-            <span class="font-serif text-lg pl-16 text-white" th:text="${carrera.porque_estudiar}">texto porque estudiar esta carrera</span>
+    
+    <div class="por-que-estudiar">
+        <div class="por-que-estudiar-text">
+            <h2 th:text="'¿Por qué estudiar ' + ${carrera.nombre} + '?'">carrera</h2><br/>
+            <p th:text="${carrera.porque_estudiar}">texto porque estudiar esta carrera</p>
         </div>
-        <div class="basis-1/2 h-48 md:h-auto">
-            <img class="h-full w-full md:w-auto" th:src="@{'/img/carreras/' + ${carrera.id_carrera} + '.jpg'}">
+        <div class="por-que-estudiar-img">
+            <img th:src="@{'/img/carreras/' + ${carrera.id_carrera} + '.jpg'}">
         </div>
     </div> 
     
-    <div class="w-full my-10 flex flex-col md:flex-row dark:text-white">
-        <div class="basis-1/2 text-center">
-            <span class="font-serif text-2xl font-bold text-sky-600" th:text="#{dondeTrabajar}"> ¿Donde puedo trabajar?</span><br/>
-            <div class="px-3 my-5 border-l-4 ml-7 text-left"><span class="font-serif text-lg text-justify" th:text="${carrera.donde_trabajar}"></span></div>
+    <div class="trabajo-desempeno">
+        <div class="donde-trabajar">
+            <h2 th:text="#{dondeTrabajar}"> ¿Donde puedo trabajar?</h2><br/>
+            <p th:text="${carrera.donde_trabajar}"></p>
         </div>
-        <div class="basis-1/2 text-center">
-            <span class="font-serif text-2xl font-bold text-sky-600" th:text="#{comoDes}"> ¿Cómo Puedo Desempeñarme?</span><br/>
-            <div class="px-3 my-5  ml-7 text-left pl-10"><ul class="font-serif text-lg list-disc " th:utext="${carrera.como_desemp}"></ul></div>
+
+        <div class="desempeno">
+            <h2 th:text="#{comoDes}"> ¿Cómo puedo Desempeñarme?</h2><br/>
+            <div><ul th:utext="${carrera.como_desemp}"></ul></div>
         </div>
     </div>
 
-    <div th:if="${!#lists.isEmpty(especialidades)}" class="mx-28 flex flex-wrap">
-        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold dark:text-white" th:text="#{especialidadess}">Especialidades</p></div>
-        <div class="mb-8 max-w-sm mx-4 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800" th:each="especialidad:${especialidades}">
+    <div th:if="${!#lists.isEmpty(especialidades)}">
+        <div><p th:text="#{especialidadess}">Especialidades</p></div>
+        <div th:each="especialidad:${especialidades}">
             <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}">
-                <img class="rounded-t-lg border-b border-blue-800 bg-white" src="/img/utch/logo.jpg" alt="" />
+                <img src="/img/utch/logo.jpg" alt="" />
             </a>
-            <div class="p-5">
+            <div>
                 <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${especialidad.nombre}">Noteworthy technology acquisitions 2021</h5>
+                    <h5 th:text="${especialidad.nombre}">Noteworthy technology acquisitions 2021</h5>
                 </a>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${especialidad.descripcion_breve}">descripcion breve</p>
-                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" th:text="#{verMas}">
+                <p th:text="${especialidad.descripcion_breve}">descripcion breve</p>
+                <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}" th:text="#{verMas}">
                     Ver mas
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                     </svg>
                 </a>
             </div>
         </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(especialidades)}" class="roadmap">
+
+            <h2 th:text="#{planEstudio}">Plan de estudio </h2>
+
+            <iframe th:src="${carrera.roadmap}" frameBorder="0"></iframe>
 
     </div>
 
-    <div th:if="${#lists.isEmpty(especialidades)}">
-        <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold" th:text="#{planEstudio}">Plan de estudio </p></div>
-        <div class="md:mx-32 border-sky-600 border-2 mb-7 h-80 md:h-[1700px]" height="1700px">
-            <iframe class="bg-sky-200 w-full h-full iframe-zoom" th:src="${carrera.roadmap}" width="100%" height="100%" frameBorder="0"></iframe>
-        </div>
-    </div>
-
-    <hr class="w-full"/>
     
-    <div class="flex flex-col lg:flex-row">
-        <!-- calificaciones de usuarios, estrellas-->
-        <div class="p-6 rounded-lg shadow-lg basis-full lg:basis-1/4 font-mono dark:text-white">
-            <h2 class="text-2xl font-bold w-full" th:text="#{calificacionesUsuarios}">Calificaciones de usuarios</h2>
-            <div class="flex">
-                <span class="ml-1" th:each="i : ${#numbers.sequence(1, 5)}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                        <path th:attr="fill=${i} <= ${califGnral.promedioGral} ? 'gold' : 'none', stroke=${i} <= ${califGnral.promedioGral} ? 'gold' : 'black'"
-                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                </span>
-                <span class="ml-2" th:text = "${califGnral.promedioGral} + ' de 5'"></span>
-            </div>
+    <div class="seccion-comentarios">
+        <div class="calificaciones">
+            <h2 th:text="#{calificacionesUsuarios}"></h2>
             <div>
-                <span class="ml-2" th:text = "${califGnral.cantidadCalif} + ' calificaciones globales'"></span>
+                <div class="promedio-estrellas">
+                    <span th:each="i : ${#numbers.sequence(1, 5)}">
+                        <svg class="estrella" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+                            <path th:attr="fill=${i} <= ${califGnral.promedioGral} ? '#0047FF' : 'none', stroke=${i} <= ${califGnral.promedioGral} ? '#0047FF' : '#0047FF'"
+                            d="M1.327,12.4,4.887,15,3.535,19.187A3.178,3.178,0,0,0,4.719,22.8a3.177,3.177,0,0,0,3.8-.019L12,20.219l3.482,2.559a3.227,3.227,0,0,0,4.983-3.591L19.113,15l3.56-2.6a3.227,3.227,0,0,0-1.9-5.832H16.4L15.073,2.432a3.227,3.227,0,0,0-6.146,0L7.6,6.568H3.231a3.227,3.227,0,0,0-1.9,5.832Z" />
+                        </svg>
+                    </span>
+                    <span class="promedio-valor" th:text="${califGnral.promedioGral} + ' de 5'"></span>
+                </div>
+                <p class="total-calificaciones" th:text="${califGnral.cantidadCalif} + ' usuarios han calificado esta carrera'"></p>
             </div>
-            <div class="flex">
-                <div class="flex-none w-10 flex items-center space-x-1">
-                    <span class="text-lg"> 5</span>
-                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                </div>
-                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
-                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promCincoE} + '%'"></div>
-                </div>
-                <div class="flex-auto w-16 flex justify-center">
-                    <span th:text="${califGnral.promCincoE} + '%'"></span>
+            <div class="barras-calificacion">
+                <div class="barra" th:each="i : ${#numbers.sequence(5, 1, -1)}">
+                    <div class="barra-numero">
+                        <span th:text="${i}"></span>
+                        <svg class="estrella" xmlns="http://www.w3.org/2000/svg" fill="#0047FF" viewBox="0 0 24 24" stroke="#0047FF">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1.327,12.4,4.887,15,3.535,19.187A3.178,3.178,0,0,0,4.719,22.8a3.177,3.177,0,0,0,3.8-.019L12,20.219l3.482,2.559a3.227,3.227,0,0,0,4.983-3.591L19.113,15l3.56-2.6a3.227,3.227,0,0,0-1.9-5.832H16.4L15.073,2.432a3.227,3.227,0,0,0-6.146,0L7.6,6.568H3.231a3.227,3.227,0,0,0-1.9,5.832Z" />
+                        </svg>
+                    </div>
+                    <div class="barra-progreso">
+                        <div class="barra-progreso-llena" th:style="'width: ' + ${
+                            i == 5 ? califGnral.promCincoE :
+                            i == 4 ? califGnral.promCuatroE :
+                            i == 3 ? califGnral.promTresE :
+                            i == 2 ? califGnral.promDosE :
+                            califGnral.promUnaE
+                        } + '%'"></div>
+                    </div>
+                    <div class="barra-porcentaje">
+                        <span th:text="${
+                            i == 5 ? califGnral.promCincoE :
+                            i == 4 ? califGnral.promCuatroE :
+                            i == 3 ? califGnral.promTresE :
+                            i == 2 ? califGnral.promDosE :
+                            califGnral.promUnaE
+                        } + '%'"></span>
+                    </div>
                 </div>
             </div>
-            <div class="flex">
-                <div class="flex-none w-10 flex items-center space-x-1">
-                    <span class="text-lg"> 4</span>
-                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                </div>
-                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
-                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promCuatroE} + '%'"></div>
-                </div>
-                <div class="flex-auto w-16 flex justify-center">
-                    <span th:text="${califGnral.promCuatroE} + '%'"></span>
-                </div>
-            </div>    
-            <div class="flex">
-                <div class="flex-none w-10 flex items-center space-x-1">
-                    <span class="text-lg"> 3</span>
-                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                </div>
-                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
-                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promTresE} + '%'"></div>
-                </div>
-                <div class="flex-auto w-16 flex justify-center">
-                    <span th:text="${califGnral.promTresE} + '%'"></span>
-                </div>
-            </div>    
-            <div class="flex">
-                <div class="flex-none w-10 flex items-center space-x-1">
-                    <span class="text-lg"> 2</span>
-                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                </div>
-                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
-                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promDosE} + '%'"></div>
-                </div>
-                <div class="flex-auto w-16 flex justify-center">
-                    <span th:text="${califGnral.promDosE} + '%'"></span>
-                </div>
-            </div>    
-            <div class="flex">
-                <div class="flex-none w-10 flex items-center space-x-1">
-                    <span class="text-lg"> 1</span>
-                    <svg class=" w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="gold" viewBox="0 0 24 24" stroke="gold">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                </div>
-                <div class="flex-auto w-64 bg-gray-300 rounded-full h-3 mt-2">
-                    <div class="h-3 rounded-full" th:style="'background-color: gold; width: ' + ${califGnral.promUnaE} + '%'"></div>
-                </div>
-                <div class="flex-auto w-16 flex justify-center">
-                    <span th:text="${califGnral.promUnaE} + '%'"></span>
-                </div>
-            </div>        
-            
 
-            <form id="comentarioForm" th:action="@{/carreras/agregarComentario}" method="post" class="my-7">
-                <h2 class="text-2xl font-bold" th:text="#{calificaCarrera}">Califica esta carrera</h2>
-                <div id="star-rating" class="flex space-x-1">
-                    <svg class="star w-5 h-5 cursor-pointer" data-value="1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                    <svg class="star w-5 h-5 cursor-pointer" data-value="2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                    <svg class="star w-5 h-5 cursor-pointer" data-value="3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                    <svg class="star w-5 h-5 cursor-pointer" data-value="4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
-                    <svg class="star w-5 h-5 cursor-pointer" data-value="5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
-                    </svg>
+            <form id="comentarioForm" class="formulario-comentario" th:action="@{/carreras/agregarComentario}" method="post">
+                <h3 th:text="#{calificaCarrera}"></h3>
+                <div id="star-rating" class="estrellas-seleccion">
+                    <span class="estrella" th:each="i : ${#numbers.sequence(1, 5)}" th:data-value="${i}"></span>
                 </div>
                 <input type="hidden" id="calificacion" name="calificacion" value="0">
-                <h3 th:text="#{dejaComentario}">Deja un comentario:</h3>
                 <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
-                <textarea id="comentarioNuevo" name="comentarioNuevo" rows="4" class="my-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escribe tu comentario aquí..."></textarea>
-                <div>
-                    <button id="enviarButton" class="bg-green-500 w-full max-w-96 rounded-lg font-bold" type="submit" th:text="#{enviar}">Enviar</button>
-                </div>
-                <div id="error-messages" class="errorCom"></div>
+                <h3 th:text="#{dejaComentario}"></h3>
+                <textarea id="comentarioNuevo" name="comentarioNuevo" rows="4" th:placeholder="#{escribeTuComentario}"></textarea>
+                <button type="submit" id="enviarButton" th:text="#{publicar}"></button>
+                <div id="error-messages"></div>
             </form>
-            
-        
         </div>
 
-
-
-        <div class="basis-full lg:basis-3/4 ml-5 my-7 dark:text-white">
-        <h2 class="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold " th:text="#{comentarios}">Comentarios</h2>
-            <div th:each="comentario : ${foros}">
-                <div>
-                    <div class="flex flex-row items-center">
-                        <div>
-                            <img th:src="@{'/img/perfilUsuario/' + ${comentario.usuario.foto_perfil} + '.jpg'}" alt="" 
-                            class="h-10 w-10 rounded-full">
-                        </div>
-                        <div class="ml-1">
-                            <p class="font-mono font-bold" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}">Autor</p>
-                            <p class="font-mono text-xs" th:text="${#dates.format(comentario.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</p>
-                        </div>
+        <div class="lista-comentarios">
+            <h2 th:text="#{comentarios}">Comentarios</h2>
+            <div th:each="comentario : ${foros}" class="comentario">
+                <img th:src="@{'/img/perfilUsuario/' + ${comentario.usuario.foto_perfil} + '.jpg'}" alt="Avatar" class="comentario-avatar">
+                <div class="comentario-contenido">
+                    <div class="comentario-encabezado">
+                        <span class="comentario-autor" th:text="${comentario.usuario.nombre} + ' ' + ${comentario.usuario.apellidoP}"></span>
+                        <span class="comentario-fecha" th:text="${#dates.format(comentario.fechaCreacion, 'dd/MM/yyyy HH:mm')}"></span>
                     </div>
-                                       
-                    <div class="flex space-x-1 my-3">
+                    <div class="comentario-estrellas">
                         <span th:each="i : ${#numbers.sequence(1, 5)}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            th:attr="fill=${i} <= ${comentario.calificacion} ? 'gold' : 'none', stroke=${i} <= ${comentario.calificacion} ? 'gold' : 'black'"
-                                 viewBox="0 0 24 24"
-                                 class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 17.27l5.18 3.05-1.64-5.81L21 9.76l-5.91-.5L12 4 9.91 9.26 4 9.76l4.46 4.75L6.82 20.32 12 17.27z" />
+                            <svg class="estrella" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path th:attr="fill=${i} <= ${comentario.calificacion} ? '#0047FF' : 'none', stroke=${i} <= ${comentario.calificacion} ? '#0047FF' : '#0047FF'"
+                                d="M1.327,12.4,4.887,15,3.535,19.187A3.178,3.178,0,0,0,4.719,22.8a3.177,3.177,0,0,0,3.8-.019L12,20.219l3.482,2.559a3.227,3.227,0,0,0,4.983-3.591L19.113,15l3.56-2.6a3.227,3.227,0,0,0-1.9-5.832H16.4L15.073,2.432a3.227,3.227,0,0,0-6.146,0L7.6,6.568H3.231a3.227,3.227,0,0,0-1.9,5.832Z"/>
                             </svg>
                         </span>
                     </div>
-                    
-                    <p class="font-mono " th:text="${comentario.comentario}">Contenido del comentario</p>
+                    <p class="comentario-texto" th:text="${comentario.comentario}"></p>
                 </div>
-                <hr class="w-full my-7"/>
             </div>
-            <div class="ml-5 my-7" th:if="${foros == null or #lists.isEmpty(foros)}" th:text="#{noComentarios}">
+            <div th:if="${foros == null or #lists.isEmpty(foros)}" th:text="#{noComentarios}">
                 <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
             </div>
         </div>
     </div>
+</div>
 
+<center>
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="/css/LogoLogoPathFinderVertical.svg" alt="">
+        </div>
+        <div class="footer-section">
+            <h3 th:text="#{servicio}"></h3>
+            <a href="#" th:text="#{nuestroTrabajo}"></a>
+            <a href="#" th:text="#{centroAyuda}"></a>
+            <a href="#" th:text="#{faqs}"></a>
+        </div>
+        <div class="footer-section">
+            <h3 th:text="#{contacto}"></h3>
+            <p>contacto@pathfinder.com</p>
+            <p th:text="#{sobreNosotros}"></p>
+            <p>614 785 6594</p>
+        </div>
+        <div class="footer-section">
+            <h3 th:text="#{direccion}"></h3>
+            <p>Av. Montes Americanos #9501, Col.</p>
+            <p>Sector 35, C.P. 31216, Chihuahua,</p>
+            <p>Chih., México.</p>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a>&copy; 2024 PathFinder</a>
+                <a href="#" th:text="#{terminos}"></a>
+                <a href="#" th:text="#{politica}"></a>
+            </div>
+            <div class="social-icons">
 
-    <script src="/js/comentarioValidacion.js" ></script>
-    <script>
-        const stars = document.querySelectorAll('.star');
-        const ratingValue = document.getElementById('rating-value');
-        const calificacionInput = document.getElementById('calificacion');
-        stars.forEach((star, index) => {
-            star.addEventListener('click', () => {
-                stars.forEach((s, i) => {
-                    if (i <= index) {
-                        s.classList.add('selected');
-                    } else {
-                        s.classList.remove('selected');
-                    }
-                });
-                const rating = index + 1;
-                calificacionInput.value = rating;
-            });
-        });
-    </script>
+                <a href="#" title="Facebook"><img src="/css/assets/facebook.svg" alt=""></a>
+                <a href="#" title="X"><img src="/css/assets/x.svg" alt=""></a>
+                <a href="#" title="Instagram"><img src="/css/assets/instagram.svg" alt=""></a>
+                <a href="#" title="LinkedIn"><img src="/css/assets/linkedin.svg" alt=""></a>
+            </div>
+        </div>
+    </footer>
+</center>
+
+    <script src="/js/comentarioValidacion.js"></script>
 </body>
 </html>

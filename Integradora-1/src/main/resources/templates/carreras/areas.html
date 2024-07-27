@@ -87,14 +87,15 @@
                 <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}" class="imagen-uni">
                     <img th:src="@{'/img/areas/'+  ${area.id_area} +'.jpg'}" alt="" />
                 </a>
+
                 <div class="tarjeta-contenido dark:text-white">
                     <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}">
                         <h2 th:text="${area.nombre_area}"></h2>
                     </a>
-                    <p th:text="${area.descripcion}"></p>
+                    <p th:text="${area.descripcion}" class="dark:text-white"></p>
+
                     <div class="tarjeta-botones">
                         <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}" th:text="#{verMas}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
-                        ver mas
                     </a>
                     </div>
                     

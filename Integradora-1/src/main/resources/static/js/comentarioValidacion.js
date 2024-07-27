@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const stars = document.querySelectorAll('#star-rating .star');
+    const stars = document.querySelectorAll('#star-rating .estrella');
     const calificacionInput = document.getElementById('calificacion');
     const comentarioTextarea = document.getElementById('comentarioNuevo');
     const errorMessagesDiv = document.getElementById('error-messages');
@@ -11,30 +11,28 @@ document.addEventListener('DOMContentLoaded', function() {
             calificacion = this.dataset.value;
             calificacionInput.value = calificacion;
             updateStarRating();
-            removeErrorStyles(); // Elimina estilos de error al cambiar la calificación
+            removeErrorStyles();
         });
     });
 
     function updateStarRating() {
         stars.forEach(star => {
             if (star.dataset.value <= calificacion) {
-                star.classList.add('text-yellow-500');
+                star.classList.add('selected');
             } else {
-                star.classList.remove('text-yellow-500');
+                star.classList.remove('selected');
             }
         });
     }
 
     function setErrorStyles() {
-        comentarioTextarea.classList.add('error-border');
-        enviarButton.classList.add('error-border');
-        stars.forEach(star => star.classList.add('error-star'));
+        comentarioTextarea.style.border = '2px solid red';
+        enviarButton.style.backgroundColor = '#9795a3';
     }
 
     function removeErrorStyles() {
-        comentarioTextarea.classList.remove('error-border');
-        enviarButton.classList.remove('error-border');
-        stars.forEach(star => star.classList.remove('error-star'));
+        comentarioTextarea.style.border = '';
+        enviarButton.style.backgroundColor = '';
     }
 
     function validateForm() {
@@ -42,12 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const comentario = comentarioTextarea.value.trim();
 
         if (calificacion === 0) {
-            errors.push('Por favor, selecciona una calificación.');
+            errors.push(/*[[#{errorSeleccionaCalificacion}]]*/'Por favor, selecciona una calificación.');
         }
         if (comentario.length < 3 || comentario.length > 350) {
-            errors.push('El comentario debe tener entre 3 y 350 caracteres.');
+            errors.push(/*[[#{errorLongitudComentario}]]*/'El comentario debe tener entre 3 y 350 caracteres.');
         } else if (comentario === '') {
-            errors.push('El comentario no puede estar vacío.');
+            errors.push(/*[[#{errorComentarioVacio}]]*/'El comentario no puede estar vacío.');
         }
 
         if (errors.length > 0) {
@@ -63,27 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
     stars.forEach(star => star.addEventListener('click', validateForm));
     
     document.getElementById('comentarioForm').addEventListener('submit', function(event) {
-        let errors = [];
-        const comentario = comentarioTextarea.value.trim();
-
-        if (calificacion === 0) {
-            errors.push('Por favor, selecciona una calificación.');
-        }
-        if (comentario.length < 3 || comentario.length > 350) {
-            errors.push('El comentario debe tener entre 3 y 350 caracteres.');
-        } else if (comentario === '') {
-            errors.push('El comentario no puede estar vacío.');
-        }
-
-        if (errors.length > 0) {
-            errorMessagesDiv.innerHTML = errors.join('<br>');
+        validateForm();
+        if (errorMessagesDiv.innerHTML !== '') {
             event.preventDefault();
-            setErrorStyles();
-        } else {
-            removeErrorStyles();
         }
     });
 });
-
-
-console.log("comentario");

@@ -8,113 +8,76 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/buscador.css">
         <script src="/js/buscador.js"></script>
     </head>
-    <body class="bg-gray-100 dark:bg-gray-800">
-        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <div id="logo-image">
-                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                            style="max-width:40%;height:auto;">
+    <body class="dark:bg-gray-800">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <a th:href="@{/}">
+                        <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                    </a>
+                    <hr>
+    
+                    <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
+                </div>
+    
+                <div class="navbar-links" id="navbarLinks">
+    
+                    <div class="form-input ">
+                        <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
                     </div>
-                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
-                </a>
     
-                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
-                        id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
-                            alt="user photo">
-                    </button>
-    
-                </div>
-                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-black-900 dark:text-white"
-                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                            th:text="${usuario.email} ">correo</span>
-                    </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/logout}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
-                                sesion</a>
-                        </li>
-                    </ul>
+                    <hr>
+                    <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                        <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
+                                class="link-icon" th:text="#{perfil}"></div>
+                    </a>
                 </div>
     
-                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
-                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                        <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicio}">Inicio</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{iniversidadess}">Universidades</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="carreras">Carreras</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="areas">Area</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white" th:text="${area}">Areas</span>
-        </div>
-        <form class="max-w-lg mx-auto">
-            <div class="flex">
-                <div class="relative w-full">
-                    <input type="search" id="search" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-gray-50 border-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Buscar carrera..." required />
-                    <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                        <span class="sr-only" th:text="#{buacador}">Search</span>
-                    </button>
-                </div>
-            </div>
-        </form>
+            </nav>
+        </header>
 
-        <div id="areas" class="flex md:mx-28 mt-8 flex-wrap">
-            <div th:each="carrera : ${carreras}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a  th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                    <img class="rounded-t-lg h-64 w-full bg-white" th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
+        <div class="title-gradient">
+            <h1 th:text="${area}"></h1>
+        </div>
+
+        <center>
+            <form class="contenedor-barra-busqueda">
+                <div class="contenedor">
+                    <div class="barra-busqueda">
+                        <input type="search" id="search" class="rounded-l-lg dark:border-gray-700 dark:text-white" placeholder="Buscar carrera..."/>
+                        <button type="submit" class="">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            </center>
+
+        <div id="areas" class="tarjetas-unis" >
+            <div th:each="carrera : ${carreras}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+                <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
+                    <img th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
                 </a>
-                <div class="p-5 bortder-2 border-t-indigo-500">
-                    <a  th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${carrera.nombre}"></h5>
+                <div class="tarjeta-contenido dark:text-white">
+                    <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
+                        <h2 th:text="${carrera.nombre}"></h2>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{universidad}"> Universidad: <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${carrera.desc_breve}">desc breve</p>
-                    <a  th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" th:text="#{verMas}">
-                        ver mas
-                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
+                    <p th:text="#{universidad}" class="dark:text-white font-semibold"> Universidad: <span th:text="${carrera.universidad.nombre_abreviado}" class="dark:text-white font-normal"></span></p>
+                    <p th:text="${carrera.desc_breve}" class="dark:text-white"></p>
+
+                    <div class="tarjeta-botones">
+                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" th:text="#{verMas}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
                     </a>
+                    </div>
+                    
                 </div>
             </div>
         </div>

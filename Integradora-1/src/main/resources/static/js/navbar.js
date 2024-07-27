@@ -1,19 +1,38 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var userMenuButton = document.getElementById('user-menu-button');
-    var userDropdown = document.getElementById('user-dropdown');
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.header');
+    const navbar = document.querySelector('.navbar');
+    const navbarLogo = document.querySelector('.navbar-logo');
 
-    userMenuButton.addEventListener('click', function (event) {
-        event.stopPropagation();
-        userDropdown.classList.toggle('hidden');
-    });
+    // Crear el botón del menú hamburguesa
+    const hamburger = document.createElement('div');
+    hamburger.classList.add('hamburger-menu');
+    hamburger.innerHTML = '<span></span><span></span><span></span>';
 
-    userDropdown.addEventListener('click', function (event) {
-        event.stopPropagation(); // Evita que el clic en el menú desplegable cierre el menú
-    });
+    // Insertar el botón después del logo
+    navbarLogo.appendChild(hamburger);
 
-    document.addEventListener('click', function (event) {
-        if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
-            userDropdown.classList.add('hidden');
+    hamburger.addEventListener('click', function() {
+        header.classList.toggle('expanded');
+        hamburger.classList.toggle('active');
+        
+        // Ajustar la altura máxima del header para la animación
+        if (header.classList.contains('expanded')) {
+            const navbarLinks = document.querySelector('.navbar-links');
+            header.style.height = `${5 + navbarLinks.scrollHeight / 16}rem`;
+        } else {
+            header.style.height = '6rem';
         }
     });
+
+    // Función para manejar el cambio de tamaño de la ventana
+    function handleResize() {
+        if (window.innerWidth > 768) {
+            header.classList.remove('expanded');
+            hamburger.classList.remove('active');
+            header.style.height = '6rem';
+        }
+    }
+
+    // Agregar event listener para el cambio de tamaño de la ventana
+    window.addEventListener('resize', handleResize);
 });
