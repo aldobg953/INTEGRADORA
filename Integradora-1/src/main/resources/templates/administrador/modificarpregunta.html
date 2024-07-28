@@ -2,7 +2,7 @@
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
     <head>
         <link rel="icon" href="css/IsotipoAdminDeveloper.ico" type="image/x-icon">
-        <title>Crear Universidad</title>
+        <title th:text="#{titleCrearUniversidad}">Crear Universidad</title>
         <link href="/css/tailwind.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/utils.js"></script>
@@ -21,7 +21,7 @@
                 <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
                         id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
+                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
                         <img class="w-8 h-8 rounded-full"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
                             alt="user photo">
@@ -39,16 +39,16 @@
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfil}">Perfil</a>
                         </li>
                         <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
                         </li>
                         <li>
-                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
                                 sesion</a>
                         </li>
                     </ul>
@@ -57,42 +57,42 @@
                 <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
                     <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                         <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicio}">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidades}">Universidades</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carreras}">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contactanos}">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="ml-28 mt-4 text-black text-3xl font-bold dark:text-white">
-            <span >Modificar Pregunta</span> <span th:text="${pregunta.id_pregunta}"></span>
+            <span th:text="#{modificarPregunta}">Modificar Pregunta</span> <span th:text="${pregunta.id_pregunta}"></span>
         </div>
 
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
-            <form action="#" th:action="@{/preguntas/editar/{id}(id=${pregunta.id_pregunta})}" th:object="${pregunta}" method="post">
+            <form action="#" th:action="@{/administrador/postGuardarPregunta}" th:object="${pregunta}" method="post">
                 <input type="hidden" th:field="*{id_pregunta}" />
                
                 <div class="mx-10 my-5">
-                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto de pregunta:</label>
+                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{textoP}">Texto de pregunta:</label>
                     <input type="text" id="text" th:field="*{text}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en inglés:</label>
+                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{textoIngles}">Texto en inglés:</label>
                     <input type="text" id="text_ingles" th:field="*{text_ingles}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mx-10 my-5">
-                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en francés:</label>
+                    <label for="nombre_abreviado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{textoFrances}">Texto en francés:</label>
                     <input type="text" id="text_frances" th:field="*{text_frances}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 
@@ -101,22 +101,22 @@
                 </div>
 
                 <div th:each="respuesta, stat : *{respuestas}">
-                    <h4 class="ml-10 mt-4 text-black text-xl font-bold dark:text-white" >Respuesta [[${stat.index + 1}]]</h4>
+                    <h4 class="ml-10 mt-4 text-black text-xl font-bold dark:text-white" th:text="#{respuesta}">Respuesta [[${stat.index + 1}]]</h4>
                     <input type="hidden" th:field="*{respuestas[__${stat.index}__].id_respuesta}" />
                     <div class="mx-10 my-5">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en español:</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{textoEsp}">Texto en español:</label>
                         <input type="text" th:field="*{respuestas[__${stat.index}__].text}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mx-10 my-5">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en inglés:</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{textoIngles}">Texto en inglés:</label>
                         <input type="text" th:field="*{respuestas[__${stat.index}__].text_ingles}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mx-10 my-5">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto en francés:</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{textoFrances}">Texto en francés:</label>
                         <input type="text" th:field="*{respuestas[__${stat.index}__].text_frances}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mx-10 my-5">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Área ID:</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{idArea}">Área ID:</label>
                         <select id="area" th:field="*{respuestas[__${stat.index}__].id_area}" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" aria-required="true">
                             <option th:each="area : ${areasDTO}" 
                                 th:value="${area.id_area}" 
@@ -129,7 +129,7 @@
                     <button
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 text-white focus:ring-4 focus:outline-none focus:ring-cyan-200">
                         <span
-                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0">
+                            class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md bg-opacity-0" th:text="#{modificarPregunta}">
                             Modificar Pregunta
                         </span>
                     </button>

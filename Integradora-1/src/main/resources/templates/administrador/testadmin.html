@@ -2,7 +2,7 @@
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
     <head>
         <link rel="icon" href="css/IsotipoAdminDeveloper.ico" type="image/x-icon">
-        <title>Modificar Universidad</title>
+        <title th:text="#{modificarUniversidad}">Modificar Universidad</title>
         <link href="/css/tailwind.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/utils.js"></script>
@@ -21,7 +21,7 @@
                 <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
                         id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
+                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
                         <img class="w-8 h-8 rounded-full"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
                             alt="user photo">
@@ -39,19 +39,19 @@
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfil}">Perfil</a>
                         </li>
                         <li>
                             <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
                         </li>
                         <li>
                             <a th:href="@{/logout}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
+                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
                                 sesion</a>
                         </li>
                     </ul>
@@ -60,26 +60,26 @@
                 <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
                     <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
                         <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
+                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicio}">Inicio</a>
                         </li>
                         <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
+                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidades}">Universidades</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
+                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carreras}">Carreras</a>
                         </li>
                         <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
+                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
                         </li>
                         <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
+                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contactanos}">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white">Modificar Test</span>
+            <span class="text-black text-3xl font-bold dark:text-white" th:text="#{modificarTest}">Modificar Test</span>
         </div>
         
 
@@ -88,10 +88,10 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" th:text="#{preguntaID}">
                                 ID pregunta
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3" th:text="#{pregunta}">
                                 Pregunta
                             </th>
                             <th scope="col" class="px-6 py-3">

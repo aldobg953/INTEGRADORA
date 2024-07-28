@@ -1,160 +1,123 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:classappend="${usuario.darkmode} ? 'dark' : ''">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="css/global_font.css">
-        <link href="/css/tailwind.css" rel="stylesheet">
-        <script src="/js/navbar.js"></script>
-        <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
-        <title>PathFinder | Test</title>
-        
-    </head>
-    <body class="bg-gray-100 dark:bg-gray-800">
-
-        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <div id="logo-image">
-                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                            style="max-width:40%;height:auto;">
-                    </div>
-                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:classappend="${usuario.darkmode} ? 'dark' : ''">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
+    <title th:text="#{titleArea}">PathFinder | Áreas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/navbar.js"></script>
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/buscador.css">
+    <script src="/js/buscador.js"></script>
+</head>
+<body class="dark:bg-gray-800">
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/}">
+                    <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
+                <hr>
 
-                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
-                        id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
-                            alt="user photo">
-                    </button>
-
-                </div>
-                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-black-900 dark:text-white"
-                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                            th:text="${usuario.email} ">correo</span>
-                    </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white"  th:text="#{perfiil}">Perfil</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white"  th:text="#{configuracioness}">Configuraciones</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritoss}">Favoritos</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/logout}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
-                                sesion</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
-                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                        <li>
-
-                        <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0 text-blue-700" aria-current="page" th:text="#{inicioo}">Inicio</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidadess}">Universidades</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carrerass}">Carreras</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areass}">Area</a>
-                        </li>
-                    </ul>
-                </div>
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
             </div>
+
+            <div class="navbar-links" id="navbarLinks">
+
+                <div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
+                </div>
+
+                <hr>
+                <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
+                            class="link-icon" th:text="#{perfil}"></div>
+                </a>
+            </div>
+
         </nav>
+    </header>
+    <div class="title-gradient">
+        <h1 class="mt-4 mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">Bienvenido al Test Vocacional de <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span></h1>
+    </div>
         <div class="mx-28 mt-4">
-            <h1 class="mt-4 mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">Bienvenido al Test Vocacional de <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span></h1>
             <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 mb-4">Por favor, selecciona una opción en cada una de las siguientes preguntas para descubrir tus intereses y aptitudes.</p>
-            <div class="rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 px-4">    
-                <p class="max-w-lg text-2xl font-bold leading-loose text-gray-900 dark:text-white">1.-Pregunta 1.</p>
-                <div class="flex flex-col md:flex-row my-2">
-                    <div class="basis-1/2">
-                        <input id="default-radio-11" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-11" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 1</label>
-                    </div>
-                    <div class="basis-1/2">
-                        <input id="default-radio-12" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-12" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 2</label>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row mt-2 mb-4">
-                    <div class="basis-1/2">
-                        <input id="default-radio-13" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-13" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 3</label>
-                    </div>
-                    <div class="basis-1/2">
-                        <input id="default-radio-14" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-14" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 4</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 px-4 mt-6">    
-                <p class="max-w-lg text-2xl font-bold leading-loose text-gray-900 dark:text-white">2.-Pregunta 2.</p>
-                <div class="flex flex-col md:flex-row my-2">
-                    <div class="basis-1/2">
-                        <input id="default-radio-21" type="radio" value="" name="default-radio-2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-21" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 1</label>
-                    </div>
-                    <div class="basis-1/2">
-                        <input id="default-radio-22" type="radio" value="" name="default-radio-2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-22" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 2</label>
+            <form id="testForm" th:action="@{/test/mostrarresultado}" method="post" onsubmit="return validateForm()">
+                <div class="rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 px-4 my-4" th:each="pregunta : ${preguntas}">    
+                    <p class="w-full text-2xl font-bold leading-loose text-gray-900 dark:text-blue-300">
+                        <span th:text="${pregunta.id_pregunta}"></span>
+                        <span>.-</span>
+                        <span th:text="${pregunta.text}"></span>
+                    </p>
+                    <div th:each="i : ${#numbers.sequence(0, pregunta.respuestas.size() - 1, 2)}">
+                        <div class="flex flex-col md:flex-row my-2">
+                            <div class="basis-1/2" th:if="${i < pregunta.respuestas.size()}">
+                                <input th:id="${'radio-' + pregunta.id_pregunta + '-' + i}" 
+                                       type="radio" 
+                                       th:value="${pregunta.respuestas[i].id_area}" 
+                                       th:name="${'pregunta-' + pregunta.id_pregunta}"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label th:for="${'radio-' + pregunta.id_pregunta + '-' + i}" 
+                                       class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" 
+                                       th:text="${pregunta.respuestas[i].text}">
+                                </label>
+                            </div>
+                            <div class="basis-1/2" th:if="${i + 1 < pregunta.respuestas.size()}">
+                                <input th:id="${'radio-' + pregunta.id_pregunta + '-' + (i + 1)}" 
+                                       type="radio" 
+                                       th:value="${pregunta.respuestas[i + 1].id_area}" 
+                                       th:name="${'pregunta-' + pregunta.id_pregunta}"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label th:for="${'radio-' + pregunta.id_pregunta + '-' + (i + 1)}" 
+                                       class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" 
+                                       th:text="${pregunta.respuestas[i + 1].text}">
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row mt-2 mb-4">
-                    <div class="basis-1/2">
-                        <input id="default-radio-23" type="radio" value="" name="default-radio-2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-23" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 3</label>
-                    </div>
-                    <div class="basis-1/2">
-                        <input id="default-radio-24" type="radio" value="" name="default-radio-2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-24" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 4</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 px-4 mt-6">    
-                <p class="max-w-lg text-2xl font-bold leading-loose text-gray-900 dark:text-white">3.-Pregunta 3.</p>
-                <div class="flex flex-col md:flex-row my-2">
-                    <div class="basis-1/2">
-                        <input id="default-radio-31" type="radio" value="" name="default-radio-3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-31" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 1</label>
-                    </div>
-                    <div class="basis-1/2">
-                        <input id="default-radio-32" type="radio" value="" name="default-radio-3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-32" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 2</label>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row mt-2 mb-4">
-                    <div class="basis-1/2">
-                        <input id="default-radio-33" type="radio" value="" name="default-radio-3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-33" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 3</label>
-                    </div>
-                    <div class="basis-1/2">
-                        <input id="default-radio-34" type="radio" value="" name="default-radio-3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-radio-34" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta 4</label>
-                    </div>
-                </div>
-            </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
+                    Enviar Test
+                </button>
+            </form>
         </div>
+        <script th:inline="javascript">
+            function validateForm() {
+                const form = document.getElementById('testForm');
+                const questions = form.querySelectorAll('div[class^="rounded-lg border"]');
+                const unansweredQuestions = [];
+            
+                questions.forEach((question, index) => {
+                    const radios = question.querySelectorAll('input[type="radio"]:checked');
+                    if (radios.length === 0) {
+                        unansweredQuestions.push(index + 1);
+                    }
+                });
+            
+                if (unansweredQuestions.length > 0) {
+                    const lang = /*[[${usuario.lang}]]*/ 'es';
+                    let message;
+            
+                    switch(lang) {
+                        case 'fr':
+                            message = `Veuillez répondre à toutes les questions. Questions non répondues : ${unansweredQuestions.join(', ')}`;
+                            break;
+                        case 'en':
+                            message = `Please answer all questions. Unanswered questions: ${unansweredQuestions.join(', ')}`;
+                            break;
+                        default:
+                            message = `Por favor, responde todas las preguntas. Preguntas sin responder: ${unansweredQuestions.join(', ')}`;
+                    }
+            
+                    alert(message);
+                    return false;
+                }
+            
+                return true;
+            }
+            </script>
     </body>
 </html>
