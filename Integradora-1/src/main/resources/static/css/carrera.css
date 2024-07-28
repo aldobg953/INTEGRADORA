@@ -547,10 +547,35 @@ h1 {
     margin-bottom: 1rem;
 }
 
+.por-que-estudiar h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.por-que-estudiar h4 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.593);
+    margin-bottom: 1rem;
+}
+
 .por-que-estudiar p {
     font-size: 1.5rem;
     font-weight: 500;
     color: white;
+}
+
+.por-que-estudiar h3 a {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: white;
+    text-decoration: underline;
+}
+
+.por-que-estudiar h3 a:hover {
+    color: #9590ff;
 }
 
 .por-que-estudiar-img {
@@ -694,15 +719,12 @@ h1 {
 }
 
 .imagen-uni {
-    width: 100%;
     height: 12.5rem;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
 }
 
 .imagen-uni img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 

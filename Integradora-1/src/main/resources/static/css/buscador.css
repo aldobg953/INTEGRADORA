@@ -53,7 +53,7 @@ body::-webkit-scrollbar {
     display: flex;
     padding: 0 10vw;
     flex-direction: column-reverse;
-    height: 20rem;
+    height: fit-content;
     width: 100%;
     background:
         radial-gradient(at 18% 99%, #0047FF 0, transparent 50%),
@@ -89,6 +89,21 @@ body::-webkit-scrollbar {
     50% { background-position: 100% 50%; }
 }
 
+/* Text Gradient Animation */
+.text-gradient {
+    background-image: var(--text-gradient);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: gradientAnimation 6s linear infinite;
+    background-size: 300% 100%;
+    filter: saturate(2);
+}
+
+@keyframes gradientAnimation {
+    0%, 100% { background-position: 0; }
+    100% { background-position: 100%; }
+}
 
 
 
@@ -287,6 +302,27 @@ h1 {
     font-weight: 900;
     color: white;
     margin-bottom: 1rem;
+    margin-top: 10rem;
+}
+
+h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+h4 > a{
+    font-weight: 900;
+    color: var(--primary-color);
+    font-style: italic;
 }
 
 
@@ -487,6 +523,15 @@ label {
     border-radius: 50rem;
     font-weight: 700;
   }
+
+
+
+  .carrera-comparar p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
   
 
 
@@ -568,7 +613,7 @@ label {
     right: 1rem;  /* Adjust this value as needed */
 }
 
-.tarjeta-botones a {
+.tarjeta-botones a, button {
     flex: 1;
     text-align: center;
     font-weight: 700;
@@ -595,6 +640,213 @@ label {
 .ver-mas:active, .comparar:active {
     scale: 0.9;
 }
+
+/* #region comparacion-carreras */
+.comparacion-carreras {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Columna de carrera */
+.comparacion-carreras .carrera-columna {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Tarjeta de carrera */
+.comparacion-carreras .tarjeta {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Imagen de la universidad */
+.comparacion-carreras .imagen-uni {
+    height: 12.5rem;
+    overflow: hidden;
+}
+
+.comparacion-carreras .imagen-uni img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+.comparacion-carreras .imagen-uni:hover img {
+    transform: scale(1.05);
+}
+
+/* Contenido de la tarjeta */
+.comparacion-carreras .tarjeta-contenido {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1.5rem;
+}
+
+/* Secciones de información */
+.comparacion-carreras .info-seccion {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.comparacion-carreras .info-seccion:last-child {
+    border-bottom: none;
+}
+
+/* Etiquetas */
+.comparacion-carreras .etiqueta {
+    font-weight: bold;
+    color: #0047FF;
+    margin-bottom: 0.5rem;
+}
+
+/* Títulos */
+.comparacion-carreras h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #0047FF;
+    padding-bottom: 0.5rem;
+}
+
+
+/* Mapa */
+.comparacion-carreras iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+/* Modo oscuro */
+.dark .comparacion-carreras {
+    background: linear-gradient(135deg, #2c3e50 0%, #4CA1AF 100%);
+}
+
+.dark .carrera-columna {
+    background: #2a2a2a;
+}
+
+.dark h2 {
+    color: #fff;
+    border-bottom-color: #9590ff;
+}
+
+.dark .info-seccion {
+    border-bottom-color: #444;
+}
+
+.dark .etiqueta {
+    color: #9590ff;
+}
+
+.dark .ver-mas {
+    background: #0038CC;
+}
+
+.dark .comparar {
+    background: #7370CC;
+}
+
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem 10vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo {
+    padding: 0 2.5vw;
+}
+
+.footer-logo > img {
+    filter: invert(1);
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.footer-section p, .footer-section a {
+    margin: 0.25rem 0;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #ffffff;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-weight: 700;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icons a img {
+    width: 2rem;
+    height: 2rem;
+    filter: invert(1);
+    margin-left: 0.5rem;
+}
+
+.social-icons a {
+    fill: white;
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .comparacion-carreras {
+        grid-template-columns: 1fr;
+    }
+
+    .carrera-columna {
+        margin-bottom: 2rem;
+    }
+}
+/* #endregion */
 
 @media (max-width: 48rem) {  /* 768px */
     body {

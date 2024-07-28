@@ -8,189 +8,237 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/buscador.css">
         <script src="/js/buscador.js"></script>
     </head>
-    <body class="bg-gray-100 dark:bg-gray-800">
-        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <div id="logo-image">
-                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                            style="max-width:40%;height:auto;">
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <a th:href="@{/}">
+                        <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                    </a>
+                    <hr>
+                    <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon">Universidades</div></a>
+                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon">Areas</div></a>
+                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon">Carreras</div></a>
+                </div>
+
+                <div class="navbar-links" id="navbarLinks">
+                    <div class="form-input">
+                        <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
                     </div>
-                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
-                </a>
-    
-                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
-                        id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
-                            alt="user photo">
-                    </button>
-    
+                    <hr>
+                    <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                        <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon" class="link-icon">Perfil</div>
+                    </a>
                 </div>
-                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-black-900 dark:text-white"
-                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                            th:text="${usuario.email} ">correo</span>
-                    </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/logout?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
-                                sesion</a>
-                        </li>
-                    </ul>
-                </div>
-    
-                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
-                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                        <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
         
-        <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">Comparador de carreras de <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span></h1>
-        <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Aqui puedes conocer las diferencias entre las carreras de tu preferencia. <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Comparar otras carreras</a>   </p>
-
-        <div class="flex flex-row mx-28 my-8">
-            <div class="basis-1/2 mr-7 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="rounded-t-lg w-full bg-white h-96" th:src="@{'/img/' + ${carrera1.universidad.nombre_abreviado} + '/logo.jpg'}"  alt="" />
-                    </a>
-                    <div class="p-5">
-                        <div class="min-h-16">
-                            <h5 class="mb-2 text-3xl font-bold tracking-tight text-teal-800 dark:text-teal-300" th:text="${carrera1.nombre}">Nombre</h5>
-                        </div>
-                        <div class="mb-3 font-serif md:text-lg text-gray-700 dark:text-gray-400 min-h-9" th:text="${carrera1.universidad.nombre_completo}"></div>
-                        <div class="mb-3 font-serif md:text-lg text-gray-700 dark:text-white min-h-28" th:text="${carrera1.desc_breve}"></div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300">Horarios</div>
-                        <div th:utext="${carrera1.horario_especifico}" class="text-base dark:text-white md:text-lg min-h-20">horario</div>
-                        <div class="text-xl md:text-lg font-serif font-bold dark:text-white mt-2 text-blue-900 dark:text-blue-300">Modalidad</div>
-                        <div th:text="${carrera1.modalidad.nombre_modalidad}" class="text-base md:text-lg dark:text-white min-h-9">modalidad</div>
-                        <div class="text-xl md:text-lg font-serif font-bold  mt-2 text-blue-900 dark:text-blue-300">Total de periodos escolares</div>
-                        <div th:text="${carrera1.cantidad_periodos} + ' ' +${carrera1.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg dark:text-white min-h-9">nombre_periodo</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 mt-2">Costo por <span th:text="${carrera1.periodoEscolar.nombre_periodo}"></span></div>
-                        <div th:text="${carrera1.costo} +'0$'" class="text-base md:text-lg dark:text-white min-h-9 font-serif">costo</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9">Area</div>
-                        <div class="font-serif text-base md:text-lg dark:text-white min-h-9" th:text="${carrera1.area.nombre_area}"></div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9">¿Porque estudiar esta carrera?</div>
-                        <div th:text="${carrera1.porque_estudiar}" class="text-base font-serif md:text-lg dark:text-white min-h-60">porque estudiar</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9">¿Como me puedo desempeñar?</div>
-                        <div class="ml-7 text-left pl-10 min-h-96"><ul class="font-serif text-lg list-disc dark:text-white" th:utext="${carrera1.como_desemp}"></ul></div>
-                        <div th:if="${carrera1.bilingue}" class="text-base font-serif md:text-lg text-blue-900 dark:text-blue-300 font-bold">Carrera Bilingue</div>
-                        <div th:if="${!carrera1.bilingue}"  class="text-base font-serif md:text-lg text-blue-900 dark:text-blue-300 font-bold">Carrera No Bilingue</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9 mt-4">Direccion:</div>
-                        <div th:text="${carrera1.universidad.direccion}" class="text-base font-serif md:text-lg dark:text-white min-h-20"></div>
-                        
-                        <!--mapa-->
-                        <input type="hidden" id="direccion" th:value="${carrera1.universidad.direccionGoogle}" />
-                        <iframe class="w-full" id="googleMap" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        <script>
-                            var direccionGoogle =  document.getElementById('direccion').value;
-                            document.getElementById('googleMap').src = direccionGoogle;
-                        </script>
-                        <!--fin mapa-->
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera1.id_carrera}, lang=${usuario.lang})}" class="mt-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Ver mas
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                        <a th:href="@{/carreras/all/{id}(id=${carrera1.id_carrera}, lang=${usuario.lang})}" class="cursor-pointer ml-4 md:ml-8 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">Comparar con otra carrera</a>
+        <div class="title-gradient">
+            <h4>Aqui puedes conocer las diferencias entre las carreras de tu preferencia. <a th:href="@{/carreras/all?lang=}+${usuario.lang}">Comparar otras carreras</a></h4>
+<h1>Comparador de carreras de <span>PathFinder</span></h1>
+        
+        </div>
+        
+        <div class="comparacion-carreras">
+            <div class="carrera-columna">
+                <div class="tarjeta">
+                    <div class="imagen-uni">
+                        <img th:src="@{'/img/' + ${carrera1.universidad.nombre_abreviado} + '/logo.jpg'}" alt="Logo Universidad" />
                     </div>
-                </div>
-            </div>
-
-
-
-
-
-
-            <div class="basis-1/2 ml-7 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
-                <div class=" w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="rounded-t-lg w-full bg-white h-96" th:src="@{'/img/' + ${carrera2.universidad.nombre_abreviado} + '/logo.jpg'}"  alt="" />
-                    </a>
-                    <div class="p-5">
-                        <div class="min-h-16">
-                            <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 text-teal-800 dark:text-teal-300" th:text="${carrera2.nombre}">Nombre</h5>
+                    <div class="tarjeta-contenido">
+                        <div class="info-seccion nombre-carrera">
+                            <h2 th:text="${carrera1.nombre}">Nombre de la Carrera</h2>
                         </div>
-                        <div class="mb-3 font-serif md:text-lg text-gray-700 dark:text-gray-400 min-h-9" th:text="${carrera2.universidad.nombre_completo}"></div>
-                        <div class="mb-3 font-serif md:text-lg text-gray-700 dark:text-white min-h-28" th:text="${carrera2.desc_breve}"></div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300">Horarios</div>
-                        <div th:utext="${carrera2.horario_especifico}" class="text-base dark:text-white md:text-lg min-h-20">horario</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 mt-2">Modalidad</div>
-                        <div th:text="${carrera2.modalidad.nombre_modalidad}" class="text-base md:text-lg dark:text-white min-h-9">modalidad</div>
-                        <div class="text-xl md:text-lg font-serif font-bold dark:text-white mt-2">Total de periodos escolares</div>
-                        <div th:text="${carrera2.cantidad_periodos} + ' ' +${carrera2.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg dark:text-white min-h-9">nombre_periodo</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 mt-2">Costo por <span th:text="${carrera2.periodoEscolar.nombre_periodo}"></span></div>
-                        <div th:text="${carrera2.costo} +'0$'" class="text-base md:text-lg dark:text-white min-h-9">costo</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9">Area</div>
-                        <div class="font-serif text-base md:text-lg dark:text-white min-h-9" th:text="${carrera2.area.nombre_area}"></div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9">¿Porque estudiar esta carrera?</div>
-                        <div th:text="${carrera2.porque_estudiar}" class="text-base font-serif md:text-lg dark:text-white min-h-60">porque estudiar</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9">¿Como me puedo desempeñar?</div>
-                        <div class="ml-7 text-left pl-10 min-h-96"><ul class="font-serif text-lg list-disc dark:text-white" th:utext="${carrera2.como_desemp}"></ul></div>
-                        <div th:if="${carrera2.bilingue}" class="text-base font-serif md:text-lg text-blue-900 dark:text-blue-300 font-bold">Carrera Bilingue</div> 
-                        <div th:if="${!carrera2.bilingue}"  class="text-base font-serif md:text-lg text-blue-900 dark:text-blue-300 font-bold">Carrera No Bilingue</div>
-                        <div class="text-xl md:text-lg font-serif font-bold text-blue-900 dark:text-blue-300 min-h-9 mt-4">Direccion:</div>
-                        <div th:text="${carrera2.universidad.direccion}" class="text-base font-serif md:text-lg dark:text-white min-h-20"></div>
-                        <!--mapa-->
-                        <input type="hidden" id="direccion2" th:value="${carrera2.universidad.direccionGoogle}" />
-                        <iframe class="w-full" id="googleMap2" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        <script>
-                            var direccionGoogle =  document.getElementById('direccion2').value;
-                            document.getElementById('googleMap2').src = direccionGoogle;
-                        </script>
-                        <!--fin mapa-->
-
-
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera2.id_carrera}, lang=${usuario.lang})}" class="mt-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Ver mas
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
-                        <a th:href="@{/carreras/all/{id}(id=${carrera2.id_carrera}, lang=${usuario.lang})}" class="cursor-pointer ml-4 md:ml-8 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">Comparar con otra carrera</a>
+                        <div class="info-seccion universidad">
+                            <div th:text="${carrera1.universidad.nombre_completo}">Nombre de la Universidad</div>
+                        </div>
+                        <div class="info-seccion descripcion">
+                            <div th:text="${carrera1.desc_breve}">Descripción breve</div>
+                        </div>
+                        <div class="info-seccion horarios">
+                            <div class="etiqueta">Horarios</div>
+                            <div th:utext="${carrera1.horario_especifico}">Horario específico</div>
+                        </div>
+                        <div class="info-seccion modalidad">
+                            <div class="etiqueta">Modalidad</div>
+                            <div th:text="${carrera1.modalidad.nombre_modalidad}">Modalidad</div>
+                        </div>
+                        <div class="info-seccion periodos">
+                            <div class="etiqueta">Total de periodos escolares</div>
+                            <div th:text="${carrera1.cantidad_periodos} + ' ' + ${carrera1.periodoEscolar.nombre_periodo} + 's'">Periodos escolares</div>
+                        </div>
+                        <div class="info-seccion costo">
+                            <div class="etiqueta">Costo por <span th:text="${carrera1.periodoEscolar.nombre_periodo}"></span></div>
+                            <div th:text="${carrera1.costo} + '0$'">Costo</div>
+                        </div>
+                        <div class="info-seccion area">
+                            <div class="etiqueta">Área</div>
+                            <div th:text="${carrera1.area.nombre_area}">Área de estudio</div>
+                        </div>
+                        <div class="info-seccion porque-estudiar">
+                            <div class="etiqueta">¿Por qué estudiar esta carrera?</div>
+                            <div th:text="${carrera1.porque_estudiar}">Razones para estudiar</div>
+                        </div>
+                        <div class="info-seccion desempenio">
+                            <div class="etiqueta">¿Cómo me puedo desempeñar?</div>
+                            <div><ul th:utext="${carrera1.como_desemp}"></ul></div>
+                        </div>
+                        <div class="info-seccion tipo-carrera">
+                            <div class="etiqueta">Tipo de carrera</div>
+                            <div th:if="${carrera1.bilingue}">Carrera Bilingüe</div>
+                            <div th:if="${!carrera1.bilingue}">Carrera No Bilingüe</div>
+                        </div>
+                        <div class="info-seccion direccion">
+                            <div class="etiqueta">Dirección:</div>
+                            <div th:text="${carrera1.universidad.direccion}">Dirección de la Universidad</div>
+                        </div>
+                        <div class="info-seccion mapa">
+                            <input type="hidden" id="direccion" th:value="${carrera1.universidad.direccionGoogle}" />
+                            <iframe id="googleMap" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="tarjeta-botones">
+                            <a th:href="@{/carreras/carrera/{id}(id=${carrera1.id_carrera}, lang=${usuario.lang})}" class="ver-mas">
+                                Ver más
+                            </a>
+                            <a th:href="@{/carreras/all/{id}(id=${carrera1.id_carrera}, lang=${usuario.lang})}" class="comparar">Comparar con otra carrera</a>
+                        </div>
                     </div>
                 </div>
             </div>
             
-
+            <div class="carrera-columna">
+                <div class="tarjeta">
+                    <div class="imagen-uni">
+                        <img th:src="@{'/img/' + ${carrera2.universidad.nombre_abreviado} + '/logo.jpg'}" alt="Logo Universidad" />
+                    </div>
+                    <div class="tarjeta-contenido">
+                        <div class="info-seccion nombre-carrera">
+                            <h2 th:text="${carrera2.nombre}">Nombre de la Carrera</h2>
+                        </div>
+                        <div class="info-seccion universidad">
+                            <div th:text="${carrera2.universidad.nombre_completo}">Nombre de la Universidad</div>
+                        </div>
+                        <div class="info-seccion descripcion">
+                            <div th:text="${carrera2.desc_breve}">Descripción breve</div>
+                        </div>
+                        <div class="info-seccion horarios">
+                            <div class="etiqueta">Horarios</div>
+                            <div th:utext="${carrera2.horario_especifico}">Horario específico</div>
+                        </div>
+                        <div class="info-seccion modalidad">
+                            <div class="etiqueta">Modalidad</div>
+                            <div th:text="${carrera2.modalidad.nombre_modalidad}">Modalidad</div>
+                        </div>
+                        <div class="info-seccion periodos">
+                            <div class="etiqueta">Total de periodos escolares</div>
+                            <div th:text="${carrera2.cantidad_periodos} + ' ' + ${carrera2.periodoEscolar.nombre_periodo} + 's'">Periodos escolares</div>
+                        </div>
+                        <div class="info-seccion costo">
+                            <div class="etiqueta">Costo por <span th:text="${carrera2.periodoEscolar.nombre_periodo}"></span></div>
+                            <div th:text="${carrera2.costo} + '0$'">Costo</div>
+                        </div>
+                        <div class="info-seccion area">
+                            <div class="etiqueta">Área</div>
+                            <div th:text="${carrera2.area.nombre_area}">Área de estudio</div>
+                        </div>
+                        <div class="info-seccion porque-estudiar">
+                            <div class="etiqueta">¿Por qué estudiar esta carrera?</div>
+                            <div th:text="${carrera2.porque_estudiar}">Razones para estudiar</div>
+                        </div>
+                        <div class="info-seccion desempenio">
+                            <div class="etiqueta">¿Cómo me puedo desempeñar?</div>
+                            <div><ul th:utext="${carrera2.como_desemp}"></ul></div>
+                        </div>
+                        <div class="info-seccion tipo-carrera">
+                            <div class="etiqueta">Tipo de carrera</div>
+                            <div th:if="${carrera2.bilingue}">Carrera Bilingüe</div>
+                            <div th:if="${!carrera2.bilingue}">Carrera No Bilingüe</div>
+                        </div>
+                        <div class="info-seccion direccion">
+                            <div class="etiqueta">Dirección:</div>
+                            <div th:text="${carrera2.universidad.direccion}">Dirección de la Universidad</div>
+                        </div>
+                        <div class="info-seccion mapa">
+                            <input type="hidden" id="direccion2" th:value="${carrera2.universidad.direccionGoogle}" />
+                            <iframe id="googleMap2" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="tarjeta-botones">
+                            <a th:href="@{/carreras/carrera/{id}(id=${carrera2.id_carrera}, lang=${usuario.lang})}" class="ver-mas">
+                                Ver más
+                            </a>
+                            <a th:href="@{/carreras/all/{id}(id=${carrera2.id_carrera}, lang=${usuario.lang})}" class="comparar">Comparar con otra carrera</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        <center>
+            <footer class="footer">
+                <div class="footer-logo">
+                    <img src="/css/LogoLogoPathFinderVertical.svg" alt="">
+                </div>
+                <div class="footer-section">
+                    <h3 th:text="#{servicio}"></h3>
+                    <a href="#" th:text="#{nuestroTrabajo}"></a>
+                    <a href="#" th:text="#{centroAyuda}"></a>
+                    <a href="#" th:text="#{faqs}"></a>
+                </div>
+                <div class="footer-section">
+                    <h3 th:text="#{contacto}"></h3>
+                    <p>contacto@pathfinder.com</p>
+                    <p th:text="#{sobreNosotros}"></p>
+                    <p>614 785 6594</p>
+                </div>
+                <div class="footer-section">
+                    <h3 th:text="#{direccion}"></h3>
+                    <p>Av. Montes Americanos #9501, Col.</p>
+                    <p>Sector 35, C.P. 31216, Chihuahua,</p>
+                    <p>Chih., México.</p>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-links">
+                        <a>&copy; 2024 PathFinder</a>
+                        <a href="#" th:text="#{terminos}"></a>
+                        <a href="#" th:text="#{politica}"></a>
+                    </div>
+                    <div class="social-icons">
+        
+                        <a href="#" title="Facebook"><img src="/css/assets/facebook.svg" alt=""></a>
+                        <a href="#" title="X"><img src="/css/assets/x.svg" alt=""></a>
+                        <a href="#" title="Instagram"><img src="/css/assets/instagram.svg" alt=""></a>
+                        <a href="#" title="LinkedIn"><img src="/css/assets/linkedin.svg" alt=""></a>
+                    </div>
+                </div>
+            </footer>
+        </center>
+
+        <script>
+            var direccionGoogle = document.getElementById('direccion').value;
+            document.getElementById('googleMap').src = direccionGoogle;
+            
+            var direccionGoogle2 = document.getElementById('direccion2').value;
+            document.getElementById('googleMap2').src = direccionGoogle2;
+
+            window.addEventListener('load', function() {
+    const secciones = document.querySelectorAll('.info-seccion');
+    secciones.forEach(seccion => {
+        const clase = seccion.classList[1];
+        const seccionesIguales = document.querySelectorAll(`.${clase}`);
+        let maxAltura = 0;
+        seccionesIguales.forEach(s => {
+            s.style.height = 'auto';
+            maxAltura = Math.max(maxAltura, s.offsetHeight);
+        });
+        seccionesIguales.forEach(s => {
+            s.style.height = `${maxAltura}px`;
+        });
+    });
+});
+        </script>
     </body>
 </html>

@@ -8,172 +8,128 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/buscador.css">
         <script src="/js/buscador.js"></script>
     </head>
-    <body class="bg-gray-100 dark:bg-gray-800">
-        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <div id="logo-image">
-                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                            style="max-width:40%;height:auto;">
-                    </div>
-                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
-                </a>
-    
-                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
-                        id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
-                            alt="user photo">
-                    </button>
-    
+    <body class="dark:bg-gray-800">
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <a th:href="@{/}">
+                        <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                    </a>
+                    <hr>
+                    <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon">Universidades</div></a>
+                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon">Areas</div></a>
+                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon">Carreras</div></a>
                 </div>
-                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-black-900 dark:text-white"
-                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                            th:text="${usuario.email} ">correo</span>
+
+                <div class="navbar-links" id="navbarLinks">
+                    <div class="form-input">
+                        <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
                     </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Favoritos</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/logout?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white">Cerrar
-                                sesion</a>
-                        </li>
-                    </ul>
+                    <hr>
+                    <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                        <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon" class="link-icon">Perfil</div>
+                    </a>
                 </div>
-    
-                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
-                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                        <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page">Inicio</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Universidades</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Carreras</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0">Area</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0">Contacto</a>
-                        </li>
-                    </ul>
+            </nav>
+        </header>
+
+        <div class="title-gradient">
+            <h1>Carreras</h1>
+        </div>
+
+        <center>
+        <form th:action="@{/carreras/buscarCarrerasComp}" method="get" class="contenedor-barra-busqueda-carreras">
+            <input type="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
+            <input type="hidden" name="id_carrera_comp" id="id_carrera_comp" th:value="${carreraAComparar.id_carrera}"/>
+            <div class="contenedor-carreras dark:bg-gray-800">
+                <div class="contenedor dark:text-white dark:border-gray-700 dark:bg-gray-800">
+                    <div class="barra-busqueda">
+                        <input type="text" id="search" name="search" placeholder="Busca una carrera" />
+                        <button type="submit">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </nav>
 
-        <div class="bg-gray-600 p-6">
-            <div class="text-black text-6xl font-serif font-extrabold text-white ml-12 text-center">Carreras</div>
-            
-            <form class="flex flex-col space-y-6 mt-6" th:action="@{/carreras/buscarCarrerasComp}" method="get">
-                <input class="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
-                <input class="hidden" name="id_carrera_comp" id="id_carrera_comp" th:value="${carreraAComparar.id_carrera}"/>
-                <div class="flex items-center mx-auto w-full max-w-md">
-                    <label for="simple-search" class="sr-only">Search</label>
-                    <div class="relative w-full">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
-                            </svg>
-                        </div>
-                        <input type="text" id="search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Busca una carrera" />
-                    </div>
-                    <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                        <span class="sr-only">Search</span>
-                    </button>
+            <div class="contenedor-carreras dark:bg-gray-800">
+                <div>
+                    <select id="modalidades" name="idModalidad" class="filtro-tipo-especifico dark:text-white dark:border-gray-700 dark:bg-gray-800">
+                        <option value="0">Todas las modalidades</option>
+                        <option th:each="modalidad : ${modalidades}" th:text="${modalidad.nombre_modalidad}" th:value="${modalidad.id_modalidad}"></option>
+                    </select>
                 </div>
-            
-                <div class="flex flex-col md:flex-row md:space-x-6 mx-auto w-full max-w-3xl space-y-4 md:space-y-0">
-                    <div class="w-full md:w-auto">
-                        <select id="modalidades" name="idModalidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todas las modalidades</option>
-                            <option th:each="modalidad : ${modalidades}" th:text="${modalidad.nombre_modalidad}" th:value="${modalidad.id_modalidad}"></option>
-                        </select>
-                    </div>
-                    <div class="w-full md:w-auto">
-                        <select id="horarios" name="idHorario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todos los horarios</option>
-                            <option th:each="horario : ${horarios}" th:text="${horario.nombre_horario}" th:value="${horario.id_horario}"></option>
-                        </select>
-                    </div>
-                    <div class="w-full md:w-auto">
-                        <select id="universidades" name="idUniversidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todas las Universidades</option>
-                            <option th:each="universidad : ${universidades}" th:text="${universidad.nombre_completo}" th:value="${universidad.id_universidad}"></option>
-                        </select>
-                    </div>
-                    <div class="w-full md:w-auto">
-                        <select id="areas" name="idArea" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="0">Todas las Areas</option>
-                            <option th:each="area : ${areas}" th:text="${area.nombre_area}" th:value="${area.id_area}"></option>
-                        </select>
-                    </div>
+                <div>
+                    <select id="horarios" name="idHorario" class="filtro-tipo-especifico dark:text-white dark:border-gray-700 dark:bg-gray-800">
+                        <option value="0">Todos los horarios</option>
+                        <option th:each="horario : ${horarios}" th:text="${horario.nombre_horario}" th:value="${horario.id_horario}"></option>
+                    </select>
                 </div>
-            
-                <div class="flex items-center justify-center space-x-4">
-                    <div class="flex items-center">
-                        <input type="radio" id="bilingue_si" name="bilingue" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_si" class="ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">Bilingüe</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="bilingue_no" name="bilingue" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_no" class="ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">No Bilingüe</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="radio" id="bilingue_todos" name="bilingue" value="2" checked class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="bilingue_todos" class="ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">Todos</label>
-                    </div>
+                <div>
+                    <select id="universidades" name="idUniversidad" class="filtro-tipo-especifico dark:text-white dark:border-gray-700 dark:bg-gray-800">
+                        <option value="0">Todas las Universidades</option>
+                        <option th:each="universidad : ${universidades}" th:text="${universidad.nombre_completo}" th:value="${universidad.id_universidad}"></option>
+                    </select>
                 </div>
-            </form>
+                <div>
+                    <select id="areas" name="idArea" class="filtro-tipo-especifico dark:text-white dark:border-gray-700 dark:bg-gray-800">
+                        <option value="0">Todas las Areas</option>
+                        <option th:each="area : ${areas}" th:text="${area.nombre_area}" th:value="${area.id_area}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="contenedor-carreras" id="radios">
+                <div class="radios-contenedor dark:text-white dark:border-gray-700 dark:bg-gray-800">
+                    <input type="radio" id="bilingue_todos" name="bilingue" value="2" checked>
+                    <label for="bilingue_todos">Todos</label>
+
+                    <input type="radio" id="bilingue_si" name="bilingue" value="1">
+                    <label for="bilingue_si">Bilingüe</label>
+
+                    <input type="radio" id="bilingue_no" name="bilingue" value="0">
+                    <label for="bilingue_no">No Bilingüe</label>
+
+                    <span class="glider"></span>
+                </div>
+            </div>
+        </form>
+        </center>
+
+        <center>
+            <div class="dark:bg-gray-80 carrera-comparar">   
+            <h3 th:text="${carreraAComparar.nombre}" class="text-gradient"></h3>
+            <p>Selecciona la segunda carrera a comparar o vuelve para <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-gradient">comparar otras carreras</a></p>
         </div>
+        </center>
+        
 
-        <div class="mx-28">   
-            <h1 class="mb-4 text-xl font-bold text-gray-900 dark:text-white md:text-5xl lg:text-3xl"> <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400" th:text="${carreraAComparar.nombre}">Carrera</span></h1>
-            <p class="text-lg font-normal text-gray-500 lg:text-lg dark:text-gray-400">Selecciona la segunda carrera a comparar o vuelve para <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">comparar otras carreras</a></p>
-        </div>
-
-        <div id="areas" class="flex md:mx-28 my-8 flex-wrap">
-            <div th:each="carrera : ${carreras}" class="w-72 mt-4 mx-4 bg-white rounded-lg border border-blue-800 shadow-lg shadow-blue-500/50 dark:bg-gray-800 flex flex-col">
-                <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                    <img class="rounded-t-lg h-64 w-full bg-white" th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
+        <div id="carrerasCard" class="tarjetas-unis">
+            <div th:each="carrera : ${carreras}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+                <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
+                    <img th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
                 </a>
-                <div class="p-5 border-t-2 border-indigo-500 flex-grow flex flex-col justify-between">
+                <div class="tarjeta-contenido dark:text-white">
                     <div>
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="${carrera.nombre}"></h5>
+                            <h2 th:text="${carrera.nombre}"></h2>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Universidad: <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="${carrera.desc_breve}">desc breve</p>
+                        <p class="dark:text-white">Universidad: <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
+                        <p th:text="${carrera.desc_breve}" class="dark:text-white">desc breve</p>
                     </div>
-                    <div class="mt-auto pt-4">
+                    <div class="tarjeta-botones">
                         <form th:action="@{/carreras/compararCarreras}" method="get">
-                            <input class="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
-                            <input class="hidden" name="id_carrera_1" id="id_carrera_1" th:value="${carreraAComparar.id_carrera}"/>
-                            <input class="hidden" name="id_carrera_2" id="id_carrera_2" th:value="${carrera.id_carrera}"/>
-                            <button class="cursor-pointer focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-24 py-2 me-2 mb-2 dark:focus:ring-yellow-900">Comparar</button>
+                            <input type="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
+                            <input type="hidden" name="id_carrera_1" id="id_carrera_1" th:value="${carreraAComparar.id_carrera}"/>
+                            <input type="hidden" name="id_carrera_2" id="id_carrera_2" th:value="${carrera.id_carrera}"/>
+                                <button class="comparar dark:shadow-none dark:hover:shadow-none">Comparar</button>
+                            
                         </form> 
                     </div>
                 </div>
