@@ -208,11 +208,11 @@
             </div>
 
             <div class="max-w-sm  m-5 bg-white border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50 dark:bg-gray-800">
-                <a th:href="@{/administrador/usuarios?lang=}+${usuario.lang}">
+                <a th:href="@{/administrador/traduccion?lang=}+${usuario.lang}">
                     <img class="rounded-t-lg  h-64 w-full" src="/img/administrador/traducciones.jpg" alt="" />
                 </a>
                 <div class="p-5">
-                    <a th:href="@{/administrador/usuarios?lang=}+${usuario.lang}">
+                    <a th:href="@{/administrador/traduccion?lang=}+${usuario.lang}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" th:text="#{traducciones}">Traducciones</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" th:text="#{textoTraducciones}">En esta sección, los administradores pueden agregar y gestionar las descripciones de las carreras en diferentes idiomas. Esto permite que el contenido de las carreras sea accesible para usuarios que hablan distintos idiomas.</p>
