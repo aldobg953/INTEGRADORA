@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-        <title th:text="#{titleArea}">PathFinder | Áreas</title>
+        <title th:text="#{TestTituloPestaña}"></title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
@@ -42,15 +42,14 @@
         </header>
 
         <div class="title-gradient">
-            <h1>Test vocacional</h1>
+            <h1 th:text="#{TestTitulo}">Test vocacional</h1>
         </div>
-        <div class="mx-28 mt-8">
-            <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">Bienvenido al Test Vocacional de <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span></h1>
-            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Este test está diseñado para ayudarte a identificar las carreras 
-                universitarias que mejor se alinean con tus intereses, habilidades y aspiraciones. A través de una serie de preguntas cuidadosamente elaboradas, podrás obtener una visión clara de las opciones educativas que podrían ser ideales para ti.</p></br>
-            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Nuestro objetivo es guiarte en la elección de una carrera que no solo te apasione, sino que también te permita desarrollar todo tu potencial. Al finalizar el test, recibirás una lista personalizada de carreras y universidades en tu estado que se adaptan a tu perfil.</p></br>
-            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"> ¡Comienza ahora y da el primer paso hacia tu futuro profesional con confianza y claridad!</p>
-            <div class="grid justify-items-center mt-8"><a th:href="@{/test/inicio?lang=}+${usuario.lang}" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  font-bold rounded-lg text-3xl px-10 py-5 text-center me-2 mb-2">Comenzar Test</button></a>
+        <div class="mx-28 mt-4">
+            <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span th:text="#{bienvenidoTest}">Bienvenido al Test Vocacional de</span> <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span></h1>
+            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400" th:text="#{parrafoTest1}">Este test está diseñado.</p></br>
+            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400" th:text="#{parrafoTest2}">Nuestro objetivo es guiarte en la elección de una carrera que no solo te apasione, sino que también te permita desarrollar todo tu potencial. Al finalizar el test, recibirás una lista personalizada de carreras y universidades en tu estado que se adaptan a tu perfil.</p></br>
+            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400" th:text="#{parrafoTest3}"> ¡Comienza ahora y da el primer paso hacia tu futuro profesional con confianza y claridad!</p>
+            <div class="grid justify-items-center mt-8"><a th:href="@{/test/inicio?lang=}+${usuario.lang}" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  font-bold rounded-lg text-3xl px-10 py-5 text-center me-2 mb-2" th:text="#{comenzarTest}">Comenzar Test</button></a>
         </div>
     </body>
 </html>
