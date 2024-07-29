@@ -7,75 +7,54 @@
         <link href="/css/validaciones.css" rel="stylesheet">
         <script src="/js/navbar.js"></script>
         <script src="/js/utils.js"></script>
+        <link rel="stylesheet" href="/css/motorbusqueda.css">
+        <link rel="stylesheet" href="/css/buscador.css">
     </head>
-    <body class="bg-gray-100 dark:bg-gray-800">
-        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-amber-500">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <div id="logo-image">
-                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                            style="max-width:40%;height:auto;">
+    <body class="bg-gray-100 dark:bg-gray-800" th:data-lang="${usuario.lang}">
+        <div id="translations" 
+            th:attr="data-carrera=#{carreraTag},
+                    data-area=#{areaTag},
+                    data-universidad=#{universidadTag}" 
+            style="display: none;">
+        </div>
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <a th:href="@{/}">
+                        <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                    </a>
+                    <hr>
+
+                    <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
+                </div>
+
+                <div class="navbar-links" id="navbarLinks">
+
+                    <div class="form-input ">
+                        <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                        <div id="searchForm">
+                            <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
+                            <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
+                            </div>
+                        </div>
                     </div>
-                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
-                </a>
-    
-                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600"
-                        id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only" th:text="#{menuUsuario}">Menu usuario</span>
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s"
-                            alt="user photo">
-                    </button>
-    
+                    <script src="/js/motorBusqueda.js"></script>
+
+                    <hr>
+                    <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                        <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
+                                class="link-icon" th:text="#{perfil}"></div>
+                    </a>
                 </div>
-                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-black-900 dark:text-white"
-                            th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                            th:text="${usuario.email} ">correo</span>
-                    </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{perfil}">Perfil</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{configuracioness}">Configuraciones</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar
-                                sesion</a>
-                        </li>
-                    </ul>
-                </div>
-    
-                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1">
-                    <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                        <li>
-                            <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicio}">Inicio</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidades}">Universidades</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{carreras}">Carreras</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contactanos}">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+
+            </nav>
+        </header>
+
+        <div class="title-gradient">
+            <h1 th:text="#{crearUniversidad}">Resultado</h1>
+        </div>
 
         <div id="alert-additional-content-3" th:if="${param.exito}" class="p-4 mb-4 mt-4 text-green-800 border border-green-300 rounded-lg bg-green-50 md:mx-28 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
             <div class="flex items-center">
@@ -110,11 +89,7 @@
               </button>
             </div>
           </div>
-
-
-          <div class="ml-28 mt-4">
-            <span class="text-black text-3xl font-bold dark:text-white" th:text="#{crearUniversidad}">Crear Universidad</span>
-        </div>
+          
         <div class="md:mx-28 my-8 border border-blue-800 rounded-lg shadow-lg shadow-blue-500/50">
             <form id="myForm" th:action="@{/administrador/postguardaruniversidad}" th:object="${universidad}" method="post" enctype="multipart/form-data">
                 

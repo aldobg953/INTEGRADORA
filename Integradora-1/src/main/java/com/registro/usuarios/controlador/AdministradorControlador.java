@@ -203,9 +203,15 @@ public class AdministradorControlador {
 
     @PostMapping("/postguardarespecialidad")
     private String postGuardarEspecialidad(@ModelAttribute Especialidad especialidad, @AuthenticationPrincipal UserDetails userDetails){
-        Especialidad especialidadNueva = especialidadServicio.guardarEspecialidad(especialidad);
+        
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        return "redirect:/administrador/modificarespecialidad/"+especialidadNueva.getId_especialidad()+"?exito&lang="+usuario.getLang();
+        if(especialidad.getCarrera()==null){
+            return "redirect:/administrador/crearespecialidad?error&lang="+usuario.getLang();
+            
+        }else{
+            Especialidad especialidadNueva = especialidadServicio.guardarEspecialidad(especialidad);
+            return "redirect:/administrador/modificarespecialidad/"+especialidadNueva.getId_especialidad()+"?exito&lang="+usuario.getLang();
+        }
     }
 
     @GetMapping("/modificarespecialidad")
