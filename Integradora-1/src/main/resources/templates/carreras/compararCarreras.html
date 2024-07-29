@@ -10,32 +10,49 @@
         <link href="/css/tailwind.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/buscador.css">
         <script src="/js/buscador.js"></script>
+        <link rel="stylesheet" href="/css/motorbusqueda.css">
     </head>
-    <body>
-        <header class="header">
-            <nav class="navbar">
-                <div class="navbar-logo">
-                    <a th:href="@{/}">
-                        <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
-                    </a>
-                    <hr>
-                    <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon">Universidades</div></a>
-                    <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon">Areas</div></a>
-                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon">Carreras</div></a>
-                </div>
+    <body class="dark:bg-gray-800" th:data-lang="${usuario.lang}">
+        <div id="translations" 
+        th:attr="data-carrera=#{carreraTag},
+                data-area=#{areaTag},
+                data-universidad=#{universidadTag}" 
+        style="display: none;">
+    </div>
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/}">
+                    <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                </a>
+                <hr>
 
-                <div class="navbar-links" id="navbarLinks">
-                    <div class="form-input">
-                        <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
-                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;"><div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
+            </div>
+
+            <div class="navbar-links" id="navbarLinks">
+
+                <div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <div id="searchForm">
+                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
+                        <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
+                        </div>
                     </div>
-                    <hr>
-                    <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
-                        <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon" class="link-icon">Perfil</div>
-                    </a>
                 </div>
-            </nav>
-        </header>
+                <script src="/js/motorBusqueda.js"></script>
+
+                <hr>
+                <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
+                            class="link-icon" th:text="#{perfil}"></div>
+                </a>
+            </div>
+
+        </nav>
+    </header>
         
         <div class="title-gradient">
             <h4>Aqui puedes conocer las diferencias entre las carreras de tu preferencia. <a th:href="@{/carreras/all?lang=}+${usuario.lang}">Comparar otras carreras</a></h4>
@@ -45,8 +62,8 @@
         
         <div class="comparacion-carreras">
             <div class="carrera-columna">
-                <div class="tarjeta">
-                    <div class="imagen-uni">
+                <div class="tarjeta dark:bg-gray-800 dark:text-white">
+                    <div class="imagen-uni bg-white">
                         <img th:src="@{'/img/' + ${carrera1.universidad.nombre_abreviado} + '/logo.jpg'}" alt="Logo Universidad" />
                     </div>
                     <div class="tarjeta-contenido">
@@ -111,8 +128,8 @@
             </div>
             
             <div class="carrera-columna">
-                <div class="tarjeta">
-                    <div class="imagen-uni">
+                <div class="tarjeta dark:bg-gray-800 dark:text-white">
+                    <div class="imagen-uni bg-white">
                         <img th:src="@{'/img/' + ${carrera2.universidad.nombre_abreviado} + '/logo.jpg'}" alt="Logo Universidad" />
                     </div>
                     <div class="tarjeta-contenido">

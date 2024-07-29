@@ -7,9 +7,15 @@
     <script src="/js/navbar.js"></script>
     <link rel="stylesheet" href="/css/carrera.css">
     <link rel="stylesheet" href="/css/validaciones.css">
+    <link rel="stylesheet" href="/css/motorbusqueda.css">
 </head>
-<body class="dark:bg-gray-800 dark:bg-gray-800">
-    
+<body class="dark:bg-gray-800 dark:bg-gray-800" th:data-lang="${usuario.lang}">
+    <div id="translations" 
+        th:attr="data-carrera=#{carreraTag},
+                data-area=#{areaTag},
+                data-universidad=#{universidadTag}" 
+        style="display: none;">
+    </div>
     <header class="header">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -27,7 +33,11 @@
 
                 <div class="form-input ">
                     <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
-                    <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
+                    <div id="searchForm">
+                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
+                        <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
+                        </div>
+                    </div>
                 </div>
 
                 <hr>
@@ -316,7 +326,7 @@
         </div>
     </footer>
 </center>
-
+    <script src="/js/motorBusqueda.js"></script>
     <script src="/js/comentarioValidacion.js"></script>
 </body>
 </html>

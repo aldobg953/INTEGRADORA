@@ -9,6 +9,7 @@
         <script src="/js/navbar.js"></script>
         <script src="/js/buscador.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="/css/motorbusqueda.css">
         <script>
             $(document).ready(function() {
                     $('form').on('keyup', function(e) {
@@ -32,7 +33,13 @@
     
          </script>
     </head>
-    <body class="dark:bg-gray-800">
+    <body class="dark:bg-gray-800" th:data-lang="${usuario.lang}">
+        <div id="translations" 
+            th:attr="data-carrera=#{carreraTag},
+                    data-area=#{areaTag},
+                    data-universidad=#{universidadTag}" 
+            style="display: none;">
+        </div>
         <header class="header">
             <nav class="navbar">
                 <div class="navbar-logo">
@@ -50,9 +57,13 @@
     
                     <div class="form-input ">
                         <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
-                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
+                        <div id="searchForm">
+                            <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
+                            <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
+                            </div>
+                        </div>
                     </div>
-    
+                    <script src="/js/motorBusqueda.js"></script>
                     <hr>
                     <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
                         <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt="" id="profile-icon"
