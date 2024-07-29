@@ -7,22 +7,20 @@
     <link rel="stylesheet" href="css/global_font.css">
     <link href="/css/tailwind.css" rel="stylesheet">
     <script src="/js/navbar.js"></script>
-    
     <link rel="stylesheet" href="css/index.css">
     <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-
+    <link rel="stylesheet" href="/css/motorbusqueda.css">
     <title>PathFinder</title>
 </head>
 
 <body th:data-lang="${usuario.lang}">
-
     <div id="translations" 
-     th:attr="data-carrera=#{carreraTag},
-              data-area=#{areaTag},
-              data-universidad=#{universidadTag}" 
-     style="display: none;">
-</div>
+        th:attr="data-carrera=#{carreraTag},
+                data-area=#{areaTag},
+                data-universidad=#{universidadTag}" 
+        style="display: none;">
+    </div>
 
     <header class="header">
         <nav class="navbar">
@@ -35,7 +33,7 @@
                     <div class="link"><img src="/css/assets/navbaricons/exit1.png" alt="" class="link-icon"
                             th:text="#{cerrarSesion}"></div>
                 </a>
-                <a th:if="${roles.contains(2L)}" th:href="@{/administrador}" style="display: yes;">
+                <a th:if="${roles.contains(2L)}" th:href="@{/administrador?lang=}+${usuario.lang}" style="display: yes;">
                     <div class="link"><img src="/css/assets/navbaricons/herramienta.png" alt="" class="link-icon"
                             th:text="#{administradores}"></div>
                 </a>
