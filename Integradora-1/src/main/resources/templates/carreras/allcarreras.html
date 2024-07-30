@@ -74,7 +74,7 @@
             <div class="contenedor-carreras dark:bg-gray-800">
                 <div class="contenedor dark:text-white dark:border-gray-700 dark:bg-gray-800">
                     <div class="barra-busqueda">
-                        <input type="text" id="search" name="search" placeholder="Busca una carrera" />
+                        <input type="text" id="search" name="search" th:placeholder="#{buscarCarrera}"  />
 
                         <button type="submit" class="">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -162,7 +162,7 @@
                         ver mas
                     </a>
                     <a th:href="@{/carreras/all/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}"
-                        class="comparar dark:shadow-none dark:hover:shadow-none">Comparar</a>
+                        class="comparar dark:shadow-none dark:hover:shadow-none" th:text="#{comparar}">Comparar</a>
                 </div>
             </div>
         </div>
