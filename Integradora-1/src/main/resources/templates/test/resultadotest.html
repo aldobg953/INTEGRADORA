@@ -3,14 +3,21 @@
     <head>
         <meta charset="utf-8">
         <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-        <title th:text="#{titleArea}">PathFinder | Áreas</title>
+        <title th:text="#{TestTituloPestaña}">PathFinder | Áreas</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/buscador.css">
         <script src="/js/buscador.js"></script>
+        <link rel="stylesheet" href="/css/motorbusqueda.css">
     </head>
-    <body class="dark:bg-gray-800">
+    <body class="dark:bg-gray-800" th:data-lang="${usuario.lang}">
+        <div id="translations" 
+            th:attr="data-carrera=#{carreraTag},
+                    data-area=#{areaTag},
+                    data-universidad=#{universidadTag}" 
+            style="display: none;">
+        </div>
         <header class="header">
             <nav class="navbar">
                 <div class="navbar-logo">
@@ -28,8 +35,13 @@
 
                     <div class="form-input ">
                         <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
-                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
+                        <div id="searchForm">
+                            <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
+                            <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
+                            </div>
+                        </div>
                     </div>
+                    <script src="/js/motorBusqueda.js"></script>
 
                     <hr>
                     <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
@@ -42,17 +54,17 @@
         </header>
 
         <div class="title-gradient">
-            <h1>Resultado</h1>
+            <h1 th:text="#{resultadotest}">Resultado</h1>
         </div>
 
         <div class="mx-28 mt-4">
-            <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span>¡Gracias por completar el test vocacional de </span><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span>!</h1>
-            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Basado en tus respuestas, creemos que podrías tener un gran futuro en el área de <span class="font-bold dark:text-white" th:text="${area.nombre_area}"></span>. Este campo ofrece una amplia gama de oportunidades y puede ser muy gratificante.
-                Estamos emocionados de haber podido ayudarte a explorar tus intereses y habilidades. ¡Te deseamos mucho éxito en tu camino educativo y profesional!</p>
+            <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span th:text="#{graciastest}">¡Gracias por completar el test vocacional de </span><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">PathFinder</span>!</h1>
+            <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400"><span th:text="#{basadoEnTest}">Basado en tus respuestas, creemos que podrías tener un gran futuro en el área de</span> <span class="font-bold dark:text-white" th:text="${area.nombre_area}"></span>. <span th:text="#{estecampotest}"> Este campo ofrece una amplia gama de oportunidades y puede ser muy gratificante.
+                Estamos emocionados de haber podido ayudarte a explorar tus intereses y habilidades. ¡Te deseamos mucho éxito en tu camino educativo y profesional!</span></p>
             <h1 class="mb-4 mt-8 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl sm:px-14 xl:px-40 lg:text-6xl dark:text-white" th:text="${area.nombre_area}"></h1>
             <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400" th:text="${area.descripcion}"></p>
             <div class="flex justify-center">
-                <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900" th:text="#{verMas}">
                     Ver mas
                     <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -61,15 +73,15 @@
             </div>
         </div>
 
-        <h1 class="flex justify-center mb-4 mt-8 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl sm:px-14 xl:px-40 lg:text-6xl dark:text-white"> Test creado por</h1>
+        <h1 class="flex justify-center mb-4 mt-8 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl sm:px-14 xl:px-40 lg:text-6xl dark:text-white" th:text="#{creadoportest}"> Test creado por</h1>
         <div class="flex justify-center mt-16">
             <div class="bg-white dark:bg-gray-700 rounded-lg shadow-xl overflow-hidden max-w-2xl w-full flex flex-col md:flex-row mb-4 transition-colors duration-200">
                 
                 <div class="w-full p-6 flex flex-col items-center justify-center">
-                    <img src="/img/perfilUsuario/perfil1.jpg" alt="Foto de Peter Medina" class="w-32 h-32 rounded-full object-cover mb-4">
+                    <img src="/img/administrador/psicologo.jpg" alt="Foto de Peter Medina" class="w-32 h-32 rounded-full object-cover mb-4">
                     <h2 class="text-2xl font-bold text-center text-gray-800 dark:text-white">Ricardo Brandt Loyo</h2>
-                    <p class="text-gray-600 dark:text-white text-center">Estudiante de psicologia</p>
-                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                    <p class="text-gray-600 dark:text-white text-center" th:text="#{estudiantePsic}">Estudiante de psicologia</p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm" th:text="#{estudianteDe}">
                         Estudiante de 8vo grado de la Universidad de Estudios Avanzados.
                      </p>
                      <div class="flex justify-center space-x-4 mt-4">

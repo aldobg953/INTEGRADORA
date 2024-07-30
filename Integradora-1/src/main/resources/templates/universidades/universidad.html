@@ -5,8 +5,15 @@
     <link href="/css/tailwind.css" rel="stylesheet">
     <script src="/js/navbar.js"></script>
     <link rel="stylesheet" href="/css/carrera.css">
+    <link rel="stylesheet" href="/css/motorbusqueda.css">
 </head>
-<body class="dark:bg-gray-800">
+<body class="dark:bg-gray-800" th:data-lang="${usuario.lang}">
+    <div id="translations" 
+        th:attr="data-carrera=#{carreraTag},
+                data-area=#{areaTag},
+                data-universidad=#{universidadTag}" 
+        style="display: none;">
+    </div>
     <header class="header">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -22,9 +29,13 @@
 
             <div class="navbar-links" id="navbarLinks">
 
-                <div class="form-input ">
+                <div class="form-input">
                     <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
-                    <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}">
+                    <div id="searchForm">
+                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
+                        <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
+                        </div>
+                    </div>
                 </div>
 
                 <hr>
@@ -44,7 +55,7 @@
     </div>
 
     <div class="main-content dark:bg-gray-800">
-    <div class="carrera-acercade">
+    <div class="carrera-acercade dark:text-white">
         <div class="vertical-line"></div>
         <p th:utext="${universidad.informacion}">informacion</p>
     </div>
@@ -53,7 +64,7 @@
         <div class="logo-carrera">
             <img th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/logo.jpg'}" alt="logo">
         </div> 
-        <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+        <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:text-white">
                 <h2>Caracteristicas</h2>
             <ul th:utext="${universidad.caracteristicas}"></ul>
         </div>
@@ -159,5 +170,6 @@
         </div>
     </footer>
 </center>
+<script src="/js/motorBusqueda.js"></script>
 </body>
 </html>
