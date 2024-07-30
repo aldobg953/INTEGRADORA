@@ -13,6 +13,10 @@
     --card-shadow: #b9b9b993;
     --card-min-width: 25rem;  /* 240px at default font size */
     --card-gap: 2rem;
+    --aldo-color: #9590ff;
+    --moira-color: #0047ff;
+    --vitaliano-color: #6abaa4;
+    --peregrino-color: #535060;
 }
 
 /* General Styles */
@@ -758,7 +762,7 @@ option {
     background: #7370CC;
     box-shadow: none;
 }
-
+/* #endregion */
 
 /* #region Pagina Perfil */
 /* Estilos para la página de perfil */
@@ -1149,7 +1153,233 @@ option {
 }
 /* #endregion */
 
-/* Footer */
+
+/* #region About us */
+.about-us-container {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.about-us-description {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0 2rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.team-section {
+    margin-bottom: 3rem;
+}
+
+.team-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.team-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 2px solid var(--card-border);
+    box-shadow: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1.5);
+}
+
+.team-member:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 0 35px var(--card-shadow);
+    border: 2px solid var(--primary-color);
+}
+
+.member-image {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-info {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.member-name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.member-role {
+    font-size: 1.125rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.section-container p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (min-width: 64rem) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 48rem) {
+    .team-member {
+        flex-direction: column;
+    }
+
+    .member-image {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 30rem) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.section-container {
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    border: 2px solid var(--card-border);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.section-content {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.objectives {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.objectives li {
+    padding-left: 2rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.objectives li::before {
+    content: "•";
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: .5rem;
+}
+
+.mission { border-left: 0.3rem solid var(--moira-color); }
+.vision { border-left: 0.3rem solid var(--aldo-color); }
+.objectives { border-left: 0.3rem solid var(--vitaliano-color); }
+
+.mission, .vision, .objectives {
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.mensaje-final {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 2rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.mensaje-final span {
+    font-weight: 700;
+}
+
+.mensaje-final-image {
+    width: 40vw;
+    object-fit: cover;
+    margin-bottom: 5rem;
+}
+
+/* Responsive design */
+@media (max-width: 48rem) {
+    .team-member {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .member-image {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .about-us-title {
+        font-size: 2.5rem;
+    }
+
+    .team-title,
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Dark mode styles */
+.dark .about-us-container {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+.dark .team-member,
+.dark .section-container {
+    background-color: #2a2a2a;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.dark .member-role {
+    color: #b0b0b0;
+}
+
+.dark .section-container {
+    background-color: #2a2a2a;
+}
+/* #endregion */
+
+/* #region Footer */
 .footer {
     background-color: var(--primary-color);
     color: white;
@@ -1222,6 +1452,8 @@ option {
     text-decoration: none;
     margin-left: 0.5rem;
 }
+/* #endregion */
+
 
 /* Responsive design */
 @media (max-width: 768px) {

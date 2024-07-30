@@ -1,10 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-        <title th:text="#{acercaDeTitulo}">PathFinder | Acerca de</title>
+        <title th:text="#{acercaDeTitulo}"></title>
+    
+        <link href="/css/tailwind.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/global_font.css">
+        <link rel="stylesheet" href="css/buscador.css">
+        <link rel="stylesheet" href="css/inicio.css">
+        <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+        <script src="/js/navbar.js"></script>
+    
+        <script src="/js/cambiarIdioma.js"></script>
     </head>
-    <body>
-        <h1 th:text="#{acercaNosotros}">Acerca de nosotros</h1>
-    </body>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/inicio}">
+                    <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
+                </a>
+                <hr>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon" th:text="#{idioma}"></div></a>
+                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon" th:text="#{cerrarSesion}"></div></a>
+                <a href="@{/universidades?lang=}+${usuario.lang}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
+                <a href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
+                <a href="@{/carreras/all?lang=}+${usuario.lang}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
+            </div>
+    
+            <div class="navbar-links" id="navbarLinks">
+                <div class="link">
+                    <img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">
+                    <select name="lenguajes" id="lang" onchange="changeLang(this)">
+                        <option th:text="#{idioma}"></option>
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+                <a th:href="@{/acercade}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon" th:text="#{quienesSomos}"></div></a>
+                <hr>
+                <a th:href="@{/login}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon" th:text="#{inicioSesion}"></div></a>
+                <a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/home.png" alt="" class="link-icon" th:text="#{regresoInicio}"></div></a>
+                <a th:href="@{/perfil}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon" th:text="#{perfil}"></div></a>
+                <a th:href="@{/registro}" style="display: yes;"><div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt="" class="link-icon" th:text="#{creaCuenta}"></div></a>
+            </div>
+
+        </nav>
+    </header>
+
+    <div class="title-gradient">
+        <h1>Acerca de nosotros</h1>
+    </div>
+    
+    <div class="about-us-container">
+    <div class="about-us-description">
+        <p><span class="text-gradient">PathFinder</span> nació de la visión compartida de cuatro estudiantes apasionados por la tecnología y la educación. Nuestra misión es transformar la experiencia educativa de los jóvenes en Chihuahua, conectándolos con sus sueños académicos a través de una plataforma intuitiva, accesible y completa.</p>
+    </div>
+
+    <section class="team-section">
+        <h2 class="team-title text-gradient">Nuestro equipo</h2>
+        <div class="team-grid">
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/css/assets/miembros/moira-image.jpg" alt="Moira Villalobos" id="moira-img">
+                </div>
+                <div class="member-info">
+                    <div class="member-name" style="color: var(--moira-color);">Moira Villalobos</div>
+                    <div class="member-role">Front-end Developer e Ideadora Original</div>
+                    <p class="member-description">Moira no solo contribuye al desarrollo front-end, sino que también es la mente detrás de la idea original de PathFinder. Su visión ha sido el motor impulsor de este proyecto.</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/css/assets/miembros/vitaliano-image.jpg" alt="Vitaliano Córdova" id="vitaliano-img">
+                </div>
+                <div class="member-info">
+                    <div class="member-name" style="color: var(--vitaliano-color);">Vitaliano Córdova</div>
+                    <div class="member-role">Database Designer</div>
+                    <p class="member-description">Vitaliano es el arquitecto de nuestra base de datos. Su habilidad para estructurar y optimizar datos es crucial para el rendimiento y la escalabilidad de PathFinder.</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/css/assets/miembros/daniel-image.jpg" alt="Daniel Peregrino" id="peregrino-img">
+                </div>
+                <div class="member-info">
+                    <div class="member-name" style="color: var(--peregrino-color);">Daniel Peregrino</div>
+                    <div class="member-role">Back-end Developer</div>
+                    <p class="member-description">Daniel es el mago detrás de las cortinas, asegurándose de que todos los engranajes de PathFinder funcionen a la perfección. Su experiencia en desarrollo back-end es fundamental para el funcionamiento de nuestra plataforma.</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/css/assets/miembros/aldo-image.jpg" alt="Aldo Barrera" id="aldo-img">
+                </div>
+                <div class="member-info">
+                    <div class="member-name" style="color: var(--aldo-color);">Aldo Barrera</div>
+                    <div class="member-role">UX/UI Designer y Front-end Developer</div>
+                    <p class="member-description">Aldo es el cerebro creativo detrás de la interfaz de usuario de PathFinder. Su pasión por el diseño y la experiencia de usuario se refleja en cada aspecto visual de nuestra plataforma.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="section-container">
+        <div class="mission ">
+        <h2 class="section-title text-gradient">Nuestra Misión</h2>
+        <p>Nuestra misión es empoderar a los estudiantes de Chihuahua con la información y las herramientas necesarias para tomar decisiones informadas sobre su futuro académico. Buscamos simplificar el proceso de selección de carreras y universidades, proporcionando una plataforma centralizada y fácil de usar que conecte a los estudiantes con las oportunidades educativas que mejor se adapten a sus intereses y metas.</p>
+    </div>
+
+    <div class="vision">
+        <h2 class="section-title text-gradient">Nuestra Visión</h2>
+        <p>Imaginamos un mundo donde cada joven tenga la confianza y el conocimiento para elegir su camino educativo con certeza y entusiasmo. Aspiramos a ser la plataforma de referencia para la orientación académica en Chihuahua, contribuyendo a una sociedad más informada y a un sistema educativo más eficiente.</p>
+    </div>
+
+    <div class="objectives">
+        <h2 class="section-title text-gradient">Nuestros Objetivos</h2>
+        <ul>
+            <li>Proporcionar información completa y actualizada sobre todas las universidades y carreras disponibles en Chihuahua.</li>
+            <li>Facilitar la comparación entre diferentes opciones académicas de manera clara y objetiva.</li>
+            <li>Crear una comunidad donde los estudiantes actuales y egresados puedan compartir sus experiencias y consejos.</li>
+            <li>Reducir la tasa de deserción escolar ayudando a los estudiantes a tomar decisiones más informadas desde el principio.</li>
+            <li>Colaborar estrechamente con las instituciones educativas para asegurar la precisión y relevancia de la información proporcionada.</li>
+            <li>Integrar herramientas interactivas que ayuden a los estudiantes a explorar diferentes caminos académicos y profesionales.</li>
+            <li>Mantenernos a la vanguardia de la tecnología educativa para ofrecer siempre la mejor experiencia a nuestros usuarios.</li>
+        </ul>
+    </div>
+    </div>
+
+    <center>
+        <p class="mensaje-final">En <span class="text-gradient">PathFinder</span>, creemos en el poder de la información para transformar vidas. Estamos comprometidos a ser tu guía de la educación superior.</p>
+        <img src="/css/assets/waving-pathfinder.svg" alt="" class="mensaje-final-image ">
+    </center>
+    
+</div>
+<center>
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="/css/LogoLogoPathFinderVertical.svg" alt="">
+        </div>
+        <div class="footer-section">
+            <h3 th:text="#{servicio}"></h3>
+            <a href="#" th:text="#{nuestroTrabajo}"></a>
+            <a href="#" th:text="#{centroAyuda}"></a>
+            <a href="#" th:text="#{faqs}"></a>
+        </div>
+        <div class="footer-section">
+            <h3 th:text="#{contacto}"></h3>
+            <p>contacto@pathfinder.com</p>
+            <p th:text="#{sobreNosotros}"></p>
+            <p>614 785 6594</p>
+        </div>
+        <div class="footer-section">
+            <h3 th:text="#{direcciones}"></h3>
+            <p>Av. Montes Americanos #9501, Col.</p>
+            <p>Sector 35, C.P. 31216, Chihuahua,</p>
+            <p>Chih., México.</p>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a>&copy; 2024 PathFinder</a>
+                <a href="#" th:text="#{terminos}"></a>
+                <a href="#" th:text="#{politica}"></a>
+            </div>
+            <div class="social-icons">
+
+                <a href="#" title="Facebook"><img src="/css/assets/facebook.svg" alt=""></a>
+                <a href="#" title="X"><img src="/css/assets/x.svg" alt=""></a>
+                <a href="#" title="Instagram"><img src="/css/assets/instagram.svg" alt=""></a>
+                <a href="#" title="LinkedIn"><img src="/css/assets/linkedin.svg" alt=""></a>
+            </div>
+        </div>
+    </footer>
+</center>
+</body>
 </html>
