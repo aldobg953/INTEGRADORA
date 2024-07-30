@@ -163,7 +163,7 @@
         <div class="por-que-estudiar">
             <div class="por-que-estudiar-text">
                 <h2 th:text="'¿Por qué estudiar ' + ${carrera.nombre} + '?'">carrera</h2><br />
-                <p th:text="${carrera.porque_estudiar}">texto porque estudiar esta carrera</p>
+                <p th:text="${carrera.porque_estudiar}"></p>
             </div>
             <div class="por-que-estudiar-img">
                 <img th:src="@{'/img/carreras/' + ${carrera.id_carrera} + '.jpg'}">
@@ -237,7 +237,7 @@
                                     d="M1.327,12.4,4.887,15,3.535,19.187A3.178,3.178,0,0,0,4.719,22.8a3.177,3.177,0,0,0,3.8-.019L12,20.219l3.482,2.559a3.227,3.227,0,0,0,4.983-3.591L19.113,15l3.56-2.6a3.227,3.227,0,0,0-1.9-5.832H16.4L15.073,2.432a3.227,3.227,0,0,0-6.146,0L7.6,6.568H3.231a3.227,3.227,0,0,0-1.9,5.832Z" />
                             </svg>
                         </span>
-                        <span class="promedio-valor" th:text="${#numbers.formatDecimal(califGnral.promedioGral, 1, 1, 'POINT')} + ' de 5'"></span>
+                        <span class="promedio-valor" th:text="${califGnral.promedioGral} + ' de 5'"></span>
                     </div>
                     <p class="total-calificaciones"
                         th:text="${califGnral.cantidadCalif} + ' usuarios han calificado esta carrera'"></p>
