@@ -150,7 +150,7 @@
                     th:text="#{infoCarrera}">Informacion de la carrera:</label>
                 <textarea id="message" rows="4" th:field="*{informacion}"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    aria-required="true" placeholder="Escribe la informacion principal de la carrera...."></textarea>
+                    aria-required="true" th:placeholder="#{infoPrincipalCarrera}"></textarea>
                 <div id="messageError" class="validationErrors" style="display: none;"></div>
             </div>
 
@@ -160,7 +160,7 @@
                     th:text="#{descripcionCarrera}">Descripcion breve de la carrera (para las tarjetas):</label>
                 <textarea id="desc_breve" rows="4" th:field="*{desc_breve}"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Escribe la informacion breve de la carrera...."></textarea>
+                    th:placeholder="#{descripcionCarrera}"></textarea>
                 <div id="desc_breveError" class="validationErrors" style="display: none;"></div>
             </div>
 
@@ -213,7 +213,7 @@
                     th:text="#{horarioEspecifico}">Horario Especifico:</label>
                 <textarea id="horario" th:field="*{horario_especifico}" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: <p>Lunes a viernes de 7 A.M. a *2 P.M.</br> Lunes a viernes de 5 P.M. a 10 P.M.</p>"></textarea>
+                    th:placeholder="#{horarioEjemplo}"></textarea>
                 <div id="horarioError" class="validationErrors" style="display: none;"></div>
             </div>
 
@@ -223,7 +223,7 @@
                     th:text="#{roadMap}">RoadMap:</label>
                 <input id="RoadMap" th:field="*{roadmap}"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: https://roadmap.sh/r/embed?id=66625d3ce724e39e4df0bcc4">
+                    th:placeholder="#{ejemploRoadmap}">
                 <div id="roadError" class="validationErrors" style="display: none;"></div>
             </div>
 
@@ -276,7 +276,7 @@
                     th:text="#{desemp}">Como desempeñarse:</label>
                 <textarea th:field="*{como_desemp}" id="txtDesempeniarse" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: <li>Gerente de sistemas y de telecomunicaciones.</li><li>Administrador de redes y sistemas.</li>"></textarea>
+                    th:placeholder="#{ejemploDesemp}"></textarea>
                 <div id="comoDesempError" class="validationErrors" style="display: none;"></div>
             </div>
 
@@ -286,7 +286,7 @@
                     th:text="#{dondeTrabajar}">Donde trabajar:</label>
                 <textarea th:field="*{donde_trabajar}" id="txtDondeTrabajar" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: El Ingeniero en Tecnologías de la Información e Innovación Digital podrá desenvolverse en los sectores privado, público y social"></textarea>
+                    th:placeholder="#{ejemploTrabajo}"></textarea>
                 <div id="dondeTrabajarError" class="validationErrors" style="display: none;"></div>
             </div>
 
@@ -296,7 +296,7 @@
                     th:text="#{porqueEstudiar}">Porque estudiar:</label>
                 <textarea id="txtPqEstudiar" th:field="*{porque_estudiar}" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: Una carrera en T.I. te permite diseñar, crear, innovar, hacer un cambio y trabajar prácticamente cualquier área de interés, garantizando una creciente y amplia demanda laboral."></textarea>
+                    th:placeholder="#{ejemploPorqueTrabajar}"></textarea>
                 <div id="pqEstudiarError" class="validationErrors" style="display: none;"></div>
 
             </div>
