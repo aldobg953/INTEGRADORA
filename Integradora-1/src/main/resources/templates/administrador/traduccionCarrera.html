@@ -82,31 +82,31 @@
                     <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{infoCarrera}">Informacion de la carrera:</label>
                     <textarea id="informacion" rows="4" th:field="*{informacion}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe las caracteristicas principal de la universidad...."></textarea>
+                        th:placeholder="#{escribirCaracteristicas}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="porque_estudiar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{porqueEstudiar}">Porque estudiar esta carrera:</label>
                     <textarea id="porque_estudiar" rows="4" th:field="*{porque_estudiar}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe porque estudiar esta carrera...."></textarea>
+                        th:placeholder="#{escribirRazon}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="donde_trabajar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{dondeTrabajar}">Donde trabajar:</label>
                     <textarea id="donde_trabajar" rows="4" th:field="*{donde_trabajar}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe donde trabajar con esta carrera..."></textarea>
+                        th:placeholder="#{escribirAreaLaboral}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="como_desemp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{desemp}">Como desempeñarse:</label>
                     <textarea id="como_desemp" rows="4" th:field="*{como_desemp}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe como desempeñarse con esta carrera...."></textarea>
+                        th:placeholder="#{escribirDesemp}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="desc_breve" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{descripcionCarrera}">Descripcion Breve (para tarjetas):</label>
                     <textarea id="desc_breve" rows="4" th:field="*{desc_breve}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe las descripcion breve para la tarjeta de esta carrera...."></textarea>
+                        th:placeholder="#{tarjetaCarrera}"></textarea>
                 </div>
                 <div class="p-4 flex justify-end pr-20">
                     <button

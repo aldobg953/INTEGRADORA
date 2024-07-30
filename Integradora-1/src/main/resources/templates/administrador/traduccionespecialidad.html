@@ -78,19 +78,19 @@
                     <label for="descripcion_breve" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{descripcionEspecialidad}">Descripcion breve de la especialidad (para las tarjetas):</label>
                     <textarea id="descripcion_breve" rows="4" th:field="*{descripcion_breve}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe una descripcion breve para la especialidad...."></textarea>
+                        th:placeholder="#{escribirDescripcionE}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{infoEspecialidad}">Informacion de la especialidad:</label>
                     <textarea id="informacion" rows="4" th:field="*{informacion}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe la informacion de la especialidad...."></textarea>
+                        th:placeholder="#{escribirInfoE}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="horario_especifico" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:Text="#{horarioEspecifico}">Horario especifico de la especialidad:</label>
                     <textarea id="horario_especifico" rows="4" th:field="*{horario_especifico}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe el horario de la especialidad...."></textarea>
+                        th:placeholder="#{escribirHorarioE}"></textarea>
                 </div>
                 <div class="p-4 flex justify-end pr-20">
                     <button

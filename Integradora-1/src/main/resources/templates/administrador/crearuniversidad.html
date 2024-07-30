@@ -134,7 +134,7 @@
                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{infoUniversidad}">Informacion de la universidad:</label>
                     <textarea id="message" rows="4" th:field="*{informacion}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe la informacion principal de la universidad...."></textarea>
+                        th:placeholder="#{descripcionUniversidad}"></textarea>
                         <div id="messageErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
 
@@ -149,7 +149,7 @@
                 <div class="mx-10 my-5">
                     <label for="direccionGoogle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{ubiGoogle}">Añadir direccion de google:</label>
                     <input id="direccionGoogle" th:field="*{direccionGoogle}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7003.141572755976!2d">
+                    th:placeholder="#{ejemploUbiGoogle}">
                     <div id="direccionGoogleErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
 
@@ -157,7 +157,7 @@
                 <div class="mx-10 my-5">
                     <label for="tipo_institucion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{tipoInstitucion}">Tipo de institución:</label>
                     <input id="tipo_institucion" th:field="*{tipo_institucion}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: Publica o Privada">
+                    th:placeholder="#{publicaPrivada}">
                     <div id="tipoErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
 
@@ -166,7 +166,7 @@
                     <label for="messageC" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{caracteristicasU}">Caracteristicas de la universidad:</label>
                     <textarea id="messageC" rows="4" th:field="*{caracteristicas}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe las caracteristicas principal de la universidad...."></textarea>
+                        th:placeholder="#{caracteristicasUniversidad}"></textarea>
                         <div id="caracteristicasErrorV" class="validationErrors" style="display: none;"></div>
                 </div>
 
