@@ -60,7 +60,7 @@
 
         <div class="border border-blue-800 md:mx-28 rounded-lg my-10 shadow-lg shadow-blue-500/50 p-6">
                 <div class="flex flex-wrap justify-center">
-                    <div th:each="i : ${#numbers.sequence(1, 8)}" class="image-option m-4 cursor-pointer">
+                    <div th:each="i : ${#numbers.sequence(1, 24)}" class="image-option m-4 cursor-pointer">
                         <div class="relative">
                             <img th:src="@{'/img/perfilUsuario/perfil' + ${i} + '.jpg'}" 
                                  th:alt="'perfil ' + ${i}"
