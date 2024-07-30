@@ -1,17 +1,29 @@
-# Usa una imagen base de Java
-FROM openjdk:17-jdk-alpine
+# Use an official Maven image as a parent image
+FROM maven:3.8.4-openjdk-17-slim AS build
 
-# Establece el directorio de trabajo
+# Set the working directory in the container
 WORKDIR /app
 
-# Copia el archivo pom.xml al contenedor (esto puede ser opcional si solo necesitas el JAR)
-COPY integradora-1/pom.xml /app/pom.xml
+# Copy the pom.xml file
+COPY Integradora-1/pom.xml .
 
-# Copia el directorio target al contenedor
-COPY integradora-1/target /app/target
+# Copy the project source
+COPY Integradora-1/src ./src
 
-# Expone el puerto en el que la aplicación se ejecuta
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Use OpenJDK for the runtime
+FROM openjdk:17-jdk-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the built artifact from the build stage
+COPY --from=build /app/target/com.registro.usuarios-1.0.jar ./app.jar
+
+# Expose the port the app runs on
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
-CMD ["java", "-jar", "target/com.registro.usuarios-1.0.jar"]
+# Run the jar file
+CMD ["java", "-jar", "app.jar"]
