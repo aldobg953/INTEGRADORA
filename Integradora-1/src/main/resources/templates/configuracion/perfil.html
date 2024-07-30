@@ -60,16 +60,14 @@
 
     <!-- informacion del usuario-->
 
-    <div class="alert-success" th:if="${param.exito}">
+    <div id="alert-success" th:if="${param.exito}" class="alert alert-success" role="alert">
         <h3 th:text="#{actualizadoExito}">¡Actualizado con éxito!</h3>
         <p th:text="#{actualizadoExitoLargo}">La información ha sido actualizada con éxito.</p>
-        <button onclick="ocultarAlerta()" th:text="#{cerrar}">Cerrar</button>
     </div>
-
-    <div class="alert-error" th:if="${msj} != null">
+    
+    <div id="alert-error" th:if="${msj} != null" class="alert alert-error" role="alert">
         <h3 th:text="#{errorActualizacion}">Error al actualizar</h3>
         <p th:text="${msj}">Mensaje de error</p>
-        <button onclick="ocultarAlerta()" th:text="#{cerrar}">Cerrar</button>
     </div>
 
     <div class="profile-container">
@@ -193,6 +191,25 @@
         document.getElementById('idioma').addEventListener('change', function() {
             document.getElementById('languageForm').submit();
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const alertSuccess = document.getElementById('alert-success');
+        const alertError = document.getElementById('alert-error');
+
+        function hideAlert(alert) {
+            if (alert) {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                    }, 600);
+                }, 5000);
+            }
+        }
+
+        hideAlert(alertSuccess);
+        hideAlert(alertError);
+    });
         </script>
         
 </body>
