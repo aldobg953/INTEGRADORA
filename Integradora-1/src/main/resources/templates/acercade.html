@@ -36,9 +36,9 @@
                     <img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">
                     <select name="lenguajes" id="lang" onchange="changeLang(this)">
                         <option th:text="#{idioma}"></option>
-                        <option value="es">Español</option>
-                        <option value="en">English</option>
-                        <option value="fr">Français</option>
+                        <option value="es" th:text="#{esp}">Español</option>
+                        <option value="en" th:text="#{ingles}">English</option>
+                        <option value="fr" th:text="#{frances}">Français</option>
                     </select>
                 </div>
                 <a th:href="@{/acercade}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon" th:text="#{quienesSomos}"></div></a>
@@ -53,16 +53,16 @@
     </header>
 
     <div class="title-gradient">
-        <h1>Acerca de nosotros</h1>
+        <h1 th:text="#{acercaNosotros}">Acerca de nosotros</h1>
     </div>
     
     <div class="about-us-container">
     <div class="about-us-description">
-        <p><span class="text-gradient">PathFinder</span> nació de la visión compartida de cuatro estudiantes apasionados por la tecnología y la educación. Nuestra misión es transformar la experiencia educativa de los jóvenes en Chihuahua, conectándolos con sus sueños académicos a través de una plataforma intuitiva, accesible y completa.</p>
+        <p th:text="#{nacimiento}"><span class="text-gradient">PathFinder</span> nació de la visión compartida de cuatro estudiantes apasionados por la tecnología y la educación. Nuestra misión es transformar la experiencia educativa de los jóvenes en Chihuahua, conectándolos con sus sueños académicos a través de una plataforma intuitiva, accesible y completa.</p>
     </div>
 
     <section class="team-section">
-        <h2 class="team-title text-gradient">Nuestro equipo</h2>
+        <h2 class="team-title text-gradient" th:text="#{equipo}">Nuestro equipo</h2>
         <div class="team-grid">
 
             <div class="team-member">
@@ -71,8 +71,8 @@
                 </div>
                 <div class="member-info">
                     <div class="member-name" style="color: var(--moira-color);">Moira Villalobos</div>
-                    <div class="member-role">Front-end Developer e Ideadora Original</div>
-                    <p class="member-description">Moira no solo contribuye al desarrollo front-end, sino que también es la mente detrás de la idea original de PathFinder. Su visión ha sido el motor impulsor de este proyecto.</p>
+                    <div class="member-role" th:text="#{rolMoira}">Front-end Developer e Ideadora Original</div>
+                    <p class="member-description" th:text="#{descripcionMoira}">Moira no solo contribuye al desarrollo front-end, sino que también es la mente detrás de la idea original de PathFinder. Su visión ha sido el motor impulsor de este proyecto.</p>
                 </div>
             </div>
 
@@ -82,8 +82,8 @@
                 </div>
                 <div class="member-info">
                     <div class="member-name" style="color: var(--vitaliano-color);">Vitaliano Córdova</div>
-                    <div class="member-role">Database Designer</div>
-                    <p class="member-description">Vitaliano es el arquitecto de nuestra base de datos. Su habilidad para estructurar y optimizar datos es crucial para el rendimiento y la escalabilidad de PathFinder.</p>
+                    <div class="member-role" th:text="#{rolVita}">Database Designer</div>
+                    <p class="member-description" th:text="#{descripcionVita}">Vitaliano es el arquitecto de nuestra base de datos. Su habilidad para estructurar y optimizar datos es crucial para el rendimiento y la escalabilidad de PathFinder.</p>
                 </div>
             </div>
 
@@ -93,8 +93,8 @@
                 </div>
                 <div class="member-info">
                     <div class="member-name" style="color: var(--peregrino-color);">Daniel Peregrino</div>
-                    <div class="member-role">Back-end Developer</div>
-                    <p class="member-description">Daniel es el mago detrás de las cortinas, asegurándose de que todos los engranajes de PathFinder funcionen a la perfección. Su experiencia en desarrollo back-end es fundamental para el funcionamiento de nuestra plataforma.</p>
+                    <div class="member-role" th:text="#{rolPere}">Back-end Developer</div>
+                    <p class="member-description" th:text="#{descripcionPere}">Daniel es el mago detrás de las cortinas, asegurándose de que todos los engranajes de PathFinder funcionen a la perfección. Su experiencia en desarrollo back-end es fundamental para el funcionamiento de nuestra plataforma.</p>
                 </div>
             </div>
 
@@ -104,8 +104,8 @@
                 </div>
                 <div class="member-info">
                     <div class="member-name" style="color: var(--aldo-color);">Aldo Barrera</div>
-                    <div class="member-role">UX/UI Designer y Front-end Developer</div>
-                    <p class="member-description">Aldo es el cerebro creativo detrás de la interfaz de usuario de PathFinder. Su pasión por el diseño y la experiencia de usuario se refleja en cada aspecto visual de nuestra plataforma.</p>
+                    <div class="member-role" th:text="#{rolAldo}">UX/UI Designer y Front-end Developer</div>
+                    <p class="member-description" th:text="#{descripcionAldo}">Aldo es el cerebro creativo detrás de la interfaz de usuario de PathFinder. Su pasión por el diseño y la experiencia de usuario se refleja en cada aspecto visual de nuestra plataforma.</p>
                 </div>
             </div>
 
@@ -114,31 +114,31 @@
 
     <div class="section-container">
         <div class="mission ">
-        <h2 class="section-title text-gradient">Nuestra Misión</h2>
-        <p>Nuestra misión es empoderar a los estudiantes de Chihuahua con la información y las herramientas necesarias para tomar decisiones informadas sobre su futuro académico. Buscamos simplificar el proceso de selección de carreras y universidades, proporcionando una plataforma centralizada y fácil de usar que conecte a los estudiantes con las oportunidades educativas que mejor se adapten a sus intereses y metas.</p>
+        <h2 class="section-title text-gradient" th:text="#{mision}">Nuestra Misión</h2>
+        <p th:text="#{descripcionMision}">Nuestra misión es empoderar a los estudiantes de Chihuahua con la información y las herramientas necesarias para tomar decisiones informadas sobre su futuro académico. Buscamos simplificar el proceso de selección de carreras y universidades, proporcionando una plataforma centralizada y fácil de usar que conecte a los estudiantes con las oportunidades educativas que mejor se adapten a sus intereses y metas.</p>
     </div>
 
     <div class="vision">
-        <h2 class="section-title text-gradient">Nuestra Visión</h2>
-        <p>Imaginamos un mundo donde cada joven tenga la confianza y el conocimiento para elegir su camino educativo con certeza y entusiasmo. Aspiramos a ser la plataforma de referencia para la orientación académica en Chihuahua, contribuyendo a una sociedad más informada y a un sistema educativo más eficiente.</p>
+        <h2 class="section-title text-gradient" th:text="#{vision}">Nuestra Visión</h2>
+        <p th:text="#{descVision}">Imaginamos un mundo donde cada joven tenga la confianza y el conocimiento para elegir su camino educativo con certeza y entusiasmo. Aspiramos a ser la plataforma de referencia para la orientación académica en Chihuahua, contribuyendo a una sociedad más informada y a un sistema educativo más eficiente.</p>
     </div>
 
     <div class="objectives">
-        <h2 class="section-title text-gradient">Nuestros Objetivos</h2>
+        <h2 class="section-title text-gradient" th:text="#{objetivos}">Nuestros Objetivos</h2>
         <ul>
-            <li>Proporcionar información completa y actualizada sobre todas las universidades y carreras disponibles en Chihuahua.</li>
-            <li>Facilitar la comparación entre diferentes opciones académicas de manera clara y objetiva.</li>
-            <li>Crear una comunidad donde los estudiantes actuales y egresados puedan compartir sus experiencias y consejos.</li>
-            <li>Reducir la tasa de deserción escolar ayudando a los estudiantes a tomar decisiones más informadas desde el principio.</li>
-            <li>Colaborar estrechamente con las instituciones educativas para asegurar la precisión y relevancia de la información proporcionada.</li>
-            <li>Integrar herramientas interactivas que ayuden a los estudiantes a explorar diferentes caminos académicos y profesionales.</li>
-            <li>Mantenernos a la vanguardia de la tecnología educativa para ofrecer siempre la mejor experiencia a nuestros usuarios.</li>
+            <li th:text="#{ob1}">Proporcionar información completa y actualizada sobre todas las universidades y carreras disponibles en Chihuahua.</li>
+            <li th:text="#{ob2}">Facilitar la comparación entre diferentes opciones académicas de manera clara y objetiva.</li>
+            <li th:text="#{ob3}">Crear una comunidad donde los estudiantes actuales y egresados puedan compartir sus experiencias y consejos.</li>
+            <li th:text="#{ob4}">Reducir la tasa de deserción escolar ayudando a los estudiantes a tomar decisiones más informadas desde el principio.</li>
+            <li th:text="#{ob5}">Colaborar estrechamente con las instituciones educativas para asegurar la precisión y relevancia de la información proporcionada.</li>
+            <li th:text="#{ob6}">Integrar herramientas interactivas que ayuden a los estudiantes a explorar diferentes caminos académicos y profesionales.</li>
+            <li th:text="#{ob7}">Mantenernos a la vanguardia de la tecnología educativa para ofrecer siempre la mejor experiencia a nuestros usuarios.</li>
         </ul>
     </div>
     </div>
 
     <center>
-        <p class="mensaje-final">En <span class="text-gradient">PathFinder</span>, creemos en el poder de la información para transformar vidas. Estamos comprometidos a ser tu guía de la educación superior.</p>
+        <p class="mensaje-final" th:utext="#{en}">En <span class="text-gradient">PathFinder</span>, creemos en el poder de la información para transformar vidas. Estamos comprometidos a ser tu guía de la educación superior.</p>
         <img src="/css/assets/waving-pathfinder.svg" alt="" class="mensaje-final-image ">
     </center>
     

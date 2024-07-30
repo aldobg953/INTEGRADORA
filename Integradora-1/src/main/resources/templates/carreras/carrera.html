@@ -130,8 +130,8 @@
                 </div>
 
                 <div>
-                    <h3>Costo de la carrera:</h3>
-                    <p th:text="${carrera.costo} + '0$' + ' *por periodo'"></p>
+                    <h3 th:text="#{costoCarrera}">Costo de la carrera:</h3>
+                    <p ><span th:text="${carrera.costo}"></span>0$ <span th:text="#{costoPeriodo}"> por periodo</span></p>
                 </div>
 
                 <div>
@@ -140,7 +140,7 @@
                 </div>
 
                 <div>
-                    <h3>Periodos</h3>
+                    <h3 th:text="#{periodos}">Periodos</h3>
                     <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'">
                         nombre_periodo</div>
                 </div>
