@@ -65,24 +65,24 @@
             <img th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/logo.jpg'}" alt="logo">
         </div> 
         <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:text-white">
-                <h2>Caracteristicas</h2>
+                <h2 th:text="#{caracteristicas}">Caracteristicas</h2>
             <ul th:utext="${universidad.caracteristicas}"></ul>
         </div>
     </div>
     
     <div class="por-que-estudiar">
         <div class="por-que-estudiar-text">
-            <h2>Informacion</h2>
-            <h3 class="font-semibold">Tipo de institucion:</h3>
+            <h2 th:text="#{informacion}">Informacion</h2>
+            <h3 class="font-semibold" th:text="#{tipoInstitucion}">Tipo de institucion:</h3>
             <h4 th:text="${universidad.tipo_institucion}"></h4>
-            <h3>Correo electronico:</h3>
+            <h3 th:text="#{correo}">Correo electronico:</h3>
             <h4 th:text="${universidad.correo}"></h4>
-            <h3>Telefono de Contacto:</h3>
+            <h3 th:text="#{telefonoContacto}">Telefono de Contacto:</h3>
             <h4 th:text="${universidad.telefono}"></h4>
-            <h3>Direccion:</h3>
+            <h3 th:text="#{direccionUni}">Direccion:</h3>
             <h4 th:text="${universidad.direccion}"></h4>
             
-            <h3>Para mas información: <a th:href="${universidad.pagina_web}">
+            <h3 th:text="#{masInfo}">Para mas información: <a th:href="${universidad.pagina_web}" th:text="#{sitioOficial}">
                 Sitio oficial
                 </a></h3>
         </div>
@@ -93,7 +93,7 @@
 
     <div>
     <div class="especialidades-titulo">
-        <h2>Carreras Universitarias</h2>
+        <h2 th:text="#{carreraUni}">Carreras Universitarias</h2>
     </div>
 
         <div id="carousel" class="tarjetas-especialidades">
@@ -149,7 +149,7 @@
             <p>614 785 6594</p>
         </div>
         <div class="footer-section">
-            <h3 th:text="#{direccion}"></h3>
+            <h3 th:text="#{direcciones}"></h3>
             <p>Av. Montes Americanos #9501, Col.</p>
             <p>Sector 35, C.P. 31216, Chihuahua,</p>
             <p>Chih., México.</p>

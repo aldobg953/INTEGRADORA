@@ -104,12 +104,12 @@
     <form class="contenedor-barra-busqueda">
         <div class="contenedor">
             <select id="tipo-universidad" class="filtro-tipo dark:text-white dark:border-gray-700">
-                <option class="dark:text-white dark:bg-gray-800">Todas</option>
-                <option class="dark:text-white dark:bg-gray-800" value="publica">Pública</option>
-                <option class="dark:text-white dark:bg-gray-800" value="privada">Privada</option>
+                <option class="dark:text-white dark:bg-gray-800" th:text="#{todas}">Todas</option>
+                <option class="dark:text-white dark:bg-gray-800" value="publica" th:text="#{tpublica}">Pública</option>
+                <option class="dark:text-white dark:bg-gray-800" value="privada" th:text="#{privada}">Privada</option>
             </select>
             <div class="barra-busqueda">
-                <input type="search" id="search" class="dark:border-gray-700 dark:text-white" placeholder="Buscar universidad..."/>
+                <input type="search" id="search" class="dark:border-gray-700 dark:text-white" th:placeholder="#{buscarUni}"/>
                 <button type="submit">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -129,9 +129,9 @@
                 <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}">
                     <h2 th:text="${universidad.nombre_completo}"></h2>
                 </a>
-                <p class="dark:text-white">Tipo de institucion: <span th:text="${universidad.tipo_institucion}"></span></p>
+                <p class="dark:text-white" th:text="#{tipoInstitucion}">Tipo de institucion: <span th:text="${universidad.tipo_institucion}"></span></p>
                 <div class="tarjeta-botones">
-                    <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
+                    <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="ver-mas dark:shadow-none dark:hover:shadow-none" th:text="#{verMas}">
                     Ver más
                 </a>
                 </div>
