@@ -122,15 +122,15 @@
                 <h2 class="dark:text-white" th:utext="#{carrerasPopu}">
                 </h2>
                 <ul>
-                    <li th:each="carrera : ${carreras}">
+                    <li th:each="carrera, iterStat : ${carreras}" th:if="${iterStat.index < 5}">
                         <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
                             <span th:text="${carrera.nombre}" class="dark:text-white"></span>
                             <span id="popular-tag" class="text-gradient" th:text="#{popularTag}"></span>
                         </a>
                     </li>
                 </ul>
-
-                <img src="/css/assets/fuego.png" alt="">
+            
+                <img src="/css/assets/trending.gif" alt="">
             </div>
         </div>
 
@@ -138,8 +138,8 @@
             <div class="titulo-favoritos">
                 <h2 th:utext="#{favoritos}"></h2>
             </div>
-            <div th:if="${carrerasFavoritas == null or #lists.isEmpty(carrerasFavoritas)}" class="text-white">
-                Aun no tienes carreras favoritas, mensaje tipo, ve y busca mas jasjsjs
+            <div th:if="${carrerasFavoritas == null or #lists.isEmpty(carrerasFavoritas)}">
+                <p class="dark:text-white" th:text="#{sinFavoritosMensaje}">¡Ups! Aún no hay favoritos. ¿Qué tal si echamos un vistazo a más carreras?</p>
             </div>
             <ul class="favoritos-grid dark:bg-gray-800 dark:border-gray-700">
                 <li th:each="carreraFav : ${carrerasFavoritas}" class="dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:hover:shadow-none"> <!-- Aqui iría la variable que guarda los favoritos del usuario-->

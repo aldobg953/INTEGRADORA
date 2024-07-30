@@ -29,6 +29,30 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    margin-top: 10rem;
+    margin-bottom: 1rem;
+}
+
+/* Main Content */
+.main-content {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: fit-content;
+    width: 100%;
+    height: fit-content;
+    padding: 3rem 10vw;
+}
+
+.main-content > *{
+    margin-bottom: 5rem;
+}
 
 /* #region Gradients Animation */
 .text-gradient {
@@ -63,7 +87,7 @@ body::-webkit-scrollbar {
     display: flex;
     padding: 0 10vw;
     flex-direction: column-reverse;
-    height: 30vh;
+    height: fit-content;
     width: 100%;
     background:
         radial-gradient(at 18% 99%, rgba(0, 71, 255, 0.5) 0, transparent 75%),
@@ -231,14 +255,14 @@ body::-webkit-scrollbar {
     color: white;
 }
 
-input {
-    width: 30rem;
+.navbar input {
+    width: 20rem;
     height: 2rem;
     background-color: rgba(0, 0, 0, 0.236);
     color: white;
     border: var(--header-border) solid 2px;
     border-radius: 1rem;
-    padding: .5rem 2rem .5rem 2.5rem; /* Asegura espacio para el icono */
+    padding: .5rem 2rem;
     font-size: 1rem;
     transition: all 0.6s cubic-bezier(0.5, 0, 0.1, 1);
     outline: none;
@@ -273,6 +297,11 @@ input {
     color: var(--header-border);
     font-weight: 600;
 }
+
+#search-bar:focus {
+    width: 30rem;
+}
+
 
 
 /* Estilizar la barra de desplazamiento */
@@ -380,41 +409,22 @@ select {
 
 /* #endregion */
 
-
-h1 {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: white;
-    margin-bottom: 1rem;
-}
-
-/* Main Content */
-.main-content {
-    background-color: transparent;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: fit-content;
-    width: 100%;
-    height: fit-content;
-    padding: 3rem 10vw;
-}
-
-.main-content > *{
-    margin-bottom: 5rem;
-}
-
 /* #region me-gusta-boton */
+.titulo-carrera {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    height: auto; /* Se ajusta al contenido */
+}
+
 .me-gusta {
-    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     z-index: 2;
-    left: 88vw;
-    top: 18vh;
+    padding-left: 5rem;
 }
 
 .me-gusta-boton button {
@@ -476,7 +486,6 @@ h1 {
     justify-content: center;
     align-items: center;
     width: 45%;
-    height: 20rem;
 }
 
 .informacion-carrera {
@@ -834,7 +843,7 @@ h1 {
         margin-left: 0.625rem;
     }
     .total-calificaciones {
-        color: #666;
+        color: #7f7f7fc4;
         font-size: 1.2rem;
         margin-top: 0.3125rem;
     }
@@ -916,6 +925,11 @@ h1 {
         outline: none;
         resize: none;
     }
+
+    textarea:active, textarea:focus {
+        border: #0047FF solid 2px;
+    }
+
     button {
         width: 100%;
         margin-top: 0.625rem;
