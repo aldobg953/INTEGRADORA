@@ -101,24 +101,24 @@
                     <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{descripcionEspecialidad}">Una descripcion breve de la especialidad:</label>
                     <textarea id="informacion" rows="4" th:field="*{descripcion_breve}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Esta informacion aparecera en la tarjeta de la especialidad...."></textarea>
+                        th:placeholder="#{warningEspecialidad}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="informacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{infoEspecialidad}">Informacion de la especialidad:</label>
                     <textarea id="informacion" rows="4" th:field="*{informacion}"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe la informacion principal de la especialidad...."></textarea>
+                        th:placeholder="#{infoPrincipalEspecialidad}"></textarea>
                 </div>
                 <div class="mx-10 my-5">
                     <label for="RoadMap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{roadMap}">RoadMap:</label>
                     <input id="RoadMap" th:field="*{roadmap}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Ejemplo: https://roadmap.sh/r/embed?id=66625d3ce724e39e4df0bcc4">
+                    th:placeholder="#{ejemploRoadmap}">
                 </div>
                 <div class="mx-10 my-5">
                     <label for="horario" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" th:text="#{horarioEspecifico}">Horario Especifico:</label>
                     <textarea id="horario" th:field="*{horario_especifico}" rows="4"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Ejemplo: <p>Lunes a viernes de 7 A.M. a *2 P.M.</br> Lunes a viernes de 5 P.M. a 10 P.M.</p>"></textarea>
+                        th:placeholder="#{horarioEjemplo}"></textarea>
                 </div>
                 <div class="mx-10 my-5 flex flex-col md:flex-row">
                     <div class="basis-1/3">
