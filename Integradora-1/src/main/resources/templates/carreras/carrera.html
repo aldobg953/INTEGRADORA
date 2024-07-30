@@ -130,8 +130,8 @@
                 </div>
 
                 <div>
-                    <h3>Costo de la carrera:</h3>
-                    <p th:text="${carrera.costo} + '0$' + ' *por periodo'"></p>
+                    <h3 th:text="#{costoCarrera}">Costo de la carrera:</h3>
+                    <p ><span th:text="${carrera.costo}"></span>0$ <span th:text="#{costoPeriodo}"> por periodo</span></p>
                 </div>
 
                 <div>
@@ -140,7 +140,7 @@
                 </div>
 
                 <div>
-                    <h3>Periodos</h3>
+                    <h3 th:text="#{periodos}">Periodos</h3>
                     <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'">
                         nombre_periodo</div>
                 </div>
@@ -237,7 +237,7 @@
                                     d="M1.327,12.4,4.887,15,3.535,19.187A3.178,3.178,0,0,0,4.719,22.8a3.177,3.177,0,0,0,3.8-.019L12,20.219l3.482,2.559a3.227,3.227,0,0,0,4.983-3.591L19.113,15l3.56-2.6a3.227,3.227,0,0,0-1.9-5.832H16.4L15.073,2.432a3.227,3.227,0,0,0-6.146,0L7.6,6.568H3.231a3.227,3.227,0,0,0-1.9,5.832Z" />
                             </svg>
                         </span>
-                        <span class="promedio-valor" th:text="${califGnral.promedioGral} + ' de 5'"></span>
+                        <span class="promedio-valor" th:text="${#numbers.formatDecimal(califGnral.promedioGral, 1, 1, 'POINT')} + ' de 5'"></span>
                     </div>
                     <p class="total-calificaciones"
                         th:text="${califGnral.cantidadCalif} + ' usuarios han calificado esta carrera'"></p>

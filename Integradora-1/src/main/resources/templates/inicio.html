@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="css/global_font.css">
     <link rel="stylesheet" href="css/inicio.css">
     <link rel="stylesheet" href="/website/css/uicons-bold-rounded.css">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     <script src="/js/navbar.js"></script>
 
     <script src="/js/cambiarIdioma.js"></script>
@@ -25,13 +26,28 @@
                     <img src="css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
                 <hr>
-                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon" th:text="#{idioma}"></div></a>
-                <a href="" style="display: none;"><div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon" th:text="#{cerrarSesion}"></div></a>
-                <a href="@{/universidades?lang=}+${usuario.lang}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon" th:text="#{universidades}"></div></a>
-                <a href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon" th:text="#{areas}"></div></a>
-                <a href="@{/carreras/all?lang=}+${usuario.lang}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon" th:text="#{carreras}"></div></a>
+                <a href="" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon"
+                            th:text="#{idioma}"></div>
+                </a>
+                <a href="" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/exit1.png" alt="" class="link-icon"
+                            th:text="#{cerrarSesion}"></div>
+                </a>
+                <a href="@{/universidades?lang=}+${usuario.lang}" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/universidad.png" alt="" class="link-icon"
+                            th:text="#{universidades}"></div>
+                </a>
+                <a href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/area.png" alt="" class="link-icon"
+                            th:text="#{areas}"></div>
+                </a>
+                <a href="@{/carreras/all?lang=}+${usuario.lang}" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/gorro.png" alt="" class="link-icon"
+                            th:text="#{carreras}"></div>
+                </a>
             </div>
-    
+
             <div class="navbar-links" id="navbarLinks">
                 <div class="link">
                     <img src="css/assets/navbaricons/lenguage.png" alt="" class="link-icon">
@@ -42,12 +58,28 @@
                         <option value="fr">Français</option>
                     </select>
                 </div>
-                <a th:href="@{/acercade}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon" th:text="#{quienesSomos}"></div></a>
+                <a th:href="@{/acercade}" style="display: yes;">
+                    <div class="link"><img src="css/assets/navbaricons/about.png" alt="" class="link-icon"
+                            th:text="#{quienesSomos}"></div>
+                </a>
                 <hr>
-                <a th:href="@{/login}" style="display: yes;"><div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon" th:text="#{inicioSesion}"></div></a>
-                <a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/home.png" alt="" class="link-icon" th:text="#{regresoInicio}"></div></a>
-                <a th:href="@{/perfil}" style="display: none;"><div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon" class="link-icon" th:text="#{perfil}"></div></a>
-                <a th:href="@{/registro}" style="display: yes;"><div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt="" class="link-icon" th:text="#{creaCuenta}"></div></a>
+                <a th:href="@{/login}" style="display: yes;">
+                    <div class="link"><img src="css/assets/navbaricons/enter.png" alt="" class="link-icon"
+                            th:text="#{inicioSesion}"></div>
+                </a>
+                <a th:href="${#strings.concat('/inicio', (lang != null and lang != '' ? '?lang=' + lang : ''))}"
+                    style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/home.png" alt="" class="link-icon"
+                            th:text="#{regresoInicio}"></div>
+                </a>
+                <a th:href="@{/perfil}" style="display: none;">
+                    <div class="link"><img src="css/assets/navbaricons/profile-picture.jpg" alt="" id="profile-icon"
+                            class="link-icon" th:text="#{perfil}"></div>
+                </a>
+                <a th:href="@{/registro}" style="display: yes;">
+                    <div class="link" id="link-register"><img src="css/assets/navbaricons/agregar-usuario.png" alt=""
+                            class="link-icon" th:text="#{creaCuenta}"></div>
+                </a>
             </div>
 
         </nav>
@@ -125,28 +157,28 @@
 
                 <div class="cards">
                     <article class="card">
-                            <img src="/css/assets/universidad-icon.png" alt="" id="card_icon">
-                            <h2 th:text="#{tarjetaUniversidades}"></h2>
-                            <p th:utext="#{tarjetaUniversidadesTexto}"></span>.</p>
-                    </article>
-                    
-                    <article class="card">
-                            <img src="/css/assets/areas-icon.png" alt="" id="card_icon">
-                            <h2 th:text="#{tarjetaAreas}"></h2>
-                            <p th:utext="#{tarjetaAreasTexto}"></p>
+                        <img src="/css/assets/universidad-icon.png" alt="" id="card_icon">
+                        <h2 th:text="#{tarjetaUniversidades}"></h2>
+                        <p th:utext="#{tarjetaUniversidadesTexto}"></span>.</p>
                     </article>
 
                     <article class="card">
-                            <img src="/css/assets/carrera-icon.png"alt="" id="card_icon">
-                            <h2 th:text="#{tarjetaCarreras}"></h2>
-                            <p th:utext="#{tarjetaCarrerasTexto}"></p>
+                        <img src="/css/assets/areas-icon.png" alt="" id="card_icon">
+                        <h2 th:text="#{tarjetaAreas}"></h2>
+                        <p th:utext="#{tarjetaAreasTexto}"></p>
+                    </article>
+
+                    <article class="card">
+                        <img src="/css/assets/carrera-icon.png" alt="" id="card_icon">
+                        <h2 th:text="#{tarjetaCarreras}"></h2>
+                        <p th:utext="#{tarjetaCarrerasTexto}"></p>
                     </article>
 
                 </div>
             </div>
 
             <div class="caracteristica" id="roadmap">
-                
+
                 <div class="caracteristica-image">
                     <img src="/css/assets/RoadmapPreview.png" alt="">
                 </div>
@@ -175,10 +207,9 @@
                 <h1 class="text-gradient" th:text="#{tituloUniversidadesDisponibles}"></h1>
                 <p th:utext="#{textoUniversidadesDisponibles}"></p>
                 <div class="carrusel-container">
-                <div class="carrusel" id="carrusel">
-                    <!-- Las tarjetas se agregarán dinámicamente con JavaScript -->
+                    <div class="carrusel" id="carrusel">
+                    </div>
                 </div>
-            </div>
             </div>
 
             <div class="dedicatoria">
@@ -225,7 +256,7 @@
                     <a href="#" th:text="#{politica}"></a>
                 </div>
                 <div class="social-icons">
-                    
+
                     <a href="#" title="Facebook"><img src="/css/assets/facebook.svg" alt=""></a>
                     <a href="#" title="X"><img src="/css/assets/x.svg" alt=""></a>
                     <a href="#" title="Instagram"><img src="/css/assets/instagram.svg" alt=""></a>
@@ -236,9 +267,9 @@
     </center>
     <script>
 
-const carrusel = document.getElementById('carrusel');
+        const carrusel = document.getElementById('carrusel');
         let currentPosition = 0;
-        const cardWidth = 5000; // 30rem de ancho + 5rem de margen (calculado en píxeles)
+        const cardWidth = 5000;
         let animationID;
 
         function generarTarjeta(titulo, imagen) {
@@ -265,7 +296,7 @@ const carrusel = document.getElementById('carrusel');
                     </div>
                 </div>
             `).join('');
-            carrusel.innerHTML = tarjetasHTML + tarjetasHTML; // Duplicamos las tarjetas
+            carrusel.innerHTML = tarjetasHTML + tarjetasHTML;
         }
 
         function animarCarrusel() {
@@ -276,7 +307,6 @@ const carrusel = document.getElementById('carrusel');
             const primerTarjeta = tarjetas[0];
             const ultimaTarjeta = tarjetas[tarjetas.length - 1];
 
-            // Verifica si la primera tarjeta ha salido de la vista
             if (-currentPosition >= cardWidth) {
                 carrusel.appendChild(primerTarjeta);
                 currentPosition += cardWidth;

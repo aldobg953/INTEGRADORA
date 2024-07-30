@@ -1,107 +1,159 @@
 <!DOCTYPE html>
 <html th:classappend="${usuario.darkmode} ? 'dark' : ''">
+
 <head>
-    <link rel="icon" href="css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-    <title >PathFinder | Especialidad</title>
+    <link rel="icon" href="/css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
+    <title th:text="'PathFinder | ' + ${especialidad.nombre}"></title>
     <script src="/js/navbar.js"></script>
     <link href="/css/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/carrera.css">
 </head>
-    <body class="dark:bg-gray-800">
-        
-        <nav class="border-gray-200 bg-gradient-to-r from-cyan-500 to-blue-500">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6">
-                <a th:href="@{/}" class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <div id="logo-image"> 
-                        <img id="logo-horizontal-image" src="css/LogoLogoPathFinderHorizontal.svg" alt=""
-                        style="max-width:40%;height:auto;">
-                    </div>
-                    <span class="self-center text-3xl font-semibold whitespace-nowrap">PathFinder</span>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a th:href="@{/}">
+                    <img src="/css/LogoLogoPathFinderHorizontal.svg" alt="" id="navbar-logo">
                 </a>
+                <hr>
 
-                <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-blue-600" id="user-menu-button" aria-expanded="false">
-                        <span class="sr-only">Menu usuario</span>
-                        <img class="w-8 h-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kvDMFGIUOvSxdN4wetKCEXcYyk3I5WfvGQ&s" alt="user photo">
-                    </button>
-                    
-                </div>
-                <div class="hidden absolute right-0 mt-8 mr-8 md:mt-64 md:mr-36 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600 z-20" id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-black-900 dark:text-white" th:text="${usuario.nombre} + ' ' + ${usuario.apellidoP}">usuario</span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400" th:text="${usuario.email} ">correo</span>
+                <a th:href="@{/universidades?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img src="/css/assets/navbaricons/universidad.png" alt="" class="link-icon"
+                            th:text="#{universidades}"></div>
+                </a>
+                <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img src="/css/assets/navbaricons/area.png" alt="" class="link-icon"
+                            th:text="#{areas}"></div>
+                </a>
+                <a th:href="@{/carreras/all?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img src="/css/assets/navbaricons/gorro.png" alt="" class="link-icon"
+                            th:text="#{carreras}"></div>
+                </a>
+            </div>
+
+            <div class="navbar-links" id="navbarLinks">
+
+                <div class="form-input ">
+                    <span class="input-icon"><i class="fi fi-rr-sparkles"></i></span>
+                    <div id="searchForm">
+                        <input type="text" id="search-bar" th:placeholder="#{mensajeBarraBusqueda}" autocomplete="off">
+                        <div id="results" class="bg-white dark:text-white dark:bg-gray-800 hidden">
+                        </div>
                     </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}"class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Perfil</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/configuracion?lang=}+${usuario.lang}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white">Configuraciones</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:text-white" th:text="#{favoritos}">Favoritos</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-300 dark:text-white" th:text="#{cierreSesion}">Cerrar sesion</a>
-                        </li>
-                    </ul>
                 </div>
 
-                <div class="items-center justify-between  w-full md:flex md:w-auto md:order-1" >
-                <ul class="flex flex-col font-medium p-4 mt-4 md:space-x-8 md:flex-row md:mt-0 md:border-0">
-                    <li>
-                    <a th:href="@{/}" class="text-2xl py-2 px-3 md:p-0" aria-current="page" th:text="#{inicioo}">Inicio</a>
-                    </li>
-                    <li>
-                    <a th:href="@{/universidades?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{universidades}">Universidades</a>
-                    </li>
-                    <li>
-                    <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 text-blue-700 md:p-0" th:text="#{carreras}">Carreras</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/carreras/areas?lang=}+${usuario.lang}" class="text-2xl py-2 px-3 md:p-0" th:text="#{areas}">Area</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-2xl py-2 px-3 md:p-0" th:text="#{contacto}">Contacto</a>
-                    </li>
-                </ul>
-                </div>
+                <hr>
+                <a th:href="@{/configuracion/perfil?lang=}+${usuario.lang}" style="display: yes;">
+                    <div class="link"><img th:src="@{'/img/perfilUsuario/' + ${usuario.foto_perfil} + '.jpg'}" alt=""
+                            id="profile-icon" class="link-icon" th:text="#{perfil}"></div>
+                </a>
             </div>
+
         </nav>
+    </header>
 
-        <div class="bg-fixed w-full min-h-80 bg-cover" style="background-image: url(/img/utch/portada.jpg); background-position: center 70%;">
-            <div class="bg-sky-900 w-full h-80 flex items-center justify-center bg-opacity-50">
-                <span class="font-serif text-5xl text-white font-bold z-10 ml-12 text-center" th:text="${especialidad.nombre}">nombre_completo</span>
+    <div id="dynamicBackground" style="background-image: url(/img/utch/portada.jpg); background-position: center 70%;">
+        <div class="title-gradient bg-opacity-50">
+            <div class="titulo-carrera">
+                <h1 th:text="${especialidad.nombre}">nombre_completo</h1>
             </div>
         </div>
-        <div class=" my-8 mx-2 md:mx-28 border-l-4 pl-10" >
-            <span class="text-justify font-serif text-sm md:text-xl dark:text-white" th:text="${especialidad.informacion}">informacion</span>
-        </div>
-        <div class="flex flex-col md:flex-row my-7 w-full ">
-            <div class="md:basis-1/2 flex justify-center items-center mt-5 dark:bg-white">
-                <img src="/img/utch/logo.jpg" class="h-auto max-w-full md:max-w-[80%]">
-            </div>
-            <div class="my-0 md:mx-16 md:basis-1/2 w-full flex flex-col space-y-4 rounded-lg border-sky-600 border-2 p-4 bg-gradient-to-r from-cyan-500 to-blue-500">
-                <div class="ml-32 mt-5 h-10 text-xl md:text-3xl font-bold font-serif" th:text="#{infoEspecialidad}">Informacion de la especialidad</div>
-                <div class="text-xl md:text-lg font-serif font-bold" th:text="#{horariosCostos}">Horarios y costos</div>
-                <div th:utext="${especialidad.horario_especifico}" class="text-base md:text-lg">horario</div>
-                <div  class="text-base md:text-lg" ><span th:text="#{costos}"></span> <span th:text="${especialidad.costo} + '0$'"></span></div>
-                <div class="text-xl md:text-lg font-serif font-bold" th:text="#{modalidad}">Modalidad</div>
-                <div th:text="${especialidad.modalidad.nombre_modalidad}" class="text-base md:text-lg">modalidad</div>
-                <div th:text="${especialidad.carrera.cantidad_periodos} + ' ' +${especialidad.periodoEscolar.nombre_periodo} + 's'" class="text-base md:text-lg">nombre_periodo</div>
-                <div class="text-xl md:text-lg font-serif font-bold" th:text="areas">Area</div>
-                <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.area.nombre_area}" th:href="@{/carreras/area/{id}(id=${especialidad.carrera.area.id_area}, lang=${usuario.lang})}"></a>
-                <div class="text-xl md:text-lg font-serif font-bold" th:text="#{universidad}">Universidad</div>
-                <a class="font-serif text-base md:text-lg" th:text="${especialidad.carrera.universidad.nombre_completo}" th:href="@{/universidades/universidad/{id}(id=${especialidad.carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
-            </div>
-        </div>
-    
-        <div >
-            <div class="w-full mt-32 mb-7 md:my-7 flex justify-center"><p class="font-mono text-5xl font-bold dark:text-white" th:text="#{planEstudio}">Plan de estudio</p></div>
-            <div class="md:mx-32 border-sky-600 border-2 mb-7 h-80 md:h-[1700px]" height="1700px">
-                <iframe class="bg-sky-200 w-full h-full iframe-zoom" th:src="${especialidad.roadmap}" width="100%" height="100%" frameBorder="0"></iframe>
-            </div>
-        </div-->
+    </div>
 
+    <div class="main-content dark:bg-gray-800">
 
-    </body>
+        <div class="carrera-acercade">
+            <div class="vertical-line"></div>
+            <p th:text="${especialidad.informacion}">informacion</p>
+        </div>
+
+        <div class="logo-informacion">
+            <div class="logo-carrera">
+                <img src="/img/utch/logo.jpg">
+            </div>
+
+            <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:text-white">
+
+                <h2 th:text="#{infoEspecialidad}">Informacion de la especialidad</h2>
+
+                <div>
+                    <h3 th:text="#{horariosCostos}">Horarios y costos</h3>
+                    <div th:utext="${especialidad.horario_especifico}">horario</div>
+                </div>
+
+                <div>
+                    <h3><span th:text="#{costos}"></span> <span th:text="${especialidad.costo} + '0$'"></span></h3>
+                    <div th:text="#{modalidad}">Modalidad</div>
+                </div>
+
+                <div>
+                    <h3 th:text="${especialidad.modalidad.nombre_modalidad}">modalidad</h3>
+                    <div
+                        th:text="${especialidad.carrera.cantidad_periodos} + ' ' +${especialidad.periodoEscolar.nombre_periodo} + 's'">
+                        nombre_periodo</div>
+                </div>
+
+                <div>
+                    <h3 th:text="areas">Area</h3>
+                    <a th:text="${especialidad.carrera.area.nombre_area}"
+                        th:href="@{/carreras/area/{id}(id=${especialidad.carrera.area.id_area}, lang=${usuario.lang})}"></a>
+                </div>
+
+                <div>
+                    <h3 th:text="#{universidad}">Universidad</h3>
+                    <a th:text="${especialidad.carrera.universidad.nombre_completo}"
+                        th:href="@{/universidades/universidad/{id}(id=${especialidad.carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="roadmap">
+            <h2 th:text="#{planEstudio}">Plan de estudio</h2>
+            <iframe th:src="${especialidad.roadmap}" width="100%" height="100%" frameBorder="0"></iframe>
+        </div>
+    </div>
+
+    <center>
+        <footer class="footer">
+            <div class="footer-logo">
+                <img src="/css/LogoLogoPathFinderVertical.svg" alt="">
+            </div>
+            <div class="footer-section">
+                <h3 th:text="#{servicio}"></h3>
+                <a href="#" th:text="#{nuestroTrabajo}"></a>
+                <a href="#" th:text="#{centroAyuda}"></a>
+                <a href="#" th:text="#{faqs}"></a>
+            </div>
+            <div class="footer-section">
+                <h3 th:text="#{contacto}"></h3>
+                <p>contacto@pathfinder.com</p>
+                <p th:text="#{sobreNosotros}"></p>
+                <p>614 785 6594</p>
+            </div>
+            <div class="footer-section">
+                <h3 th:text="#{direccion}"></h3>
+                <p>Av. Montes Americanos #9501, Col.</p>
+                <p>Sector 35, C.P. 31216, Chihuahua,</p>
+                <p>Chih., México.</p>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a>&copy; 2024 PathFinder</a>
+                    <a href="#" th:text="#{terminos}"></a>
+                    <a href="#" th:text="#{politica}"></a>
+                </div>
+                <div class="social-icons">
+
+                    <a href="#" title="Facebook"><img src="/css/assets/facebook.svg" alt=""></a>
+                    <a href="#" title="X"><img src="/css/assets/x.svg" alt=""></a>
+                    <a href="#" title="Instagram"><img src="/css/assets/instagram.svg" alt=""></a>
+                    <a href="#" title="LinkedIn"><img src="/css/assets/linkedin.svg" alt=""></a>
+                </div>
+            </div>
+        </footer>
+    </center>
+</body>
+
 </html>
