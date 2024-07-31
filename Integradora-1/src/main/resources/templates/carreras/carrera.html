@@ -3,7 +3,7 @@
 
 <head>
     <link rel="icon" href="/css/IsotipoPathFinderTabIcon.ico" type="image/x-icon">
-    <title th:text="'PathFinder | ' + ${carrera.nombre}"></title>
+    <title th:text="'PathFinder | ' + ${carreraDetalleDTO.carrera.nombre}"></title>
     <link href="/css/tailwind.css" rel="stylesheet">
     <script src="/js/navbar.js"></script>
     <link rel="stylesheet" href="/css/carrera.css">
@@ -60,17 +60,17 @@
     </header>
 
     <div id="dynamicBackground"
-        th:data-background-image="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/portada.jpg'}"
+        th:data-background-image="@{'/img/' + ${carreraDetalleDTO.carrera.universidad.nombre_abreviado} + '/portada.jpg'}"
         class="bg-fixed w-full bg-cover" style="background-position: center 70%;">
         <div class="title-gradient bg-opacity-50">
             <div class="titulo-carrera">
-                <h1 th:text="${carrera.nombre}">nombre_completo</h1>
+                <h1 th:text="${carreraDetalleDTO.carrera.nombre}">nombre_completo</h1>
                 <div class="me-gusta">
                     <!-- Botón para agregar a favoritos -->
-                    <form th:if="${carrera.esFavoritaParaUsuario(usuario)}" th:action="@{/carreras/carreras/quitarFav}"
+                    <form th:if="${carreraDetalleDTO.carrera.esFavoritaParaUsuario(usuario)}" th:action="@{/carreras/carreras/quitarFav}"
                         method="post" class="me-gusta-boton">
 
-                        <input type="hidden" name="carreraId" th:value="${carrera.id_carrera}" />
+                        <input type="hidden" name="carreraId" th:value="${carreraDetalleDTO.carrera.id_carrera}" />
                         <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
                                 <path
@@ -80,9 +80,9 @@
                         </button>
                     </form>
 
-                    <form th:if="${!carrera.esFavoritaParaUsuario(usuario)}"
+                    <form th:if="${!carreraDetalleDTO.carrera.esFavoritaParaUsuario(usuario)}"
                         th:action="@{/carreras/carreras/agregarFav}" method="post" class="me-gusta-boton">
-                        <input type="hidden" name="carreraId" th:value="${carrera.id_carrera}" />
+                        <input type="hidden" name="carreraId" th:value="${carreraDetalleDTO.carrera.id_carrera}" />
                         <button type="submit" id="inactive">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
                                 <path
@@ -100,7 +100,7 @@
     <script th:inline="javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var elemento = document.getElementById('dynamicBackground');
-            var imagenFondo = /*[[${'/img/' + carrera.universidad.nombre_abreviado + '/portada.jpg'}]]*/ 'default-image.jpg';
+            var imagenFondo = /*[[${'/img/' + carreraDetalleDTO.carrera.universidad.nombre_abreviado + '/portada.jpg'}]]*/ 'default-image.jpg';
 
             if (imagenFondo) {
                 elemento.style.backgroundImage = 'url("' + imagenFondo + '")';
@@ -112,12 +112,14 @@
 
         <div class="carrera-acercade">
             <div class="vertical-line"></div>
-            <p class="dark:text-white" th:text="${carrera.informacion}"></p>
+            <p class="dark:text-white" th:text="${carreraDetalleDTO.carrera.informacion}"></p>
         </div>
 
         <div class="logo-informacion">
             <div class="logo-carrera">
-                <img th:src="@{'/img/' + ${carrera.universidad.nombre_abreviado} + '/logo.jpg'}">
+                <img th:src="@{'data:image/jpeg;base64,' + ${carreraDetalleDTO.logoUni}}" 
+                            alt="Logo de la Universidad" 
+                            class="universidad-imagen">
             </div>
 
             <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:text-white">
@@ -126,35 +128,35 @@
 
                 <div>
                     <h3 th:text="#{horariosCostos}">Horarios</h3>
-                    <p th:utext="${carrera.horario_especifico}">horario</p>
+                    <p th:utext="${carreraDetalleDTO.carrera.horario_especifico}">horario</p>
                 </div>
 
                 <div>
                     <h3 th:text="#{costoCarrera}">Costo de la carrera:</h3>
-                    <p ><span th:text="${carrera.costo}"></span>0$ <span th:text="#{costoPeriodo}"> por periodo</span></p>
+                    <p ><span th:text="${carreraDetalleDTO.carrera.costo}"></span>0$ <span th:text="#{costoPeriodo}"> por periodo</span></p>
                 </div>
 
                 <div>
                     <h3 th:text="#{modalidad}">Modalidad</h3>
-                    <p th:text="${carrera.modalidad.nombre_modalidad}">modalidad</p>
+                    <p th:text="${carreraDetalleDTO.carrera.modalidad.nombre_modalidad}">modalidad</p>
                 </div>
 
                 <div>
                     <h3 th:text="#{periodos}">Periodos</h3>
-                    <div th:text="${carrera.cantidad_periodos} + ' ' +${carrera.periodoEscolar.nombre_periodo} + 's'">
+                    <div th:text="${carreraDetalleDTO.carrera.cantidad_periodos} + ' ' +${carreraDetalleDTO.carrera.periodoEscolar.nombre_periodo} + 's'">
                         nombre_periodo</div>
                 </div>
 
                 <div>
                     <h3 th:text="#{areas}"></h3>
-                    <a th:text="${carrera.area.nombre_area}"
-                        th:href="@{/carreras/area/{id}(id=${carrera.area.id_area}, lang=${usuario.lang})}"></a>
+                    <a th:text="${carreraDetalleDTO.carrera.area.nombre_area}"
+                        th:href="@{/carreras/area/{id}(id=${carreraDetalleDTO.carrera.area.id_area}, lang=${usuario.lang})}"></a>
                 </div>
 
                 <div>
                     <h3 th:text="#{universidad}"></h3>
-                    <a th:text="${carrera.universidad.nombre_completo}"
-                        th:href="@{/universidades/universidad/{id}(id=${carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
+                    <a th:text="${carreraDetalleDTO.carrera.universidad.nombre_completo}"
+                        th:href="@{/universidades/universidad/{id}(id=${carreraDetalleDTO.carrera.universidad.id_universidad}, lang=${usuario.lang})}"></a>
                 </div>
 
             </div>
@@ -162,24 +164,26 @@
 
         <div class="por-que-estudiar">
             <div class="por-que-estudiar-text">
-                <h2 th:text="'¿Por qué estudiar ' + ${carrera.nombre} + '?'">carrera</h2><br />
-                <p th:text="${carrera.porque_estudiar}"></p>
+                <h2 th:text="'¿Por qué estudiar ' + ${carreraDetalleDTO.carrera.nombre} + '?'">carrera</h2><br />
+                <p th:text="${carreraDetalleDTO.carrera.porque_estudiar}"></p>
             </div>
             <div class="por-que-estudiar-img">
-                <img th:src="@{'/img/carreras/' + ${carrera.id_carrera} + '.jpg'}">
+                <img th:src="@{'data:image/jpeg;base64,' + ${carreraDetalleDTO.imagen}}" 
+                            alt="Logo de la carrera" 
+                            class="universidad-imagen">
             </div>
         </div>
 
         <div class="trabajo-desempeno dark:text-white">
             <div class="donde-trabajar">
                 <h2 th:text="#{dondeTrabajar}"></h2><br />
-                <p th:text="${carrera.donde_trabajar}"></p>
+                <p th:text="${carreraDetalleDTO.carrera.donde_trabajar}"></p>
             </div>
 
             <div class="desempeno">
                 <h2 th:text="#{comoDes}"> ¿Cómo puedo Desempeñarme?</h2><br />
                 <div>
-                    <ul th:utext="${carrera.como_desemp}"></ul>
+                    <ul th:utext="${carreraDetalleDTO.carrera.como_desemp}"></ul>
                 </div>
             </div>
         </div>
@@ -194,7 +198,9 @@
                     class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
                     <a th:href="@{/carreras/especialidad/{id}(id=${especialidad.id_especialidad}, lang=${usuario.lang})}"
                         class="imagen-uni">
-                        <img src="/img/utch/logo.jpg" alt="" />
+                        <img th:src="@{'data:image/jpeg;base64,' + ${carreraDetalleDTO.logoUni}}" 
+                            alt="Logo de la Universidad" 
+                            class="h-full w-full">
                     </a>
 
                     <div class="tarjeta-contenido dark:text-white">
@@ -220,7 +226,7 @@
 
             <h2 th:text="#{planEstudio}">Plan de estudio </h2>
 
-            <iframe th:src="${carrera.roadmap}" frameBorder="0"></iframe>
+            <iframe th:src="${carreraDetalleDTO.carrera.roadmap}" frameBorder="0"></iframe>
 
         </div>
 
@@ -280,7 +286,7 @@
                         <span class="estrella" th:each="i : ${#numbers.sequence(1, 5)}" th:data-value="${i}"></span>
                     </div>
                     <input type="hidden" id="calificacion" name="calificacion" value="0">
-                    <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carrera.id_carrera}">
+                    <input type="hidden" id="id_carrera" name="id_carrera" th:value="${carreraDetalleDTO.carrera.id_carrera}">
                     <h3 th:text="#{dejaComentario}"></h3>
                     <textarea class="dark:bg-gray-800" id="comentarioNuevo" name="comentarioNuevo" rows="4"
                         th:placeholder="#{escribeTuComentario}"></textarea>

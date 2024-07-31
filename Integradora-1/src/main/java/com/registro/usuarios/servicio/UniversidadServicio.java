@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Universidad;
@@ -84,16 +85,25 @@ public class UniversidadServicio {
         return resumen;
     }
     
-    public Universidad guardarUniversidad(UniversidadDTO universidadDTO){
-        try {
-            Universidad universidad = new Universidad(universidadDTO.getId_universidad(), universidadDTO.getNombre_completo(),universidadDTO.getNombre_abreviado(),
-            universidadDTO.getPagina_web(),universidadDTO.getCorreo(),universidadDTO.getTelefono(),universidadDTO.getInformacion(),
-            universidadDTO.getDireccion(), universidadDTO.getDireccionGoogle(),universidadDTO.getTipo_institucion(), 
-            universidadDTO.getCaracteristicas());
-            return universidadRepositorio.save(universidad);
-        } catch (Exception e) {
-            return null;
-        }
+    @Transactional
+    public Universidad guardarUniversidad(UniversidadDTO universidadDTO) {
+        Universidad universidad = new Universidad();
+        
+        universidad.setNombre_completo(universidadDTO.getNombre_completo());
+        universidad.setNombre_abreviado(universidadDTO.getNombre_abreviado());
+        universidad.setPagina_web(universidadDTO.getPagina_web());
+        universidad.setCorreo(universidadDTO.getCorreo());
+        universidad.setTelefono(universidadDTO.getTelefono());
+        universidad.setInformacion(universidadDTO.getInformacion());
+        universidad.setDireccion(universidadDTO.getDireccion());
+        universidad.setDireccionGoogle(universidadDTO.getDireccionGoogle());
+        universidad.setTipo_institucion(universidadDTO.getTipo_institucion());
+        universidad.setCaracteristicas(universidadDTO.getCaracteristicas());
+        
+        universidad.setLogoBytes(universidadDTO.getLogoBytes());
+        universidad.setPortadaBytes(universidadDTO.getPortadaBytes());
+        universidad.setImagen1Bytes(universidadDTO.getImagen1Bytes());
+        return universidadRepositorio.save(universidad);
     }
 
     public UniversidadDTO getUniversidadDTO(Long id){
@@ -164,4 +174,31 @@ public class UniversidadServicio {
         }
     }
     
+    @Transactional
+    public Universidad actualizarUniversidad(UniversidadDTO universidadDTO) {
+        Universidad universidad = universidadRepositorio.findById(universidadDTO.getId_universidad()).get();
+        
+        universidad.setNombre_completo(universidadDTO.getNombre_completo());
+        universidad.setNombre_abreviado(universidadDTO.getNombre_abreviado());
+        universidad.setPagina_web(universidadDTO.getPagina_web());
+        universidad.setCorreo(universidadDTO.getCorreo());
+        universidad.setTelefono(universidadDTO.getTelefono());
+        universidad.setInformacion(universidadDTO.getInformacion());
+        universidad.setDireccion(universidadDTO.getDireccion());
+        universidad.setDireccionGoogle(universidadDTO.getDireccionGoogle());
+        universidad.setTipo_institucion(universidadDTO.getTipo_institucion());
+        universidad.setCaracteristicas(universidadDTO.getCaracteristicas());
+        
+        if (universidadDTO.getLogoBytes() != null) {
+            universidad.setLogoBytes(universidadDTO.getLogoBytes());
+        }
+        if (universidadDTO.getPortadaBytes() != null) {
+            universidad.setPortadaBytes(universidadDTO.getPortadaBytes());
+        }
+        if (universidadDTO.getImagen1Bytes() != null) {
+            universidad.setImagen1Bytes(universidadDTO.getImagen1Bytes());
+        }
+        
+        return universidadRepositorio.save(universidad);
+    }
 }

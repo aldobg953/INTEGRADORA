@@ -74,19 +74,21 @@
             </center>
 
         <div id="areas" class="tarjetas-unis" >
-            <div th:each="carrera : ${carreras}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
-                <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
-                    <img th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
+            <div th:each="carr : ${carreraDetalleDTO}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+                <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
+                    <img th:src="@{'data:image/jpeg;base64,' + ${carr.imagen}}" 
+                            alt="Logo de la Universidad" 
+                            class="universidad-imagen">
                 </a>
                 <div class="tarjeta-contenido dark:text-white">
-                    <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                        <h2 th:text="${carrera.nombre}"></h2>
+                    <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}">
+                        <h2 th:text="${carr.carrera.nombre}"></h2>
                     </a>
-                    <p th:text="#{universidad}" class="dark:text-white font-semibold"> Universidad: <span th:text="${carrera.universidad.nombre_abreviado}" class="dark:text-white font-normal"></span></p>
-                    <p th:text="${carrera.desc_breve}" class="dark:text-white"></p>
+                    <p class="dark:text-white font-semibold"> <span th:text="#{universidad}">Universidad:</span>: <span th:text="${carr.carrera.universidad.nombre_abreviado}" class="dark:text-white font-normal"></span></p>
+                    <p th:text="${carr.carrera.desc_breve}" class="dark:text-white"></p>
 
                     <div class="tarjeta-botones">
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" th:text="#{verMas}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
+                        <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}" th:text="#{verMas}" class="ver-mas dark:shadow-none dark:hover:shadow-none">
                     </a>
                     </div>
                     

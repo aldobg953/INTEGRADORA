@@ -117,29 +117,31 @@
         <center>
             <div class="dark:bg-gray-80 carrera-comparar">   
             <h3 th:text="${carreraAComparar.nombre}" class="text-gradient"></h3>
-            <p><span th:text="#{seleccionaSegCarr}">Selecciona la segunda carrera a comparar o vuelve para </span> <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-gradient" th:text="#{compararOCarr}">comparar otras carreras</a></p>
+            <p><span th:text="#{seleccionaSegCarr}" class="dark:text-white">Selecciona la segunda carrera a comparar o vuelve para </span> <a th:href="@{/carreras/all?lang=}+${usuario.lang}" class="text-gradient" th:text="#{compararOCarr}">comparar otras carreras</a></p>
         </div>
         </center>
         
 
         <div id="carrerasCard" class="tarjetas-unis">
-            <div th:each="carrera : ${carreras}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
-                <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
-                    <img th:src="@{'/img/carreras/'+  ${carrera.id_carrera} +'.jpg'}" alt="" />
+            <div th:each="carr : ${carreraDetalleDTO}" th:if="${carreraAComparar.id_carrera}!=${carr.carrera.id_carrera}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+                <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
+                    <img th:src="@{'data:image/jpeg;base64,' + ${carr.imagen}}" 
+                            alt="Logo de la Universidad" 
+                            class="universidad-imagen">
                 </a>
                 <div class="tarjeta-contenido dark:text-white">
                     <div>
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                            <h2 th:text="${carrera.nombre}"></h2>
+                        <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}">
+                            <h2 th:text="${carr.carrera.nombre}"></h2>
                         </a>
-                        <p class="dark:text-white">Universidad: <span th:text="${carrera.universidad.nombre_abreviado}"></span></p>
-                        <p th:text="${carrera.desc_breve}" class="dark:text-white">desc breve</p>
+                        <p class="dark:text-white">Universidad: <span th:text="${carr.carrera.universidad.nombre_abreviado}"></span></p>
+                        <p th:text="${carr.carrera.desc_breve}" class="dark:text-white">desc breve</p>
                     </div>
                     <div class="tarjeta-botones">
                         <form th:action="@{/carreras/compararCarreras}" method="get">
                             <input type="hidden" name="lang" id="lang" th:value="${usuario.lang}"/>
                             <input type="hidden" name="id_carrera_1" id="id_carrera_1" th:value="${carreraAComparar.id_carrera}"/>
-                            <input type="hidden" name="id_carrera_2" id="id_carrera_2" th:value="${carrera.id_carrera}"/>
+                            <input type="hidden" name="id_carrera_2" id="id_carrera_2" th:value="${carr.carrera.id_carrera}"/>
                                 <button class="comparar dark:shadow-none dark:hover:shadow-none" th:text="#{comparar}">Comparar</button>
                             
                         </form> 

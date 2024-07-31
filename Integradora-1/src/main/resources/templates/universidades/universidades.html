@@ -120,17 +120,19 @@
     </center>
 
     <div id="unis" class="tarjetas-unis">
-        <div th:each="universidad : ${universidades}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
-            <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="imagen-uni">
-                <img th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/logo.jpg'}" alt="" />
+        <div th:each="universidadDet : ${universidadDetalles}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+            <a th:href="@{/universidades/universidad/{id}(id=${universidadDet.universidad.id_universidad}, lang=${usuario.lang})}" class="imagen-uni">
+                <img th:src="@{'data:image/jpeg;base64,' + ${universidadDet.logoBase64}}" 
+                    alt="Logo de la Universidad" 
+                    class="universidad-imagen">
             </a>
             <div class="tarjeta-contenido dark:text-white">
-                <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}">
-                    <h2 th:text="${universidad.nombre_completo}"></h2>
+                <a th:href="@{/universidades/universidad/{id}(id=${universidadDet.universidad.id_universidad}, lang=${usuario.lang})}">
+                    <h2 th:text="${universidadDet.universidad.nombre_completo}"></h2>
                 </a>
-                <p class="dark:text-white" th:text="#{tipoInstitucion}">Tipo de institucion: <span th:text="${universidad.tipo_institucion}"></span></p>
+                <p><span class="dark:text-white" th:text="#{tipoInstitucion}">Tipo de institucion:</span>: <span th:text="${universidadDet.universidad.tipo_institucion}"></span></p>
                 <div class="tarjeta-botones">
-                    <a th:href="@{/universidades/universidad/{id}(id=${universidad.id_universidad}, lang=${usuario.lang})}" class="ver-mas dark:shadow-none dark:hover:shadow-none" th:text="#{verMas}">
+                    <a th:href="@{/universidades/universidad/{id}(id=${universidadDet.universidad.id_universidad}, lang=${usuario.lang})}" class="ver-mas dark:shadow-none dark:hover:shadow-none" th:text="#{verMas}">
                     Ver más
                 </a>
                 </div>

@@ -1,6 +1,8 @@
 package com.registro.usuarios.controlador;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +22,8 @@ import com.registro.usuarios.modelo.Modalidad;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.modelo.dto.AreaDTO;
 import com.registro.usuarios.modelo.dto.CalificacionesDto;
+import com.registro.usuarios.modelo.dto.CarreraDetalleDTO;
+import com.registro.usuarios.modelo.dto.UniversidadDetalleDTO;
 import com.registro.usuarios.modelo.resumen.UniversidadResumen;
 import com.registro.usuarios.servicio.AreaServicio;
 import com.registro.usuarios.servicio.CarreraServicio;
@@ -66,14 +70,13 @@ public class CarreraControlador {
     public String mostrarCarrera(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         carreraServicio.incrementarContador(id);
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        Carrera carrera = carreraServicio.getCarreraById(id, usuario.getLang());
+        CarreraDetalleDTO carreraDetalleDTO = new CarreraDetalleDTO(carreraServicio.getCarreraById(id, usuario.getLang()));
         List<Foro> foros = carreraServicio.getForoByCarrera(id);
         CalificacionesDto califGnral = foroServicio.obtenerCalifCarrera(id);
         List<Especialidad> especialidades = especialidadServicio.getEspecialidadByCarrera(id,usuario.getLang());
-        
         model.addAttribute("especialidades", especialidades);
         model.addAttribute("usuario", usuario);
-        model.addAttribute("carrera", carrera);
+        model.addAttribute("carreraDetalleDTO", carreraDetalleDTO);
         model.addAttribute("foros", foros);
         model.addAttribute("califGnral", califGnral);
         return "carreras/carrera";
@@ -83,9 +86,11 @@ public class CarreraControlador {
     public String mostrarCarreraByArea( Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id) {
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         List<Carrera> carreras = carreraServicio.getCarrerasByArea(id,usuario.getLang());
+        List<CarreraDetalleDTO> carreraDetalleDTO = carreras.stream().map(carrera -> new CarreraDetalleDTO(carrera)).collect(Collectors.toList());
+        
         String area = areaServicio.getAreaByid(id).getNombreSegunIdioma(usuario.getLang());
         model.addAttribute("usuario", usuario);
-        model.addAttribute("carreras", carreras);
+        model.addAttribute("carreraDetalleDTO", carreraDetalleDTO);
         model.addAttribute("area", area);
         return "carreras/carreasByArea";
     }
@@ -114,6 +119,8 @@ public class CarreraControlador {
     public String mostrarEspecialidad(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         Especialidad especialidad = especialidadServicio.getEspecialidadById(id, usuario.getLang());
+        UniversidadDetalleDTO universidadDetalleDTO = new UniversidadDetalleDTO(especialidad.getCarrera().getUniversidad());
+        model.addAttribute("universidadDetalleDTO", universidadDetalleDTO);
         model.addAttribute("especialidad", especialidad);
         model.addAttribute("usuario", usuario);
         return "carreras/especialidad";
@@ -124,6 +131,7 @@ public class CarreraControlador {
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         String lang = usuario.getLang();
         List<Carrera> carreras = carreraServicio.getAllCarreras(lang);
+        List<CarreraDetalleDTO> carreraDetalleDTO = carreras.stream().map(carrera -> new CarreraDetalleDTO(carrera)).collect(Collectors.toList());
         List<Modalidad> modalidades = modalidadServicio.getAllModalidades(lang);
         List<Horario> horarios = horarioServicio.getAllHorarios(lang);
         List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadesResumen();
@@ -131,7 +139,7 @@ public class CarreraControlador {
         model.addAttribute("modalidades", modalidades);
         model.addAttribute("horarios", horarios);
         model.addAttribute("usuario", usuario);
-        model.addAttribute("carreras", carreras);
+        model.addAttribute("carreraDetalleDTO", carreraDetalleDTO);
         model.addAttribute("universidades", universidades);
         model.addAttribute("areas", areas);
         return "carreras/allcarreras";
@@ -157,12 +165,12 @@ public class CarreraControlador {
         List<AreaDTO> areas = areaServicio.getAllAreas(lang);
         
         List<Carrera> carreras = carreraServicio.buscarCarreras(idModalidad, idHorario, idUniversidad, idArea, bilingue, lang);
-
+        List<CarreraDetalleDTO> carreraDetalleDTO = carreras.stream().map(carrera -> new CarreraDetalleDTO(carrera)).collect(Collectors.toList());
         model.addAttribute("modalidades", modalidades);
         model.addAttribute("horarios", horarios);
         model.addAttribute("universidades", universidades);
         model.addAttribute("areas", areas);
-        model.addAttribute("carreras", carreras);
+        model.addAttribute("carreraDetalleDTO", carreraDetalleDTO);
         model.addAttribute("usuario", usuario);
         
         return "carreras/allcarreras";
@@ -173,6 +181,7 @@ public class CarreraControlador {
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
         String lang = usuario.getLang();
         List<Carrera> carreras = carreraServicio.getAllCarreras(lang);
+        List<CarreraDetalleDTO> carreraDetalleDTO = carreras.stream().map(carrera -> new CarreraDetalleDTO(carrera)).collect(Collectors.toList());
         List<Modalidad> modalidades = modalidadServicio.getAllModalidades(lang);
         List<Horario> horarios = horarioServicio.getAllHorarios(lang);
         List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadesResumen();
@@ -182,7 +191,7 @@ public class CarreraControlador {
         model.addAttribute("modalidades", modalidades);
         model.addAttribute("horarios", horarios);
         model.addAttribute("usuario", usuario);
-        model.addAttribute("carreras", carreras);
+        model.addAttribute("carreraDetalleDTO", carreraDetalleDTO);
         model.addAttribute("universidades", universidades);
         model.addAttribute("areas", areas);
         return "carreras/seleccionarCarreraComp";
@@ -207,8 +216,9 @@ public class CarreraControlador {
         List<Horario> horarios = horarioServicio.getAllHorarios(lang);
         List<UniversidadResumen> universidades = universidadServicio.getAllUniversidadesResumen();
         List<AreaDTO> areas = areaServicio.getAllAreas(lang);
-        
         List<Carrera> carreras = carreraServicio.buscarCarreras(idModalidad, idHorario, idUniversidad, idArea, bilingue, lang);
+        List<CarreraDetalleDTO> carreraDetalleDTO = carreras.stream().map(carrera -> new CarreraDetalleDTO(carrera)).collect(Collectors.toList());
+        
         Carrera carreraAComparar = carreraServicio.getCarreraById(id_carrera_comp, lang);
         
         model.addAttribute("carreraAComparar", carreraAComparar);
@@ -216,7 +226,7 @@ public class CarreraControlador {
         model.addAttribute("horarios", horarios);
         model.addAttribute("universidades", universidades);
         model.addAttribute("areas", areas);
-        model.addAttribute("carreras", carreras);
+        model.addAttribute("carreraDetalleDTO", carreraDetalleDTO);
         model.addAttribute("usuario", usuario);
         
         return "carreras/seleccionarCarreraComp";
@@ -230,10 +240,10 @@ public class CarreraControlador {
         @AuthenticationPrincipal UserDetails userDetails,
         Model model) {
             Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-            Carrera carrera1 = carreraServicio.getCarreraById(id_carrera_1, lang);
-            Carrera carrera2 = carreraServicio.getCarreraById(id_carrera_2, lang);
-            model.addAttribute("carrera1", carrera1);
-            model.addAttribute("carrera2", carrera2);
+            CarreraDetalleDTO carreraDTO1 = new CarreraDetalleDTO(carreraServicio.getCarreraById(id_carrera_1, lang));
+            CarreraDetalleDTO carreraDTO2 = new CarreraDetalleDTO(carreraServicio.getCarreraById(id_carrera_2, lang));
+            model.addAttribute("carreraDTO1", carreraDTO1);
+            model.addAttribute("carreraDTO2", carreraDTO2);
             model.addAttribute("usuario", usuario);
             return "carreras/compararCarreras";
     }

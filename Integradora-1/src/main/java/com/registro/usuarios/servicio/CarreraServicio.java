@@ -120,12 +120,30 @@ public class CarreraServicio {
     public Carrera guardarCarrera(CarreraDTO carreraDTO) {
         Carrera newCarrera;
         try {
-            Carrera carrera = new Carrera(carreraDTO.getNombre(), carreraDTO.getInformacion(),carreraDTO.getRoadmap(),
-            carreraDTO.getCosto(), carreraDTO.getHorario_especifico(), carreraDTO.isBilingue(),carreraDTO.getCantidad_periodos(),
-            carreraDTO.getPorque_estudiar(),carreraDTO.getDonde_trabajar(),carreraDTO.getComo_desemp(),
-            universidadRepositorio.getById(carreraDTO.getUniversidad()),areaRepositorio.getById(carreraDTO.getArea()),
-            modalidadRepositorio.getById(carreraDTO.getModalidad()),periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()),
-            horarioRepositorio.getById(carreraDTO.getHorario()),carreraDTO.getDesc_breve(),0L);
+            Carrera carrera = new Carrera(
+                carreraDTO.getNombre(),
+                carreraDTO.getInformacion(),
+                carreraDTO.getRoadmap(),
+                carreraDTO.getCosto(),
+                carreraDTO.getHorario_especifico(),
+                carreraDTO.isBilingue(),
+                carreraDTO.getCantidad_periodos(),
+                carreraDTO.getPorque_estudiar(),
+                carreraDTO.getDonde_trabajar(),
+                carreraDTO.getComo_desemp(),
+                universidadRepositorio.getById(carreraDTO.getUniversidad()),
+                areaRepositorio.getById(carreraDTO.getArea()),
+                modalidadRepositorio.getById(carreraDTO.getModalidad()),
+                periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()),
+                horarioRepositorio.getById(carreraDTO.getHorario()),
+                carreraDTO.getDesc_breve(),
+                0L
+            );
+    
+            if (carreraDTO.getImagenBytes() != null) {
+                carrera.setImagenBytes(carreraDTO.getImagenBytes());
+            }
+    
             newCarrera = carreraRepositorio.save(carrera);
         } catch (Exception e) {
             newCarrera = null;
@@ -158,30 +176,39 @@ public class CarreraServicio {
         return carreraDTO;
     }
 
-    public boolean modificarCarrera(CarreraDTO carreraDTO) {
+    public Carrera modificarCarrera(CarreraDTO carreraDTO) {
+        Carrera newCarrera;
         try {
-            Carrera carrera = carreraRepositorio.getById(carreraDTO.getId_carrera());
-            carrera.setNombre(carreraDTO.getNombre());
-            carrera.setInformacion(carreraDTO.getInformacion());
-            carrera.setCosto(carreraDTO.getCosto());
-            carrera.setHorario_especifico(carreraDTO.getHorario_especifico());
-            carrera.setBilingue(carreraDTO.isBilingue());
-            carrera.setCantidad_periodos(carreraDTO.getCantidad_periodos());
-            carrera.setRoadmap(carreraDTO.getRoadmap());
-            carrera.setPorque_estudiar(carreraDTO.getPorque_estudiar());
-            carrera.setDonde_trabajar(carreraDTO.getDonde_trabajar());
-            carrera.setComo_desemp(carreraDTO.getComo_desemp());
-            carrera.setUniversidad(universidadRepositorio.getById(carreraDTO.getUniversidad()));
-            carrera.setArea(areaRepositorio.getById(carreraDTO.getArea()));
-            carrera.setModalidad(modalidadRepositorio.getById(carreraDTO.getModalidad()));
-            carrera.setPeriodoEscolar(periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()));
-            carrera.setHorario(horarioRepositorio.getById(carreraDTO.getHorario()));
-            carrera.setDesc_breve(carreraDTO.getDesc_breve());
-            carreraRepositorio.save(carrera);
+            Carrera carrera = new Carrera(
+                carreraDTO.getId_carrera(),
+                carreraDTO.getNombre(),
+                carreraDTO.getInformacion(),
+                carreraDTO.getRoadmap(),
+                carreraDTO.getCosto(),
+                carreraDTO.getHorario_especifico(),
+                carreraDTO.isBilingue(),
+                carreraDTO.getCantidad_periodos(),
+                carreraDTO.getPorque_estudiar(),
+                carreraDTO.getDonde_trabajar(),
+                carreraDTO.getComo_desemp(),
+                universidadRepositorio.getById(carreraDTO.getUniversidad()),
+                areaRepositorio.getById(carreraDTO.getArea()),
+                modalidadRepositorio.getById(carreraDTO.getModalidad()),
+                periodoEscolarRepositorio.getById(carreraDTO.getPeriodoEscolar()),
+                horarioRepositorio.getById(carreraDTO.getHorario()),
+                carreraDTO.getDesc_breve(),
+                0L
+            );
+    
+            if (carreraDTO.getImagenBytes() != null) {
+                carrera.setImagenBytes(carreraDTO.getImagenBytes());
+            }
+    
+            newCarrera = carreraRepositorio.save(carrera);
         } catch (Exception e) {
-            return false;
+            newCarrera = null;
         }
-        return true;
+        return newCarrera;
     }
 
     public boolean eliminarcarrera(Long id){

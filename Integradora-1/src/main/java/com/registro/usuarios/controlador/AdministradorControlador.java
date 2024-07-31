@@ -2,14 +2,10 @@ package com.registro.usuarios.controlador;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -111,20 +107,26 @@ public class AdministradorControlador {
     }
 
     @PostMapping("/postguardarcarrera")
-    private String postGuardarCarrera(@ModelAttribute CarreraDTO carreraDTO, @AuthenticationPrincipal UserDetails userDetails){
+    public String postGuardarCarrera(@ModelAttribute CarreraDTO carreraDTO, @AuthenticationPrincipal UserDetails userDetails) {
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        
         try {
-            Carrera res = carreraServicio.guardarCarrera(carreraDTO);
-            if(res!=null){  
-                Path path = Paths.get(uploadDir+"/carreras").resolve(res.getId_carrera() + ".jpg").normalize();
-                Files.copy(carreraDTO.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            }else{
-                return "redirect:/administrador/crearcarrera?error&lang="+usuario.getLang();
+            if (carreraDTO.getFile() != null && !carreraDTO.getFile().isEmpty()) {
+                carreraDTO.setImagenBytes(carreraDTO.getFile().getBytes());
             }
-        } catch (IOException ex) {
-            return "redirect:/administrador/crearcarrera?error&lang="+usuario.getLang();
+            
+            Carrera carreraGuardada = carreraServicio.guardarCarrera(carreraDTO);
+            
+            if (carreraGuardada != null) {
+                return "redirect:/administrador/crearcarrera?exito&lang=" + usuario.getLang();
+            } else {
+                return "redirect:/administrador/crearcarrera?error&lang=" + usuario.getLang();
+            }
+        } catch (IOException e) {
+            return "redirect:/administrador/crearcarrera?error&lang=" + usuario.getLang();
+        } catch (Exception e) {
+            return "redirect:/administrador/crearcarrera?error&lang=" + usuario.getLang();
         }
-        return "redirect:/administrador/crearcarrera?exito&lang="+usuario.getLang();
     }
 
     @GetMapping("/modificarCarrera")
@@ -160,18 +162,23 @@ public class AdministradorControlador {
     @PostMapping("/postmodificarcarrera")
     private String postModificarCarrera(@ModelAttribute CarreraDTO carreraDTO, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        if(!carreraDTO.getFile().isEmpty()){
-            try {
-                Path path = Paths.get(uploadDir + "/carreras").resolve(carreraDTO.getId_carrera() + ".jpg").normalize();
-                Files.copy(carreraDTO.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            } catch (Exception e) {
+        try {
+            if (carreraDTO.getFile() != null && !carreraDTO.getFile().isEmpty()) {
+                carreraDTO.setImagenBytes(carreraDTO.getFile().getBytes());
+            }
+            
+            Carrera carreraGuardada = carreraServicio.modificarCarrera(carreraDTO);
+            
+            if (carreraGuardada != null) {
+                return "redirect:/administrador/crearcarrera?exito&lang=" + usuario.getLang();
+            } else {
                 return "redirect:/administrador/modificarcarrera/" + carreraDTO.getId_carrera() + "?error&lang="+usuario.getLang();
             }
+        } catch (IOException e) {
+            return "redirect:/administrador/modificarcarrera/" + carreraDTO.getId_carrera() + "?error&lang="+usuario.getLang();
+        } catch (Exception e) {
+            return "redirect:/administrador/modificarcarrera/" + carreraDTO.getId_carrera() + "?error&lang="+usuario.getLang();
         }
-        if(carreraServicio.modificarCarrera(carreraDTO)){
-            return "redirect:/administrador/modificarcarrera/" + carreraDTO.getId_carrera() + "?exito&lang="+usuario.getLang();
-        }
-        return "redirect:/administrador/modificarcarrera/" + carreraDTO.getId_carrera() + "?error&lang="+usuario.getLang();
     }
 
 
@@ -267,69 +274,57 @@ public class AdministradorControlador {
         return "administrador/crearuniversidad";
      }
 
-    @PostMapping("/postguardaruniversidad")
-    private String postGuardarUniversidad(@ModelAttribute UniversidadDTO universidadDTO, @AuthenticationPrincipal UserDetails userDetails){
-        Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        if(universidadServicio.existeUniversidad(universidadDTO.getNombre_abreviado())){
-            return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
-        }
-        try {
-            Path dir = Paths.get(uploadDir,universidadDTO.getNombre_abreviado());
-            if (!Files.exists(dir)) {
-                Files.createDirectory(dir);
-            }
-            Path path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("logo.jpg").normalize();
-            if(!universidadDTO.getLogo().isEmpty()){
-                Files.copy(universidadDTO.getLogo().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            }
-            if(!universidadDTO.getPortada().isEmpty()){
-                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("portada.jpg").normalize();
-                Files.copy(universidadDTO.getPortada().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            }
-            if(!universidadDTO.getImagen1().isEmpty()){
-                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("imagen1.jpg").normalize();
-                Files.copy(universidadDTO.getImagen1().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            }
-            Universidad universidadnueva = universidadServicio.guardarUniversidad(universidadDTO); 
-            if(universidadnueva != null){
-                return "redirect:/administrador/modificaruniversidad/"+universidadnueva.getId_universidad()+"?exito&lang="+usuario.getLang();
-            }else{
-                return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
-            }
-        } catch (Exception e) {
-            return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
-        } 
-    }
+     @PostMapping("/postguardaruniversidad")
+     public String guardarUniversidad(@ModelAttribute UniversidadDTO universidadDTO, @AuthenticationPrincipal UserDetails userDetails) {
+         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+         try {
+             if (universidadDTO.getLogo() != null && !universidadDTO.getLogo().isEmpty()) {
+                 universidadDTO.setLogoBytes(universidadDTO.getLogo().getBytes());
+             }
+             if (universidadDTO.getPortada() != null && !universidadDTO.getPortada().isEmpty()) {
+                 universidadDTO.setPortadaBytes(universidadDTO.getPortada().getBytes());
+             }
+             if (universidadDTO.getImagen1() != null && !universidadDTO.getImagen1().isEmpty()) {
+                 universidadDTO.setImagen1Bytes(universidadDTO.getImagen1().getBytes());
+             }
+     
+             Universidad universidadGuardada = universidadServicio.guardarUniversidad(universidadDTO);
+             return "redirect:/administrador/modificaruniversidad/"+universidadGuardada.getId_universidad()+"?exito&lang="+usuario.getLang();
+         } catch (IOException e) {
+             return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
+         }
+     }
 
 
     @PostMapping("/postmodificaruniversidad")
-    private String postModificarUniversidad(@ModelAttribute UniversidadDTO universidadDTO, @AuthenticationPrincipal UserDetails userDetails){
+    public String postModificarUniversidad(@ModelAttribute UniversidadDTO universidadDTO, @AuthenticationPrincipal UserDetails userDetails) {
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
+        
         try {
-            Path dir = Paths.get(uploadDir,universidadDTO.getNombre_abreviado());
-            if (!Files.exists(dir)) {
-                Files.createDirectory(dir);
+            if (universidadDTO.getLogo() != null && !universidadDTO.getLogo().isEmpty()) {
+                universidadDTO.setLogoBytes(universidadDTO.getLogo().getBytes());
             }
-            Path path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("logo.jpg").normalize();
-            if(!universidadDTO.getLogo().isEmpty()){
-                Files.copy(universidadDTO.getLogo().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            
+            if (universidadDTO.getPortada() != null && !universidadDTO.getPortada().isEmpty()) {
+                universidadDTO.setPortadaBytes(universidadDTO.getPortada().getBytes());
             }
-            if(!universidadDTO.getPortada().isEmpty()){
-                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("portada.jpg").normalize();
-                Files.copy(universidadDTO.getPortada().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+            if (universidadDTO.getImagen1() != null && !universidadDTO.getImagen1().isEmpty()) {
+                universidadDTO.setImagen1Bytes(universidadDTO.getImagen1().getBytes());
             }
-            if(!universidadDTO.getImagen1().isEmpty()){
-                path = Paths.get(uploadDir+"/"+universidadDTO.getNombre_abreviado()).resolve("imagen1.jpg").normalize();
-                Files.copy(universidadDTO.getImagen1().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            
+            Universidad universidadActualizada = universidadServicio.actualizarUniversidad(universidadDTO);
+            
+            if (universidadActualizada != null) {
+                return "redirect:/administrador/modificaruniversidad/" + universidadActualizada.getId_universidad() + "?exito&lang=" + usuario.getLang();
+            } else {
+                return "redirect:/administrador/modificaruniversidad/" + universidadDTO.getId_universidad() + "?error&lang=" + usuario.getLang();
             }
-            if(universidadServicio.guardarUniversidad(universidadDTO) != null){
-                return "redirect:/administrador/modificaruniversidad/"+universidadDTO.getId_universidad()+"?exito&lang="+usuario.getLang();
-            }else{
-                return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
-            }
+        } catch (IOException e) {
+            return "redirect:/administrador/modificaruniversidad/" + universidadDTO.getId_universidad() + "?error&lang=" + usuario.getLang();
         } catch (Exception e) {
-            return "redirect:/administrador/crearuniversidad?error&lang="+usuario.getLang();
-        } 
+            return "redirect:/administrador/modificaruniversidad/" + universidadDTO.getId_universidad() + "?error&lang=" + usuario.getLang();
+        }
     }
 
 

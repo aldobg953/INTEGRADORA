@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,7 +40,18 @@ public class Universidad {
     private String tipo_institucion; //publica o privada
     @Column(length = 600)
     private String caracteristicas;
-
+    @Lob
+    @Column(name = "logo", columnDefinition = "LONGBLOB")
+    private byte[] logoBytes;
+    
+    @Lob
+    @Column(name = "portada", columnDefinition = "LONGBLOB")
+    private byte[] portadaBytes;
+    
+    @Lob
+    @Column(name = "imagen1", columnDefinition = "LONGBLOB")
+    private byte[] imagen1Bytes;
+    
     @OneToMany(mappedBy = "universidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UniversidadTraduccion> traducciones;
 

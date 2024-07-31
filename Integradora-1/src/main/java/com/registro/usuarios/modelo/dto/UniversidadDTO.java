@@ -23,7 +23,10 @@ public class UniversidadDTO {
     private MultipartFile imagen1;
     private Long id_u_traduccion;
     private String lang;
-
+    private byte[] logoBytes;
+    private byte[] portadaBytes;
+    private byte[] imagen1Bytes;
+    
     public UniversidadDTO(Long id_universidad, String nombre_completo, String nombre_abreviado, String pagina_web,
             String correo, String telefono, String informacion, String direccion, String direccionGoogle,
             String tipo_institucion, String caracteristicas) {

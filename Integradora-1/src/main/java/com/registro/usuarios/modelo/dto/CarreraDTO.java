@@ -26,7 +26,7 @@ public class CarreraDTO {
     private String desc_breve;
     private String lang;
     private Long id_c_traduccion;
-
+    private byte[] imagenBytes;
     public CarreraDTO(){
 
     }

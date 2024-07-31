@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -48,7 +49,10 @@ public class Carrera {
     @Column(length = 500)
     private String desc_breve;
     private Long contador;
-
+    @Lob
+    @Column(name = "imagen", columnDefinition = "LONGBLOB")
+    private byte[] imagenBytes;
+    
     @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CarreraTraduccion> traducciones;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:classappend="${usuario.darkmode} ? 'dark' : ''">
 <head>
-    <title th:text="'PathFinder | ' + ${universidad.nombre_abreviado}">nombre_abreviado</title>
+    <title th:text="'PathFinder | ' + ${universidadDetalle.universidad.nombre_abreviado}">nombre_abreviado</title>
     <link href="/css/tailwind.css" rel="stylesheet">
     <script src="/js/navbar.js"></script>
     <link rel="stylesheet" href="/css/carrera.css">
@@ -48,25 +48,27 @@
         </nav>
     </header>
 
-    <div id="dynamicBackground" th:data-background-image="@{/img/{nombreAbreviado}/portada.jpg(nombreAbreviado=${universidad.nombre_abreviado})}" class="bg-fixed w-full bg-cover" style="background-position: center 70%;">
+    <div id="dynamicBackground" th:data-background-image="@{/img/{nombreAbreviado}/portada.jpg(nombreAbreviado=${universidadDetalle.universidad.nombre_abreviado})}" class="bg-fixed w-full bg-cover" style="background-position: center 70%;">
         <div class="title-gradient bg-opacity-50">
-            <h1 th:text="${universidad.nombre_completo}"></h1>
+            <h1 th:text="${universidadDetalle.universidad.nombre_completo}"></h1>
         </div>
     </div>
 
     <div class="main-content dark:bg-gray-800">
     <div class="carrera-acercade dark:text-white">
         <div class="vertical-line"></div>
-        <p th:utext="${universidad.informacion}">informacion</p>
+        <p th:utext="${universidadDetalle.universidad.informacion}">informacion</p>
     </div>
 
     <div class="logo-informacion">
         <div class="logo-carrera">
-            <img th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/logo.jpg'}" alt="logo">
+            <img th:src="@{'data:image/jpeg;base64,' + ${universidadDetalle.logoBase64}}" 
+             alt="Logo de la Universidad" 
+             class="universidad-imagen">
         </div> 
         <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:text-white">
                 <h2 th:text="#{caracteristicas}">Caracteristicas</h2>
-            <ul th:utext="${universidad.caracteristicas}"></ul>
+            <ul th:utext="${universidadDetalle.universidad.caracteristicas}"></ul>
         </div>
     </div>
     
@@ -74,20 +76,22 @@
         <div class="por-que-estudiar-text">
             <h2 th:text="#{informacion}">Informacion</h2>
             <h3 class="font-semibold" th:text="#{tipoInstitucion}">Tipo de institucion:</h3>
-            <h4 th:text="${universidad.tipo_institucion}"></h4>
+            <h4 th:text="${universidadDetalle.universidad.tipo_institucion}"></h4>
             <h3 th:text="#{correo}">Correo electronico:</h3>
-            <h4 th:text="${universidad.correo}"></h4>
+            <h4 th:text="${universidadDetalle.universidad.correo}"></h4>
             <h3 th:text="#{telefonoContacto}">Telefono de Contacto:</h3>
-            <h4 th:text="${universidad.telefono}"></h4>
+            <h4 th:text="${universidadDetalle.universidad.telefono}"></h4>
             <h3 th:text="#{direccionUni}">Direccion:</h3>
-            <h4 th:text="${universidad.direccion}"></h4>
+            <h4 th:text="${universidadDetalle.universidad.direccion}"></h4>
             
-            <h3 th:text="#{masInfo}">Para mas información: <a th:href="${universidad.pagina_web}" th:text="#{sitioOficial}">
+            <h3 th:text="#{masInfo}">Para mas información: <a th:href="${universidadDetalle.universidad.pagina_web}" th:text="#{sitioOficial}">
                 Sitio oficial
                 </a></h3>
         </div>
         <div class="por-que-estudiar-img">
-            <img th:src="@{'/img/' + ${universidad.nombre_abreviado} + '/imagen1.jpg'}" alt="logo">
+            <img th:src="@{'data:image/jpeg;base64,' + ${universidadDetalle.imagen1Base64}}" 
+             alt="Logo de la Universidad" 
+             class="universidad-imagen">
         </div>
     </div>
 
@@ -97,18 +101,20 @@
     </div>
 
         <div id="carousel" class="tarjetas-especialidades">
-            <div th:each="carrera, iterStat : ${carreras}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
+            <div th:each="carr, iterStat : ${carreraDetalleDTO}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
                 <div>
-                    <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
-                        <img th:src="@{'/img/carreras/' + ${carrera.id_carrera} + '.jpg'}" alt="Imagen de la carrera">
+                    <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}" class="imagen-uni">
+                        <img th:src="@{'data:image/jpeg;base64,' + ${carr.imagen}}" 
+                            alt="Logo de la Universidad" 
+                            class="universidad-imagen">
                     </a>
                     <div class="tarjeta-contenido dark:text-white">
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}">
-                            <h2 th:text="${carrera.nombre}"></h2>
+                        <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}">
+                            <h2 th:text="${carr.carrera.nombre}"></h2>
                         </a>
-                        <p class="dark:text-white" th:text="${carrera.informacion}"></p>
+                        <p class="dark:text-white" th:text="${carr.carrera.informacion}"></p>
                         <div class="tarjeta-botones">
-                            <a th:href="@{/carreras/carrera/{id}(id=${carrera.id_carrera}, lang=${usuario.lang})}" th:text="#{verMas}" class="ver-mas dark:shadow-none dark:hover:shadow-none">Ver más</a>
+                            <a th:href="@{/carreras/carrera/{id}(id=${carr.carrera.id_carrera}, lang=${usuario.lang})}" th:text="#{verMas}" class="ver-mas dark:shadow-none dark:hover:shadow-none">Ver más</a>
                         </div>
                         
                     </div>
@@ -120,7 +126,7 @@
     <div class="roadmap">
         <h2 th:text="#{ubicacion}">Ubicación </h2>
 
-        <input type="hidden" id="direccion" th:value="${universidad.direccionGoogle}" />
+        <input type="hidden" id="direccion" th:value="${universidadDetalle.universidad.direccionGoogle}" />
     <iframe id="googleMap"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     
     </div>

@@ -74,72 +74,73 @@
         <div class="carrera-columna">
             <div class="tarjeta dark:bg-gray-800 dark:text-white dark:shadow-none">
                 <div class="imagen-uni bg-white">
-                    <img th:src="@{'/img/' + ${carrera1.universidad.nombre_abreviado} + '/logo.jpg'}"
-                        alt="Logo Universidad" />
+                    <img th:src="@{'data:image/jpeg;base64,' + ${carreraDTO1.logoUni}}" 
+                            alt="Logo de la Universidad" 
+                            class="universidad-imagen">
                 </div>
                 <div class="tarjeta-contenido">
                     <div class="info-seccion nombre-carrera">
-                        <h2 th:text="${carrera1.nombre}">Nombre de la Carrera</h2>
+                        <h2 th:text="${carreraDTO1.carrera.nombre}">Nombre de la Carrera</h2>
                     </div>
                     <div class="info-seccion universidad">
-                        <div th:text="${carrera1.universidad.nombre_completo}">Nombre de la Universidad</div>
+                        <div th:text="${carreraDTO1.carrera.universidad.nombre_completo}">Nombre de la Universidad</div>
                     </div>
                     <div class="info-seccion descripcion">
-                        <div th:text="${carrera1.desc_breve}">Descripción breve</div>
+                        <div th:text="${carreraDTO1.carrera.desc_breve}">Descripción breve</div>
                     </div>
                     <div class="info-seccion horarios">
                         <div class="etiqueta" th:text="#{horarios}">Horarios</div>
-                        <div th:utext="${carrera1.horario_especifico}">Horario específico</div>
+                        <div th:utext="${carreraDTO1.carrera.horario_especifico}">Horario específico</div>
                     </div>
                     <div class="info-seccion modalidad">
                         <div class="etiqueta" th:text="#{modalidad}">Modalidad</div>
-                        <div th:text="${carrera1.modalidad.nombre_modalidad}">Modalidad</div>
+                        <div th:text="${carreraDTO1.carrera.modalidad.nombre_modalidad}">Modalidad</div>
                     </div>
                     <div class="info-seccion periodos">
                         <div class="etiqueta" th:text="#{ttlPeriodosEscolares}">Total de periodos escolares</div>
                         <div
-                            th:text="${carrera1.cantidad_periodos} + ' ' + ${carrera1.periodoEscolar.nombre_periodo} + 's'">
+                            th:text="${carreraDTO1.carrera.cantidad_periodos} + ' ' + ${carreraDTO1.carrera.periodoEscolar.nombre_periodo} + 's'">
                             Periodos escolares</div>
                     </div>
                     <div class="info-seccion costo">
                         <div class="etiqueta"><span th:text="#{costopor}"> Costo por </span> <span
-                                th:text="${carrera1.periodoEscolar.nombre_periodo}"></span></div>
-                        <div th:text="${carrera1.costo} + '0$'">Costo</div>
+                                th:text="${carreraDTO1.carrera.periodoEscolar.nombre_periodo}"></span></div>
+                        <div th:text="${carreraDTO1.carrera.costo} + '0$'">Costo</div>
                     </div>
                     <div class="info-seccion area">
                         <div class="etiqueta" th:text="#{areaTag}">Área</div>
-                        <div th:text="${carrera1.area.nombre_area}">Área de estudio</div>
+                        <div th:text="${carreraDTO1.carrera.area.nombre_area}">Área de estudio</div>
                     </div>
                     <div class="info-seccion porque-estudiar">
                         <div class="etiqueta" th:text="#{porqueestuidarestacarr}">¿Por qué estudiar esta carrera?</div>
-                        <div th:text="${carrera1.porque_estudiar}">Razones para estudiar</div>
+                        <div th:text="${carreraDTO1.carrera.porque_estudiar}">Razones para estudiar</div>
                     </div>
                     <div class="info-seccion desempenio">
                         <div class="etiqueta" th:text="#{comoDes}">¿Cómo me puedo desempeñar?</div>
                         <div>
-                            <ul th:utext="${carrera1.como_desemp}"></ul>
+                            <ul th:utext="${carreraDTO1.carrera.como_desemp}"></ul>
                         </div>
                     </div>
                     <div class="info-seccion tipo-carrera">
                         <div class="etiqueta" th:text="#{tipoCarr}">Tipo de carrera</div>
-                        <div th:if="${carrera1.bilingue}" th:text="#{CarrBilingue}">Carrera Bilingüe</div>
-                        <div th:if="${!carrera1.bilingue}" th:text="#{CarrNoBilingue}">Carrera No Bilingüe</div>
+                        <div th:if="${carreraDTO1.carrera.bilingue}" th:text="#{CarrBilingue}">Carrera Bilingüe</div>
+                        <div th:if="${!carreraDTO1.carrera.bilingue}" th:text="#{CarrNoBilingue}">Carrera No Bilingüe</div>
                     </div>
                     <div class="info-seccion direccion">
                         <div class="etiqueta" th:text="#{direcCarr}" >Dirección:</div>
-                        <div th:text="${carrera1.universidad.direccion}">Dirección de la Universidad</div>
+                        <div th:text="${carreraDTO1.carrera.universidad.direccion}">Dirección de la Universidad</div>
                     </div>
                     <div class="info-seccion mapa">
-                        <input type="hidden" id="direccion" th:value="${carrera1.universidad.direccionGoogle}" />
+                        <input type="hidden" id="direccion" th:value="${carreraDTO1.carrera.universidad.direccionGoogle}" />
                         <iframe id="googleMap" width="100%" height="300" style="border:none;" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="tarjeta-botones">
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera1.id_carrera}, lang=${usuario.lang})}"
+                        <a th:href="@{/carreras/carrera/{id}(id=${carreraDTO1.carrera.id_carrera}, lang=${usuario.lang})}"
                             class="ver-mas" th:text="#{verMas}">
                             Ver más
                         </a>
-                        <a th:href="@{/carreras/all/{id}(id=${carrera1.id_carrera}, lang=${usuario.lang})}"
+                        <a th:href="@{/carreras/all/{id}(id=${carreraDTO1.carrera.id_carrera}, lang=${usuario.lang})}"
                             class="comparar" th:text="#{compararConOCarr}">Comparar con otra carrera</a>
                     </div>
                 </div>
@@ -149,72 +150,73 @@
         <div class="carrera-columna">
             <div class="tarjeta dark:bg-gray-800 dark:text-white dark:shadow-none">
                 <div class="imagen-uni bg-white">
-                    <img th:src="@{'/img/' + ${carrera2.universidad.nombre_abreviado} + '/logo.jpg'}"
-                        alt="Logo Universidad" />
+                    <img th:src="@{'data:image/jpeg;base64,' + ${carreraDTO2.logoUni}}" 
+                            alt="Logo de la Universidad" 
+                            class="universidad-imagen">
                 </div>
                 <div class="tarjeta-contenido">
                     <div class="info-seccion nombre-carrera">
-                        <h2 th:text="${carrera2.nombre}">Nombre de la Carrera</h2>
+                        <h2 th:text="${carreraDTO2.carrera.nombre}">Nombre de la Carrera</h2>
                     </div>
                     <div class="info-seccion universidad">
-                        <div th:text="${carrera2.universidad.nombre_completo}">Nombre de la Universidad</div>
+                        <div th:text="${carreraDTO2.carrera.universidad.nombre_completo}">Nombre de la Universidad</div>
                     </div>
                     <div class="info-seccion descripcion">
-                        <div th:text="${carrera2.desc_breve}">Descripción breve</div>
+                        <div th:text="${carreraDTO2.carrera.desc_breve}">Descripción breve</div>
                     </div>
                     <div class="info-seccion horarios">
                         <div class="etiqueta" th:text="#{horarios}">Horarios</div>
-                        <div th:utext="${carrera2.horario_especifico}" class="dark:text-white">Horario específico</div>
+                        <div th:utext="${carreraDTO2.carrera.horario_especifico}" class="dark:text-white">Horario específico</div>
                     </div>
                     <div class="info-seccion modalidad">
                         <div class="etiqueta" th:text="#{modalidad}">Modalidad</div>
-                        <div th:text="${carrera2.modalidad.nombre_modalidad}">Modalidad</div>
+                        <div th:text="${carreraDTO2.carrera.modalidad.nombre_modalidad}">Modalidad</div>
                     </div>
                     <div class="info-seccion periodos">
                         <div class="etiqueta" th:text="#{ttlPeriodosEscolares}">Total de periodos escolares</div>
                         <div
-                            th:text="${carrera2.cantidad_periodos} + ' ' + ${carrera2.periodoEscolar.nombre_periodo} + 's'">
+                            th:text="${carreraDTO2.carrera.cantidad_periodos} + ' ' + ${carreraDTO2.carrera.periodoEscolar.nombre_periodo} + 's'">
                             Periodos escolares</div>
                     </div>
                     <div class="info-seccion costo">
                         <div class="etiqueta"><span th:text="#{costopor}"> Costo por </span> <span
-                                th:text="${carrera2.periodoEscolar.nombre_periodo}"></span></div>
-                        <div th:text="${carrera2.costo} + '0$'">Costo</div>
+                                th:text="${carreraDTO2.carrera.periodoEscolar.nombre_periodo}"></span></div>
+                        <div th:text="${carreraDTO2.carrera.costo} + '0$'">Costo</div>
                     </div>
                     <div class="info-seccion area">
                         <div class="etiqueta" th:text="#{areaTag}">Área</div>
-                        <div th:text="${carrera2.area.nombre_area}">Área de estudio</div>
+                        <div th:text="${carreraDTO2.carrera.area.nombre_area}">Área de estudio</div>
                     </div>
                     <div class="info-seccion porque-estudiar">
                         <div class="etiqueta" th:text="#{porqueestuidarestacarr}">¿Por qué estudiar esta carrera?</div>
-                        <div th:text="${carrera2.porque_estudiar}">Razones para estudiar</div>
+                        <div th:text="${carreraDTO2.carrera.porque_estudiar}">Razones para estudiar</div>
                     </div>
                     <div class="info-seccion desempenio">
                         <div class="etiqueta" th:text="#{comoDes}">¿Cómo me puedo desempeñar?</div>
                         <div>
-                            <ul th:utext="${carrera2.como_desemp}"></ul>
+                            <ul th:utext="${carreraDTO2.carrera.como_desemp}"></ul>
                         </div>
                     </div>
                     <div class="info-seccion tipo-carrera">
                         <div class="etiqueta" th:text="#{tipoCarr}">Tipo de carrera</div>
-                        <div th:if="${carrera2.bilingue}" th:text="#{CarrBilingue}">Carrera Bilingüe</div>
-                        <div th:if="${!carrera2.bilingue}" th:text="#{CarrNoBilingue}">Carrera No Bilingüe</div>
+                        <div th:if="${carreraDTO2.carrera.bilingue}" th:text="#{CarrBilingue}">Carrera Bilingüe</div>
+                        <div th:if="${!carreraDTO2.carrera.bilingue}" th:text="#{CarrNoBilingue}">Carrera No Bilingüe</div>
                     </div>
                     <div class="info-seccion direccion">
                         <div class="etiqueta" th:text="#{direcCarr}">Dirección:</div>
-                        <div th:text="${carrera2.universidad.direccion}">Dirección de la Universidad</div>
+                        <div th:text="${carreraDTO2.carrera.universidad.direccion}">Dirección de la Universidad</div>
                     </div>
                     <div class="info-seccion mapa">
-                        <input type="hidden" id="direccion2" th:value="${carrera2.universidad.direccionGoogle}" />
+                        <input type="hidden" id="direccion2" th:value="${carreraDTO2.carrera.universidad.direccionGoogle}" />
                         <iframe id="googleMap2" width="100%" height="300" style="border:0;" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="tarjeta-botones">
-                        <a th:href="@{/carreras/carrera/{id}(id=${carrera2.id_carrera}, lang=${usuario.lang})}"
+                        <a th:href="@{/carreras/carrera/{id}(id=${carreraDTO2.carrera.id_carrera}, lang=${usuario.lang})}"
                             class="ver-mas" th:text="#{verMas}">
                             Ver más
                         </a>
-                        <a th:href="@{/carreras/all/{id}(id=${carrera2.id_carrera}, lang=${usuario.lang})}"
+                        <a th:href="@{/carreras/all/{id}(id=${carreraDTO2.carrera.id_carrera}, lang=${usuario.lang})}"
                             class="comparar" th:text="#{compararConOCarr}">Comparar con otra carrera</a>
                     </div>
                 </div>

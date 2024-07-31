@@ -65,12 +65,14 @@
 
         <div class="carrera-acercade">
             <div class="vertical-line"></div>
-            <p th:text="${especialidad.informacion}">informacion</p>
+            <p class="dark:text-white" th:text="${especialidad.informacion}">informacion</p>
         </div>
 
         <div class="logo-informacion">
             <div class="logo-carrera">
-                <img src="/img/utch/logo.jpg">
+                <img th:src="@{'data:image/jpeg;base64,' + ${universidadDetalleDTO.logoBase64}}" 
+                    alt="Logo de la Universidad" 
+                    class="universidad-imagen">
             </div>
 
             <div class="informacion-carrera dark:bg-gray-800 dark:border-gray-700 dark:shadow-none dark:text-white">
