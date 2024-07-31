@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("myForm");
     const fields = [
-        { id: "nombre", errorId: "nombreError", minLength: 8, maxLength: 50 },
-        { id: "message", errorId: "messageError", minLength: 10, maxLength: 500 },
-        { id: "desc_breve", errorId: "desc_breveError", minLength: 10, maxLength: 400 },
+        { id: "nombre", errorId: "nombreError", minLength: 8, maxLength: 100 },
+        { id: "message", errorId: "messageError", minLength: 10, maxLength: 800 },
+        { id: "desc_breve", errorId: "desc_breveError", minLength: 10, maxLength: 600 },
         { id: "horario", errorId: "horarioError", minLength: 10, maxLength: 300 },
-        { id: "txtDesempeniarse", errorId: "comoDesempError", minLength: 10, maxLength: 500 },
-        { id: "txtDondeTrabajar", errorId: "dondeTrabajarError", minLength: 10, maxLength: 400 },
-        { id: "txtPqEstudiar", errorId: "pqEstudiarError", minLength: 10, maxLength: 600 },
+        { id: "txtDesempeniarse", errorId: "comoDesempError", minLength: 10, maxLength: 1000 },
+        { id: "txtDondeTrabajar", errorId: "dondeTrabajarError", minLength: 10, maxLength: 1000 },
+        { id: "txtPqEstudiar", errorId: "pqEstudiarError", minLength: 10, maxLength: 1000 },
         { id: "universidad", errorId: "universidadError", required: true },
         { id: "slctPeriodoEscolar", errorId: "periodoEscolarError", required: true },
         { id: "slctArea", errorId: "selectAreaError", required: true },
