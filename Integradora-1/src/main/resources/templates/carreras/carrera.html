@@ -76,7 +76,7 @@
                                 <path
                                     d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" />
                             </svg>
-                            <p>Me gusta</p>
+                            <p th:text="#{meGustaTexto}">Me gusta</p>
                         </button>
                     </form>
 
@@ -88,7 +88,7 @@
                                 <path
                                     d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
                             </svg>
-                            <p>Me gusta</p>
+                            <p th:text="#{meGustaTexto}">Me gusta</p>
                         </button>
                     </form>
                 </div>
@@ -125,7 +125,7 @@
                 <h2 th:text="#{infoCarrera}">Informacion de la carrera</h2>
 
                 <div>
-                    <h3 th:text="#{horariosCostos}">Horarios</h3>
+                    <h3 th:text="#{horarios}">Horarios</h3>
                     <p th:utext="${carrera.horario_especifico}">horario</p>
                 </div>
 
@@ -162,7 +162,7 @@
 
         <div class="por-que-estudiar">
             <div class="por-que-estudiar-text">
-                <h2 th:text="'¿Por qué estudiar ' + ${carrera.nombre} + '?'">carrera</h2><br />
+                <h2 th:text="#{porqueEstudiarCarrera} + ${carrera.nombre} + '?'"></h2><br />
                 <p th:text="${carrera.porque_estudiar}"></p>
             </div>
             <div class="por-que-estudiar-img">
@@ -237,10 +237,10 @@
                                     d="M1.327,12.4,4.887,15,3.535,19.187A3.178,3.178,0,0,0,4.719,22.8a3.177,3.177,0,0,0,3.8-.019L12,20.219l3.482,2.559a3.227,3.227,0,0,0,4.983-3.591L19.113,15l3.56-2.6a3.227,3.227,0,0,0-1.9-5.832H16.4L15.073,2.432a3.227,3.227,0,0,0-6.146,0L7.6,6.568H3.231a3.227,3.227,0,0,0-1.9,5.832Z" />
                             </svg>
                         </span>
-                        <span class="promedio-valor" th:text="${califGnral.promedioGral} + ' de 5'"></span>
+                        <span class="promedio-valor" th:text="${califGnral.promedioGral} + ' ' + #{de}"></span>
                     </div>
                     <p class="total-calificaciones"
-                        th:text="${califGnral.cantidadCalif} + ' usuarios han calificado esta carrera'"></p>
+                        th:text="${califGnral.cantidadCalif} + ' ' + #{totalUsuariosCalificado}"></p>
                 </div>
                 <div class="barras-calificacion">
                     <div class="barra" th:each="i : ${#numbers.sequence(5, 1, -1)}">

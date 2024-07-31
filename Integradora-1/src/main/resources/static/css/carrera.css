@@ -421,29 +421,38 @@ select {
 .me-gusta {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     z-index: 2;
-    padding-left: 5rem;
+    margin: 1rem 0;
 }
 
 .me-gusta-boton button {
+    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 3rem;
+    padding: 1rem;
+    object-fit: scale-down;
 }
 
 .me-gusta-boton p{
+    font-size: auto;
     white-space: nowrap;
     margin-left: 1rem;
 }
+
+.me-gusta-boton svg{
+    height: 2.5rem;
+}
+
 
 .me-gusta-boton {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 10rem;
-    height: 5rem;
+    width: fit-content;
+    height: 3rem;
     border-radius: 50rem;
 }
 /* #endregion */
