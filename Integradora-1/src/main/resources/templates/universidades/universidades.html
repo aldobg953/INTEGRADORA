@@ -34,7 +34,6 @@
                     var tipoInstitucion = $universidad.find('span').text().toLowerCase();
                     var nombreUniversidad = $universidad.find('h2').text().toLowerCase();
 
-                    // Incluyendo variaciones para "pública" y "privada"
                     var tipoMatch = tipoSeleccionado === 'tipo de universidad' || 
                                     tipoInstitucion.includes(tipoSeleccionado) || 
                                     (tipoSeleccionado === 'publica' && 
