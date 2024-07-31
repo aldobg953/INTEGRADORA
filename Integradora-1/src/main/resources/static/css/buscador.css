@@ -575,7 +575,7 @@ option {
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.5);
 }
 
-#unis .imagen-uni img {
+#unis .imagen-uni img, #areas .imagen-uni img {
     width: 100%;
     height: 100%;
     object-fit: scale-down;

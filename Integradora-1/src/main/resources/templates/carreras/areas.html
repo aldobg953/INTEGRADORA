@@ -96,7 +96,7 @@
         <div id="areas" class="tarjetas-unis">
             <div th:each="area : ${areas}" class="tarjeta dark:bg-gray-800 dark:border-gray-700 dark:shadow-none">
                 <a th:href="@{/carreras/area/{id}(id=${area.id_area}, lang=${usuario.lang})}" class="imagen-uni">
-                    <img th:src="@{'/img/areas/'+  ${area.id_area} +'.jpg'}" alt="" />
+                    <img th:src="@{'/img/areas/'+  ${area.id_area} +'.png'}" alt="" />
                 </a>
 
                 <div class="tarjeta-contenido dark:text-white">
