@@ -97,7 +97,7 @@
                 </div>
 
                 <div>
-                    <h3 th:text="areas">Area</h3>
+                    <h3 th:text="#{areas}">Area</h3>
                     <a th:text="${especialidad.carrera.area.nombre_area}"
                         th:href="@{/carreras/area/{id}(id=${especialidad.carrera.area.id_area}, lang=${usuario.lang})}"></a>
                 </div>

@@ -1,10 +1,5 @@
 package com.registro.usuarios.servicio;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -116,25 +111,11 @@ public class UniversidadServicio {
 
     public boolean eliminarUniversidad(Long id){
         try {
-            Universidad universidad = universidadRepositorio.getById(id);
-            Path folder = Paths.get(uploadDir+"/"+universidad.getNombre_abreviado());
-            deleteDirectoryRecursively(folder);
             universidadRepositorio.deleteById(id);
         } catch (Exception e) {
             return false;
         }
         return true;
-    }
-
-    private void deleteDirectoryRecursively(Path path) throws IOException {
-        if (Files.isDirectory(path)) {
-            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path)) {
-                for (Path entry : directoryStream) {
-                    deleteDirectoryRecursively(entry);
-                }
-            }
-        }
-        Files.delete(path);
     }
 
     public UniversidadDTO getUniTraduccion(Long id_universidad, String lang){

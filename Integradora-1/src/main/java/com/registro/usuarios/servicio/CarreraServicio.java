@@ -212,7 +212,11 @@ public class CarreraServicio {
     }
 
     public boolean eliminarcarrera(Long id){
-        carreraRepositorio.deleteById(id);
+        try {
+            carreraRepositorio.deleteById(id);
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 

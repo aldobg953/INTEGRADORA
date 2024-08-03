@@ -1,6 +1,5 @@
 package com.registro.usuarios.controlador;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -186,10 +185,12 @@ public class AdministradorControlador {
     @GetMapping("/eliminarcarrera/{id}")
     private String eliminarcarrera(Model model, @AuthenticationPrincipal UserDetails userDetails, @PathVariable("id") Long id){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
-        carreraServicio.eliminarcarrera(id);
-        File archivo = new File(uploadDir+"/carreras/"+id+".jpg");
-        archivo.delete();
-        return "redirect:/administrador/modificarCarrera?lang="+usuario.getLang();
+        if(carreraServicio.eliminarcarrera(id)){
+            return "redirect:/administrador/modificarCarrera?exito&lang="+usuario.getLang();
+        }else{
+            return "redirect:/administrador/modificarCarrera?error&lang="+usuario.getLang();
+        }
+        
     }
 
     @GetMapping("/crearespecialidad")
@@ -360,6 +361,7 @@ public class AdministradorControlador {
         }
         return "redirect:/administrador/modificaruniversidad?error&lang="+usuario.getLang();
      }
+
     @GetMapping("/usuarios")
     private String administrarUsuario(Model model, @AuthenticationPrincipal UserDetails userDetails){
         Usuario usuario = usuarioServicio.findByEmail(userDetails.getUsername());
