@@ -1,5 +1,5 @@
 # Use an official Maven image as a parent image
-FROM maven:3.8.4-openjdk-17-slim AS build
+FROM maven:3.9-eclipse-temurin-17 AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -14,7 +14,7 @@ COPY Integradora-1/src ./src
 RUN mvn clean package -DskipTests
 
 # Use OpenJDK for the runtime
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jre-jammy
 
 # Set the working directory in the container
 WORKDIR /app
